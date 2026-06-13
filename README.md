@@ -1,25 +1,28 @@
+````markdown
 # Post-Quantum TLS 1.3 and QUIC Handshakes under Constrained Networks: Combining ML-DSA with ML-KEM and HQC
 
-
->
-> David Rive Tolokoum, Yve Bruno Mbezoa, Hervé Talé Kalachi.
-> *"Post-Quantum TLS 1.3 and QUIC Handshakes under Constrained Networks: Combining ML-DSA with ML-KEM and HQC"*
+> David Rive Tolokoum, Yve Bruno MBEZOA, Hervé Talé Kalachi.  
+> *Post-Quantum TLS 1.3 and QUIC Handshakes under Constrained Networks: Combining ML-DSA with ML-KEM and HQC*  
 > Submitted to *Computer Networks*, 2026.
+
+---
 
 ## 1. Overview
 
-This repository contains the **complete artifact** for a large-scale experimental study evaluating the combined impact of **ML-DSA** signatures with **ML-KEM** and **HQC** key encapsulation mechanisms in **TLS 1.3** and **QUIC** under network conditions calibrated from real measurements at ENSP Yaoundé (Orange Cameroon, April 2026).
+This repository contains the artifact package for a large-scale experimental study evaluating the combined impact of **ML-DSA** signatures with **ML-KEM** and **HQC** key encapsulation mechanisms in **TLS 1.3** and **QUIC** under constrained network conditions calibrated from field measurements at ENSP Yaoundé using Orange Cameroon infrastructure.
+
+The repository provides scripts, data, logs, analysis code, and additional figures/tables supporting the results reported in the paper.
 
 ### Measurement Scale
 
 | Experiment Type | Measurements | Details |
-|-----------------|-------------|---------|
-| Full handshakes (Study 1 + 2) | **312,000** | N = 500 per configuration |
+|-----------------|--------------|---------|
+| Full handshakes | **312,000** | Study 1 + Study 2, N = 500 per configuration |
 | Session resumption | Reported separately | N = 500 per scenario |
-| Concurrent load | Reported separately | 10 / 50 / 100 clients |
-| KEM families | 2 | ML-KEM (lattice) + HQC (code-based) |
-| Security tiers | 3 | NIST Level I, III, V |
-| Protocols | 2 | TLS 1.3 + QUIC |
+| Concurrent load | Reported separately | 10 / 50 / 100 simultaneous clients |
+| KEM families | 2 | ML-KEM and HQC |
+| Security tiers | 3 | NIST categories I, III, V |
+| Protocols | 2 | TLS 1.3 and QUIC |
 | Network scenarios | 6 | Ideal, Local YDE, Backbone, Degraded, GE-stable, GE-unstable |
 
 ### Central Thesis
@@ -32,275 +35,213 @@ Post-quantum protocol performance **cannot be predicted from primitive micro-ben
 
 | Finding | Description |
 |---------|-------------|
-| **AVX2 Performance Paradox** | ML-DSA reduces TLS median by up to 75.7% vs. ECDSA under ideal conditions on x86-64/AVX2 |
-| **Protocol Reversal** | TLS becomes faster than QUIC for all Tier 3 KEMs with ML-DSA65 at Local YDE (35 ms / 2% loss) |
-| **Super-additivity in TLS** | 7/10 migration paths are super-additive in TLS; QUIC shows sub-additive behavior (6/10) |
+| **AVX2 Performance Paradox** | ML-DSA reduces TLS median latency by up to 75.7% versus ECDSA under ideal conditions on x86-64/AVX2 |
+| **TLS/QUIC Protocol Reversal** | TLS becomes faster than QUIC for all Tier 3 KEMs with ML-DSA65 in the Local YDE scenario |
+| **Super-additivity in TLS** | 7/10 migration paths are super-additive in TLS; QUIC mostly exhibits sub-additive behavior |
 | **HQC Bottleneck Inversion** | HQC dominates handshake cost in QUIC, making the signature choice nearly neutral under ideal conditions |
-| **Gilbert-Elliott Catastrophe** | ML-DSA87 + P-521 + HQC-256 reaches 18,595 ms mean (p99 > 25 s) under GE unstable burst loss |
+| **Gilbert--Elliott Tail-Latency Regime** | ML-DSA87 + P-521 + HQC-256 reaches 18,595 ms mean latency and p99 above 25 s under GE-unstable burst loss |
 
 ---
 
 ## 3. Repository Structure
 
-```
-.mldsa-mlkem-hqc-tls-quic-constrained-performance/
+```text
+mldsa-mlkem-hqc-tls-quic-constrained-performance/
+│
+├── README.md
+├── LICENSE
+├── CITATION.cff
 │
 ├── 0-docker/                                      # Docker environment
-│   ├── Dockerfile                                 # OpenSSL 3.4.2-dev + liboqs + oqsprovider
+│   ├── Dockerfile                                 # OpenSSL 3.4.2-dev + liboqs + oqsprovider + MsQuic
 │   └── scripts/
 │       ├── doCert.sh                              # X.509 certificate generation
 │       ├── perftestServerTlsQuic.sh               # TLS/QUIC server-side test runner
 │       ├── perftestClientTlsQuic.sh               # TLS/QUIC client-side test runner
 │       ├── perftestServerClientTlsQuic.sh         # Combined server + client launcher
 │       ├── perftestClientConcurrent.sh            # Concurrent-load client
-│       ├── perftestClientResumptionBatch.sh       # Session resumption client
+│       ├── perftestClientResumptionBatch.sh       # Session-resumption client
 │       ├── perftestServerCompress.sh              # RFC 8879 compression server
 │       └── perftestClientCompress.sh              # RFC 8879 compression client
+│
+├── network/
+│   └── netem_config.sh                            # tc/netem scenario definitions
 │
 ├── mldsa-mlkem-study1/                            # Study 1 — ML-DSA × ML-KEM
 │   ├── TLS/
 │   │   ├── csv/
-│   │   │   ├── ed25519_tls_ideal.csv
-│   │   │   ├── ed25519_tls_africa_local.csv
-│   │   │   ├── ed25519_tls_africa_backbone.csv
-│   │   │   └── ge/                              # Gilbert-Elliott CSVs
 │   │   ├── log/
-│   │   │   ├── TLS_pq_ideal.log
-│   │   │   ├── TLS_pq_africa_local.log
-│   │   │   ├── TLS_pq_africa_backbone.log
-│   │   │   ├── TLS_pq_africa_degraded.log
-│   │   │   └── ge/
-│   │   │       ├── TLS_mlkem_ge_stable.log
-│   │   │       └── TLS_mlkem_ge_unstable.log
-│   │   └── plots/                               # Per-signature raw violin plots
-│   │       ├── ed25519_tls_ideal.pdf
-│   │       ├── ed25519_tls_ideal.svg
-│   │       ├── ed25519_tls_africa_local.pdf
-│   │       ├── ed25519_tls_africa_local.svg
+│   │   └── plots/
 │   ├── QUIC/
 │   │   ├── csv/
-│   │   │   ├── ed25519_quic_ideal.csv
-│   │   │   ├── ed25519_quic_africa_local.csv
-│   │   │   ├── ed25519_quic_africa_backbone.csv
-│   │   │   └── ge/
 │   │   ├── log/
-│   │   │   ├── QUIC_pq_ideal.log
-│   │   │   ├── QUIC_pq_africa_local.log
-│   │   │   ├── QUIC_pq_africa_backbone.log
-│   │   │   ├── QUIC_pq_africa_degraded.log
-│   │   │   └── ge/
 │   │   └── plots/
-│   │       ├── ed25519_quic_ideal.pdf
-│   │       ├── ed25519_quic_ideal.svg
-│   │       ├── ed25519_quic_africa_local.pdf
 │   ├── Analysis/
-│   │   ├── analysis_output.txt                  # Ideal-condition statistics
-│   │   ├── analysis_africa_output.txt           # Constrained-network statistics
-│   │   └── analysis_ge_output.txt               # Gilbert-Elliott statistics
+│   │   ├── analysis_output.txt                    # Ideal-condition statistics
+│   │   ├── analysis_africa_output.txt             # Constrained-network statistics
+│   │   └── analysis_ge_output.txt                 # Gilbert--Elliott statistics
 │   ├── result_concurrent/
-│   │   ├── tls_c10_none_l0_d0_20260603_090144/
-│   │   ├── tls_c10_simple_l2_d35_20260603_090300/
-│   │   ├── tls_c10_simple_l10_d200_20260603_090746/
 │   ├── scripts/
-│   │   ├── analysis_pq_signatures.py            # Ideal-condition analysis
-│   │   ├── analysis_africa_scenarios.py         # Constrained-network analysis
-│   │   ├── analysis_ge.py                       # Gilbert-Elliott analysis
-│   │   ├── analyse_concurrent.py                # Concurrent-load analysis
-│   │   ├── compare_concurrent.py                # TLS vs. QUIC concurrent comparison
-│   │   ├── plot_pq_signatures.py                # Ideal violin / heatmap / super-add figures
-│   │   ├── plot_africa_scenarios.py             # Delta-evolution and protocol-reversal figures
-│   │   ├── plot_ge_violin.py                    # GE burst-loss violin plots
-│   │   └── plot_violins_phase5.py               # Per-signature raw violin plots
-│   │   └── handshakeProcess.py               
-│   └── plots/                                   # Publication figures — Study 1
+│   │   ├── analysis_pq_signatures.py
+│   │   ├── analysis_africa_scenarios.py
+│   │   ├── analysis_ge.py
+│   │   ├── analyse_concurrent.py
+│   │   ├── compare_concurrent.py
+│   │   ├── handshakeProcess.py
+│   │   ├── plot_pq_signatures.py
+│   │   ├── plot_africa_scenarios.py
+│   │   ├── plot_ge_violin.py
+│   │   └── plot_violins_phase5.py
+│   └── plots/
 │       ├── fig1a_level1_violin.pdf
-│       ├── fig1a_level1_violin.png
 │       ├── fig1b_level3_violin.pdf
+│       ├── fig3_superadditivity.pdf
 │       └── ge_violin/
-│           ├── fig_GE_stable_L1.pdf
-│           ├── fig_GE_stable_L1.png
 │
-├── mldsa-hqc-study2/                            # Study 2 — ML-DSA × HQC
+├── mldsa-hqc-study2/                              # Study 2 — ML-DSA × HQC
 │   ├── TLS/
 │   │   ├── csv/
-│   │   │   ├── ed25519_tls_ideal.csv
-│   │   │   ├── ed25519_tls_africa_local.csv
-│   │   │   ├── ed25519_tls_africa_backbone.csv
-│   │   │   └── ge/
 │   │   ├── log/
-│   │   │   ├── TLS_hqc_ideal.log
-│   │   │   ├── TLS_hqc_africa_local.log
-│   │   │   ├── TLS_hqc_africa_backbone.log
-│   │   │   ├── TLS_hqc_africa_degraded.log
-│   │   │   └── ge/
 │   │   └── plots/
-│   │       ├── ed25519_tls_ideal.pdf
-│   │       ├── ed25519_tls_ideal.svg
-│   │       ├── ed25519_tls_africa_local.pdf
 │   ├── QUIC/
 │   │   ├── csv/
-│   │   │   ├── ed25519_quic_ideal.csv
-│   │   │   ├── ed25519_quic_africa_local.csv
-│   │   │   ├── ed25519_quic_africa_backbone.csv
-│   │   │   ├── ed25519_quic_africa_degraded.csv
-│   │   │   └── ge/
 │   │   ├── log/
-│   │   │   ├── QUIC_hqc_ideal.log
-│   │   │   ├── QUIC_hqc_africa_local.log
-│   │   │   ├── QUIC_hqc_africa_backbone.log
-│   │   │   ├── QUIC_hqc_africa_degraded.log
-│   │   │   └── ge/
-│   │   │       ├── QUIC_hqc_ge_stable.log
-│   │   │       └── QUIC_hqc_ge_unstable.log
 │   │   └── plots/
-│   │       ├── ed25519_quic_ideal.pdf
-│   │       ├── ed25519_quic_ideal.svg
-│   │       ├── ed25519_quic_africa_local.pdf
 │   ├── Analysis/
 │   │   ├── analysis_hqc_output.txt
 │   │   ├── analysis_hqc_africa_output.txt
 │   │   └── analysis_ge_output.txt
 │   ├── result_concurrent/
-│   │   ├── tls_c10_none_l0_d0_20260603_215822/
-│   │   ├── tls_c10_none_l2_d35_20260603_220259/
-│   │   ├── tls_c10_none_l10_d200_20260603_220705/
 │   ├── scripts/
-│   │   ├── analysis_hqc.py                      # Ideal-condition analysis
-│   │   ├── analysis_hqc_africa.py               # Constrained-network analysis
-│   │   ├── analysis_ge.py                       # Gilbert-Elliott analysis
-│   │   ├── analyse_concurrent.py                # Concurrent-load analysis
-│   │   ├── compare_concurrent.py                # TLS vs. QUIC concurrent comparison
-│   │   ├── handshakeProcess.py                  # Raw log parsing utilities
-│   │   ├── plot_hqc_ideal.py                    # HQC ideal-condition figures
-│   │   ├── plot_hqc_africa.py                   # HQC constrained-network figures
-│   │   └── plot_violins_phase6.py               # Per-signature HQC violin plots
-│   └── plots/                                   # Publication figures — Study 2
+│   │   ├── analysis_hqc.py
+│   │   ├── analysis_hqc_africa.py
+│   │   ├── analysis_ge.py
+│   │   ├── analyse_concurrent.py
+│   │   ├── compare_concurrent.py
+│   │   ├── handshakeProcess.py
+│   │   ├── plot_hqc_ideal.py
+│   │   ├── plot_hqc_africa.py
+│   │   └── plot_violins_phase6.py
+│   └── plots/
 │       ├── fig1a_level1_hqc_violin.pdf
-│       ├── fig1a_level1_hqc_violin.png
 │       ├── fig1b_level3_hqc_violin.pdf
+│       └── ge_violin/
 │
 ├── resumption_study/
 │   ├── scripts/
-│   │   ├── Launcherv3_resumption_batch.sh
-│   │   ├── run_resumption_batch_matrix.sh
-│   │   └── analyse_resumption_batch.py
 │   ├── results/
-│   │   ├── tls_none_l0_d0_20260604_211209/
-│   │   ├── tls_none_l0_d0_20260604_212203/
 │   └── analysis/
-│       ├── comparison_resumption_batch.csv
-│       ├── comparison_resumption_batch_mldsa65_mlkem768.pdf
-│       ├── comparison_resumption_batch_mldsa65_mlkem768.png
-│       ├── comparison_resumption_batch_mldsa65_mlkem768.svg
 │
 ├── compression_study/
 │   ├── scripts/
-│   │   ├── Launcherv3_compress.sh
-│   │   ├── run_compress_matrix.sh
-│   │   └── analyse_compress.py
 │   ├── results/
-│   │   └── tls_none_l0_d0_20260608_153650/
 │   └── analysis/
-├── microbench/
-│   ├── microbench_results.txt                           
 │
-├── Launcherv3_pq_mlkem.sh                     # Study 1 full matrix orchestrator
-├── Launcherv3_pq_hqc.sh                       # Study 2 full matrix orchestrator
-├── Launcherv3_mlkem_concurrent.sh             # ML-KEM concurrent-load orchestrator
-├── Launcherv3_hqc_concurrent.sh               # HQC concurrent-load orchestrator
-└── run_concurrent_matrix.sh                   # Run all concurrent experiments
-```
+├── microbench/
+│   └── microbench_results.txt
+│
+├── Launcherv3_pq_mlkem.sh                         # Study 1 full-matrix orchestrator
+├── Launcherv3_pq_hqc.sh                           # Study 2 full-matrix orchestrator
+├── Launcherv3_mlkem_concurrent.sh                 # ML-KEM concurrent-load orchestrator
+├── Launcherv3_hqc_concurrent.sh                   # HQC concurrent-load orchestrator
+└── run_concurrent_matrix.sh                       # Run all concurrent experiments
+````
 
 ---
 
 ## 4. Hardware and Software Requirements
 
-### Hardware (as used in the paper)
+### Hardware Used in the Paper
 
-| Component | Specification |
-|-----------|---------------|
-| Machine | HP ProBook 640 G4 |
-| CPU | Intel Core i5-8250U @ 1.60–3.40 GHz |
-| ISA extensions | **AVX2** (required for ML-DSA native performance) |
-| Cores | 4 physical / 8 logical threads |
-| RAM | 24 GB DDR4 |
-| OS | Ubuntu 24.04 LTS |
-| Docker | 26.1+ |
-| Disk | ≥ 20 GB free (for Docker image + raw data) |
+| Component      | Specification                        |
+| -------------- | ------------------------------------ |
+| Machine        | HP ProBook 640 G4                    |
+| CPU            | Intel Core i5-8250U @ 1.60--3.40 GHz |
+| ISA extensions | AVX2                                 |
+| Cores          | 4 physical / 8 logical threads       |
+| RAM            | 24 GB DDR4                           |
+| OS             | Ubuntu 24.04 LTS                     |
+| Docker         | 26.1+                                |
+| Disk           | At least 20 GB free                  |
 
-> **Note on AVX2:** The AVX2 performance paradox observed in this study is **architecture-specific**. Results on ARM, embedded, or mobile platforms will differ. Cross-architecture validation is identified as future work.
+> **Note on AVX2.** The AVX2 performance advantage reported in the paper is architecture-specific. Results on ARM, embedded, or mobile platforms may differ. Cross-architecture validation is future work.
 
 ### Software Stack
 
-| Component | Version | Role |
-|-----------|---------|------|
-| OpenSSL | 3.4.2-dev | TLS 1.3 stack |
-| liboqs | 0.12.0 | Post-quantum primitives |
-| oqsprovider | 0.8.0 | OpenSSL provider for PQ algorithms |
-| MsQuic | — | QUIC protocol stack |
-| tc / netem | Linux kernel | Network impairment injection |
-| Python | ≥ 3.10 | Analysis and figure generation |
-| Docker | ≥ 26.1 | Reproducible container environment |
+| Component   | Version                                        | Role                               |
+| ----------- | ---------------------------------------------- | ---------------------------------- |
+| OpenSSL     | 3.4.2-dev                                      | TLS 1.3 stack                      |
+| liboqs      | 0.12.0                                         | Post-quantum primitives            |
+| oqsprovider | 0.8.0                                          | OpenSSL provider for PQ algorithms |
+| MsQuic      | Repository version bundled in the Docker image | QUIC stack                         |
+| tc/netem    | Linux kernel                                   | Network impairment injection       |
+| Python      | >= 3.10                                        | Analysis and figure generation     |
+| Docker      | >= 26.1                                        | Reproducible container environment |
 
 ---
 
 ## 5. Installation and Environment Setup
 
-### Step 1: Clone the repository
+### Step 1 — Clone the repository
 
 ```bash
 git clone https://github.com/TOLOKOUM/mldsa-mlkem-hqc-tls-quic-constrained-performance.git
 cd mldsa-mlkem-hqc-tls-quic-constrained-performance
 ```
 
-### Step 2: Install system dependencies
+### Step 2 — Install system dependencies
 
 ```bash
 sudo apt update
 sudo apt install -y \
     docker.io \
     git \
-    iproute2 \          # provides tc/netem
+    iproute2 \
     python3 \
     python3-pip \
     python3-venv
 
-# Add current user to docker group (log out/in to take effect)
-sudo usermod -aG docker $USER
+sudo systemctl enable --now docker
+sudo usermod -aG docker "$USER"
 ```
 
-### Step 3: Install Python dependencies
+After adding the user to the `docker` group, log out and log back in.
+
+### Step 3 — Install Python dependencies
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
+
 pip install --upgrade pip
-pip install \
-    numpy \
-    scipy \
-    pandas \
-    matplotlib \
-    seaborn
+pip install numpy scipy pandas matplotlib seaborn
 ```
 
-### Step 4: Build the Docker image
+### Step 4 — Build the Docker image
 
 ```bash
-cd docker
+cd 0-docker
 docker build -t uma-tls-quic-pq-34 .
 cd ..
 ```
 
-> **Build time:** approximately 15–25 minutes depending on network speed. The image compiles OpenSSL 3.4.2-dev, liboqs 0.12.0, oqsprovider 0.8.0, and MsQuic from source.
+Build time is approximately 15--25 minutes depending on network speed and CPU performance.
 
-### Step 5: Verify the installation
+### Step 5 — Verify the installation
 
 ```bash
-# Check OpenSSL version inside the container
 docker run --rm uma-tls-quic-pq-34 openssl version
-# Expected: OpenSSL 3.4.2-dev ...
+```
 
-# List available post-quantum algorithms
+Expected output begins with:
+
+```text
+OpenSSL 3.4.2-dev
+```
+
+List available post-quantum algorithms:
+
+```bash
 docker run --rm uma-tls-quic-pq-34 \
     openssl list -signature-algorithms -provider oqsprovider \
     | grep -i "mldsa\|hqc"
@@ -310,145 +251,196 @@ docker run --rm uma-tls-quic-pq-34 \
 
 ## 6. Network Scenarios
 
-All scenarios are calibrated from field measurements conducted at **ENSP Yaoundé** using **Orange Cameroon** infrastructure in **April 2026**.
+All network scenarios are based on field measurements conducted at **ENSP Yaoundé** using **Orange Cameroon** infrastructure in **April 2026**.
 
-### 6.1 Uniform-Loss Scenarios (tc/netem)
+### 6.1 Uniform-Loss Scenarios
 
-| Scenario ID | Label | RTT | Loss | Calibration |
-|-------------|-------|-----|------|-------------|
-| `ideal` | Ideal | 0 ms | 0% | Docker localhost, no impairment |
-| `local_yde` | Local YDE | 35 ms | 2% | Orange regional path, P25 = 34 ms |
-| `backbone` | Backbone | 200 ms | 4% | International path, P50 = 207 ms |
-| `degraded` | Degraded | 200 ms | 10% | Peak-hour congestion estimate |
+| Scenario ID | Label     | RTT    | Loss | Calibration                       |
+| ----------- | --------- | ------ | ---- | --------------------------------- |
+| `ideal`     | Ideal     | 0 ms   | 0%   | Docker localhost, no impairment   |
+| `local_yde` | Local YDE | 35 ms  | 2%   | Orange regional path, P25 = 34 ms |
+| `backbone`  | Backbone  | 200 ms | 4%   | International path, P50 = 207 ms  |
+| `degraded`  | Degraded  | 200 ms | 10%  | Peak-hour congestion estimate     |
 
-**Launcher arguments:**
+Launcher arguments:
 
-| Scenario | `mode` | `loss` | `delay` |
-|----------|--------|--------|---------|
-| Ideal | `none` | `0` | `0` |
-| Local YDE | `simple` | `2` | `35` |
-| Backbone | `simple` | `4` | `200` |
-| Degraded | `simple` | `10` | `200` |
-
-### 6.2 Gilbert–Elliott Burst-Loss Models
-
-The GE models use the same parameter sets as Montenegro et al. [1]:
-
-| Model | p_g | p_b | ε_h | ε_k | Avg. loss |
-|-------|-----|-----|-----|-----|-----------|
-| GE-Stable | 0.10 | 0.50 | 0.70 | 0.10 | ≈ 22.5% |
-| GE-Unstable | 0.20 | 0.40 | 0.90 | 0.20 | ≈ 52% |
-
-Where: `p_g` = P(Good→Bad), `p_b` = P(Bad→Good), `ε_h` = P(loss | Good), `ε_k` = P(loss | Bad).
-
-**Launcher arguments:**
-
-| Scenario | `mode` | `loss` | `delay` |
-|----------|--------|--------|---------|
-| GE-Stable | `stable` | `0` | `0` |
-| GE-Unstable | `unstable` | `0` | `0` |
-
-### 6.3 tc/netem Configuration Details
-
-See [`network/netem_config.sh`](network/netem_config.sh) for the exact `tc` commands applied inside the Docker network namespace for each scenario.
+| Scenario  | `mode`   | `loss` | `delay` |
+| --------- | -------- | ------ | ------- |
+| Ideal     | `none`   | `0`    | `0`     |
+| Local YDE | `simple` | `2`    | `35`    |
+| Backbone  | `simple` | `4`    | `200`   |
+| Degraded  | `simple` | `10`   | `200`   |
 
 Example for Local YDE:
+
 ```bash
 tc qdisc add dev eth0 root netem delay 35ms loss 2%
 ```
 
-Example for GE-Stable:
+### 6.2 Gilbert--Elliott Burst-Loss Models
+
+The Gilbert--Elliott models use the same parameter sets as Montenegro et al.:
+
+| Model       | `p_g` | `p_b` | `epsilon_h` | `epsilon_k` |
+| ----------- | ----- | ----- | ----------- | ----------- |
+| GE-stable   | 0.10  | 0.50  | 0.70        | 0.10        |
+| GE-unstable | 0.20  | 0.40  | 0.90        | 0.20        |
+
+Launcher arguments:
+
+| Scenario    | `mode`     | `loss` | `delay` |
+| ----------- | ---------- | ------ | ------- |
+| GE-stable   | `stable`   | `0`    | `0`     |
+| GE-unstable | `unstable` | `0`    | `0`     |
+
+Example command:
+
 ```bash
 tc qdisc add dev eth0 root netem \
     loss gemodel 10% 50% 70% 10%
 ```
 
+The average induced loss should be verified from the generated logs or traces. The table above reports the exact `tc/netem` parameters used in the experiments.
+
 ---
 
 ## 7. Evaluated Configurations
 
-### Study 1 — ML-DSA × ML-KEM (26 Signature × KEM pairs)
+### Study 1 — ML-DSA × ML-KEM
 
-| Tier | Signature (Classical → PQ) | KEMs evaluated |
-|------|---------------------------|----------------|
-| L1 | Ed25519 → ML-DSA44 | P-256, X25519, P-256+ML-KEM512, X25519+ML-KEM512, ML-KEM512 |
-| L3 | secp384r1 → ML-DSA65 | P-384, X448, P-384+ML-KEM768, X448+ML-KEM768, ML-KEM768 |
-| L5 | secp521r1 → ML-DSA87 | P-521, P-521+ML-KEM1024, ML-KEM1024 |
+Each security tier is evaluated with a classical signature and the corresponding ML-DSA parameter set.
 
-### Study 2 — ML-DSA × HQC (26 Signature × KEM pairs)
+| Tier | Signature pair       | KEMs evaluated                                              |
+| ---- | -------------------- | ----------------------------------------------------------- |
+| L1   | Ed25519 / ML-DSA44   | P-256, X25519, P-256+ML-KEM512, X25519+ML-KEM512, ML-KEM512 |
+| L3   | secp384r1 / ML-DSA65 | P-384, X448, P-384+ML-KEM768, X448+ML-KEM768, ML-KEM768     |
+| L5   | secp521r1 / ML-DSA87 | P-521, P-521+ML-KEM1024, ML-KEM1024                         |
 
-| Tier | Signature (Classical → PQ) | KEMs evaluated |
-|------|---------------------------|----------------|
-| L1 | Ed25519 → ML-DSA44 | P-256, X25519, HQC-128, P-256+HQC-128, X25519+HQC-128 |
-| L3 | secp384r1 → ML-DSA65 | P-384, X448, HQC-192, P-384+HQC-192, X448+HQC-192 |
-| L5 | secp521r1 → ML-DSA87 | P-521, HQC-256, P-521+HQC-256 |
+### Study 2 — ML-DSA × HQC
 
+| Tier | Signature pair       | KEMs evaluated                                        |
+| ---- | -------------------- | ----------------------------------------------------- |
+| L1   | Ed25519 / ML-DSA44   | P-256, X25519, HQC-128, P-256+HQC-128, X25519+HQC-128 |
+| L3   | secp384r1 / ML-DSA65 | P-384, X448, HQC-192, P-384+HQC-192, X448+HQC-192     |
+| L5   | secp521r1 / ML-DSA87 | P-521, HQC-256, P-521+HQC-256                         |
 
-## 8. Reproducing the Experiments
+---
 
-### 8.1 Study 1 — ML-DSA × ML-KEM
+## 8. Reproducibility Modes
 
-#### Uniform-loss scenarios (TLS + QUIC)
+This repository supports two reproducibility modes.
+
+### Mode A — Reproduce the analysis from provided data
+
+Use this mode to regenerate statistics, tables, and figures from the CSV/log files included in the repository. This is the recommended mode for reviewers who want to verify the numerical results without rerunning the full network experiments.
+
+```bash
+cd mldsa-mlkem-study1/scripts/
+python3 analysis_pq_signatures.py
+python3 analysis_africa_scenarios.py
+python3 analysis_ge.py
+python3 plot_pq_signatures.py
+python3 plot_africa_scenarios.py
+
+cd ../../mldsa-hqc-study2/scripts/
+python3 analysis_hqc.py
+python3 analysis_hqc_africa.py
+python3 analysis_ge.py
+python3 plot_hqc_ideal.py
+python3 plot_hqc_africa.py
+```
+
+### Mode B — Reproduce the experiments from scratch
+
+Use this mode to rebuild the Docker image and rerun the TLS/QUIC handshake campaigns. This mode requires privileges for `tc/netem` and takes substantially longer.
+
+```bash
+cd 0-docker
+docker build -t uma-tls-quic-pq-34 .
+cd ..
+```
+
+Then run the desired experiment matrix as described below.
+
+---
+
+## 9. Reproducing the Full-Handshake Campaigns
+
+### 9.1 Study 1 — ML-DSA × ML-KEM
 
 ```bash
 cd mldsa-mlkem-study1/
-
-# TLS — all 4 uniform-loss scenarios
-../../Launcherv3_pq_mlkem.sh tls single nocapture none   0  0
-../../Launcherv3_pq_mlkem.sh tls single nocapture simple 2  35
-../../Launcherv3_pq_mlkem.sh tls single nocapture simple 4  200
-../../Launcherv3_pq_mlkem.sh tls single nocapture simple 10 200
-
-# QUIC — all 4 uniform-loss scenarios
-../../Launcherv3_pq_mlkem.sh quic single nocapture none   0  0
-../../Launcherv3_pq_mlkem.sh quic single nocapture simple 2  35
-../../Launcherv3_pq_mlkem.sh quic single nocapture simple 4  200
-../../Launcherv3_pq_mlkem.sh quic single nocapture simple 10 200
 ```
 
-#### Gilbert–Elliott burst-loss models
+Uniform-loss scenarios:
 
 ```bash
-# TLS — GE models
-../../Launcherv3_pq_mlkem.sh tls single nocapture stable   0 0
-../../Launcherv3_pq_mlkem.sh tls single nocapture unstable 0 0
+# TLS
+../Launcherv3_pq_mlkem.sh tls single nocapture none   0  0
+../Launcherv3_pq_mlkem.sh tls single nocapture simple 2  35
+../Launcherv3_pq_mlkem.sh tls single nocapture simple 4  200
+../Launcherv3_pq_mlkem.sh tls single nocapture simple 10 200
 
-# QUIC — GE models
-../../Launcherv3_pq_mlkem.sh quic single nocapture stable   0 0
-../../Launcherv3_pq_mlkem.sh quic single nocapture unstable 0 0
+# QUIC
+../Launcherv3_pq_mlkem.sh quic single nocapture none   0  0
+../Launcherv3_pq_mlkem.sh quic single nocapture simple 2  35
+../Launcherv3_pq_mlkem.sh quic single nocapture simple 4  200
+../Launcherv3_pq_mlkem.sh quic single nocapture simple 10 200
 ```
 
-> **Estimated runtime:** 6–8 hours on equivalent hardware (Intel Core i5-8250U).
-
-### 8.3 Study 2 — ML-DSA × HQC
+Gilbert--Elliott models:
 
 ```bash
-cd mldsa-hqc-study2/
+# TLS
+../Launcherv3_pq_mlkem.sh tls single nocapture stable   0 0
+../Launcherv3_pq_mlkem.sh tls single nocapture unstable 0 0
 
-# TLS — all scenarios including GE
+# QUIC
+../Launcherv3_pq_mlkem.sh quic single nocapture stable   0 0
+../Launcherv3_pq_mlkem.sh quic single nocapture unstable 0 0
+```
+
+Estimated runtime on the reference machine: 6--8 hours.
+
+### 9.2 Study 2 — ML-DSA × HQC
+
+```bash
+cd ../mldsa-hqc-study2/
+```
+
+TLS:
+
+```bash
 for scenario in "none 0 0" "simple 2 35" "simple 4 200" "simple 10 200" \
                 "stable 0 0" "unstable 0 0"; do
     read -r mode loss delay <<< "$scenario"
-    bash ../../Launcherv3_pq_hqc.sh tls single nocapture $mode $loss $delay
+    ../Launcherv3_pq_hqc.sh tls single nocapture "$mode" "$loss" "$delay"
 done
+```
 
-# QUIC — all scenarios including GE
+QUIC:
+
+```bash
 for scenario in "none 0 0" "simple 2 35" "simple 4 200" "simple 10 200" \
                 "stable 0 0" "unstable 0 0"; do
     read -r mode loss delay <<< "$scenario"
-    bash ../../Launcherv3_pq_hqc.sh quic single nocapture $mode $loss $delay
+    ../Launcherv3_pq_hqc.sh quic single nocapture "$mode" "$loss" "$delay"
 done
 ```
 
-> **Estimated runtime:** 8–12 hours on equivalent hardware.  
-> **Note:** HQC-256 under GE-unstable can produce individual handshakes exceeding 25 seconds. This is an expected result, not a hang — see Section 2 (Gilbert-Elliott Catastrophe finding).
+Estimated runtime on the reference machine: 8--12 hours.
 
-### 8.4 Expected Output
+> **Note.** HQC-256 under GE-unstable can produce individual handshakes exceeding 25 seconds. This is an expected result, not a hang.
 
-Each launcher produces one log file per Signature × Protocol × Scenario combination, stored in either `TLS/log/` or `QUIC/log/`. CSV files are then generated from these logs by the Python analysis scripts handshakeProcess.py  and placed in `TLS/csv/` and `QUIC/csv/`, respectively.
+---
 
-CSV format:
-```
+## 10. Expected Output
+
+Each launcher produces log files under either `TLS/log/` or `QUIC/log/`. CSV files are generated from the logs by the parsing utilities and stored in `TLS/csv/` or `QUIC/csv/`.
+
+Representative CSV format:
+
+```text
 run_id,sig,kem,protocol,scenario,rtt_ms,loss_pct,handshake_time_ms,status
 1,mldsa65,mlkem768,tls,local_yde,35,2,186.92,success
 2,mldsa65,mlkem768,tls,local_yde,35,2,188.14,success
@@ -458,82 +450,91 @@ run_id,sig,kem,protocol,scenario,rtt_ms,loss_pct,handshake_time_ms,status
 
 ---
 
-## 9. Data Description
+## 11. Data Description
 
-### 9.1 Raw Data Location
+### 11.1 Raw and Processed Data
 
-| Study | Protocol | Path |
-|-------|----------|------|
-| Study 1 — ML-KEM (uniform loss) | TLS | `mldsa-mlkem-study1/TLS/csv/` |
-| Study 1 — ML-KEM (uniform loss) | QUIC | `mldsa-mlkem-study1/QUIC/csv/` |
-| Study 1 — GE models | TLS + QUIC | `mldsa-mlkem-study1/{TLS,QUIC}/log/ge/` |
-| Study 2 — HQC (uniform loss) | TLS | `mldsa-hqc-study2/TLS/csv/` |
-| Study 2 — HQC (uniform loss) | QUIC | `mldsa-hqc-study2/QUIC/csv/` |
-| Study 2 — GE models | TLS + QUIC | `mldsa-hqc-study2/{TLS,QUIC}/log/ge/` |
+| Study                         | Protocol    | Path                                                                           |
+| ----------------------------- | ----------- | ------------------------------------------------------------------------------ |
+| Study 1 — ML-KEM uniform loss | TLS         | `mldsa-mlkem-study1/TLS/csv/`                                                  |
+| Study 1 — ML-KEM uniform loss | QUIC        | `mldsa-mlkem-study1/QUIC/csv/`                                                 |
+| Study 1 — GE models           | TLS/QUIC    | `mldsa-mlkem-study1/{TLS,QUIC}/log/ge/`                                        |
+| Study 2 — HQC uniform loss    | TLS         | `mldsa-hqc-study2/TLS/csv/`                                                    |
+| Study 2 — HQC uniform loss    | QUIC        | `mldsa-hqc-study2/QUIC/csv/`                                                   |
+| Study 2 — GE models           | TLS/QUIC    | `mldsa-hqc-study2/{TLS,QUIC}/log/ge/`                                          |
+| Session resumption            | TLS/QUIC    | `resumption_study/results/`                                                    |
+| Concurrent load               | TLS/QUIC    | `mldsa-mlkem-study1/result_concurrent/`, `mldsa-hqc-study2/result_concurrent/` |
+| Micro-benchmarks              | Sign/verify | `microbench/microbench_results.txt`                                            |
 
-### 9.2 CSV Naming Convention
+### 11.2 CSV Naming Convention
 
 Uniform-loss scenarios:
-```
+
+```text
 {sig}_{protocol}_{scenario}.csv
+```
 
 Examples:
-  mldsa65_tls_ideal.csv
-  mldsa65_tls_africa_local.csv
-  mldsa65_tls_africa_backbone.csv
-  mldsa65_tls_africa_degraded.csv
-  ed25519_quic_ideal.csv
-  secp384r1_quic_africa_backbone.csv
+
+```text
+mldsa65_tls_ideal.csv
+mldsa65_tls_africa_local.csv
+mldsa65_tls_africa_backbone.csv
+mldsa65_tls_africa_degraded.csv
+ed25519_quic_ideal.csv
+secp384r1_quic_africa_backbone.csv
 ```
 
-Gilbert–Elliott scenarios:
-```
+Gilbert--Elliott scenarios:
+
+```text
 {sig}_{protocol}_ge_stable.csv
 {sig}_{protocol}_ge_unstable.csv
+```
 
 Examples:
-  mldsa65_tls_ge_stable.csv
-  mldsa87_quic_ge_unstable.csv
+
+```text
+mldsa65_tls_ge_stable.csv
+mldsa87_quic_ge_unstable.csv
 ```
 
 ---
 
-## 10. Statistical Analysis
-
-### 10.1 Methodology
+## 12. Statistical Analysis
 
 All statistical tests are implemented in the `scripts/` directory of each study.
 
-| Test | Tool | Purpose |
-|------|------|---------|
-| Shapiro–Wilk | `scipy.stats.shapiro` | Confirm non-normality (all distributions, p < 0.001) |
-| Mann–Whitney U | `scipy.stats.mannwhitneyu` | Non-parametric pairwise comparison |
-| Bonferroni correction | Manual | Control family-wise error rate (α = 0.001) |
-| Cliff's delta | Custom | Effect size for each pairwise comparison |
+| Test or Metric        | Tool                       | Purpose                            |
+| --------------------- | -------------------------- | ---------------------------------- |
+| Shapiro--Wilk         | `scipy.stats.shapiro`      | Check normality                    |
+| Mann--Whitney U       | `scipy.stats.mannwhitneyu` | Pairwise non-parametric comparison |
+| Bonferroni correction | Manual                     | Control family-wise error rate     |
+| Median                | `numpy` / `pandas`         | Primary location metric            |
+| Mean, p95, p99        | `numpy` / `pandas`         | Tail and service-level metrics     |
+| Cliff's delta         | Custom                     | Effect-size estimate               |
 
-Primary location metric is the **median**. Mean, p95, and p99 are reported as secondary tail metrics.
+The primary location metric is the **median**. Mean, p95, and p99 are reported as secondary tail metrics.
 
-### 10.2 Run Statistical Analysis — Study 1
+### 12.1 Study 1
 
 ```bash
 cd mldsa-mlkem-study1/scripts/
 
-# Ideal conditions
 python3 analysis_pq_signatures.py
-
-# Constrained-network scenarios
 python3 analysis_africa_scenarios.py
-
-# Gilbert-Elliott scenarios
 python3 analysis_ge.py
 ```
 
-Output is written to `mldsa-mlkem-study1/Analysis/`:
-- `analysis_output.txt` — ideal-condition statistics
-- `analysis_africa_output.txt` — constrained-network statistics
-- `analysis_ge_output.txt` — Gilbert–Elliott statistics
+Outputs:
 
-### 10.3 Run Statistical Analysis — Study 2
+```text
+mldsa-mlkem-study1/Analysis/analysis_output.txt
+mldsa-mlkem-study1/Analysis/analysis_africa_output.txt
+mldsa-mlkem-study1/Analysis/analysis_ge_output.txt
+```
+
+### 12.2 Study 2
 
 ```bash
 cd mldsa-hqc-study2/scripts/
@@ -543,77 +544,64 @@ python3 analysis_hqc_africa.py
 python3 analysis_ge.py
 ```
 
-Output is written to `mldsa-hqc-study2/Analysis/`:
-- `analysis_hqc_output.txt`
-- `analysis_hqc_africa_output.txt`
-- `analysis_ge_output.txt`
+Outputs:
+
+```text
+mldsa-hqc-study2/Analysis/analysis_hqc_output.txt
+mldsa-hqc-study2/Analysis/analysis_hqc_africa_output.txt
+mldsa-hqc-study2/Analysis/analysis_ge_output.txt
+```
 
 ---
 
-## 11. Generating Figures
+## 13. Generating Figures
 
-### 11.1 Study 1 — ML-DSA × ML-KEM
+### 13.1 Study 1 — ML-DSA × ML-KEM
 
 ```bash
 cd mldsa-mlkem-study1/scripts/
 
-# Ideal-condition violin plots
 python3 plot_pq_signatures.py
-
-# Delta-evolution and protocol-reversal figures
 python3 plot_africa_scenarios.py
-
-# GE burst-loss violin plots
 python3 plot_ge_violin.py
-
-# Per-signature raw violin plots
 python3 plot_violins_phase5.py
 ```
 
-Figures are written to `mldsa-mlkem-study1/plots/` in both `.pdf` and `.png` formats.
-
-### 11.2 Study 2 — ML-DSA × HQC
+### 13.2 Study 2 — ML-DSA × HQC
 
 ```bash
 cd mldsa-hqc-study2/scripts/
 
-# HQC ideal-condition figures
 python3 plot_hqc_ideal.py
-
-# HQC constrained-network figures
 python3 plot_hqc_africa.py
-
-# Per-signature HQC violin plots
 python3 plot_violins_phase6.py
 ```
 
-Figures are written to `mldsa-hqc-study2/plots/` in both `.pdf` and `.png` formats.
+### 13.3 Figure Index
 
-### 11.3 Figure Index
-
-| Figure | Script | Output file |
-|--------|--------|-------------|
-| Fig. 1 — Ideal violin plots L1/L3 (Study 1) | `plot_pq_signatures.py` | `plots/fig1a_level1_violin.*` |
-| Fig. 2 — Heatmap Δ% ML-DSA vs classical | `plot_pq_signatures.py` | `plots/fig2_heatmap_delta.*` |
-| Fig. 3 — Super-additivity ratios | `plot_pq_signatures.py` | `plots/fig3_superadditivity.*` |
-| Fig. 4 — Delta evolution across scenarios | `plot_africa_scenarios.py` | `plots/fig4_delta_evolution.*` |
-| Fig. 5 — Protocol reversal TLS vs QUIC | `plot_africa_scenarios.py` | `plots/fig5_protocol_reversal.*` |
-| Fig. 6 — Deployment heatmap Study 1 | `plot_africa_scenarios.py` | `plots/fig6_deployment_heatmap.*` |
-| Fig. 7 — Ideal vs degraded scatter Study 1 | `plot_africa_scenarios.py` | `plots/fig7_ideal_vs_degraded.*` |
-| Fig. 8 — HQC ideal violin plots (Study 2) | `plot_hqc_ideal.py` | `plots/fig8_hqc_violin.*` |
-| Fig. 9 — HQC delta evolution | `plot_hqc_africa.py` | `plots/fig9_hqc_delta.*` |
-| Fig. 10 — HQC deployment heatmap | `plot_hqc_africa.py` | `plots/fig10_hqc_heatmap.*` |
-| GE violin Study 1 (supplementary) | `plot_ge_violin.py` | `plots/ge_violin/fig_GE_*.*` |
+| Figure                          | Script                     | Output file                                          |
+| ------------------------------- | -------------------------- | ---------------------------------------------------- |
+| Study 1 ideal violin plots      | `plot_pq_signatures.py`    | `mldsa-mlkem-study1/plots/fig1*_violin.*`            |
+| Study 1 super-additivity ratios | `plot_pq_signatures.py`    | `mldsa-mlkem-study1/plots/fig3_superadditivity.*`    |
+| Study 1 protocol reversal       | `plot_africa_scenarios.py` | `mldsa-mlkem-study1/plots/fig*_protocol_reversal.*`  |
+| Study 1 deployment heatmap      | `plot_africa_scenarios.py` | `mldsa-mlkem-study1/plots/fig*_deployment_heatmap.*` |
+| Study 1 GE violin plots         | `plot_ge_violin.py`        | `mldsa-mlkem-study1/plots/ge_violin/fig_GE_*.*`      |
+| Study 2 HQC ideal violin plots  | `plot_hqc_ideal.py`        | `mldsa-hqc-study2/plots/fig*_hqc_violin.*`           |
+| Study 2 HQC delta evolution     | `plot_hqc_africa.py`       | `mldsa-hqc-study2/plots/fig*_hqc_delta.*`            |
+| Study 2 HQC deployment heatmap  | `plot_hqc_africa.py`       | `mldsa-hqc-study2/plots/fig*_hqc_heatmap.*`          |
 
 ---
 
-## 12. Micro-benchmarks
+## 14. Micro-benchmarks
 
-Micro-benchmarks measure isolated cryptographic operation latency to provide causal justification for the AVX2 performance paradox documented in the paper.
+Micro-benchmarks measure isolated cryptographic operation latency to help interpret the AVX2 performance behavior observed in the protocol-level results.
 
-### 12.1 Run Inside the Docker Container
+### 14.1 Run Micro-benchmarks
 
-```bashdocker run --rm uma-tls-quic-pq-34 bash -c "
+```bash
+mkdir -p microbench
+
+docker run --rm uma-tls-quic-pq-34 bash -c "
     echo '=== Classical Signatures ==='
     openssl speed ed25519 ecdsap384 ecdsap521 2>&1
     echo ''
@@ -622,109 +610,87 @@ Micro-benchmarks measure isolated cryptographic operation latency to provide cau
 " > microbench/microbench_results.txt
 ```
 
-### 12.2 Reference Results (Table 2 in paper)
+### 14.2 Reference Results
 
-Measured on HP ProBook 640 G4, Intel Core i5-8250U, AVX2, Ubuntu 24.04 LTS,
-OpenSSL 3.4.2-dev + liboqs 0.12.0 + oqsprovider 0.8.0, N ≈ 10,000 iterations.
+Measured on HP ProBook 640 G4, Intel Core i5-8250U, AVX2, Ubuntu 24.04 LTS, OpenSSL 3.4.2-dev, liboqs 0.12.0, oqsprovider 0.8.0, N ≈ 10,000 iterations.
 
-| Algorithm | Sign (µs) | Verify (µs) | NIST Level |
-|-----------|-----------|-------------|------------|
-| Ed25519 | 42.6 | 135.8 | I |
-| secp384r1 | 249.7 | 657.6 | III |
-| secp521r1 | 381.0 | 764.1 | V |
-| ML-DSA-44 | 89.5 | 34.6 | II |
-| ML-DSA-65 | 142.9 | 51.7 | III |
-| ML-DSA-87 | 153.9 | 73.9 | V |
+| Algorithm | Sign (µs) | Verify (µs) | NIST Category |
+| --------- | --------- | ----------- | ------------- |
+| Ed25519   | 42.6      | 135.8       | I             |
+| secp384r1 | 249.7     | 657.6       | III           |
+| secp521r1 | 381.0     | 764.1       | V             |
+| ML-DSA44  | 89.5      | 34.6        | II            |
+| ML-DSA65  | 142.9     | 51.7        | III           |
+| ML-DSA87  | 153.9     | 73.9        | V             |
 
-> **Interpretation:** secp384r1 Sign (249.7 µs) is 1.75× slower than ML-DSA-65 Sign (142.9 µs) despite ML-DSA-65 producing certificates 32× larger. This asymmetry — driven by AVX2 NTT acceleration in ML-DSA — is the mechanism underlying the AVX2 performance paradox reported in Key Finding 1. secp521r1 has no dedicated Intel hardware acceleration path; P-521 scalar multiplication is executed entirely in software.
+These values are used only to interpret protocol-level results; they are not used as handshake measurements.
 
 ---
 
-## 13. Validation Against Montenegro et al. [1]
+## 15. Validation Against Prior TLS/QUIC Measurements
 
-To confirm that our framework correctly reproduces the baseline from Montenegro et al. before introducing ML-DSA, run the original launcher:
+To validate the framework, we reproduced common ideal-condition configurations from Montenegro et al. using the original launcher and configuration style.
 
 ```bash
-# Reproduce Montenegro et al. — ideal conditions
-Launcherv3.sh tls single nocapture none 0 0
-Launcherv3.sh quic single nocapture none 0 0
+./Launcherv3.sh tls single nocapture none 0 0
+./Launcherv3.sh quic single nocapture none 0 0
 ```
-<table>
-  <caption>Expected agreement (mean handshake times, ms)</caption>
-  <thead>
-    <tr><th>Configuration</th><th>Our result</th><th>Montenegro et al. [1]</th><th>|Δ|%</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>TLS — Ed25519 + ML-KEM512</td><td>4.87 ms</td><td>≈ 4.9 ms</td><td>0.6%</td></tr>
-    <tr><td>TLS — Ed25519 + p256_ML-KEM512</td><td>9.24 ms</td><td>≈ 9.1 ms</td><td>1.5%</td></tr>
-    <tr><td>TLS — secp384r1 + ML-KEM768</td><td>5.11 ms</td><td>≈ 5.2 ms</td><td>1.7%</td></tr>
-    <tr><td>TLS — secp521r1 + ML-KEM1024</td><td>11.02 ms</td><td>≈ 11.1 ms</td><td>0.7%</td></tr>
-    <tr><td>QUIC — Ed25519 + ML-KEM512</td><td>2.95 ms</td><td>≈ 2.9 ms</td><td>1.7%</td></tr>
-    <tr><td>QUIC — Ed25519 + p256_ML-KEM512</td><td>12.14 ms</td><td>≈ 12.0 ms</td><td>1.2%</td></tr>
-    <tr><td>QUIC — secp384r1 + ML-KEM768</td><td>3.98 ms</td><td>≈ 3.9 ms</td><td>2.1%</td></tr>
-  </tbody>
-</table>
 
-All reproduced values agree with Montenegro et al values within **±3%**. KEM performance rankings match 100%.
+| Configuration                   | Our result | Reference value | Relative difference |
+| ------------------------------- | ---------- | --------------- | ------------------- |
+| TLS — Ed25519 + ML-KEM512       | 4.87 ms    | ≈ 4.9 ms        | 0.6%                |
+| TLS — Ed25519 + p256_ML-KEM512  | 9.24 ms    | ≈ 9.1 ms        | 1.5%                |
+| TLS — secp384r1 + ML-KEM768     | 5.11 ms    | ≈ 5.2 ms        | 1.7%                |
+| TLS — secp521r1 + ML-KEM1024    | 11.02 ms   | ≈ 11.1 ms       | 0.7%                |
+| QUIC — Ed25519 + ML-KEM512      | 2.95 ms    | ≈ 2.9 ms        | 1.7%                |
+| QUIC — Ed25519 + p256_ML-KEM512 | 12.14 ms   | ≈ 12.0 ms       | 1.2%                |
+| QUIC — secp384r1 + ML-KEM768    | 3.98 ms    | ≈ 3.9 ms        | 2.1%                |
 
-> **Note on divergence:** Our machine (Intel Core i5-8250U, 1.6–3.4 GHz, laptop) differs from the Montenegro et al. hardware (Intel Xeon Silver 4214, 2.2 GHz, server). Both support AVX2. Absolute values differ by up to 2× for some configurations due to clock speed and cache hierarchy differences; relative rankings and Δ% comparisons are unaffected.
+All reproduced values agree within ±3%, with matching KEM rankings.
 
 ---
 
-## 14. Supplementary Materials
+## 16. Supplementary Materials
 
-The following materials are available in `mldsa-mlkem-study1/plots/` and `mldsa-hqc-study2/plots/` and are not included in the main paper due to space constraints.
+The following materials are available in the repository and are not included in the main paper due to space constraints.
 
-### Supplementary Figures
+### 16.1 Supplementary Figures
 
-| File | Description |
-|------|-------------|
-| `mldsa-mlkem-study1/plots/ge_violin/fig_GE_stable_L*.{pdf,png}` | GE-stable violin plots, Levels I/III/V, Study 1 |
-| `mldsa-mlkem-study1/plots/ge_violin/fig_GE_unstable_L*.{pdf,png}` | GE-unstable violin plots, Levels I/III/V, Study 1 |
-| `mldsa-hqc-study2/plots/fig1*_hqc_violin.*` | Ideal-condition HQC violin plots, Levels I/III/V |
-| `mldsa-hqc-study2/plots/ge_violin/fig_GE_*_hqc.*` | GE violin plots, Study 2 |
+| File or directory                     | Description                                                   |
+| ------------------------------------- | ------------------------------------------------------------- |
+| `mldsa-mlkem-study1/plots/ge_violin/` | GE-stable and GE-unstable violin plots for Study 1            |
+| `mldsa-mlkem-study1/plots/`           | Additional ideal-condition and deployment figures for Study 1 |
+| `mldsa-hqc-study2/plots/`             | HQC ideal-condition, constrained-network, and heatmap figures |
+| `mldsa-hqc-study2/plots/ge_violin/`   | GE violin plots for Study 2, when generated                   |
 
-### Supplementary Data Files
+### 16.2 Supplementary Data Files
 
-| File | Description |
-|------|-------------|
-| `mldsa-mlkem-study1/Analysis/analysis_output.txt` | Full statistics — Study 1 ideal conditions |
-| `mldsa-mlkem-study1/Analysis/analysis_africa_output.txt` | Full statistics — Study 1 constrained networks |
-| `mldsa-mlkem-study1/Analysis/analysis_ge_output.txt` | Full statistics — Study 1 GE models |
-| `mldsa-hqc-study2/Analysis/analysis_hqc_output.txt` | Full statistics — Study 2 ideal conditions |
-| `mldsa-hqc-study2/Analysis/analysis_hqc_africa_output.txt` | Full statistics — Study 2 constrained networks |
-| `mldsa-hqc-study2/Analysis/analysis_ge_output.txt` | Full statistics — Study 2 GE models |
-
----
-
-
----
-
-## 16. License
-
-This repository is released under the **MIT License** — see [`LICENSE`](LICENSE) for full terms.
-
-The Docker image integrates the following open-source components:
-
-| Component | License |
-|-----------|---------|
-| [OpenSSL](https://openssl.org/) | Apache 2.0 / OpenSSL License |
-| [liboqs](https://github.com/open-quantum-safe/liboqs) | MIT License |
-| [oqsprovider](https://github.com/open-quantum-safe/oqs-provider) | MIT License |
-| [MsQuic](https://github.com/microsoft/msquic) | MIT License |
+| File                                                       | Description                                              |
+| ---------------------------------------------------------- | -------------------------------------------------------- |
+| `mldsa-mlkem-study1/Analysis/analysis_output.txt`          | Full statistics — Study 1 ideal conditions               |
+| `mldsa-mlkem-study1/Analysis/analysis_africa_output.txt`   | Full statistics — Study 1 constrained networks           |
+| `mldsa-mlkem-study1/Analysis/analysis_ge_output.txt`       | Full statistics — Study 1 GE models                      |
+| `mldsa-hqc-study2/Analysis/analysis_hqc_output.txt`        | Full statistics — Study 2 ideal conditions               |
+| `mldsa-hqc-study2/Analysis/analysis_hqc_africa_output.txt` | Full statistics — Study 2 constrained networks           |
+| `mldsa-hqc-study2/Analysis/analysis_ge_output.txt`         | Full statistics — Study 2 GE models                      |
+| `resumption_study/analysis/`                               | Session-resumption analysis outputs                      |
+| `compression_study/analysis/`                              | Certificate-compression analysis outputs, when available |
+| `microbench/microbench_results.txt`                        | Isolated sign/verify micro-benchmark results             |
 
 ---
 
 ## 17. Contact
 
-| Role | Name | Email |
-|------|------|-------|
-| Lead author — experiments, code, analysis, writing | David Rive Tolokoum | davidtolokoum8@gmail.com |
-| Co-author — validation, analysis | Yve Bruno Mbezoa | mbezoayvebruno@gmail.com |
-| Supervisor / corresponding author | Hervé Talé Kalachi | herve.tale@univ-yaounde1.cm |
+| Role                                               | Name                | Email                                                             |
+| -------------------------------------------------- | ------------------- | ----------------------------------------------------------------- |
+| Lead author — experiments, code, analysis, writing | David Rive Tolokoum | [davidtolokoum8@gmail.com](mailto:davidtolokoum8@gmail.com)       |
+| Co-author — validation, analysis                   | Yve Bruno MBEZOA    | [mbezoayvebruno@gmail.com](mailto:mbezoayvebruno@gmail.com)       |
+| Supervisor / corresponding author                  | Hervé Talé Kalachi  | [herve.tale@univ-yaounde1.cm](mailto:herve.tale@univ-yaounde1.cm) |
 
-**Affiliation:**
-Department of Computer Engineering,
-National Advanced School of Engineering (ENSPY),
-University of Yaoundé I, Yaoundé, Cameroon.
+Affiliations:
 
+* Department of Computer Engineering, National Advanced School of Engineering (ENSPY/NASEY), University of Yaoundé I, Yaoundé, Cameroon.
+* Department of Computer Science, Faculty of Sciences, University of Yaoundé I, Yaoundé, Cameroon.
+
+```
+```
