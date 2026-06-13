@@ -697,21 +697,6 @@ The following materials are available in `mldsa-mlkem-study1/plots/` and `mldsa-
 
 ---
 
-## 15. Citation
-
-If you use this repository, the data, or the code it contains, please cite:
-
-```bibtex
-@article{tolokoum2026pq,
-  author    = {Tolokoum, David Rive and Mbezoa, Yve Bruno and {Talé Kalachi}, Hervé},
-  title     = {Post-Quantum {TLS} 1.3 and {QUIC} Handshakes under Constrained Networks:
-               Combining {ML-DSA} with {ML-KEM} and {HQC}},
-  journal   = {Computer Networks},
-  year      = {2026},
-  note      = {Submitted},
-  url       = {https://github.com/TOLOKOUM/mldsa-mlkem-hqc-tls-quic-constrained-performance}
-}
-```
 
 ---
 
