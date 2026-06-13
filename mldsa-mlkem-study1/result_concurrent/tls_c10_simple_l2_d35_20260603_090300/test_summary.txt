@@ -1,0 +1,26 @@
+=============================================================================
+TEST SUMMARY - PQ_MLKEM
+=============================================================================
+Date: mer. 03 juin 2026 09:07:42 WAT
+Protocol: tls
+Number of clients: 10
+Handshakes per client: 500
+Total handshakes: 5000
+Total execution time: 258975 ms
+Overall throughput: 19.30 handshakes/sec
+Network profile: simple
+Loss: 2%
+Delay: 35 ms
+
+Algorithms tested:
+  Signatures: mldsa65
+  KEMs: mlkem768
+
+Results location: /home/tolokoum/Documents/TLS-QUIC/mldsa-mlkem-study1/result_concurrent/tls_c10_simple_l2_d35_20260603_090300
+
+To analyze individual handshake latencies:
+  python3 analyse_concurrent.py /home/tolokoum/Documents/TLS-QUIC/mldsa-mlkem-study1/result_concurrent/tls_c10_simple_l2_d35_20260603_090300 --plots
+
+To compare with other runs:
+  python3 compare_concurrent.py /home/tolokoum/Documents/TLS-QUIC/mldsa-mlkem-study1/result_concurrent/
+=============================================================================

@@ -1,0 +1,470 @@
+--- 2026-06-03_13:35:11 ---
+--- 2026-06-03_13:35:13 ---
+--- 2026-06-03_13:35:15 ---
+--- 2026-06-03_13:35:17 ---
+--- 2026-06-03_13:35:19 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+servidor   0.00%     3.012MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:35:22 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     2.98MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:35:25 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+servidor   4.29%     4.48MiB / 23.32GiB    0.02%
+cliente1   107.56%   2.781MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:35:29 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+cliente2   106.58%   3.766MiB / 23.32GiB   0.02%
+cliente1   107.52%   3.422MiB / 23.32GiB   0.01%
+servidor   14.05%    4.406MiB / 23.32GiB   0.02%
+cliente3   105.93%   4.062MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:35:33 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+cliente4   101.39%   3.258MiB / 23.32GiB   0.01%
+cliente3   106.14%   2.117MiB / 23.32GiB   0.01%
+cliente2   106.09%   1.961MiB / 23.32GiB   0.01%
+servidor   17.79%    4.523MiB / 23.32GiB   0.02%
+cliente5   92.37%    2.227MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:35:39 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+cliente6   106.80%   3.434MiB / 23.32GiB   0.01%
+cliente5   106.27%   3.738MiB / 23.32GiB   0.02%
+cliente4   105.34%   3.98MiB / 23.32GiB    0.02%
+servidor   16.08%    4.52MiB / 23.32GiB    0.02%
+--- 2026-06-03_13:35:43 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+cliente7   105.91%   3.578MiB / 23.32GiB   0.01%
+cliente6   106.88%   4.148MiB / 23.32GiB   0.02%
+cliente5   105.06%   3.68MiB / 23.32GiB    0.02%
+servidor   15.49%    4.016MiB / 23.32GiB   0.02%
+cliente8   105.33%   3.41MiB / 23.32GiB    0.01%
+--- 2026-06-03_13:35:48 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+cliente9   106.36%   3.984MiB / 23.32GiB   0.02%
+cliente8   106.02%   4.375MiB / 23.32GiB   0.02%
+cliente7   103.43%   2.027MiB / 23.32GiB   0.01%
+servidor   14.82%    4.559MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:35:52 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente10   102.78%   4.648MiB / 23.32GiB   0.02%
+cliente9    107.71%   3.242MiB / 23.32GiB   0.01%
+servidor    16.15%    4.02MiB / 23.32GiB    0.02%
+cliente11   107.09%   2.258MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:35:59 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente11   107.06%   3.477MiB / 23.32GiB   0.01%
+servidor    12.10%    3.801MiB / 23.32GiB   0.02%
+cliente12   85.18%    1.395MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:36:04 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente13   86.78%    3.738MiB / 23.32GiB   0.02%
+cliente12   106.86%   4.133MiB / 23.32GiB   0.02%
+servidor    9.23%     4.758MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:08 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente14   104.91%   2.012MiB / 23.32GiB   0.01%
+cliente13   99.84%    3.832MiB / 23.32GiB   0.02%
+servidor    10.79%    4.426MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:12 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente15   106.91%   3.395MiB / 23.32GiB   0.01%
+cliente14   106.93%   2.129MiB / 23.32GiB   0.01%
+servidor    11.44%    4.133MiB / 23.32GiB   0.02%
+cliente16   106.56%   3.121MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:36:17 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente16   104.79%   3.695MiB / 23.32GiB   0.02%
+servidor    10.60%    4.285MiB / 23.32GiB   0.02%
+cliente17   106.28%   1.965MiB / 23.32GiB   0.01%
+cliente18   99.73%    2.336MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:36:25 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente19   104.77%   2.293MiB / 23.32GiB   0.01%
+cliente18   104.78%   3.824MiB / 23.32GiB   0.02%
+servidor    17.53%    4.035MiB / 23.32GiB   0.02%
+cliente20   106.63%   4.258MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:33 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente21   107.33%   2.855MiB / 23.32GiB   0.01%
+cliente20   107.77%   2.141MiB / 23.32GiB   0.01%
+servidor    10.24%    4.164MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:37 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente22   107.45%   2.359MiB / 23.32GiB   0.01%
+cliente21   102.46%   2.938MiB / 23.32GiB   0.01%
+servidor    10.60%    4.496MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:41 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente23   105.92%   2.949MiB / 23.32GiB   0.01%
+cliente22   106.37%   4.352MiB / 23.32GiB   0.02%
+servidor    10.95%    4.465MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:45 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente24   94.41%    1.824MiB / 23.32GiB   0.01%
+cliente23   95.51%    1.496MiB / 23.32GiB   0.01%
+servidor    8.23%     4.266MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:50 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente25   106.16%   3.699MiB / 23.32GiB   0.02%
+cliente24   106.48%   2.879MiB / 23.32GiB   0.01%
+servidor    11.03%    3.984MiB / 23.32GiB   0.02%
+cliente26   100.24%   3.762MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:36:55 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente26   92.15%    3.414MiB / 23.32GiB   0.01%
+servidor    11.47%    4.289MiB / 23.32GiB   0.02%
+cliente27   102.08%   4.215MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:01 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente28   107.22%   2.25MiB / 23.32GiB    0.01%
+cliente27   99.06%    1.945MiB / 23.32GiB   0.01%
+servidor    11.18%    4.562MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:06 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente29   105.24%   4.059MiB / 23.32GiB   0.02%
+cliente28   104.36%   4.195MiB / 23.32GiB   0.02%
+servidor    11.28%    3.918MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:10 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente30   103.85%   1.945MiB / 23.32GiB   0.01%
+cliente29   81.02%    3.41MiB / 23.32GiB    0.01%
+servidor    9.49%     4.398MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:14 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente31   105.41%   4.355MiB / 23.32GiB   0.02%
+cliente30   103.21%   1.781MiB / 23.32GiB   0.01%
+servidor    10.68%    4.762MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:19 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente31   101.96%   4.574MiB / 23.32GiB   0.02%
+servidor    5.24%     3.98MiB / 23.32GiB    0.02%
+--- 2026-06-03_13:37:23 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente32   80.52%    2.918MiB / 23.32GiB   0.01%
+servidor    3.95%     4.457MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:27 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente33   105.82%   3.414MiB / 23.32GiB   0.01%
+cliente32   104.20%   1.727MiB / 23.32GiB   0.01%
+servidor    11.28%    3.324MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:37:31 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente33   102.40%   2.598MiB / 23.32GiB   0.01%
+servidor    10.78%    4.465MiB / 23.32GiB   0.02%
+cliente34   100.67%   1.688MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:37:35 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente35   106.20%   4.734MiB / 23.32GiB   0.02%
+cliente34   107.77%   1.961MiB / 23.32GiB   0.01%
+servidor    11.22%    4.656MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:39 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente36   91.46%    2.598MiB / 23.32GiB   0.01%
+servidor    9.86%     4.258MiB / 23.32GiB   0.02%
+cliente37   104.88%   3.52MiB / 23.32GiB    0.01%
+--- 2026-06-03_13:37:48 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente38   83.46%    2.996MiB / 23.32GiB   0.01%
+cliente37   105.76%   3.559MiB / 23.32GiB   0.01%
+servidor    10.99%    4.988MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:37:52 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente39   106.30%   4.191MiB / 23.32GiB   0.02%
+cliente38   106.43%   3.883MiB / 23.32GiB   0.02%
+servidor    10.84%    4.656MiB / 23.32GiB   0.02%
+cliente40   106.11%   2.523MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:37:57 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente40   106.03%   2.719MiB / 23.32GiB   0.01%
+servidor    11.76%    4.16MiB / 23.32GiB    0.02%
+cliente41   106.53%   4.5MiB / 23.32GiB     0.02%
+cliente42   99.43%    5.113MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:04 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente42   105.09%   3.672MiB / 23.32GiB   0.02%
+servidor    10.94%    4.055MiB / 23.32GiB   0.02%
+cliente43   98.70%    4.758MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:11 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente44   105.42%   3.707MiB / 23.32GiB   0.02%
+cliente43   106.72%   3.613MiB / 23.32GiB   0.02%
+servidor    6.84%     4.496MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:15 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente45   72.90%    2.754MiB / 23.32GiB   0.01%
+cliente44   73.47%    3.691MiB / 23.32GiB   0.02%
+servidor    10.73%    4.305MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:19 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente46   105.74%   2.023MiB / 23.32GiB   0.01%
+cliente45   106.22%   3.402MiB / 23.32GiB   0.01%
+servidor    10.34%    4.219MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:23 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente47   106.13%   1.93MiB / 23.32GiB    0.01%
+cliente46   106.69%   1.75MiB / 23.32GiB    0.01%
+servidor    10.72%    4.461MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:27 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente48   98.58%    3.922MiB / 23.32GiB   0.02%
+cliente47   98.91%    3.512MiB / 23.32GiB   0.01%
+servidor    10.36%    4.816MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:31 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente49   101.17%   3.469MiB / 23.32GiB   0.01%
+cliente48   101.85%   4.086MiB / 23.32GiB   0.02%
+servidor    11.04%    4.168MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:35 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente50   73.65%    3.262MiB / 23.32GiB   0.01%
+cliente49   73.45%    2.941MiB / 23.32GiB   0.01%
+servidor    10.75%    4.094MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:39 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente51   104.86%   4.098MiB / 23.32GiB   0.02%
+cliente50   107.40%   3.707MiB / 23.32GiB   0.02%
+servidor    11.00%    4.508MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:45 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+servidor    5.11%     4.281MiB / 23.32GiB   0.02%
+cliente52   106.71%   2.715MiB / 23.32GiB   0.01%
+cliente53   107.23%   4.523MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:38:53 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente54   103.94%   3.785MiB / 23.32GiB   0.02%
+servidor    11.85%    4.176MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:39:01 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente55   107.19%   3.594MiB / 23.32GiB   0.02%
+servidor    5.75%     4.414MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:39:05 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente56   106.05%   4.23MiB / 23.32GiB    0.02%
+servidor    11.18%    4.453MiB / 23.32GiB   0.02%
+cliente57   98.88%    3.035MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:39:12 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente58   107.39%   4.418MiB / 23.32GiB   0.02%
+cliente57   104.89%   2.34MiB / 23.32GiB    0.01%
+servidor    10.39%    3.367MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:39:16 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente59   104.84%   3.652MiB / 23.32GiB   0.02%
+cliente58   103.65%   3.312MiB / 23.32GiB   0.01%
+servidor    10.20%    4.574MiB / 23.32GiB   0.02%
+cliente60   106.79%   3.914MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:39:21 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente60   105.94%   2.691MiB / 23.32GiB   0.01%
+cliente59   104.87%   2.422MiB / 23.32GiB   0.01%
+servidor    14.73%    3.543MiB / 23.32GiB   0.01%
+cliente61   105.70%   3.426MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:39:25 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente62   101.47%   2.785MiB / 23.32GiB   0.01%
+cliente61   100.64%   3.766MiB / 23.32GiB   0.02%
+servidor    16.42%    4.781MiB / 23.32GiB   0.02%
+cliente63   106.75%   2.277MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:39:32 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente63   106.64%   1.844MiB / 23.32GiB   0.01%
+cliente62   105.77%   3.758MiB / 23.32GiB   0.02%
+servidor    11.87%    4.469MiB / 23.32GiB   0.02%
+cliente64   106.04%   2.672MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:39:36 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente65   101.87%   3.18MiB / 23.32GiB    0.01%
+cliente64   102.08%   2.359MiB / 23.32GiB   0.01%
+servidor    11.68%    4.738MiB / 23.32GiB   0.02%
+cliente66   105.02%   4.234MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:39:43 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente66   106.45%   2.547MiB / 23.32GiB   0.01%
+servidor    11.92%    4.762MiB / 23.32GiB   0.02%
+cliente67   105.17%   2.645MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:39:48 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente67   106.06%   2.34MiB / 23.32GiB    0.01%
+servidor    11.07%    3.996MiB / 23.32GiB   0.02%
+cliente68   107.09%   2.004MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:39:52 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente69   89.60%    4.391MiB / 23.32GiB   0.02%
+cliente68   105.71%   5.125MiB / 23.32GiB   0.02%
+servidor    11.05%    4.586MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:39:56 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente70   93.50%    3.836MiB / 23.32GiB   0.02%
+cliente69   92.58%    1.859MiB / 23.32GiB   0.01%
+servidor    11.23%    4.754MiB / 23.32GiB   0.02%
+cliente71   100.98%   4.168MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:40:01 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+servidor    4.50%     3.07MiB / 23.32GiB    0.01%
+cliente72   105.30%   3.945MiB / 23.32GiB   0.02%
+cliente73   105.50%   3.68MiB / 23.32GiB    0.02%
+--- 2026-06-03_13:40:14 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente74   96.50%    3.465MiB / 23.32GiB   0.01%
+cliente73   96.47%    3.562MiB / 23.32GiB   0.01%
+servidor    11.69%    3.969MiB / 23.32GiB   0.02%
+cliente75   105.49%   2.18MiB / 23.32GiB    0.01%
+--- 2026-06-03_13:40:21 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente76   93.08%    3.574MiB / 23.32GiB   0.01%
+servidor    9.57%     4.297MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:40:30 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente77   105.68%   3.184MiB / 23.32GiB   0.01%
+servidor    5.30%     4.641MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:40:34 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente78   103.41%   3.32MiB / 23.32GiB    0.01%
+servidor    10.41%    4.066MiB / 23.32GiB   0.02%
+cliente79   103.98%   2.297MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:40:41 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente79   106.80%   4.348MiB / 23.32GiB   0.02%
+servidor    4.90%     4.254MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:40:46 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente80   80.44%    3.199MiB / 23.32GiB   0.01%
+servidor    5.12%     4.176MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:40:51 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente81   103.51%   4.805MiB / 23.32GiB   0.02%
+cliente80   103.91%   4.891MiB / 23.32GiB   0.02%
+servidor    10.52%    4.887MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:40:55 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente81   105.78%   4.676MiB / 23.32GiB   0.02%
+servidor    6.41%     4.246MiB / 23.32GiB   0.02%
+cliente82   94.81%    1.418MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:41:00 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente82   106.41%   2.695MiB / 23.32GiB   0.01%
+servidor    5.44%     4.258MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:04 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente83   82.08%    2.992MiB / 23.32GiB   0.01%
+servidor    4.48%     4.324MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:08 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente84   105.79%   2.523MiB / 23.32GiB   0.01%
+cliente83   104.27%   2.781MiB / 23.32GiB   0.01%
+servidor    11.67%    4.492MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:12 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente85   76.15%    3.652MiB / 23.32GiB   0.02%
+cliente84   75.24%    1.902MiB / 23.32GiB   0.01%
+servidor    11.39%    4.395MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:16 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente85   91.67%    1.965MiB / 23.32GiB   0.01%
+servidor    5.24%     4.477MiB / 23.32GiB   0.02%
+cliente86   105.23%   4.93MiB / 23.32GiB    0.02%
+--- 2026-06-03_13:41:21 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente86   104.58%   2.441MiB / 23.32GiB   0.01%
+servidor    8.97%     4.715MiB / 23.32GiB   0.02%
+cliente87   107.08%   2.457MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:41:25 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente88   105.73%   2.086MiB / 23.32GiB   0.01%
+cliente87   105.04%   4.094MiB / 23.32GiB   0.02%
+servidor    11.57%    4.07MiB / 23.32GiB    0.02%
+cliente89   89.01%    1.824MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:41:32 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente89   105.77%   3.203MiB / 23.32GiB   0.01%
+cliente88   106.21%   2.562MiB / 23.32GiB   0.01%
+servidor    5.42%     4.262MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:36 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+servidor    7.74%     4.504MiB / 23.32GiB   0.02%
+cliente90   91.88%    4.027MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:42 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente91   105.85%   2.938MiB / 23.32GiB   0.01%
+servidor    11.03%    4.633MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:49 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente92   107.66%   2.734MiB / 23.32GiB   0.01%
+servidor    4.72%     4.281MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:54 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente93   106.27%   3.707MiB / 23.32GiB   0.02%
+servidor    11.02%    4.199MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:41:59 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente94   103.20%   2.246MiB / 23.32GiB   0.01%
+servidor    11.18%    4.656MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:42:06 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente95   104.60%   4.578MiB / 23.32GiB   0.02%
+servidor    9.89%     4.621MiB / 23.32GiB   0.02%
+cliente96   106.35%   3.992MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:42:13 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente97   106.96%   2.348MiB / 23.32GiB   0.01%
+cliente96   104.91%   2.094MiB / 23.32GiB   0.01%
+servidor    8.45%     4.395MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:42:17 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente98   105.71%   4.594MiB / 23.32GiB   0.02%
+cliente97   106.05%   4.008MiB / 23.32GiB   0.02%
+servidor    10.90%    4.621MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:42:22 ---
+NAME        CPU %     MEM USAGE / LIMIT     MEM %
+cliente99   106.40%   2.242MiB / 23.32GiB   0.01%
+servidor    11.06%    4.184MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:42:29 ---
+NAME         CPU %     MEM USAGE / LIMIT     MEM %
+cliente100   105.99%   4.055MiB / 23.32GiB   0.02%
+servidor     5.27%     4.426MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:42:33 ---
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+servidor   5.28%     4.164MiB / 23.32GiB   0.02%
+--- 2026-06-03_13:42:38 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:42:41 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:42:44 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:42:47 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:42:50 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:42:53 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:42:56 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:42:59 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:43:02 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:43:05 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:43:08 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:43:11 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:43:14 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:43:18 ---
+NAME       CPU %     MEM USAGE / LIMIT    MEM %
+servidor   0.00%     3.07MiB / 23.32GiB   0.01%
+--- 2026-06-03_13:43:21 ---

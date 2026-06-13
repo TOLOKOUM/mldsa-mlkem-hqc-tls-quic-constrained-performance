@@ -1,0 +1,324 @@
+
+================================================================================
+ANALYSE COMPARATIVE : SIGNATURES POST-QUANTIQUES ML-DSA vs CLASSIQUES
+TLS 1.3 et QUIC — Conditions idéales — 500 runs
+Données : /home/tolokoum/Documents/TLS-QUIC/5- pq-signatures/
+================================================================================
+
+✅ Données chargées : 12 fichiers CSV
+   QUIC | ed25519      | 5 KEMs | 500 runs chacun
+   QUIC | mldsa44      | 5 KEMs | 500 runs chacun
+   QUIC | mldsa65      | 5 KEMs | 500 runs chacun
+   QUIC | mldsa87      | 3 KEMs | 500 runs chacun
+   QUIC | secp384r1    | 5 KEMs | 500 runs chacun
+   QUIC | secp521r1    | 3 KEMs | 500 runs chacun
+   TLS  | ed25519      | 5 KEMs | 500 runs chacun
+   TLS  | mldsa44      | 5 KEMs | 500 runs chacun
+   TLS  | mldsa65      | 5 KEMs | 500 runs chacun
+   TLS  | mldsa87      | 3 KEMs | 500 runs chacun
+   TLS  | secp384r1    | 5 KEMs | 500 runs chacun
+   TLS  | secp521r1    | 3 KEMs | 500 runs chacun
+
+================================================================================
+SECTION 1 — STATISTIQUES DESCRIPTIVES PAR SIGNATURE ET PROTOCOLE
+================================================================================
+
+── TLS | Signature: ed25519 (Niveau L1) ──
+| KEM             | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|-----------------|-----------|-------------|-------|----------|-------|-------|
+| P-256           | classique |        5.43 |  1.32 |     5.58 |  2.17 | 10.46 |
+| x25519          | classique |        5.15 |  1.45 |     5.42 |  2.05 | 10.02 |
+| p256_mlkem512   | hybride   |       19.74 |  4.83 |    21.44 |  9.08 | 30.59 |
+| x25519_mlkem512 | hybride   |        5.84 |  0.89 |     5.75 |  2.6  |  9.52 |
+| mlkem512        | PQ pur    |        4.87 |  0.86 |     4.95 |  2.12 |  7.66 |
+
+── TLS | Signature: secp384r1 (Niveau L3) ──
+| KEM           | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|---------------|-----------|-------------|-------|----------|-------|-------|
+| P-384         | classique |       26.29 |  3.25 |    26.02 | 11.71 | 54.36 |
+| x448          | classique |       15.91 |  2.25 |    15.59 |  6.63 | 24.09 |
+| p384_mlkem768 | hybride   |       43.27 | 12.34 |    47.03 | 20.28 | 80.85 |
+| x448_mlkem768 | hybride   |       18.8  |  4.26 |    19.46 |  8.5  | 35.16 |
+| mlkem768      | PQ pur    |       14.31 |  3.2  |    14.84 |  5.96 | 25.3  |
+
+── TLS | Signature: secp521r1 (Niveau L5) ──
+| KEM            | Type      |   Mean (ms) |   Std |   Median |   Min |    Max |
+|----------------|-----------|-------------|-------|----------|-------|--------|
+| P-521          | classique |       52.09 | 11.32 |    54.37 | 24.5  |  89.44 |
+| p521_mlkem1024 | hybride   |       78.12 | 23.23 |    87.5  | 34.24 | 134.67 |
+| mlkem1024      | PQ pur    |       22.32 |  7.05 |    22.21 | 11.85 |  46.88 |
+
+── TLS | Signature: mldsa44 (Niveau L1) ──
+| KEM             | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|-----------------|-----------|-------------|-------|----------|-------|-------|
+| P-256           | classique |        4.52 |  1.44 |     4.89 |  1.96 |  8.95 |
+| x25519          | classique |        4.11 |  1.06 |     4.08 |  1.82 |  9.29 |
+| p256_mlkem512   | hybride   |       17.89 |  6.36 |    16.38 |  9.07 | 40.02 |
+| x25519_mlkem512 | hybride   |        4.36 |  1.67 |     3.68 |  2.25 |  9.89 |
+| mlkem512        | PQ pur    |        3.56 |  1.39 |     3.04 |  1.83 |  8.75 |
+
+── TLS | Signature: mldsa65 (Niveau L3) ──
+| KEM           | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|---------------|-----------|-------------|-------|----------|-------|-------|
+| P-384         | classique |       18.21 |  5.15 |    19.3  |  7.54 | 32.51 |
+| x448          | classique |        7.03 |  1.6  |     7.46 |  2.86 | 13.09 |
+| p384_mlkem768 | hybride   |       36.31 |  7.7  |    38.03 | 16.78 | 75.67 |
+| x448_mlkem768 | hybride   |        9.12 |  1.53 |     8.89 |  4.2  | 13.79 |
+| mlkem768      | PQ pur    |        4.92 |  1.06 |     5.02 |  2    |  7.45 |
+
+── TLS | Signature: mldsa87 (Niveau L5) ──
+| KEM            | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|----------------|-----------|-------------|-------|----------|-------|-------|
+| P-521          | classique |       36.84 |  5.87 |    37    | 15.58 | 59.71 |
+| p521_mlkem1024 | hybride   |       64.9  | 14.37 |    70.97 | 25.99 | 87.42 |
+| mlkem1024      | PQ pur    |        5.16 |  1.19 |     5.39 |  2.11 |  8.94 |
+
+── QUIC | Signature: ed25519 (Niveau L1) ──
+| KEM             | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|-----------------|-----------|-------------|-------|----------|-------|-------|
+| P-256           | classique |        3.18 |  2.71 |     2.86 |  2.58 | 62.83 |
+| x25519          | classique |        2.7  |  0.38 |     2.52 |  2.28 |  5.27 |
+| p256_mlkem512   | hybride   |       16.21 |  4.13 |    14.52 | 12.21 | 56.81 |
+| x25519_mlkem512 | hybride   |        5.78 |  1.73 |     5.29 |  4.47 | 18.82 |
+| mlkem512        | PQ pur    |        2.95 |  0.57 |     2.79 |  2.31 |  8.27 |
+
+── QUIC | Signature: secp384r1 (Niveau L3) ──
+| KEM           | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|---------------|-----------|-------------|-------|----------|-------|-------|
+| P-384         | classique |        9.49 |  3.1  |     8.48 |  7.36 | 40.22 |
+| x448          | classique |        7.56 |  2.01 |     7.04 |  5.37 | 24.74 |
+| p384_mlkem768 | hybride   |       25.97 |  8.56 |    22.67 | 17.65 | 66.19 |
+| x448_mlkem768 | hybride   |       10    |  2    |     9.41 |  8.2  | 21.22 |
+| mlkem768      | PQ pur    |        5.28 |  1.29 |     4.86 |  4.2  | 22.71 |
+
+── QUIC | Signature: secp521r1 (Niveau L5) ──
+| KEM            | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|----------------|-----------|-------------|-------|----------|-------|-------|
+| P-521          | classique |        8.72 |  1.63 |     8.08 |  7.18 | 17.29 |
+| p521_mlkem1024 | hybride   |       20.71 |  3.93 |    18.94 | 17.3  | 38.46 |
+| mlkem1024      | PQ pur    |        6.28 |  1.65 |     5.88 |  4.55 | 28.19 |
+
+── QUIC | Signature: mldsa44 (Niveau L1) ──
+| KEM             | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|-----------------|-----------|-------------|-------|----------|-------|-------|
+| P-256           | classique |        3.34 |  0.57 |     3.21 |  2.63 |  9.82 |
+| x25519          | classique |        2.91 |  0.41 |     2.8  |  2.36 |  5.92 |
+| p256_mlkem512   | hybride   |       14.8  |  2.8  |    13.75 | 12.3  | 26.29 |
+| x25519_mlkem512 | hybride   |        5.44 |  0.86 |     5.17 |  4.43 | 12.33 |
+| mlkem512        | PQ pur    |        2.79 |  0.35 |     2.69 |  2.33 |  6.38 |
+
+── QUIC | Signature: mldsa65 (Niveau L3) ──
+| KEM           | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|---------------|-----------|-------------|-------|----------|-------|-------|
+| P-384         | classique |        6.8  |  0.88 |     6.38 |  5.65 | 11.54 |
+| x448          | classique |        4.33 |  0.52 |     4.12 |  3.63 |  7.72 |
+| p384_mlkem768 | hybride   |       18.69 |  3.11 |    17.34 | 15.77 | 29.81 |
+| x448_mlkem768 | hybride   |        7.55 |  0.95 |     7.09 |  6.46 | 10.36 |
+| mlkem768      | PQ pur    |        3.1  |  0.41 |     3.03 |  2.46 |  5.39 |
+
+── QUIC | Signature: mldsa87 (Niveau L5) ──
+| KEM            | Type      |   Mean (ms) |   Std |   Median |   Min |   Max |
+|----------------|-----------|-------------|-------|----------|-------|-------|
+| P-521          | classique |        6.47 |  0.82 |     6.07 |  5.54 | 10.12 |
+| p521_mlkem1024 | hybride   |       18.44 |  3.33 |    16.95 | 15.54 | 32.35 |
+| mlkem1024      | PQ pur    |        3.32 |  0.41 |     3.21 |  2.67 |  5.04 |
+
+================================================================================
+SECTION 2 — SURCOÛT ML-DSA vs SIGNATURE CLASSIQUE (même niveau)
+================================================================================
+
+────────────────────────────────────────────────────────────
+Protocole : TLS
+────────────────────────────────────────────────────────────
+| Niv   | KEM             | Type KEM   | Sig classique   |   Mean (ms) | Sig PQ   |   Mean (ms) |   Δ (ms) | Δ (%)   |   p-val MW | Sig   |
+|-------|-----------------|------------|-----------------|-------------|----------|-------------|----------|---------|------------|-------|
+| L1    | P-256           | classique  | ed25519         |        5.43 | mldsa44  |        4.52 |    -0.91 | -16.8%  | 3.515e-28  | ***   |
+| L1    | x25519          | classique  | ed25519         |        5.15 | mldsa44  |        4.11 |    -1.04 | -20.2%  | 1.795e-36  | ***   |
+| L1    | p256_mlkem512   | hybride    | ed25519         |       19.74 | mldsa44  |       17.89 |    -1.85 | -9.4%   | 0.000126   | ***   |
+| L1    | x25519_mlkem512 | hybride    | ed25519         |        5.84 | mldsa44  |        4.36 |    -1.48 | -25.3%  | 4.662e-46  | ***   |
+| L1    | mlkem512        | PQ pur     | ed25519         |        4.87 | mldsa44  |        3.56 |    -1.31 | -27.0%  | 2.034e-52  | ***   |
+| L3    | P-384           | classique  | secp384r1       |       26.29 | mldsa65  |       18.21 |    -8.08 | -30.7%  | 7.047e-129 | ***   |
+| L3    | x448            | classique  | secp384r1       |       15.91 | mldsa65  |        7.03 |    -8.88 | -55.8%  | 2.357e-157 | ***   |
+| L3    | p384_mlkem768   | hybride    | secp384r1       |       43.27 | mldsa65  |       36.31 |    -6.96 | -16.1%  | 8.348e-30  | ***   |
+| L3    | x448_mlkem768   | hybride    | secp384r1       |       18.8  | mldsa65  |        9.12 |    -9.68 | -51.5%  | 3.275e-149 | ***   |
+| L3    | mlkem768        | PQ pur     | secp384r1       |       14.31 | mldsa65  |        4.92 |    -9.39 | -65.6%  | 2.057e-164 | ***   |
+| L5    | P-521           | classique  | secp521r1       |       52.09 | mldsa87  |       36.84 |   -15.25 | -29.3%  | 6.325e-86  | ***   |
+| L5    | p521_mlkem1024  | hybride    | secp521r1       |       78.12 | mldsa87  |       64.9  |   -13.22 | -16.9%  | 2.133e-35  | ***   |
+| L5    | mlkem1024       | PQ pur     | secp521r1       |       22.32 | mldsa87  |        5.16 |   -17.16 | -76.9%  | 5.842e-165 | ***   |
+
+────────────────────────────────────────────────────────────
+Protocole : QUIC
+────────────────────────────────────────────────────────────
+| Niv   | KEM             | Type KEM   | Sig classique   |   Mean (ms) | Sig PQ   |   Mean (ms) |   Δ (ms) | Δ (%)   |   p-val MW | Sig   |
+|-------|-----------------|------------|-----------------|-------------|----------|-------------|----------|---------|------------|-------|
+| L1    | P-256           | classique  | ed25519         |        3.18 | mldsa44  |        3.34 |     0.16 | +5.1%   | 9.795e-32  | ***   |
+| L1    | x25519          | classique  | ed25519         |        2.7  | mldsa44  |        2.91 |     0.21 | +7.8%   | 1.028e-32  | ***   |
+| L1    | p256_mlkem512   | hybride    | ed25519         |       16.21 | mldsa44  |       14.8  |    -1.41 | -8.7%   | 4.891e-09  | ***   |
+| L1    | x25519_mlkem512 | hybride    | ed25519         |        5.78 | mldsa44  |        5.44 |    -0.34 | -5.8%   | 0.108      | ns    |
+| L1    | mlkem512        | PQ pur     | ed25519         |        2.95 | mldsa44  |        2.79 |    -0.16 | -5.3%   | 0.002044   | **    |
+| L3    | P-384           | classique  | secp384r1       |        9.49 | mldsa65  |        6.8  |    -2.69 | -28.4%  | 1.205e-115 | ***   |
+| L3    | x448            | classique  | secp384r1       |        7.56 | mldsa65  |        4.33 |    -3.23 | -42.7%  | 3.546e-161 | ***   |
+| L3    | p384_mlkem768   | hybride    | secp384r1       |       25.97 | mldsa65  |       18.69 |    -7.28 | -28.0%  | 2.848e-83  | ***   |
+| L3    | x448_mlkem768   | hybride    | secp384r1       |       10    | mldsa65  |        7.55 |    -2.46 | -24.6%  | 2.636e-108 | ***   |
+| L3    | mlkem768        | PQ pur     | secp384r1       |        5.28 | mldsa65  |        3.1  |    -2.18 | -41.3%  | 3.728e-162 | ***   |
+| L5    | P-521           | classique  | secp521r1       |        8.72 | mldsa87  |        6.47 |    -2.25 | -25.8%  | 3.3e-121   | ***   |
+| L5    | p521_mlkem1024  | hybride    | secp521r1       |       20.71 | mldsa87  |       18.44 |    -2.27 | -11.0%  | 2.678e-48  | ***   |
+| L5    | mlkem1024       | PQ pur     | secp521r1       |        6.28 | mldsa87  |        3.32 |    -2.96 | -47.1%  | 1.885e-164 | ***   |
+
+================================================================================
+SECTION 3 — SUPER-ADDITIVITÉ : (KEM PQ + Sig PQ) vs somme des surcoûts
+================================================================================
+
+Méthode :
+  overhead_KEM  = mean(sig_classic + kem_pq)  - mean(sig_classic + kem_classic)
+  overhead_SIG  = mean(sig_pq      + kem_classic) - mean(sig_classic + kem_classic)
+  overhead_BOTH = mean(sig_pq      + kem_pq)  - mean(sig_classic + kem_classic)
+  overhead_SUM  = overhead_KEM + overhead_SIG  (hypothèse additive)
+  
+  Si overhead_BOTH > overhead_SUM  → super-additif (synergie négative)
+  Si overhead_BOTH ≈ overhead_SUM  → additif
+  Si overhead_BOTH < overhead_SUM  → sous-additif (synergie positive)
+
+
+────────────────────────────────────────────────────────────
+Protocole : TLS
+────────────────────────────────────────────────────────────
+| Niv   | Signature         | KEM                    |   Baseline |   ΔKem |   ΔSig |   Σ attendu |   Réel |   Ratio | Verdict         |
+|       |                   |                        |       (ms) |   (ms) |   (ms) |        (ms) |   (ms) |         |                 |
+|-------|-------------------|------------------------|------------|--------|--------|-------------|--------|---------|-----------------|
+| L1    | ed25519→mldsa44   | P-256→mlkem512         |       5.43 |  -0.56 |  -0.91 |       -1.47 |  -1.87 |    1.27 | ⚠ Super-additif |
+| L1    | ed25519→mldsa44   | x25519→mlkem512        |       5.15 |  -0.29 |  -1.04 |       -1.33 |  -1.6  |    1.2  | ⚠ Super-additif |
+| L1    | ed25519→mldsa44   | P-256→p256_mlkem512    |       5.43 |  14.31 |  -0.91 |       13.4  |  12.46 |    0.93 | ✓ Sous-additif  |
+| L1    | ed25519→mldsa44   | x25519→x25519_mlkem512 |       5.15 |   0.69 |  -1.04 |       -0.35 |  -0.79 |    2.24 | ⚠ Super-additif |
+| L3    | secp384r1→mldsa65 | P-384→mlkem768         |      26.29 | -11.99 |  -8.08 |      -20.07 | -21.38 |    1.07 | ⚠ Super-additif |
+| L3    | secp384r1→mldsa65 | x448→mlkem768          |      15.91 |  -1.6  |  -8.88 |      -10.48 | -10.99 |    1.05 | ≈ Additif       |
+| L3    | secp384r1→mldsa65 | P-384→p384_mlkem768    |      26.29 |  16.97 |  -8.08 |        8.89 |  10.01 |    1.13 | ⚠ Super-additif |
+| L3    | secp384r1→mldsa65 | x448→x448_mlkem768     |      15.91 |   2.89 |  -8.88 |       -5.99 |  -6.79 |    1.13 | ⚠ Super-additif |
+| L5    | secp521r1→mldsa87 | P-521→mlkem1024        |      52.09 | -29.77 | -15.25 |      -45.03 | -46.93 |    1.04 | ≈ Additif       |
+| L5    | secp521r1→mldsa87 | P-521→p521_mlkem1024   |      52.09 |  26.03 | -15.25 |       10.77 |  12.81 |    1.19 | ⚠ Super-additif |
+
+────────────────────────────────────────────────────────────
+Protocole : QUIC
+────────────────────────────────────────────────────────────
+| Niv   | Signature         | KEM                    |   Baseline |   ΔKem |   ΔSig |   Σ attendu |   Réel |   Ratio | Verdict         |
+|       |                   |                        |       (ms) |   (ms) |   (ms) |        (ms) |   (ms) |         |                 |
+|-------|-------------------|------------------------|------------|--------|--------|-------------|--------|---------|-----------------|
+| L1    | ed25519→mldsa44   | P-256→mlkem512         |       3.18 |  -0.24 |   0.16 |       -0.07 |  -0.39 |    5.28 | ⚠ Super-additif |
+| L1    | ed25519→mldsa44   | x25519→mlkem512        |       2.7  |   0.25 |   0.21 |        0.46 |   0.09 |    0.2  | ✓ Sous-additif  |
+| L1    | ed25519→mldsa44   | P-256→p256_mlkem512    |       3.18 |  13.02 |   0.16 |       13.19 |  11.61 |    0.88 | ✓ Sous-additif  |
+| L1    | ed25519→mldsa44   | x25519→x25519_mlkem512 |       2.7  |   3.08 |   0.21 |        3.29 |   2.74 |    0.83 | ✓ Sous-additif  |
+| L3    | secp384r1→mldsa65 | P-384→mlkem768         |       9.49 |  -4.21 |  -2.69 |       -6.9  |  -6.39 |    0.93 | ✓ Sous-additif  |
+| L3    | secp384r1→mldsa65 | x448→mlkem768          |       7.56 |  -2.28 |  -3.23 |       -5.51 |  -4.46 |    0.81 | ✓ Sous-additif  |
+| L3    | secp384r1→mldsa65 | P-384→p384_mlkem768    |       9.49 |  16.48 |  -2.69 |       13.78 |   9.2  |    0.67 | ✓ Sous-additif  |
+| L3    | secp384r1→mldsa65 | x448→x448_mlkem768     |       7.56 |   2.44 |  -3.23 |       -0.79 |  -0.01 |    0.02 | ✓ Sous-additif  |
+| L5    | secp521r1→mldsa87 | P-521→mlkem1024        |       8.72 |  -2.44 |  -2.25 |       -4.69 |  -5.4  |    1.15 | ⚠ Super-additif |
+| L5    | secp521r1→mldsa87 | P-521→p521_mlkem1024   |       8.72 |  12    |  -2.25 |        9.74 |   9.72 |    1    | ≈ Additif       |
+
+================================================================================
+SECTION 4 — TLS vs QUIC PAR COMBINAISON SIGNATURE × KEM
+================================================================================
+
+── Niveau L1 ──
+| Signature   | KEM             | Type      |   TLS (ms) |   QUIC (ms) | TLS vs QUIC   |      p-val | Sig   | Meilleur   |
+|-------------|-----------------|-----------|------------|-------------|---------------|------------|-------|------------|
+| ed25519     | P-256           | classique |       5.43 |        3.18 | +70.6%        | 5.051e-123 | ***   | QUIC       |
+| ed25519     | x25519          | classique |       5.15 |        2.7  | +91.0%        | 5.004e-126 | ***   | QUIC       |
+| ed25519     | p256_mlkem512   | hybride   |      19.74 |       16.21 | +21.8%        | 2.283e-33  | ***   | QUIC       |
+| ed25519     | x25519_mlkem512 | hybride   |       5.84 |        5.78 | +1.1%         | 2.157e-18  | ***   | QUIC       |
+| ed25519     | mlkem512        | PQ pur    |       4.87 |        2.95 | +65.2%        | 1.737e-121 | ***   | QUIC       |
+| mldsa44     | P-256           | classique |       4.52 |        3.34 | +35.1%        | 9.886e-36  | ***   | QUIC       |
+| mldsa44     | x25519          | classique |       4.11 |        2.91 | +41.4%        | 1.001e-81  | ***   | QUIC       |
+| mldsa44     | p256_mlkem512   | hybride   |      17.89 |       14.8  | +20.9%        | 3.657e-06  | ***   | QUIC       |
+| mldsa44     | x25519_mlkem512 | hybride   |       4.36 |        5.44 | -19.8%        | 5.199e-31  | ***   | TLS        |
+| mldsa44     | mlkem512        | PQ pur    |       3.56 |        2.79 | +27.4%        | 6.428e-06  | ***   | QUIC       |
+
+── Niveau L3 ──
+| Signature   | KEM           | Type      |   TLS (ms) |   QUIC (ms) | TLS vs QUIC   |      p-val | Sig   | Meilleur   |
+|-------------|---------------|-----------|------------|-------------|---------------|------------|-------|------------|
+| secp384r1   | P-384         | classique |      26.29 |        9.49 | +177.1%       | 2.926e-161 | ***   | QUIC       |
+| secp384r1   | x448          | classique |      15.91 |        7.56 | +110.5%       | 1.518e-152 | ***   | QUIC       |
+| secp384r1   | p384_mlkem768 | hybride   |      43.27 |       25.97 | +66.6%        | 9.017e-95  | ***   | QUIC       |
+| secp384r1   | x448_mlkem768 | hybride   |      18.8  |       10    | +87.9%        | 9.952e-137 | ***   | QUIC       |
+| secp384r1   | mlkem768      | PQ pur    |      14.31 |        5.28 | +170.8%       | 1.456e-160 | ***   | QUIC       |
+| mldsa65     | P-384         | classique |      18.21 |        6.8  | +167.9%       | 8.418e-161 | ***   | QUIC       |
+| mldsa65     | x448          | classique |       7.03 |        4.33 | +62.3%        | 5.932e-98  | ***   | QUIC       |
+| mldsa65     | p384_mlkem768 | hybride   |      36.31 |       18.69 | +94.3%        | 2.994e-144 | ***   | QUIC       |
+| mldsa65     | x448_mlkem768 | hybride   |       9.12 |        7.55 | +20.8%        | 6.44e-67   | ***   | QUIC       |
+| mldsa65     | mlkem768      | PQ pur    |       4.92 |        3.1  | +58.5%        | 1.787e-103 | ***   | QUIC       |
+
+── Niveau L5 ──
+| Signature   | KEM            | Type      |   TLS (ms) |   QUIC (ms) | TLS vs QUIC   |      p-val | Sig   | Meilleur   |
+|-------------|----------------|-----------|------------|-------------|---------------|------------|-------|------------|
+| secp521r1   | P-521          | classique |      52.09 |        8.72 | +497.5%       | 5.84e-165  | ***   | QUIC       |
+| secp521r1   | p521_mlkem1024 | hybride   |      78.12 |       20.71 | +277.1%       | 1.246e-164 | ***   | QUIC       |
+| secp521r1   | mlkem1024      | PQ pur    |      22.32 |        6.28 | +255.4%       | 6.294e-164 | ***   | QUIC       |
+| mldsa87     | P-521          | classique |      36.84 |        6.47 | +469.6%       | 5.815e-165 | ***   | QUIC       |
+| mldsa87     | p521_mlkem1024 | hybride   |      64.9  |       18.44 | +251.9%       | 4.822e-164 | ***   | QUIC       |
+| mldsa87     | mlkem1024      | PQ pur    |       5.16 |        3.32 | +55.3%        | 1.651e-91  | ***   | QUIC       |
+
+================================================================================
+SECTION 5 — RÉSUMÉ SYNTHÉTIQUE
+================================================================================
+
+── Moyennes globales par catégorie ──
+
+| Catégorie                     |   TLS moy. (ms) | QUIC moy. (ms)   |
+|-------------------------------|-----------------|------------------|
+| Sig classique + KEM classique |           20.98 | —                |
+| Sig classique + KEM hybride   |           33.15 | —                |
+| Sig classique + KEM PQ pur    |           13.83 | —                |
+| Sig PQ + KEM classique        |           14.14 | —                |
+| Sig PQ + KEM hybride          |           26.52 | —                |
+| Sig PQ + KEM PQ pur           |            4.54 | —                |
+| Catégorie                     | TLS moy. (ms)   |   QUIC moy. (ms) |
+|-------------------------------|-----------------|------------------|
+| Sig classique + KEM classique | —               |             6.33 |
+| Sig classique + KEM hybride   | —               |            15.73 |
+| Sig classique + KEM PQ pur    | —               |             4.84 |
+| Sig PQ + KEM classique        | —               |             4.77 |
+| Sig PQ + KEM hybride          | —               |            12.98 |
+| Sig PQ + KEM PQ pur           | —               |             3.07 |
+
+── Combinaisons optimales (latence minimale) ──
+
+
+TLS — Top 5 combinaisons les plus rapides :
+| Niv   | Signature   | KEM             | Type KEM   |   Mean (ms) |
+|-------|-------------|-----------------|------------|-------------|
+| L1    | mldsa44     | mlkem512        | PQ pur     |        3.56 |
+| L1    | mldsa44     | x25519          | classique  |        4.11 |
+| L1    | mldsa44     | x25519_mlkem512 | hybride    |        4.36 |
+| L1    | mldsa44     | P-256           | classique  |        4.52 |
+| L1    | ed25519     | mlkem512        | PQ pur     |        4.87 |
+
+TLS — Top 5 combinaisons les plus lentes :
+| Niv   | Signature   | KEM            | Type KEM   |   Mean (ms) |
+|-------|-------------|----------------|------------|-------------|
+| L5    | secp521r1   | p521_mlkem1024 | hybride    |       78.12 |
+| L5    | mldsa87     | p521_mlkem1024 | hybride    |       64.9  |
+| L5    | secp521r1   | P-521          | classique  |       52.09 |
+| L3    | secp384r1   | p384_mlkem768  | hybride    |       43.27 |
+| L5    | mldsa87     | P-521          | classique  |       36.84 |
+
+QUIC — Top 5 combinaisons les plus rapides :
+| Niv   | Signature   | KEM      | Type KEM   |   Mean (ms) |
+|-------|-------------|----------|------------|-------------|
+| L1    | ed25519     | x25519   | classique  |        2.7  |
+| L1    | mldsa44     | mlkem512 | PQ pur     |        2.79 |
+| L1    | mldsa44     | x25519   | classique  |        2.91 |
+| L1    | ed25519     | mlkem512 | PQ pur     |        2.95 |
+| L3    | mldsa65     | mlkem768 | PQ pur     |        3.1  |
+
+QUIC — Top 5 combinaisons les plus lentes :
+| Niv   | Signature   | KEM            | Type KEM   |   Mean (ms) |
+|-------|-------------|----------------|------------|-------------|
+| L3    | secp384r1   | p384_mlkem768  | hybride    |       25.97 |
+| L5    | secp521r1   | p521_mlkem1024 | hybride    |       20.71 |
+| L3    | mldsa65     | p384_mlkem768  | hybride    |       18.69 |
+| L5    | mldsa87     | p521_mlkem1024 | hybride    |       18.44 |
+| L1    | ed25519     | p256_mlkem512  | hybride    |       16.21 |
+
+================================================================================
+Analyse terminée.
+================================================================================
+

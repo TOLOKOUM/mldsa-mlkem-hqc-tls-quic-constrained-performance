@@ -1,0 +1,2 @@
+sig_alg,kem_alg,num_clients,total_handshakes,success_rate,throughput_hs_s,total_time_ms,median_ms,mean_ms,p95_ms,p99_ms,min_ms,max_ms,std_ms,cpu_avg_pct,mem_avg_mib
+mldsa65,mlkem768,100,29358,100.0,N/A,N/A,47390.93,47048.77,55385.17,58649.32,403.98,69865.25,6332.40,0.96,2.9

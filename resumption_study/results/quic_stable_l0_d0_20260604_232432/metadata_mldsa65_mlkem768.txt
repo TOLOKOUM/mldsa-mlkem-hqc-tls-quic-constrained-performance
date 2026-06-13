@@ -1,0 +1,11 @@
+protocol=quic
+sig_alg=mldsa65
+kem_alg=mlkem768
+runs=1000
+batch_size=500
+approach=batch_separe
+network_profile=stable
+loss_percent=0
+delay_ms=0
+total_time_ms=27930
+timestamp=20260604_232432

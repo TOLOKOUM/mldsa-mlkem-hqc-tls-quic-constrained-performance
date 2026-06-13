@@ -1,0 +1,21 @@
+[client-1] Applying netem on eth0 (delay=0ms loss=0%)...
+[client-1] ==========================================================
+[client-1] SIG_ALG   = mldsa65
+[client-1] KEM_ALG   = mlkem768
+[client-1] PROTOCOL  = TLS
+[client-1] COMPRESS  = nocompress
+[client-1] SERVER    = 172.18.0.2:4433
+[client-1] RUNS      = 500
+[client-1] ==========================================================
+[client-1] Starting tcpdump on eth0...
+[client-1] Waiting for server at 172.18.0.2:4433...
+[client-1] Server ready (attempt 1)
+[client-1] Stopping tcpdump...
+[client-1] ==========================================================
+[client-1] DONE: 500/500 successful handshakes
+[client-1] Compression negotiated: 0/500 runs
+[client-1] Average latency (success): 14.11 ms
+[client-1] CSV  : /results/compress_1_mldsa65_mlkem768_nocompress.csv
+[client-1] PCAP : /results/capture_1_mldsa65_mlkem768_nocompress.pcap
+[client-1] LOG  : /results/client_1_mldsa65_mlkem768_nocompress.log
+[client-1] ==========================================================

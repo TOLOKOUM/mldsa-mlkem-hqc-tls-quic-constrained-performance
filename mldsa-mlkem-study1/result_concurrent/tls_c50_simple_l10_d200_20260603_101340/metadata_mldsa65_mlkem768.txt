@@ -1,0 +1,17 @@
+# ============================================================
+# METADATA - CONCURRENT LOAD TEST
+# ============================================================
+protocol=tls
+sig_alg=mldsa65
+kem_alg=mlkem768
+test_type=PQ_MLKEM
+num_clients=50
+runs_per_client=500
+total_handshakes=25000
+network_profile=simple
+loss_percent=10
+delay_ms=200
+total_time_ms=12041919
+throughput_handshakes_per_sec=2.07
+timestamp=20260603_101340
+# ============================================================

@@ -1,0 +1,4 @@
+kem,keyshare,certificate,signature,1RTT,total_quic
+p521,133,505,139,1262,3963
+p521_mlkem1024,1701,505,137,1262,6734
+mlkem1024,1568,505,139,1262,6603

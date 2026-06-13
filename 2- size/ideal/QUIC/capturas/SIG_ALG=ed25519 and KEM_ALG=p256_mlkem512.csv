@@ -1,0 +1,5 @@
+frame.number,frame.time_relative,Length,ip.src,ip.dst,Protocol,_ws.col.info
+"1","0.000000000","2482","172.18.0.3","172.18.0.2","QUIC","Initial, DCID=adf82f7e51f65b26, PKN: 1, CRYPTO, PADDING"
+"2","0.015599381","1629","172.18.0.2","172.18.0.3","QUIC","Handshake, SCID=74b394dbd491eeea14"
+"3","0.019573010","177","172.18.0.3","172.18.0.2","QUIC","Protected Payload (KP0), DCID=74b394dbd491eeea14"
+"4","0.019710228","1262","172.18.0.2","172.18.0.3","QUIC","Protected Payload (KP0)"

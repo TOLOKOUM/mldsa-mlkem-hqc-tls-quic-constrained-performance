@@ -1,0 +1,4 @@
+kem,total_tcp,keyshare,certificate,signature,total_tls
+p521,412,133,504,138,1884
+p521_mlkem1024,412,1701,504,139,5013
+mlkem1024,412,1568,504,139,4747

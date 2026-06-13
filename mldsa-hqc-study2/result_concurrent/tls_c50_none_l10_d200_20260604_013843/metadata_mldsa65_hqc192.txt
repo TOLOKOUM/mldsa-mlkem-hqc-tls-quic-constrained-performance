@@ -1,0 +1,17 @@
+# ============================================================
+# METADATA - CONCURRENT LOAD TEST (HQC)
+# ============================================================
+protocol=tls
+sig_alg=mldsa65
+kem_alg=hqc192
+test_type=PQ_HQC
+num_clients=50
+runs_per_client=500
+total_handshakes=25000
+network_profile=none
+loss_percent=10
+delay_ms=200
+total_time_ms=988496
+throughput_handshakes_per_sec=25.29
+timestamp=20260604_013843
+# ============================================================

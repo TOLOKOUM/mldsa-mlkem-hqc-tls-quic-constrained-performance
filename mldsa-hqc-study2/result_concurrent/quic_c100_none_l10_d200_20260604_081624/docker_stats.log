@@ -1,0 +1,2239 @@
+--- 2026-06-04_08:16:29 ---
+--- 2026-06-04_08:16:31 ---
+--- 2026-06-04_08:16:33 ---
+--- 2026-06-04_08:16:35 ---
+--- 2026-06-04_08:16:37 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.48%   4.016MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:16:40 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.08%   3.801MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:16:43 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.03%   3.801MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:16:47 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc1   71.38%    5.191MiB / 23.32GiB   0.02%
+servidor_hqc   129.48%   7.707MiB / 23.32GiB   0.03%
+--- 2026-06-04_08:16:51 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc2   71.14%    4.934MiB / 23.32GiB   0.02%
+cliente_hqc1   71.30%    4.27MiB / 23.32GiB    0.02%
+servidor_hqc   165.71%   8.926MiB / 23.32GiB   0.04%
+cliente_hqc3   70.30%    4.695MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:16:55 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc4   68.54%    3.898MiB / 23.32GiB   0.02%
+cliente_hqc3   72.20%    4.832MiB / 23.32GiB   0.02%
+cliente_hqc2   66.87%    4.82MiB / 23.32GiB    0.02%
+cliente_hqc1   67.04%    4.977MiB / 23.32GiB   0.02%
+servidor_hqc   229.06%   9.781MiB / 23.32GiB   0.04%
+cliente_hqc5   65.18%    4.758MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:00 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc6   65.74%    2.117MiB / 23.32GiB   0.01%
+cliente_hqc5   67.57%    4.41MiB / 23.32GiB    0.02%
+cliente_hqc4   64.73%    4.457MiB / 23.32GiB   0.02%
+cliente_hqc3   61.66%    2.008MiB / 23.32GiB   0.01%
+cliente_hqc2   67.36%    2.402MiB / 23.32GiB   0.01%
+cliente_hqc1   67.59%    2.828MiB / 23.32GiB   0.01%
+servidor_hqc   275.48%   10.46MiB / 23.32GiB   0.04%
+cliente_hqc7   64.83%    4.516MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:05 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc8   52.90%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc7   57.23%    4.559MiB / 23.32GiB   0.02%
+cliente_hqc6   58.84%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc5   56.83%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc4   59.90%    4.473MiB / 23.32GiB   0.02%
+cliente_hqc3   53.97%    1.25MiB / 23.32GiB    0.01%
+cliente_hqc2   51.42%    4.594MiB / 23.32GiB   0.02%
+cliente_hqc1   47.57%    4.375MiB / 23.32GiB   0.02%
+servidor_hqc   276.95%   11.42MiB / 23.32GiB   0.05%
+cliente_hqc9   47.57%    3.379MiB / 23.32GiB   0.01%
+--- 2026-06-04_08:17:10 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc10   44.03%    2.578MiB / 23.32GiB   0.01%
+cliente_hqc9    47.54%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc8    32.37%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc7    43.13%    4.73MiB / 23.32GiB    0.02%
+cliente_hqc6    46.68%    4.574MiB / 23.32GiB   0.02%
+cliente_hqc5    40.81%    4.652MiB / 23.32GiB   0.02%
+cliente_hqc4    46.36%    4.855MiB / 23.32GiB   0.02%
+cliente_hqc3    48.12%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc2    45.62%    4.91MiB / 23.32GiB    0.02%
+cliente_hqc1    41.44%    4.562MiB / 23.32GiB   0.02%
+servidor_hqc    271.96%   12.8MiB / 23.32GiB    0.05%
+cliente_hqc11   49.27%    4.066MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:15 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc12   33.72%    4.578MiB / 23.32GiB   0.02%
+cliente_hqc11   24.92%    3.617MiB / 23.32GiB   0.02%
+cliente_hqc10   46.28%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc9    35.59%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc8    34.19%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc7    34.35%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc6    45.45%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc5    41.39%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc4    31.19%    3.965MiB / 23.32GiB   0.02%
+cliente_hqc3    37.35%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc2    42.45%    4.113MiB / 23.32GiB   0.02%
+cliente_hqc1    46.20%    4.145MiB / 23.32GiB   0.02%
+servidor_hqc    255.50%   14.27MiB / 23.32GiB   0.06%
+cliente_hqc13   29.32%    3.945MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:20 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc14   28.97%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc13   37.43%    3.512MiB / 23.32GiB   0.01%
+cliente_hqc12   32.97%    4.438MiB / 23.32GiB   0.02%
+cliente_hqc11   38.34%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc10   46.13%    4.039MiB / 23.32GiB   0.02%
+cliente_hqc9    40.75%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc8    19.73%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc7    35.36%    4.395MiB / 23.32GiB   0.02%
+cliente_hqc6    19.04%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc5    43.20%    4.398MiB / 23.32GiB   0.02%
+cliente_hqc4    27.74%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc3    39.90%    4.449MiB / 23.32GiB   0.02%
+cliente_hqc2    27.85%    3.66MiB / 23.32GiB    0.02%
+cliente_hqc1    24.62%    4.133MiB / 23.32GiB   0.02%
+servidor_hqc    248.98%   14.18MiB / 23.32GiB   0.06%
+cliente_hqc15   42.74%    4.688MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:26 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc16   32.32%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc15   26.38%    4.379MiB / 23.32GiB   0.02%
+cliente_hqc14   43.17%    4.133MiB / 23.32GiB   0.02%
+cliente_hqc13   24.79%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc12   20.38%    2.543MiB / 23.32GiB   0.01%
+cliente_hqc11   29.58%    4.23MiB / 23.32GiB    0.02%
+cliente_hqc10   30.05%    2.508MiB / 23.32GiB   0.01%
+cliente_hqc9    17.86%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc8    39.35%    4.523MiB / 23.32GiB   0.02%
+cliente_hqc7    37.02%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc6    24.32%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc5    26.00%    1.684MiB / 23.32GiB   0.01%
+cliente_hqc4    23.54%    4.578MiB / 23.32GiB   0.02%
+cliente_hqc3    21.20%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc2    39.04%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc1    34.79%    3.328MiB / 23.32GiB   0.01%
+servidor_hqc    250.77%   14.76MiB / 23.32GiB   0.06%
+cliente_hqc17   31.63%    4.352MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:32 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc18   23.97%    4.367MiB / 23.32GiB   0.02%
+cliente_hqc17   24.90%    3.078MiB / 23.32GiB   0.01%
+cliente_hqc16   23.13%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc15   33.04%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc14   25.81%    740KiB / 23.32GiB     0.00%
+cliente_hqc13   29.35%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc12   30.68%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc11   28.12%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc10   13.62%    4.52MiB / 23.32GiB    0.02%
+cliente_hqc9    23.72%    1.367MiB / 23.32GiB   0.01%
+cliente_hqc8    27.07%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc7    36.27%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc6    27.56%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc5    23.22%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc4    26.70%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc3    19.23%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc2    33.53%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc1    33.74%    4.086MiB / 23.32GiB   0.02%
+servidor_hqc    264.80%   16.56MiB / 23.32GiB   0.07%
+cliente_hqc19   23.05%    4.543MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:36 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc20   15.31%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc19   27.04%    4.418MiB / 23.32GiB   0.02%
+cliente_hqc18   22.93%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc17   23.70%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc16   18.87%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc15   22.67%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc14   17.62%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc13   10.31%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc12   9.70%     4.07MiB / 23.32GiB    0.02%
+cliente_hqc11   19.36%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc10   36.29%    4.238MiB / 23.32GiB   0.02%
+cliente_hqc9    26.40%    3.57MiB / 23.32GiB    0.01%
+cliente_hqc8    16.94%    3.477MiB / 23.32GiB   0.01%
+cliente_hqc7    25.41%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc6    16.63%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc5    29.79%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc4    29.74%    4.137MiB / 23.32GiB   0.02%
+cliente_hqc3    31.25%    2.668MiB / 23.32GiB   0.01%
+cliente_hqc2    26.02%    4.238MiB / 23.32GiB   0.02%
+cliente_hqc1    18.46%    4.324MiB / 23.32GiB   0.02%
+servidor_hqc    250.37%   17.54MiB / 23.32GiB   0.07%
+cliente_hqc21   28.14%    4.273MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:42 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc22   24.76%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc21   14.18%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc20   16.89%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc19   31.97%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc18   33.87%    4.395MiB / 23.32GiB   0.02%
+cliente_hqc17   23.78%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc16   20.39%    2.938MiB / 23.32GiB   0.01%
+cliente_hqc15   19.15%    4.629MiB / 23.32GiB   0.02%
+cliente_hqc14   28.85%    3.637MiB / 23.32GiB   0.02%
+cliente_hqc13   31.00%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc12   24.56%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc11   9.88%     4.324MiB / 23.32GiB   0.02%
+cliente_hqc10   34.60%    4.602MiB / 23.32GiB   0.02%
+cliente_hqc9    11.41%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc8    23.66%    4.133MiB / 23.32GiB   0.02%
+cliente_hqc7    25.15%    3.957MiB / 23.32GiB   0.02%
+cliente_hqc6    24.39%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc5    25.06%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc4    12.77%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc3    22.20%    4.598MiB / 23.32GiB   0.02%
+cliente_hqc2    9.79%     4.086MiB / 23.32GiB   0.02%
+cliente_hqc1    10.27%    4.102MiB / 23.32GiB   0.02%
+servidor_hqc    246.93%   18.46MiB / 23.32GiB   0.08%
+--- 2026-06-04_08:17:46 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc23   24.05%    4.266MiB / 23.32GiB   0.02%
+cliente_hqc22   23.69%    5.02MiB / 23.32GiB    0.02%
+cliente_hqc21   18.47%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc20   13.55%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc19   9.20%     3.922MiB / 23.32GiB   0.02%
+cliente_hqc18   25.38%    4.113MiB / 23.32GiB   0.02%
+cliente_hqc17   13.27%    4.391MiB / 23.32GiB   0.02%
+cliente_hqc16   19.62%    4.23MiB / 23.32GiB    0.02%
+cliente_hqc15   18.71%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc14   18.79%    4.496MiB / 23.32GiB   0.02%
+cliente_hqc13   30.01%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc12   23.49%    4.406MiB / 23.32GiB   0.02%
+cliente_hqc11   19.38%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc10   14.63%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc9    29.94%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc8    17.68%    3.957MiB / 23.32GiB   0.02%
+cliente_hqc7    22.60%    4.395MiB / 23.32GiB   0.02%
+cliente_hqc6    23.86%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc5    19.27%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc4    19.18%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc3    23.93%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc2    15.62%    4.121MiB / 23.32GiB   0.02%
+cliente_hqc1    20.12%    4.082MiB / 23.32GiB   0.02%
+servidor_hqc    258.04%   19.82MiB / 23.32GiB   0.08%
+cliente_hqc24   20.68%    4.184MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:17:52 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc25   23.53%    2.715MiB / 23.32GiB   0.01%
+cliente_hqc24   21.94%    4.121MiB / 23.32GiB   0.02%
+cliente_hqc22   21.53%    4.039MiB / 23.32GiB   0.02%
+cliente_hqc21   25.77%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc20   20.36%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc19   20.18%    1.227MiB / 23.32GiB   0.01%
+cliente_hqc17   21.70%    3.66MiB / 23.32GiB    0.02%
+cliente_hqc16   21.48%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc15   28.35%    3.977MiB / 23.32GiB   0.02%
+cliente_hqc14   26.78%    4.223MiB / 23.32GiB   0.02%
+cliente_hqc13   20.89%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc12   26.77%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc9    22.29%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc8    22.35%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc7    20.81%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc6    26.13%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc4    21.97%    4.141MiB / 23.32GiB   0.02%
+cliente_hqc3    22.02%    4.387MiB / 23.32GiB   0.02%
+cliente_hqc2    25.57%    4.172MiB / 23.32GiB   0.02%
+servidor_hqc    255.51%   20.4MiB / 23.32GiB    0.09%
+cliente_hqc26   21.43%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc27   25.04%    3.938MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:18:08 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc28   22.44%    3.586MiB / 23.32GiB   0.02%
+cliente_hqc27   25.70%    4.273MiB / 23.32GiB   0.02%
+cliente_hqc26   22.81%    3.965MiB / 23.32GiB   0.02%
+cliente_hqc25   20.94%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc24   13.68%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc22   24.83%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc21   9.09%     4.094MiB / 23.32GiB   0.02%
+cliente_hqc20   48.39%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc19   9.56%     4.055MiB / 23.32GiB   0.02%
+cliente_hqc17   16.85%    3.914MiB / 23.32GiB   0.02%
+cliente_hqc16   44.36%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc15   27.72%    4.414MiB / 23.32GiB   0.02%
+cliente_hqc14   19.52%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc13   29.65%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc12   4.17%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc9    17.54%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc8    15.39%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc7    39.04%    4.391MiB / 23.32GiB   0.02%
+cliente_hqc6    24.67%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc4    23.71%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc3    9.61%     4.066MiB / 23.32GiB   0.02%
+cliente_hqc2    10.95%    2.055MiB / 23.32GiB   0.01%
+servidor_hqc    255.26%   21.15MiB / 23.32GiB   0.09%
+--- 2026-06-04_08:18:12 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc29   9.90%     4.098MiB / 23.32GiB   0.02%
+cliente_hqc28   30.60%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc27   5.07%     4.102MiB / 23.32GiB   0.02%
+cliente_hqc26   28.26%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc25   24.29%    3.953MiB / 23.32GiB   0.02%
+cliente_hqc24   11.58%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc22   23.11%    2.852MiB / 23.32GiB   0.01%
+cliente_hqc21   17.17%    3.457MiB / 23.32GiB   0.01%
+cliente_hqc20   33.04%    3.773MiB / 23.32GiB   0.02%
+cliente_hqc19   18.87%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc17   19.27%    3.914MiB / 23.32GiB   0.02%
+cliente_hqc16   17.86%    3.988MiB / 23.32GiB   0.02%
+cliente_hqc15   13.36%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc14   22.43%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc13   29.54%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc12   19.53%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc9    19.66%    3.992MiB / 23.32GiB   0.02%
+cliente_hqc8    33.11%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc7    35.97%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc6    9.37%     4.078MiB / 23.32GiB   0.02%
+cliente_hqc4    23.61%    3.855MiB / 23.32GiB   0.02%
+cliente_hqc3    27.44%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc2    14.95%    3.945MiB / 23.32GiB   0.02%
+servidor_hqc    260.05%   21.82MiB / 23.32GiB   0.09%
+cliente_hqc30   24.51%    4.367MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:18:18 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc31   27.18%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc30   24.79%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc29   16.61%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc28   29.70%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc27   15.04%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc26   19.20%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc25   15.26%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc24   13.50%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc21   24.13%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc20   28.18%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc19   17.34%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc17   16.62%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc16   19.14%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc15   37.49%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc14   15.38%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc13   28.71%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc12   23.25%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc9    0.00%     0B / 0B               0.00%
+cliente_hqc8    13.81%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc7    24.72%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc6    9.81%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc4    29.11%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc3    25.69%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc2    15.73%    4.578MiB / 23.32GiB   0.02%
+servidor_hqc    246.26%   21.81MiB / 23.32GiB   0.09%
+--- 2026-06-04_08:18:23 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc32   20.73%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc31   23.86%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc30   19.93%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc29   4.04%     4.086MiB / 23.32GiB   0.02%
+cliente_hqc28   25.58%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc27   20.99%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc26   20.76%    3.469MiB / 23.32GiB   0.01%
+cliente_hqc25   17.03%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc24   4.23%     4.07MiB / 23.32GiB    0.02%
+cliente_hqc21   28.51%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc20   28.91%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc19   20.57%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc17   24.31%    4.043MiB / 23.32GiB   0.02%
+cliente_hqc16   25.74%    1004KiB / 23.32GiB    0.00%
+cliente_hqc15   22.74%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc14   23.61%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc13   4.17%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc12   20.81%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc8    20.14%    2.406MiB / 23.32GiB   0.01%
+cliente_hqc6    26.55%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc4    19.37%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc3    22.10%    3.426MiB / 23.32GiB   0.01%
+cliente_hqc2    15.18%    4.289MiB / 23.32GiB   0.02%
+servidor_hqc    265.81%   22.76MiB / 23.32GiB   0.10%
+cliente_hqc33   15.54%    4.168MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:18:30 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc34   15.65%    3.316MiB / 23.32GiB   0.01%
+cliente_hqc33   12.58%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc32   19.34%    4.23MiB / 23.32GiB    0.02%
+cliente_hqc31   13.63%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc30   31.78%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc29   17.42%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc28   28.97%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc27   12.41%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc26   15.36%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc25   8.87%     3.922MiB / 23.32GiB   0.02%
+cliente_hqc24   34.74%    3.953MiB / 23.32GiB   0.02%
+cliente_hqc21   12.43%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc20   35.40%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc19   12.94%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc17   8.68%     4.07MiB / 23.32GiB    0.02%
+cliente_hqc16   23.33%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc15   17.64%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc14   15.30%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc13   25.04%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc12   18.67%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc8    22.88%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc6    9.73%     3.926MiB / 23.32GiB   0.02%
+cliente_hqc4    24.84%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc3    17.67%    4.414MiB / 23.32GiB   0.02%
+cliente_hqc2    5.93%     4.086MiB / 23.32GiB   0.02%
+servidor_hqc    248.63%   22.2MiB / 23.32GiB    0.09%
+--- 2026-06-04_08:18:34 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc35   25.75%    4.375MiB / 23.32GiB   0.02%
+cliente_hqc34   14.17%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc33   19.57%    4.402MiB / 23.32GiB   0.02%
+cliente_hqc32   13.72%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc31   15.58%    4.141MiB / 23.32GiB   0.02%
+cliente_hqc30   20.79%    4.609MiB / 23.32GiB   0.02%
+cliente_hqc29   20.71%    4.438MiB / 23.32GiB   0.02%
+cliente_hqc28   16.09%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc27   19.48%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc26   21.32%    3.547MiB / 23.32GiB   0.01%
+cliente_hqc25   25.14%    3.07MiB / 23.32GiB    0.01%
+cliente_hqc24   15.28%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc21   18.58%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc20   31.74%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc19   15.50%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc17   18.84%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc16   12.84%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc15   19.65%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc14   27.78%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc13   13.54%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc12   25.37%    4.949MiB / 23.32GiB   0.02%
+cliente_hqc6    22.16%    4.477MiB / 23.32GiB   0.02%
+cliente_hqc4    29.37%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc3    19.18%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc2    26.26%    4.203MiB / 23.32GiB   0.02%
+servidor_hqc    241.04%   22.68MiB / 23.32GiB   0.10%
+cliente_hqc36   23.67%    664KiB / 23.32GiB     0.00%
+--- 2026-06-04_08:18:40 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc36   15.64%    3.992MiB / 23.32GiB   0.02%
+cliente_hqc35   13.88%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc34   28.72%    4.258MiB / 23.32GiB   0.02%
+cliente_hqc33   19.25%    4.512MiB / 23.32GiB   0.02%
+cliente_hqc32   19.27%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc31   19.08%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc30   16.73%    4.16MiB / 23.32GiB    0.02%
+cliente_hqc29   15.00%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc28   19.81%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc27   20.24%    4.43MiB / 23.32GiB    0.02%
+cliente_hqc26   22.71%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc25   14.13%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc24   17.00%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc21   13.81%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc20   29.80%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc19   25.55%    4.504MiB / 23.32GiB   0.02%
+cliente_hqc17   22.38%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc16   12.95%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc15   15.38%    4.508MiB / 23.32GiB   0.02%
+cliente_hqc14   14.17%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc13   12.83%    1.891MiB / 23.32GiB   0.01%
+cliente_hqc12   13.28%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc6    27.44%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc4    14.60%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc3    14.43%    4.023MiB / 23.32GiB   0.02%
+cliente_hqc2    28.84%    4.125MiB / 23.32GiB   0.02%
+servidor_hqc    243.37%   22.65MiB / 23.32GiB   0.09%
+cliente_hqc37   25.43%    4.168MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:18:45 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc38   18.80%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc37   19.80%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc36   8.67%     4.055MiB / 23.32GiB   0.02%
+cliente_hqc35   22.55%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc34   26.77%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc33   29.54%    4.625MiB / 23.32GiB   0.02%
+cliente_hqc32   10.15%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc31   15.01%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc30   6.69%     4.312MiB / 23.32GiB   0.02%
+cliente_hqc29   9.61%     3.926MiB / 23.32GiB   0.02%
+cliente_hqc28   18.79%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc27   9.77%     4.07MiB / 23.32GiB    0.02%
+cliente_hqc26   20.61%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc25   10.34%    4.512MiB / 23.32GiB   0.02%
+cliente_hqc24   12.25%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc21   9.94%     4.168MiB / 23.32GiB   0.02%
+cliente_hqc20   15.04%    4.445MiB / 23.32GiB   0.02%
+cliente_hqc19   7.78%     4.27MiB / 23.32GiB    0.02%
+cliente_hqc17   12.49%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc16   20.48%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc15   18.42%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc14   19.11%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc13   18.81%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc12   27.89%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc6    28.15%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc4    23.29%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc3    25.80%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc2    10.40%    3.918MiB / 23.32GiB   0.02%
+servidor_hqc    260.57%   21.68MiB / 23.32GiB   0.09%
+--- 2026-06-04_08:18:49 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc39   21.20%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc38   15.99%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc37   19.41%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc35   21.77%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc34   16.22%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc33   8.15%     4.535MiB / 23.32GiB   0.02%
+cliente_hqc32   16.16%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc30   14.80%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc28   16.24%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc27   20.98%    4.57MiB / 23.32GiB    0.02%
+cliente_hqc25   28.20%    4.684MiB / 23.32GiB   0.02%
+cliente_hqc24   18.25%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc21   23.04%    4.621MiB / 23.32GiB   0.02%
+cliente_hqc20   22.22%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc19   20.64%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc17   18.41%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc16   19.69%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc15   17.96%    1.125MiB / 23.32GiB   0.00%
+cliente_hqc14   24.28%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc13   27.40%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc6    26.12%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc4    14.52%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc3    32.30%    4.32MiB / 23.32GiB    0.02%
+servidor_hqc    253.21%   23.16MiB / 23.32GiB   0.10%
+cliente_hqc40   16.17%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc41   16.33%    4.594MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:19:03 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc41   35.74%    3.551MiB / 23.32GiB   0.01%
+cliente_hqc40   20.43%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc39   20.38%    1.414MiB / 23.32GiB   0.01%
+cliente_hqc38   21.74%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc37   38.32%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc35   24.76%    1.688MiB / 23.32GiB   0.01%
+cliente_hqc33   15.54%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc32   19.31%    4.207MiB / 23.32GiB   0.02%
+cliente_hqc30   14.97%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc28   28.49%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc27   10.60%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc25   19.30%    4.016MiB / 23.32GiB   0.02%
+cliente_hqc24   25.22%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc21   17.62%    1.652MiB / 23.32GiB   0.01%
+cliente_hqc20   19.88%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc17   19.51%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc16   24.72%    4.426MiB / 23.32GiB   0.02%
+cliente_hqc15   27.87%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc14   38.15%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc13   27.03%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc4    19.24%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc3    14.08%    4.09MiB / 23.32GiB    0.02%
+servidor_hqc    262.94%   24.17MiB / 23.32GiB   0.10%
+--- 2026-06-04_08:19:08 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc42   18.31%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc41   13.78%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc40   36.21%    3.504MiB / 23.32GiB   0.01%
+cliente_hqc39   24.42%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc38   11.87%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc37   24.03%    4.492MiB / 23.32GiB   0.02%
+cliente_hqc35   19.96%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc33   28.11%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc32   17.02%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc30   19.62%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc28   15.27%    4.242MiB / 23.32GiB   0.02%
+cliente_hqc27   14.01%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc25   29.83%    4.426MiB / 23.32GiB   0.02%
+cliente_hqc24   23.24%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc21   22.96%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc20   18.76%    4.352MiB / 23.32GiB   0.02%
+cliente_hqc17   14.11%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc16   33.88%    4.348MiB / 23.32GiB   0.02%
+cliente_hqc15   26.25%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc14   14.95%    2.426MiB / 23.32GiB   0.01%
+cliente_hqc13   22.38%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc4    16.07%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc3    15.92%    4.688MiB / 23.32GiB   0.02%
+servidor_hqc    250.62%   25.15MiB / 23.32GiB   0.11%
+cliente_hqc43   11.62%    4.176MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:19:13 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc44   10.11%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc43   25.53%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc42   12.57%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc41   24.75%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc40   9.78%     4.203MiB / 23.32GiB   0.02%
+cliente_hqc39   23.32%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc38   21.74%    2.836MiB / 23.32GiB   0.01%
+cliente_hqc37   19.73%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc35   9.64%     4.059MiB / 23.32GiB   0.02%
+cliente_hqc33   23.86%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc32   24.79%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc30   18.25%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc28   29.92%    3.953MiB / 23.32GiB   0.02%
+cliente_hqc27   13.96%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc25   25.47%    4.238MiB / 23.32GiB   0.02%
+cliente_hqc24   17.03%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc21   15.34%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc20   18.87%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc17   19.94%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc16   31.54%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc15   12.09%    3.664MiB / 23.32GiB   0.02%
+cliente_hqc14   19.90%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc13   19.94%    4.391MiB / 23.32GiB   0.02%
+cliente_hqc4    18.61%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc3    22.01%    4.309MiB / 23.32GiB   0.02%
+servidor_hqc    237.79%   24.75MiB / 23.32GiB   0.10%
+--- 2026-06-04_08:19:18 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc45   15.35%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc44   15.24%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc43   19.15%    4.348MiB / 23.32GiB   0.02%
+cliente_hqc42   16.98%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc41   21.09%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc40   14.24%    4.285MiB / 23.32GiB   0.02%
+cliente_hqc39   24.14%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc38   19.43%    4.391MiB / 23.32GiB   0.02%
+cliente_hqc37   19.50%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc35   18.96%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc33   11.81%    3.359MiB / 23.32GiB   0.01%
+cliente_hqc32   21.98%    3.598MiB / 23.32GiB   0.02%
+cliente_hqc30   13.41%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc28   15.30%    4.219MiB / 23.32GiB   0.02%
+cliente_hqc27   20.72%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc25   29.06%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc24   19.53%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc21   9.23%     4.051MiB / 23.32GiB   0.02%
+cliente_hqc20   25.55%    3.516MiB / 23.32GiB   0.01%
+cliente_hqc17   16.03%    4.16MiB / 23.32GiB    0.02%
+cliente_hqc16   22.50%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc15   27.51%    4.414MiB / 23.32GiB   0.02%
+cliente_hqc14   30.55%    2.961MiB / 23.32GiB   0.01%
+cliente_hqc13   9.11%     4.082MiB / 23.32GiB   0.02%
+cliente_hqc4    15.43%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc3    20.42%    4.074MiB / 23.32GiB   0.02%
+servidor_hqc    263.30%   24.23MiB / 23.32GiB   0.10%
+cliente_hqc46   27.04%    1.527MiB / 23.32GiB   0.01%
+--- 2026-06-04_08:19:23 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc47   21.75%    4.281MiB / 23.32GiB   0.02%
+cliente_hqc46   24.33%    3.633MiB / 23.32GiB   0.02%
+cliente_hqc45   28.18%    2.938MiB / 23.32GiB   0.01%
+cliente_hqc44   22.28%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc43   10.96%    3.18MiB / 23.32GiB    0.01%
+cliente_hqc42   25.23%    4.352MiB / 23.32GiB   0.02%
+cliente_hqc41   18.48%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc40   9.50%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc39   20.18%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc38   12.84%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc37   20.04%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc35   13.62%    4.133MiB / 23.32GiB   0.02%
+cliente_hqc33   24.02%    4.562MiB / 23.32GiB   0.02%
+cliente_hqc32   10.68%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc30   14.15%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc28   17.00%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc27   23.51%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc25   14.44%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc24   14.24%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc21   20.08%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc20   14.77%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc17   20.12%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc16   13.29%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc15   18.31%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc14   9.20%     4.508MiB / 23.32GiB   0.02%
+cliente_hqc13   18.21%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc4    10.58%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc3    20.34%    4.145MiB / 23.32GiB   0.02%
+servidor_hqc    274.19%   24.64MiB / 23.32GiB   0.10%
+--- 2026-06-04_08:19:28 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc48   19.55%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc46   15.56%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc45   19.57%    3.238MiB / 23.32GiB   0.01%
+cliente_hqc44   15.19%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc43   17.17%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc42   21.37%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc41   20.49%    4.406MiB / 23.32GiB   0.02%
+cliente_hqc40   22.83%    4.27MiB / 23.32GiB    0.02%
+cliente_hqc39   9.84%     4.086MiB / 23.32GiB   0.02%
+cliente_hqc38   14.91%    3.777MiB / 23.32GiB   0.02%
+cliente_hqc37   14.89%    4.211MiB / 23.32GiB   0.02%
+cliente_hqc33   15.08%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc32   15.98%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc30   14.69%    4.215MiB / 23.32GiB   0.02%
+cliente_hqc28   7.18%     3.641MiB / 23.32GiB   0.02%
+cliente_hqc27   26.23%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc25   19.59%    3.27MiB / 23.32GiB    0.01%
+cliente_hqc24   27.49%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc20   19.32%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc17   24.72%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc16   17.21%    3.504MiB / 23.32GiB   0.01%
+cliente_hqc15   16.55%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc14   19.09%    4.531MiB / 23.32GiB   0.02%
+cliente_hqc13   25.38%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc4    16.70%    3.609MiB / 23.32GiB   0.02%
+cliente_hqc3    22.17%    4.051MiB / 23.32GiB   0.02%
+servidor_hqc    226.55%   25.21MiB / 23.32GiB   0.11%
+--- 2026-06-04_08:19:36 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc49   24.06%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc48   25.59%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc46   22.58%    4.582MiB / 23.32GiB   0.02%
+cliente_hqc45   22.57%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc44   19.23%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc43   9.59%     4.168MiB / 23.32GiB   0.02%
+cliente_hqc42   16.47%    4.805MiB / 23.32GiB   0.02%
+cliente_hqc41   17.12%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc40   16.00%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc39   20.50%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc38   17.55%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc37   18.27%    4.461MiB / 23.32GiB   0.02%
+cliente_hqc33   19.50%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc32   22.41%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc28   20.48%    3.484MiB / 23.32GiB   0.01%
+cliente_hqc27   14.32%    4.438MiB / 23.32GiB   0.02%
+cliente_hqc25   9.72%     3.934MiB / 23.32GiB   0.02%
+cliente_hqc24   31.94%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc20   19.44%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc17   12.66%    4.234MiB / 23.32GiB   0.02%
+cliente_hqc16   14.73%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc15   19.82%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc14   19.09%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc13   16.04%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc4    12.38%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc3    14.71%    4.07MiB / 23.32GiB    0.02%
+servidor_hqc    256.95%   25.35MiB / 23.32GiB   0.11%
+cliente_hqc50   14.27%    3.875MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:19:43 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc50   12.77%    4.027MiB / 23.32GiB   0.02%
+cliente_hqc48   21.94%    4.676MiB / 23.32GiB   0.02%
+cliente_hqc46   22.84%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc45   17.92%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc44   13.67%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc43   19.00%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc41   22.82%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc40   18.90%    3.898MiB / 23.32GiB   0.02%
+cliente_hqc39   9.68%     4.094MiB / 23.32GiB   0.02%
+cliente_hqc38   22.79%    4.281MiB / 23.32GiB   0.02%
+cliente_hqc37   28.17%    3.957MiB / 23.32GiB   0.02%
+cliente_hqc33   13.53%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc32   15.26%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc28   33.64%    2.043MiB / 23.32GiB   0.01%
+cliente_hqc27   30.48%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc25   15.43%    2.473MiB / 23.32GiB   0.01%
+cliente_hqc24   14.94%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc20   20.11%    1.664MiB / 23.32GiB   0.01%
+cliente_hqc16   17.21%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc15   19.96%    4.426MiB / 23.32GiB   0.02%
+cliente_hqc14   19.87%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc13   19.09%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc4    22.95%    4.277MiB / 23.32GiB   0.02%
+cliente_hqc3    9.41%     4.391MiB / 23.32GiB   0.02%
+servidor_hqc    261.42%   25.41MiB / 23.32GiB   0.11%
+--- 2026-06-04_08:19:48 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc51   9.00%     4.082MiB / 23.32GiB   0.02%
+cliente_hqc50   25.22%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc48   27.11%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc46   18.52%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc45   17.71%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc44   23.89%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc43   19.32%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc41   19.87%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc40   18.69%    4.434MiB / 23.32GiB   0.02%
+cliente_hqc39   27.42%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc38   26.76%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc37   20.84%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc33   17.10%    4.012MiB / 23.32GiB   0.02%
+cliente_hqc32   19.52%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc28   19.33%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc25   20.35%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc24   21.98%    2.738MiB / 23.32GiB   0.01%
+cliente_hqc20   14.92%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc16   34.14%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc15   9.49%     4.336MiB / 23.32GiB   0.02%
+cliente_hqc14   37.85%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc13   9.18%     4.281MiB / 23.32GiB   0.02%
+servidor_hqc    262.13%   25.38MiB / 23.32GiB   0.11%
+cliente_hqc52   16.44%    4.25MiB / 23.32GiB    0.02%
+--- 2026-06-04_08:19:59 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc52   18.22%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc51   20.84%    3.375MiB / 23.32GiB   0.01%
+cliente_hqc50   22.57%    4.488MiB / 23.32GiB   0.02%
+cliente_hqc48   10.20%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc46   33.52%    4.484MiB / 23.32GiB   0.02%
+cliente_hqc45   14.21%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc44   17.84%    4.48MiB / 23.32GiB    0.02%
+cliente_hqc43   9.93%     4.152MiB / 23.32GiB   0.02%
+cliente_hqc40   32.95%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc39   20.27%    4.387MiB / 23.32GiB   0.02%
+cliente_hqc38   23.27%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc37   24.95%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc32   36.15%    4.152MiB / 23.32GiB   0.02%
+cliente_hqc28   9.15%     4.055MiB / 23.32GiB   0.02%
+cliente_hqc25   17.13%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc24   30.71%    4.352MiB / 23.32GiB   0.02%
+cliente_hqc20   38.33%    4.273MiB / 23.32GiB   0.02%
+cliente_hqc16   11.69%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc15   32.60%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc14   41.91%    4.809MiB / 23.32GiB   0.02%
+cliente_hqc13   20.36%    3.93MiB / 23.32GiB    0.02%
+servidor_hqc    255.19%   26.42MiB / 23.32GiB   0.11%
+cliente_hqc53   21.92%    3.922MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:20:03 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc54   18.99%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc53   17.89%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc52   24.51%    4.043MiB / 23.32GiB   0.02%
+cliente_hqc51   20.78%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc50   18.11%    4.402MiB / 23.32GiB   0.02%
+cliente_hqc48   13.57%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc46   9.30%     4.566MiB / 23.32GiB   0.02%
+cliente_hqc45   22.00%    4.23MiB / 23.32GiB    0.02%
+cliente_hqc44   24.80%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc43   14.67%    1.574MiB / 23.32GiB   0.01%
+cliente_hqc40   19.42%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc39   14.61%    1.117MiB / 23.32GiB   0.00%
+cliente_hqc38   25.20%    4.719MiB / 23.32GiB   0.02%
+cliente_hqc37   17.96%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc32   16.91%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc28   22.56%    3.984MiB / 23.32GiB   0.02%
+cliente_hqc25   33.80%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc24   32.49%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc20   24.12%    4.668MiB / 23.32GiB   0.02%
+cliente_hqc16   21.40%    4.242MiB / 23.32GiB   0.02%
+cliente_hqc15   24.52%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc14   29.69%    3.273MiB / 23.32GiB   0.01%
+cliente_hqc13   15.35%    3.93MiB / 23.32GiB    0.02%
+servidor_hqc    243.25%   25.42MiB / 23.32GiB   0.11%
+--- 2026-06-04_08:20:08 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc55   25.30%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc54   18.18%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc53   26.74%    4.254MiB / 23.32GiB   0.02%
+cliente_hqc52   8.72%     4.277MiB / 23.32GiB   0.02%
+cliente_hqc51   17.55%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc50   20.96%    3.793MiB / 23.32GiB   0.02%
+cliente_hqc48   35.04%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc46   15.14%    4.5MiB / 23.32GiB     0.02%
+cliente_hqc45   9.92%     4.164MiB / 23.32GiB   0.02%
+cliente_hqc44   10.71%    1.547MiB / 23.32GiB   0.01%
+cliente_hqc43   20.86%    3.855MiB / 23.32GiB   0.02%
+cliente_hqc40   14.53%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc39   25.18%    4.219MiB / 23.32GiB   0.02%
+cliente_hqc38   17.20%    4.012MiB / 23.32GiB   0.02%
+cliente_hqc37   37.30%    3.188MiB / 23.32GiB   0.01%
+cliente_hqc32   23.02%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc28   29.45%    3.957MiB / 23.32GiB   0.02%
+cliente_hqc25   19.85%    4.387MiB / 23.32GiB   0.02%
+cliente_hqc24   28.61%    4.406MiB / 23.32GiB   0.02%
+cliente_hqc20   19.26%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc16   21.03%    4.379MiB / 23.32GiB   0.02%
+cliente_hqc15   10.59%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc14   15.23%    4.352MiB / 23.32GiB   0.02%
+cliente_hqc13   28.95%    4.039MiB / 23.32GiB   0.02%
+servidor_hqc    243.81%   25.93MiB / 23.32GiB   0.11%
+--- 2026-06-04_08:20:12 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc56   23.02%    3.168MiB / 23.32GiB   0.01%
+cliente_hqc55   37.23%    4.277MiB / 23.32GiB   0.02%
+cliente_hqc54   14.66%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc53   40.95%    2.074MiB / 23.32GiB   0.01%
+cliente_hqc52   4.14%     4.055MiB / 23.32GiB   0.02%
+cliente_hqc51   18.72%    3.988MiB / 23.32GiB   0.02%
+cliente_hqc50   34.17%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc48   22.09%    4.281MiB / 23.32GiB   0.02%
+cliente_hqc46   4.13%     4.316MiB / 23.32GiB   0.02%
+cliente_hqc45   33.37%    4.43MiB / 23.32GiB    0.02%
+cliente_hqc44   17.66%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc43   25.31%    1.176MiB / 23.32GiB   0.00%
+cliente_hqc40   10.22%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc39   13.75%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc38   22.16%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc37   22.33%    3.734MiB / 23.32GiB   0.02%
+cliente_hqc32   20.53%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc28   19.70%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc25   10.36%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc24   17.79%    3.984MiB / 23.32GiB   0.02%
+cliente_hqc20   18.36%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc16   26.68%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc15   14.72%    4.562MiB / 23.32GiB   0.02%
+cliente_hqc14   19.83%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc13   18.34%    4.043MiB / 23.32GiB   0.02%
+servidor_hqc    248.14%   26.07MiB / 23.32GiB   0.11%
+--- 2026-06-04_08:20:17 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc57   23.52%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc56   18.95%    4.246MiB / 23.32GiB   0.02%
+cliente_hqc55   20.26%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc54   21.83%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc53   19.77%    4.43MiB / 23.32GiB    0.02%
+cliente_hqc52   21.58%    4.352MiB / 23.32GiB   0.02%
+cliente_hqc51   21.66%    4.246MiB / 23.32GiB   0.02%
+cliente_hqc50   23.68%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc48   22.71%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc46   17.26%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc45   9.12%     3.934MiB / 23.32GiB   0.02%
+cliente_hqc44   16.19%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc43   14.67%    4.395MiB / 23.32GiB   0.02%
+cliente_hqc40   23.68%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc38   16.37%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc37   17.32%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc32   12.96%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc28   17.46%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc25   25.01%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc24   22.58%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc16   21.76%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc15   26.24%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc14   16.34%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc13   25.26%    4.484MiB / 23.32GiB   0.02%
+servidor_hqc    259.35%   26.55MiB / 23.32GiB   0.11%
+--- 2026-06-04_08:20:24 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc58   29.01%    4.254MiB / 23.32GiB   0.02%
+cliente_hqc57   28.80%    4.219MiB / 23.32GiB   0.02%
+cliente_hqc56   11.65%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc55   9.55%     4.059MiB / 23.32GiB   0.02%
+cliente_hqc54   20.89%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc53   10.50%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc52   10.78%    3.992MiB / 23.32GiB   0.02%
+cliente_hqc51   13.49%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc50   28.68%    4.273MiB / 23.32GiB   0.02%
+cliente_hqc48   14.50%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc46   38.09%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc45   23.93%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc44   13.71%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc43   19.10%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc40   14.78%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc38   24.66%    4MiB / 23.32GiB       0.02%
+cliente_hqc37   15.39%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc32   23.68%    4.422MiB / 23.32GiB   0.02%
+cliente_hqc28   14.37%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc25   29.60%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc24   14.87%    4.641MiB / 23.32GiB   0.02%
+cliente_hqc16   15.49%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc15   26.38%    4.375MiB / 23.32GiB   0.02%
+cliente_hqc14   12.19%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc13   19.52%    4.078MiB / 23.32GiB   0.02%
+servidor_hqc    226.45%   26.3MiB / 23.32GiB    0.11%
+cliente_hqc59   18.88%    4.094MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:20:28 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc59   10.33%    4.273MiB / 23.32GiB   0.02%
+cliente_hqc58   9.94%     3.934MiB / 23.32GiB   0.02%
+cliente_hqc57   24.28%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc56   25.27%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc55   11.88%    3.797MiB / 23.32GiB   0.02%
+cliente_hqc53   20.04%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc52   13.86%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc51   18.26%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc50   14.21%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc48   14.21%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc46   13.83%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc45   21.84%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc44   34.05%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc43   15.38%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc40   17.55%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc38   23.95%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc37   15.84%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc28   16.89%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc25   15.13%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc24   30.53%    4.258MiB / 23.32GiB   0.02%
+cliente_hqc16   9.87%     4.699MiB / 23.32GiB   0.02%
+cliente_hqc15   33.80%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc14   23.23%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc13   26.55%    2.875MiB / 23.32GiB   0.01%
+servidor_hqc    232.06%   26.79MiB / 23.32GiB   0.11%
+cliente_hqc60   9.45%     4.152MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:20:36 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc61   34.32%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc60   23.62%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc59   27.06%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc58   21.39%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc57   22.82%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc56   19.80%    4.359MiB / 23.32GiB   0.02%
+cliente_hqc55   23.16%    3.594MiB / 23.32GiB   0.02%
+cliente_hqc53   19.36%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc52   20.09%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc51   20.80%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc48   13.05%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc46   19.68%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc45   22.54%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc44   21.07%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc43   24.13%    4.559MiB / 23.32GiB   0.02%
+cliente_hqc40   26.45%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc24   21.75%    4.492MiB / 23.32GiB   0.02%
+cliente_hqc16   22.22%    4.492MiB / 23.32GiB   0.02%
+cliente_hqc15   27.84%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc14   23.10%    4.359MiB / 23.32GiB   0.02%
+cliente_hqc13   18.90%    4.367MiB / 23.32GiB   0.02%
+servidor_hqc    256.93%   26.27MiB / 23.32GiB   0.11%
+cliente_hqc62   24.74%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc63   24.86%    4.324MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:20:53 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc63   36.16%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc62   6.79%     4.328MiB / 23.32GiB   0.02%
+cliente_hqc61   24.37%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc60   16.64%    4.277MiB / 23.32GiB   0.02%
+cliente_hqc59   28.41%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc58   14.73%    1.168MiB / 23.32GiB   0.00%
+cliente_hqc57   18.72%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc56   24.27%    4.027MiB / 23.32GiB   0.02%
+cliente_hqc55   15.05%    4.035MiB / 23.32GiB   0.02%
+cliente_hqc53   15.74%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc52   22.89%    3.961MiB / 23.32GiB   0.02%
+cliente_hqc48   34.72%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc46   21.42%    3.957MiB / 23.32GiB   0.02%
+cliente_hqc45   17.41%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc44   19.89%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc43   20.65%    4.215MiB / 23.32GiB   0.02%
+cliente_hqc40   15.14%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc24   19.94%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc16   31.69%    3.746MiB / 23.32GiB   0.02%
+cliente_hqc15   29.76%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc14   34.92%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc13   25.47%    4.746MiB / 23.32GiB   0.02%
+servidor_hqc    249.79%   26.82MiB / 23.32GiB   0.11%
+cliente_hqc64   18.62%    4.473MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:20:57 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc65   15.07%    3.562MiB / 23.32GiB   0.01%
+cliente_hqc64   35.25%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc63   19.18%    4.031MiB / 23.32GiB   0.02%
+cliente_hqc62   24.66%    3.715MiB / 23.32GiB   0.02%
+cliente_hqc61   21.73%    1.738MiB / 23.32GiB   0.01%
+cliente_hqc60   25.97%    4.406MiB / 23.32GiB   0.02%
+cliente_hqc59   15.48%    3.418MiB / 23.32GiB   0.01%
+cliente_hqc58   17.45%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc57   35.65%    4.246MiB / 23.32GiB   0.02%
+cliente_hqc56   21.48%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc55   9.81%     4.059MiB / 23.32GiB   0.02%
+cliente_hqc53   22.79%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc52   9.58%     3.93MiB / 23.32GiB    0.02%
+cliente_hqc48   24.49%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc46   16.94%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc45   21.65%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc44   22.78%    4.375MiB / 23.32GiB   0.02%
+cliente_hqc43   25.33%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc40   29.35%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc24   27.37%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc16   8.64%     3.926MiB / 23.32GiB   0.02%
+cliente_hqc15   14.90%    3.309MiB / 23.32GiB   0.01%
+cliente_hqc14   22.46%    4.387MiB / 23.32GiB   0.02%
+cliente_hqc13   12.26%    4.227MiB / 23.32GiB   0.02%
+servidor_hqc    250.68%   27.1MiB / 23.32GiB    0.11%
+--- 2026-06-04_08:21:02 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc66   25.77%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc65   16.25%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc64   29.80%    3.992MiB / 23.32GiB   0.02%
+cliente_hqc63   10.21%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc62   22.26%    4.352MiB / 23.32GiB   0.02%
+cliente_hqc61   19.56%    1.848MiB / 23.32GiB   0.01%
+cliente_hqc60   22.62%    3.762MiB / 23.32GiB   0.02%
+cliente_hqc59   13.70%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc58   10.09%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc57   18.78%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc56   18.12%    4.273MiB / 23.32GiB   0.02%
+cliente_hqc55   19.15%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc53   15.66%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc52   13.38%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc48   10.34%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc46   25.21%    3.914MiB / 23.32GiB   0.02%
+cliente_hqc45   19.68%    4.141MiB / 23.32GiB   0.02%
+cliente_hqc44   18.53%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc43   27.03%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc40   30.07%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc24   27.45%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc16   10.22%    4.355MiB / 23.32GiB   0.02%
+cliente_hqc15   10.18%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc14   24.85%    4.352MiB / 23.32GiB   0.02%
+cliente_hqc13   23.24%    4.074MiB / 23.32GiB   0.02%
+servidor_hqc    251.23%   26.82MiB / 23.32GiB   0.11%
+--- 2026-06-04_08:21:06 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc67   29.51%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc66   23.92%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc65   28.08%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc64   20.00%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc63   21.13%    2.359MiB / 23.32GiB   0.01%
+cliente_hqc62   19.68%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc61   16.47%    3.973MiB / 23.32GiB   0.02%
+cliente_hqc60   21.01%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc57   19.98%    1.531MiB / 23.32GiB   0.01%
+cliente_hqc56   19.20%    4.465MiB / 23.32GiB   0.02%
+cliente_hqc55   25.18%    3.539MiB / 23.32GiB   0.01%
+cliente_hqc53   17.33%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc52   20.26%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc48   17.97%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc46   10.61%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc45   10.59%    4.211MiB / 23.32GiB   0.02%
+cliente_hqc44   20.94%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc40   19.58%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc24   21.84%    4.602MiB / 23.32GiB   0.02%
+cliente_hqc16   20.50%    4.707MiB / 23.32GiB   0.02%
+cliente_hqc15   18.14%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc14   18.46%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc13   10.49%    4.129MiB / 23.32GiB   0.02%
+servidor_hqc    252.78%   27.97MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:21:15 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc68   29.07%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc67   18.54%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc66   20.77%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc65   23.78%    4.371MiB / 23.32GiB   0.02%
+cliente_hqc64   18.50%    4.16MiB / 23.32GiB    0.02%
+cliente_hqc62   20.24%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc61   30.40%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc57   19.28%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc56   17.44%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc55   18.37%    4.285MiB / 23.32GiB   0.02%
+cliente_hqc53   25.83%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc52   19.75%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc48   24.78%    2.73MiB / 23.32GiB    0.01%
+cliente_hqc46   16.30%    3.27MiB / 23.32GiB    0.01%
+cliente_hqc45   31.83%    4.434MiB / 23.32GiB   0.02%
+cliente_hqc44   10.26%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc40   23.95%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc24   32.02%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc16   20.58%    2.812MiB / 23.32GiB   0.01%
+cliente_hqc15   38.31%    4.113MiB / 23.32GiB   0.02%
+cliente_hqc14   24.47%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc13   20.27%    4.098MiB / 23.32GiB   0.02%
+servidor_hqc    257.44%   27.92MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:21:20 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc69   22.29%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc68   16.33%    3.914MiB / 23.32GiB   0.02%
+cliente_hqc67   25.79%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc66   25.25%    4.438MiB / 23.32GiB   0.02%
+cliente_hqc65   31.89%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc64   29.13%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc62   17.26%    4.355MiB / 23.32GiB   0.02%
+cliente_hqc61   20.61%    4MiB / 23.32GiB       0.02%
+cliente_hqc57   13.57%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc56   23.94%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc55   25.47%    4.668MiB / 23.32GiB   0.02%
+cliente_hqc53   23.81%    4.211MiB / 23.32GiB   0.02%
+cliente_hqc52   14.67%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc48   14.42%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc46   24.44%    3.598MiB / 23.32GiB   0.02%
+cliente_hqc45   31.19%    4.223MiB / 23.32GiB   0.02%
+cliente_hqc44   25.52%    4.578MiB / 23.32GiB   0.02%
+cliente_hqc40   24.35%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc24   23.60%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc16   24.81%    3.996MiB / 23.32GiB   0.02%
+servidor_hqc    244.89%   28.03MiB / 23.32GiB   0.12%
+cliente_hqc70   28.62%    4.125MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:21:29 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc71   20.22%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc70   10.33%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc69   10.08%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc68   20.52%    4.133MiB / 23.32GiB   0.02%
+cliente_hqc67   15.79%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc66   9.83%     4.402MiB / 23.32GiB   0.02%
+cliente_hqc65   10.45%    4.137MiB / 23.32GiB   0.02%
+cliente_hqc64   35.18%    4.25MiB / 23.32GiB    0.02%
+cliente_hqc62   28.35%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc61   31.61%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc57   35.85%    4.41MiB / 23.32GiB    0.02%
+cliente_hqc56   17.26%    4.598MiB / 23.32GiB   0.02%
+cliente_hqc55   15.71%    4.484MiB / 23.32GiB   0.02%
+cliente_hqc53   18.20%    3.578MiB / 23.32GiB   0.01%
+cliente_hqc52   11.83%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc48   24.41%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc46   38.28%    4.16MiB / 23.32GiB    0.02%
+cliente_hqc45   14.44%    4.461MiB / 23.32GiB   0.02%
+cliente_hqc44   22.97%    4.605MiB / 23.32GiB   0.02%
+cliente_hqc40   34.77%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc24   21.09%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc16   20.00%    4.074MiB / 23.32GiB   0.02%
+servidor_hqc    262.99%   27.52MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:21:33 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc72   11.00%    2.168MiB / 23.32GiB   0.01%
+cliente_hqc71   9.98%     4.328MiB / 23.32GiB   0.02%
+cliente_hqc70   16.13%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc69   49.43%    4.688MiB / 23.32GiB   0.02%
+cliente_hqc68   22.65%    4.207MiB / 23.32GiB   0.02%
+cliente_hqc67   23.52%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc66   20.03%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc64   32.46%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc61   18.99%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc57   20.20%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc56   20.86%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc55   18.29%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc53   23.24%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc52   25.88%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc48   26.51%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc46   10.02%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc45   22.71%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc44   7.99%     4.168MiB / 23.32GiB   0.02%
+cliente_hqc40   26.09%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc24   39.57%    4.098MiB / 23.32GiB   0.02%
+servidor_hqc    255.85%   26.96MiB / 23.32GiB   0.11%
+cliente_hqc73   34.43%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc74   14.81%    4.434MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:21:45 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc74   23.76%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc73   29.00%    4.016MiB / 23.32GiB   0.02%
+cliente_hqc72   26.53%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc71   24.61%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc70   18.96%    4.641MiB / 23.32GiB   0.02%
+cliente_hqc69   29.36%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc68   27.97%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc67   23.23%    4.406MiB / 23.32GiB   0.02%
+cliente_hqc66   19.13%    3.984MiB / 23.32GiB   0.02%
+cliente_hqc64   14.19%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc61   20.78%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc57   19.00%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc56   24.61%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc55   14.77%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc53   13.35%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc52   15.75%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc48   24.95%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc46   29.02%    4.371MiB / 23.32GiB   0.02%
+cliente_hqc45   28.65%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc44   21.07%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc40   20.94%    2.617MiB / 23.32GiB   0.01%
+cliente_hqc24   22.43%    4.285MiB / 23.32GiB   0.02%
+servidor_hqc    257.19%   27.39MiB / 23.32GiB   0.11%
+cliente_hqc75   15.17%    3.922MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:21:49 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc76   19.69%    4.742MiB / 23.32GiB   0.02%
+cliente_hqc75   16.98%    3.949MiB / 23.32GiB   0.02%
+cliente_hqc74   16.07%    3.359MiB / 23.32GiB   0.01%
+cliente_hqc73   15.56%    4.031MiB / 23.32GiB   0.02%
+cliente_hqc72   23.41%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc71   24.43%    1.328MiB / 23.32GiB   0.01%
+cliente_hqc70   18.38%    4.242MiB / 23.32GiB   0.02%
+cliente_hqc69   30.00%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc68   27.66%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc67   15.56%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc66   20.59%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc64   25.56%    2.48MiB / 23.32GiB    0.01%
+cliente_hqc61   24.52%    3.242MiB / 23.32GiB   0.01%
+cliente_hqc57   15.40%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc56   13.77%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc55   15.36%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc53   15.46%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc52   13.99%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc48   14.53%    1.73MiB / 23.32GiB    0.01%
+cliente_hqc46   40.96%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc45   9.96%     3.93MiB / 23.32GiB    0.02%
+cliente_hqc44   19.49%    4.137MiB / 23.32GiB   0.02%
+cliente_hqc40   19.81%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc24   23.12%    4.316MiB / 23.32GiB   0.02%
+servidor_hqc    247.46%   27.86MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:21:54 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc77   19.92%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc76   33.07%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc75   20.73%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc74   21.35%    2.41MiB / 23.32GiB    0.01%
+cliente_hqc73   25.92%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc72   14.19%    3.914MiB / 23.32GiB   0.02%
+cliente_hqc71   17.24%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc70   15.10%    4.219MiB / 23.32GiB   0.02%
+cliente_hqc69   26.18%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc68   20.55%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc67   26.06%    3.965MiB / 23.32GiB   0.02%
+cliente_hqc66   18.25%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc64   10.51%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc61   10.16%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc57   14.13%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc56   13.84%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc55   11.77%    4.363MiB / 23.32GiB   0.02%
+cliente_hqc53   20.42%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc52   14.71%    4.547MiB / 23.32GiB   0.02%
+cliente_hqc48   10.06%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc46   12.92%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc45   19.73%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc44   14.63%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc40   28.74%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc24   13.28%    4.07MiB / 23.32GiB    0.02%
+servidor_hqc    228.00%   28.4MiB / 23.32GiB    0.12%
+cliente_hqc78   14.47%    4.305MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:21:59 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc78   14.31%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc77   20.92%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc76   13.88%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc75   9.93%     4.324MiB / 23.32GiB   0.02%
+cliente_hqc74   18.17%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc73   13.77%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc72   24.35%    3.789MiB / 23.32GiB   0.02%
+cliente_hqc71   23.59%    4.215MiB / 23.32GiB   0.02%
+cliente_hqc70   20.05%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc69   11.31%    4.383MiB / 23.32GiB   0.02%
+cliente_hqc68   18.66%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc67   23.64%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc66   16.59%    3.453MiB / 23.32GiB   0.01%
+cliente_hqc64   27.10%    4.461MiB / 23.32GiB   0.02%
+cliente_hqc61   15.67%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc57   19.27%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc56   22.36%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc55   25.48%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc53   14.07%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc52   9.68%     3.926MiB / 23.32GiB   0.02%
+cliente_hqc48   27.48%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc46   18.35%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc45   19.86%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc44   20.36%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc40   23.67%    4.238MiB / 23.32GiB   0.02%
+cliente_hqc24   11.04%    4.188MiB / 23.32GiB   0.02%
+servidor_hqc    264.31%   28.04MiB / 23.32GiB   0.12%
+cliente_hqc79   15.79%    4.117MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:22:04 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc80   4.31%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc79   21.85%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc78   26.79%    4.609MiB / 23.32GiB   0.02%
+cliente_hqc76   29.73%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc75   33.56%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc73   24.13%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc72   19.72%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc71   17.13%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc70   4.35%     4.094MiB / 23.32GiB   0.02%
+cliente_hqc69   22.59%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc68   22.89%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc67   24.13%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc66   16.83%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc64   19.88%    4.449MiB / 23.32GiB   0.02%
+cliente_hqc61   27.41%    4.434MiB / 23.32GiB   0.02%
+cliente_hqc57   23.69%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc56   39.20%    4.605MiB / 23.32GiB   0.02%
+cliente_hqc55   5.97%     4.066MiB / 23.32GiB   0.02%
+cliente_hqc53   18.70%    4.238MiB / 23.32GiB   0.02%
+cliente_hqc52   13.11%    4.223MiB / 23.32GiB   0.02%
+cliente_hqc48   17.89%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc46   20.47%    4.391MiB / 23.32GiB   0.02%
+cliente_hqc45   29.52%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc44   12.48%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc40   4.30%     4.094MiB / 23.32GiB   0.02%
+servidor_hqc    279.63%   28.55MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:22:11 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc81   30.25%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc80   23.92%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc79   28.30%    3.883MiB / 23.32GiB   0.02%
+cliente_hqc78   12.00%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc76   14.24%    4.043MiB / 23.32GiB   0.02%
+cliente_hqc75   30.97%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc73   18.98%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc72   17.94%    3.766MiB / 23.32GiB   0.02%
+cliente_hqc71   9.08%     4.102MiB / 23.32GiB   0.02%
+cliente_hqc70   17.86%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc69   28.25%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc68   22.92%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc67   15.34%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc66   9.83%     4.055MiB / 23.32GiB   0.02%
+cliente_hqc64   20.93%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc61   12.54%    3.531MiB / 23.32GiB   0.01%
+cliente_hqc57   19.73%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc56   22.15%    1.117MiB / 23.32GiB   0.00%
+cliente_hqc55   12.41%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc53   8.38%     4.066MiB / 23.32GiB   0.02%
+cliente_hqc52   24.49%    4.215MiB / 23.32GiB   0.02%
+cliente_hqc48   13.61%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc46   12.00%    2.203MiB / 23.32GiB   0.01%
+cliente_hqc45   23.85%    1.863MiB / 23.32GiB   0.01%
+cliente_hqc44   13.94%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc40   23.70%    4.09MiB / 23.32GiB    0.02%
+servidor_hqc    230.73%   28.49MiB / 23.32GiB   0.12%
+cliente_hqc82   13.02%    4.078MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:22:17 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc82   19.62%    4.555MiB / 23.32GiB   0.02%
+cliente_hqc81   14.13%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc80   7.30%     4.031MiB / 23.32GiB   0.02%
+cliente_hqc78   18.40%    3.32MiB / 23.32GiB    0.01%
+cliente_hqc76   16.97%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc75   10.19%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc73   24.79%    4.52MiB / 23.32GiB    0.02%
+cliente_hqc72   22.70%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc71   27.34%    4.438MiB / 23.32GiB   0.02%
+cliente_hqc70   25.89%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc69   15.14%    4.035MiB / 23.32GiB   0.02%
+cliente_hqc68   11.92%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc67   26.08%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc66   14.76%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc64   13.22%    1.492MiB / 23.32GiB   0.01%
+cliente_hqc61   17.92%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc57   19.69%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc56   29.66%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc55   17.85%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc53   18.16%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc52   17.22%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc48   21.75%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc46   14.25%    3.914MiB / 23.32GiB   0.02%
+cliente_hqc45   34.34%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc40   20.01%    4.18MiB / 23.32GiB    0.02%
+servidor_hqc    254.30%   29.03MiB / 23.32GiB   0.12%
+cliente_hqc83   12.50%    4.168MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:22:23 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc84   12.72%    3.965MiB / 23.32GiB   0.02%
+cliente_hqc82   23.72%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc81   20.38%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc76   22.59%    4.27MiB / 23.32GiB    0.02%
+cliente_hqc75   23.21%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc73   25.44%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc70   25.31%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc69   25.07%    4.551MiB / 23.32GiB   0.02%
+cliente_hqc68   19.20%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc67   20.14%    4.438MiB / 23.32GiB   0.02%
+cliente_hqc66   18.05%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc64   24.80%    1.812MiB / 23.32GiB   0.01%
+cliente_hqc61   12.45%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc57   40.56%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc56   27.86%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc55   19.73%    3.402MiB / 23.32GiB   0.01%
+cliente_hqc53   16.73%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc52   16.62%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc48   22.48%    4.02MiB / 23.32GiB    0.02%
+cliente_hqc46   20.52%    4.375MiB / 23.32GiB   0.02%
+cliente_hqc45   16.24%    2.508MiB / 23.32GiB   0.01%
+cliente_hqc40   24.88%    4.355MiB / 23.32GiB   0.02%
+servidor_hqc    245.65%   29.54MiB / 23.32GiB   0.12%
+cliente_hqc85   19.43%    4.355MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:22:36 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc84   9.81%     4.387MiB / 23.32GiB   0.02%
+cliente_hqc82   14.27%    4.281MiB / 23.32GiB   0.02%
+cliente_hqc81   29.81%    4.285MiB / 23.32GiB   0.02%
+cliente_hqc76   14.02%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc75   20.97%    4.359MiB / 23.32GiB   0.02%
+cliente_hqc73   17.72%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc70   13.81%    4.512MiB / 23.32GiB   0.02%
+cliente_hqc69   48.67%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc68   21.22%    4.246MiB / 23.32GiB   0.02%
+cliente_hqc67   20.19%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc66   23.90%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc64   26.50%    4.48MiB / 23.32GiB    0.02%
+cliente_hqc61   35.85%    4.25MiB / 23.32GiB    0.02%
+cliente_hqc57   25.12%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc56   24.31%    4.266MiB / 23.32GiB   0.02%
+cliente_hqc55   18.26%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc53   21.56%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc52   26.42%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc48   25.30%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc46   17.33%    4.207MiB / 23.32GiB   0.02%
+cliente_hqc45   20.46%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc40   23.56%    4.516MiB / 23.32GiB   0.02%
+servidor_hqc    255.84%   29.19MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:22:44 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc87   13.74%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc84   9.82%     4.562MiB / 23.32GiB   0.02%
+cliente_hqc82   25.37%    4.043MiB / 23.32GiB   0.02%
+cliente_hqc81   20.60%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc76   23.80%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc75   30.39%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc73   19.34%    4.434MiB / 23.32GiB   0.02%
+cliente_hqc70   21.08%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc69   15.39%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc68   11.67%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc67   19.21%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc66   25.05%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc64   10.20%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc61   24.99%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc57   20.43%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc56   34.61%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc55   34.48%    4.516MiB / 23.32GiB   0.02%
+cliente_hqc53   16.70%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc52   15.31%    4.27MiB / 23.32GiB    0.02%
+cliente_hqc48   20.02%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc46   17.06%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc45   15.20%    4.414MiB / 23.32GiB   0.02%
+cliente_hqc40   20.29%    4.133MiB / 23.32GiB   0.02%
+servidor_hqc    252.78%   28.98MiB / 23.32GiB   0.12%
+cliente_hqc88   11.53%    4.047MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:22:50 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc88   13.35%    3.758MiB / 23.32GiB   0.02%
+cliente_hqc87   34.17%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc84   15.31%    1.512MiB / 23.32GiB   0.01%
+cliente_hqc82   18.79%    4.57MiB / 23.32GiB    0.02%
+cliente_hqc81   11.52%    4.578MiB / 23.32GiB   0.02%
+cliente_hqc76   20.15%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc73   8.11%     4.016MiB / 23.32GiB   0.02%
+cliente_hqc70   21.51%    1.184MiB / 23.32GiB   0.00%
+cliente_hqc69   34.74%    4.664MiB / 23.32GiB   0.02%
+cliente_hqc68   10.82%    1.195MiB / 23.32GiB   0.01%
+cliente_hqc67   13.77%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc66   26.15%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc64   31.11%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc61   26.27%    3.621MiB / 23.32GiB   0.02%
+cliente_hqc57   23.04%    3.902MiB / 23.32GiB   0.02%
+cliente_hqc56   16.37%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc55   22.17%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc53   20.08%    4.23MiB / 23.32GiB    0.02%
+cliente_hqc52   28.69%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc48   24.85%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc46   15.12%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc45   26.89%    4.184MiB / 23.32GiB   0.02%
+servidor_hqc    244.65%   28.98MiB / 23.32GiB   0.12%
+cliente_hqc89   22.47%    4.191MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:22:55 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc90   30.48%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc89   14.46%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc88   14.89%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc87   14.59%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc84   14.65%    4.023MiB / 23.32GiB   0.02%
+cliente_hqc82   38.68%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc81   32.75%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc76   28.30%    4.387MiB / 23.32GiB   0.02%
+cliente_hqc73   22.57%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc70   12.45%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc69   27.90%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc68   22.11%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc67   16.20%    4.121MiB / 23.32GiB   0.02%
+cliente_hqc66   18.87%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc64   18.40%    4.141MiB / 23.32GiB   0.02%
+cliente_hqc61   18.98%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc57   14.78%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc56   18.87%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc55   15.02%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc53   22.70%    4.285MiB / 23.32GiB   0.02%
+cliente_hqc52   18.89%    4.746MiB / 23.32GiB   0.02%
+cliente_hqc48   10.25%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc46   18.47%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc45   33.49%    4.273MiB / 23.32GiB   0.02%
+servidor_hqc    270.82%   28.96MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:23:00 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc91   30.94%    1.316MiB / 23.32GiB   0.01%
+cliente_hqc90   9.59%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc89   14.58%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc88   20.10%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc87   20.24%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc84   14.56%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc82   19.75%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc81   13.23%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc76   13.53%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc73   27.49%    3.98MiB / 23.32GiB    0.02%
+cliente_hqc70   22.56%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc69   14.41%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc68   21.89%    1.578MiB / 23.32GiB   0.01%
+cliente_hqc67   20.29%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc66   14.01%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc64   27.24%    3.465MiB / 23.32GiB   0.01%
+cliente_hqc61   13.60%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc57   16.32%    1.586MiB / 23.32GiB   0.01%
+cliente_hqc56   20.44%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc55   28.87%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc53   17.21%    3.875MiB / 23.32GiB   0.02%
+cliente_hqc52   33.97%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc48   13.12%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc46   18.30%    4.629MiB / 23.32GiB   0.02%
+cliente_hqc45   27.31%    4.125MiB / 23.32GiB   0.02%
+servidor_hqc    254.43%   29.43MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:23:04 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc92   20.19%    4.039MiB / 23.32GiB   0.02%
+cliente_hqc91   20.55%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc90   19.65%    4.012MiB / 23.32GiB   0.02%
+cliente_hqc89   15.48%    900KiB / 23.32GiB     0.00%
+cliente_hqc87   21.80%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc84   25.54%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc82   17.43%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc81   18.78%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc76   16.73%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc73   36.34%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc70   22.31%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc69   19.10%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc67   19.30%    3.559MiB / 23.32GiB   0.01%
+cliente_hqc66   23.85%    4.395MiB / 23.32GiB   0.02%
+cliente_hqc64   15.71%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc61   23.84%    4.562MiB / 23.32GiB   0.02%
+cliente_hqc57   19.44%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc56   15.86%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc55   22.44%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc53   21.28%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc52   18.39%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc48   18.02%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc45   15.45%    1.668MiB / 23.32GiB   0.01%
+servidor_hqc    231.40%   30.06MiB / 23.32GiB   0.13%
+cliente_hqc93   9.34%     4.27MiB / 23.32GiB    0.02%
+--- 2026-06-04_08:23:14 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc94   31.56%    3.738MiB / 23.32GiB   0.02%
+cliente_hqc93   10.39%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc92   25.01%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc91   22.97%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc89   21.70%    4.156MiB / 23.32GiB   0.02%
+cliente_hqc87   21.48%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc84   22.30%    4.645MiB / 23.32GiB   0.02%
+cliente_hqc82   16.17%    4.602MiB / 23.32GiB   0.02%
+cliente_hqc81   15.92%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc76   19.74%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc73   24.52%    4.789MiB / 23.32GiB   0.02%
+cliente_hqc70   28.12%    4.473MiB / 23.32GiB   0.02%
+cliente_hqc69   20.96%    4.621MiB / 23.32GiB   0.02%
+cliente_hqc67   20.26%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc64   18.80%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc61   18.14%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc57   30.18%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc56   26.26%    4.695MiB / 23.32GiB   0.02%
+cliente_hqc55   24.39%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc53   8.82%     4.254MiB / 23.32GiB   0.02%
+cliente_hqc45   21.66%    4.207MiB / 23.32GiB   0.02%
+servidor_hqc    253.74%   30.37MiB / 23.32GiB   0.13%
+cliente_hqc95   30.54%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc96   15.31%    1.43MiB / 23.32GiB    0.01%
+--- 2026-06-04_08:23:30 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc97   29.63%    3.98MiB / 23.32GiB    0.02%
+cliente_hqc96   28.36%    3.906MiB / 23.32GiB   0.02%
+cliente_hqc95   18.91%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc94   25.26%    4.016MiB / 23.32GiB   0.02%
+cliente_hqc93   16.31%    4.355MiB / 23.32GiB   0.02%
+cliente_hqc92   14.31%    4.133MiB / 23.32GiB   0.02%
+cliente_hqc91   29.92%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc89   23.12%    4.141MiB / 23.32GiB   0.02%
+cliente_hqc87   29.93%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc84   15.88%    2.363MiB / 23.32GiB   0.01%
+cliente_hqc82   17.30%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc81   26.87%    4.469MiB / 23.32GiB   0.02%
+cliente_hqc76   36.71%    4.152MiB / 23.32GiB   0.02%
+cliente_hqc73   16.37%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc70   21.37%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc69   18.48%    4.633MiB / 23.32GiB   0.02%
+cliente_hqc67   14.18%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc64   20.14%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc61   24.47%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc57   21.01%    3.969MiB / 23.32GiB   0.02%
+cliente_hqc56   9.83%     4.219MiB / 23.32GiB   0.02%
+cliente_hqc55   21.90%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc53   22.08%    4.094MiB / 23.32GiB   0.02%
+servidor_hqc    245.97%   29.93MiB / 23.32GiB   0.13%
+cliente_hqc98   10.61%    4.055MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:23:37 ---
+NAME            CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc98   11.77%    3.395MiB / 23.32GiB   0.01%
+cliente_hqc97   21.45%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc96   9.90%     4.094MiB / 23.32GiB   0.02%
+cliente_hqc95   18.39%    4.566MiB / 23.32GiB   0.02%
+cliente_hqc94   36.55%    4.035MiB / 23.32GiB   0.02%
+cliente_hqc93   21.73%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc92   18.34%    4.328MiB / 23.32GiB   0.02%
+cliente_hqc91   9.12%     956KiB / 23.32GiB     0.00%
+cliente_hqc89   33.55%    4.121MiB / 23.32GiB   0.02%
+cliente_hqc87   23.02%    3.945MiB / 23.32GiB   0.02%
+cliente_hqc84   20.53%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc82   27.06%    4.371MiB / 23.32GiB   0.02%
+cliente_hqc81   22.82%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc76   22.45%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc73   25.73%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc70   20.88%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc69   22.80%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc67   17.99%    4.605MiB / 23.32GiB   0.02%
+cliente_hqc64   22.07%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc61   10.71%    3.027MiB / 23.32GiB   0.01%
+cliente_hqc57   18.13%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc56   14.43%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc55   10.26%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc53   20.15%    3.938MiB / 23.32GiB   0.02%
+servidor_hqc    254.13%   29.64MiB / 23.32GiB   0.12%
+cliente_hqc99   17.63%    4.961MiB / 23.32GiB   0.02%
+--- 2026-06-04_08:23:42 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   20.35%    4.102MiB / 23.32GiB   0.02%
+cliente_hqc99    17.26%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc98    9.42%     4.164MiB / 23.32GiB   0.02%
+cliente_hqc97    13.79%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc96    33.78%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc95    26.34%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc94    18.81%    2.77MiB / 23.32GiB    0.01%
+cliente_hqc93    13.78%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc92    14.67%    3.922MiB / 23.32GiB   0.02%
+cliente_hqc91    20.97%    3.445MiB / 23.32GiB   0.01%
+cliente_hqc89    15.53%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc87    9.11%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc84    29.71%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc82    14.49%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc81    13.72%    4.039MiB / 23.32GiB   0.02%
+cliente_hqc76    9.50%     4.094MiB / 23.32GiB   0.02%
+cliente_hqc73    14.83%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc70    15.16%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc69    20.88%    4.391MiB / 23.32GiB   0.02%
+cliente_hqc67    26.21%    3.828MiB / 23.32GiB   0.02%
+cliente_hqc64    12.72%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc61    19.10%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc57    35.66%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc56    9.56%     4.07MiB / 23.32GiB    0.02%
+cliente_hqc55    11.88%    4.488MiB / 23.32GiB   0.02%
+cliente_hqc53    13.62%    4.172MiB / 23.32GiB   0.02%
+servidor_hqc     251.41%   29.1MiB / 23.32GiB    0.12%
+--- 2026-06-04_08:23:46 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   24.64%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc99    9.62%     4.68MiB / 23.32GiB    0.02%
+cliente_hqc98    30.23%    4.41MiB / 23.32GiB    0.02%
+cliente_hqc97    12.31%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc96    28.74%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc95    25.29%    3.988MiB / 23.32GiB   0.02%
+cliente_hqc94    23.67%    4.359MiB / 23.32GiB   0.02%
+cliente_hqc93    18.07%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc92    14.63%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc91    21.80%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc89    12.28%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc87    24.76%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc84    18.92%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc82    32.09%    4.23MiB / 23.32GiB    0.02%
+cliente_hqc81    26.25%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc76    36.11%    2.203MiB / 23.32GiB   0.01%
+cliente_hqc73    17.26%    3.918MiB / 23.32GiB   0.02%
+cliente_hqc70    11.07%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc69    27.76%    3.992MiB / 23.32GiB   0.02%
+cliente_hqc67    14.12%    2.809MiB / 23.32GiB   0.01%
+cliente_hqc64    22.18%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc61    25.87%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc57    4.12%     4.094MiB / 23.32GiB   0.02%
+cliente_hqc56    14.21%    4.508MiB / 23.32GiB   0.02%
+cliente_hqc55    9.93%     4.098MiB / 23.32GiB   0.02%
+cliente_hqc53    20.03%    4.141MiB / 23.32GiB   0.02%
+servidor_hqc     250.59%   29.17MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:23:51 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   9.60%     4.062MiB / 23.32GiB   0.02%
+cliente_hqc99    31.53%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc98    20.05%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc97    5.94%     3.91MiB / 23.32GiB    0.02%
+cliente_hqc96    8.30%     4.16MiB / 23.32GiB    0.02%
+cliente_hqc95    4.27%     4.082MiB / 23.32GiB   0.02%
+cliente_hqc94    25.23%    4.551MiB / 23.32GiB   0.02%
+cliente_hqc93    29.87%    4.602MiB / 23.32GiB   0.02%
+cliente_hqc92    32.12%    4.57MiB / 23.32GiB    0.02%
+cliente_hqc91    14.11%    1.574MiB / 23.32GiB   0.01%
+cliente_hqc89    11.58%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc87    9.39%     4.07MiB / 23.32GiB    0.02%
+cliente_hqc84    25.65%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc82    24.41%    2.891MiB / 23.32GiB   0.01%
+cliente_hqc81    28.38%    4.715MiB / 23.32GiB   0.02%
+cliente_hqc76    14.44%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc73    10.55%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc70    16.63%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc69    7.90%     4.09MiB / 23.32GiB    0.02%
+cliente_hqc67    9.47%     3.93MiB / 23.32GiB    0.02%
+cliente_hqc64    19.32%    1.605MiB / 23.32GiB   0.01%
+cliente_hqc61    23.92%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc57    35.97%    3.898MiB / 23.32GiB   0.02%
+cliente_hqc56    26.00%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc55    39.70%    2.211MiB / 23.32GiB   0.01%
+cliente_hqc53    25.09%    4.422MiB / 23.32GiB   0.02%
+servidor_hqc     268.87%   29.5MiB / 23.32GiB    0.12%
+--- 2026-06-04_08:23:55 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   19.57%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc99    24.28%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc98    17.54%    3.734MiB / 23.32GiB   0.02%
+cliente_hqc97    25.49%    4.422MiB / 23.32GiB   0.02%
+cliente_hqc96    24.87%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc95    24.07%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc92    29.41%    4.348MiB / 23.32GiB   0.02%
+cliente_hqc91    19.84%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc89    29.85%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc87    21.66%    4.809MiB / 23.32GiB   0.02%
+cliente_hqc84    28.59%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc82    31.61%    4.16MiB / 23.32GiB    0.02%
+cliente_hqc76    16.65%    4.48MiB / 23.32GiB    0.02%
+cliente_hqc73    24.30%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc70    39.72%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc69    24.02%    4.676MiB / 23.32GiB   0.02%
+cliente_hqc67    34.24%    4.16MiB / 23.32GiB    0.02%
+cliente_hqc64    23.86%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc57    24.26%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc53    25.78%    3.945MiB / 23.32GiB   0.02%
+servidor_hqc     269.62%   31.2MiB / 23.32GiB    0.13%
+--- 2026-06-04_08:24:04 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   31.58%    4.43MiB / 23.32GiB    0.02%
+cliente_hqc99    24.63%    2.066MiB / 23.32GiB   0.01%
+cliente_hqc98    22.61%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc97    28.31%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc96    26.11%    4.043MiB / 23.32GiB   0.02%
+cliente_hqc95    24.68%    1.242MiB / 23.32GiB   0.01%
+cliente_hqc92    18.32%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc91    22.38%    4.543MiB / 23.32GiB   0.02%
+cliente_hqc89    19.08%    4.125MiB / 23.32GiB   0.02%
+cliente_hqc87    27.74%    4.449MiB / 23.32GiB   0.02%
+cliente_hqc84    17.82%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc82    14.78%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc76    23.91%    4.547MiB / 23.32GiB   0.02%
+cliente_hqc73    33.72%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc70    26.94%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc69    12.24%    4.684MiB / 23.32GiB   0.02%
+cliente_hqc67    26.20%    2.602MiB / 23.32GiB   0.01%
+cliente_hqc64    35.54%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc57    18.94%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc53    33.25%    2.961MiB / 23.32GiB   0.01%
+servidor_hqc     272.07%   30MiB / 23.32GiB      0.13%
+--- 2026-06-04_08:24:08 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   18.27%    4.098MiB / 23.32GiB   0.02%
+cliente_hqc99    24.58%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc98    24.72%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc97    30.91%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc96    19.41%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc95    19.37%    3.949MiB / 23.32GiB   0.02%
+cliente_hqc92    22.79%    4.016MiB / 23.32GiB   0.02%
+cliente_hqc91    17.44%    3.652MiB / 23.32GiB   0.02%
+cliente_hqc89    28.14%    3.758MiB / 23.32GiB   0.02%
+cliente_hqc87    19.26%    3.184MiB / 23.32GiB   0.01%
+cliente_hqc84    29.34%    4.484MiB / 23.32GiB   0.02%
+cliente_hqc82    30.37%    4.207MiB / 23.32GiB   0.02%
+cliente_hqc76    32.44%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc73    30.35%    4.066MiB / 23.32GiB   0.02%
+cliente_hqc70    22.79%    3.984MiB / 23.32GiB   0.02%
+cliente_hqc69    31.10%    2.387MiB / 23.32GiB   0.01%
+cliente_hqc67    29.19%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc64    24.61%    4.527MiB / 23.32GiB   0.02%
+cliente_hqc57    20.44%    3.945MiB / 23.32GiB   0.02%
+servidor_hqc     266.47%   29.98MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:14 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   29.28%    4.113MiB / 23.32GiB   0.02%
+cliente_hqc99    27.26%    4.242MiB / 23.32GiB   0.02%
+cliente_hqc98    37.19%    4.41MiB / 23.32GiB    0.02%
+cliente_hqc97    25.81%    3.98MiB / 23.32GiB    0.02%
+cliente_hqc96    21.71%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc95    39.73%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc92    30.66%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc91    14.11%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc89    30.29%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc87    39.27%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc84    31.64%    4.41MiB / 23.32GiB    0.02%
+cliente_hqc82    17.64%    4.234MiB / 23.32GiB   0.02%
+cliente_hqc76    19.96%    4.402MiB / 23.32GiB   0.02%
+cliente_hqc73    16.31%    4.562MiB / 23.32GiB   0.02%
+cliente_hqc70    22.14%    2.469MiB / 23.32GiB   0.01%
+cliente_hqc69    22.18%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc67    29.88%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc64    33.76%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc57    15.77%    4.18MiB / 23.32GiB    0.02%
+servidor_hqc     260.08%   30.67MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:18 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   24.63%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc99    18.95%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc98    31.90%    3.953MiB / 23.32GiB   0.02%
+cliente_hqc97    28.90%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc96    36.09%    3.824MiB / 23.32GiB   0.02%
+cliente_hqc95    22.55%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc92    18.57%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc91    22.82%    3.793MiB / 23.32GiB   0.02%
+cliente_hqc89    35.09%    3.074MiB / 23.32GiB   0.01%
+cliente_hqc87    15.18%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc84    19.92%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc82    27.30%    4.055MiB / 23.32GiB   0.02%
+cliente_hqc76    19.88%    4.336MiB / 23.32GiB   0.02%
+cliente_hqc73    26.53%    3.191MiB / 23.32GiB   0.01%
+cliente_hqc70    34.00%    4.387MiB / 23.32GiB   0.02%
+cliente_hqc69    34.54%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc67    25.44%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc64    42.94%    4.363MiB / 23.32GiB   0.02%
+servidor_hqc     262.32%   30.93MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:24 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   15.34%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc99    25.29%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc98    35.87%    4.398MiB / 23.32GiB   0.02%
+cliente_hqc97    14.64%    4.578MiB / 23.32GiB   0.02%
+cliente_hqc96    39.37%    3.801MiB / 23.32GiB   0.02%
+cliente_hqc95    34.33%    4.211MiB / 23.32GiB   0.02%
+cliente_hqc92    30.10%    5.035MiB / 23.32GiB   0.02%
+cliente_hqc91    20.38%    2.008MiB / 23.32GiB   0.01%
+cliente_hqc89    31.98%    4.047MiB / 23.32GiB   0.02%
+cliente_hqc87    34.07%    3.809MiB / 23.32GiB   0.02%
+cliente_hqc84    31.54%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc82    21.54%    4.031MiB / 23.32GiB   0.02%
+cliente_hqc76    45.78%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc73    20.29%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc70    30.68%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc69    30.29%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc67    30.32%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc64    8.42%     4.113MiB / 23.32GiB   0.02%
+servidor_hqc     267.35%   30.73MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:28 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   34.70%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc99    25.35%    3.91MiB / 23.32GiB    0.02%
+cliente_hqc98    28.72%    4.211MiB / 23.32GiB   0.02%
+cliente_hqc97    30.11%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc96    34.14%    4.223MiB / 23.32GiB   0.02%
+cliente_hqc95    34.92%    4.633MiB / 23.32GiB   0.02%
+cliente_hqc92    16.21%    4.418MiB / 23.32GiB   0.02%
+cliente_hqc91    21.59%    3.512MiB / 23.32GiB   0.01%
+cliente_hqc89    23.90%    1.66MiB / 23.32GiB    0.01%
+cliente_hqc87    25.64%    3.984MiB / 23.32GiB   0.02%
+cliente_hqc84    36.06%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc82    34.00%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc76    21.40%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc73    25.78%    4.695MiB / 23.32GiB   0.02%
+cliente_hqc70    25.86%    4MiB / 23.32GiB       0.02%
+cliente_hqc69    23.19%    4.566MiB / 23.32GiB   0.02%
+cliente_hqc67    33.03%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc64    39.78%    4.555MiB / 23.32GiB   0.02%
+servidor_hqc     273.61%   30.98MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:32 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   27.85%    4.434MiB / 23.32GiB   0.02%
+cliente_hqc99    25.43%    4.531MiB / 23.32GiB   0.02%
+cliente_hqc98    23.05%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc97    23.91%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc96    15.35%    4.324MiB / 23.32GiB   0.02%
+cliente_hqc95    36.43%    3.926MiB / 23.32GiB   0.02%
+cliente_hqc92    36.76%    2.168MiB / 23.32GiB   0.01%
+cliente_hqc91    29.44%    4.09MiB / 23.32GiB    0.02%
+cliente_hqc89    24.22%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc87    25.40%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc84    14.74%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc82    23.72%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc76    31.70%    4.461MiB / 23.32GiB   0.02%
+cliente_hqc73    42.85%    4.754MiB / 23.32GiB   0.02%
+cliente_hqc70    35.14%    2.707MiB / 23.32GiB   0.01%
+cliente_hqc69    15.13%    4.148MiB / 23.32GiB   0.02%
+cliente_hqc67    21.09%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc64    39.99%    4.406MiB / 23.32GiB   0.02%
+servidor_hqc     280.38%   31.15MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:37 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   31.75%    3.395MiB / 23.32GiB   0.01%
+cliente_hqc99    20.60%    4.566MiB / 23.32GiB   0.02%
+cliente_hqc98    23.64%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc97    32.94%    3.883MiB / 23.32GiB   0.02%
+cliente_hqc96    35.94%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc95    31.09%    4.422MiB / 23.32GiB   0.02%
+cliente_hqc92    34.97%    1.84MiB / 23.32GiB    0.01%
+cliente_hqc91    27.23%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc89    29.13%    3.863MiB / 23.32GiB   0.02%
+cliente_hqc87    19.44%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc84    30.88%    4.383MiB / 23.32GiB   0.02%
+cliente_hqc82    23.78%    3.531MiB / 23.32GiB   0.01%
+cliente_hqc76    20.79%    4.113MiB / 23.32GiB   0.02%
+cliente_hqc73    24.51%    4.109MiB / 23.32GiB   0.02%
+cliente_hqc70    23.31%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc69    38.03%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc67    31.51%    4.527MiB / 23.32GiB   0.02%
+cliente_hqc64    22.41%    3.844MiB / 23.32GiB   0.02%
+servidor_hqc     267.68%   30.67MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:41 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   20.02%    4.082MiB / 23.32GiB   0.02%
+cliente_hqc99    39.03%    4.27MiB / 23.32GiB    0.02%
+cliente_hqc98    29.43%    4.145MiB / 23.32GiB   0.02%
+cliente_hqc97    31.09%    2.531MiB / 23.32GiB   0.01%
+cliente_hqc96    36.31%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc95    25.44%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc92    34.79%    4.137MiB / 23.32GiB   0.02%
+cliente_hqc91    25.76%    4.355MiB / 23.32GiB   0.02%
+cliente_hqc89    29.81%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc87    28.71%    4.086MiB / 23.32GiB   0.02%
+cliente_hqc84    29.57%    3.645MiB / 23.32GiB   0.02%
+cliente_hqc82    27.56%    4.418MiB / 23.32GiB   0.02%
+cliente_hqc76    35.64%    4.477MiB / 23.32GiB   0.02%
+cliente_hqc73    19.89%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc70    29.17%    4.242MiB / 23.32GiB   0.02%
+cliente_hqc69    28.73%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc67    33.80%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc64    31.23%    4.012MiB / 23.32GiB   0.02%
+servidor_hqc     256.83%   30.72MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:45 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   29.47%    4.168MiB / 23.32GiB   0.02%
+cliente_hqc99    36.24%    4.715MiB / 23.32GiB   0.02%
+cliente_hqc98    29.14%    4.051MiB / 23.32GiB   0.02%
+cliente_hqc97    30.24%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc96    27.33%    4.34MiB / 23.32GiB    0.02%
+cliente_hqc95    24.92%    3.941MiB / 23.32GiB   0.02%
+cliente_hqc92    25.42%    4.574MiB / 23.32GiB   0.02%
+cliente_hqc91    37.28%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc89    30.60%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc87    19.63%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc84    34.84%    4.512MiB / 23.32GiB   0.02%
+cliente_hqc82    39.03%    4.234MiB / 23.32GiB   0.02%
+cliente_hqc76    27.27%    4.129MiB / 23.32GiB   0.02%
+cliente_hqc73    26.27%    4.359MiB / 23.32GiB   0.02%
+cliente_hqc70    25.18%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc69    39.66%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc67    25.24%    4.355MiB / 23.32GiB   0.02%
+cliente_hqc64    25.01%    3.832MiB / 23.32GiB   0.02%
+servidor_hqc     288.70%   31.14MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:50 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   23.94%    3.953MiB / 23.32GiB   0.02%
+cliente_hqc99    27.24%    4.555MiB / 23.32GiB   0.02%
+cliente_hqc98    30.13%    4.473MiB / 23.32GiB   0.02%
+cliente_hqc97    28.47%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc96    41.14%    4.617MiB / 23.32GiB   0.02%
+cliente_hqc95    26.56%    4.105MiB / 23.32GiB   0.02%
+cliente_hqc92    30.43%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc91    19.27%    3.949MiB / 23.32GiB   0.02%
+cliente_hqc89    26.60%    4.668MiB / 23.32GiB   0.02%
+cliente_hqc87    20.36%    4.383MiB / 23.32GiB   0.02%
+cliente_hqc84    42.08%    3.574MiB / 23.32GiB   0.01%
+cliente_hqc82    16.45%    3.949MiB / 23.32GiB   0.02%
+cliente_hqc76    28.11%    4.188MiB / 23.32GiB   0.02%
+cliente_hqc73    23.96%    4.242MiB / 23.32GiB   0.02%
+cliente_hqc70    30.78%    4.551MiB / 23.32GiB   0.02%
+cliente_hqc69    36.65%    4.41MiB / 23.32GiB    0.02%
+cliente_hqc67    36.66%    4.219MiB / 23.32GiB   0.02%
+servidor_hqc     266.04%   30.34MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:24:55 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   26.06%    3.461MiB / 23.32GiB   0.01%
+cliente_hqc99    24.27%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc98    33.98%    3.324MiB / 23.32GiB   0.01%
+cliente_hqc97    20.06%    4.043MiB / 23.32GiB   0.02%
+cliente_hqc96    32.45%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc95    35.82%    3.238MiB / 23.32GiB   0.01%
+cliente_hqc92    29.96%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc91    25.10%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc89    22.32%    4.516MiB / 23.32GiB   0.02%
+cliente_hqc87    33.75%    3.52MiB / 23.32GiB    0.01%
+cliente_hqc84    37.58%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc82    35.71%    3.93MiB / 23.32GiB    0.02%
+cliente_hqc76    25.81%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc73    35.64%    4.316MiB / 23.32GiB   0.02%
+cliente_hqc70    38.13%    3.297MiB / 23.32GiB   0.01%
+cliente_hqc69    28.23%    4.297MiB / 23.32GiB   0.02%
+servidor_hqc     264.14%   30.32MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:00 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   31.63%    1.156MiB / 23.32GiB   0.00%
+cliente_hqc99    23.56%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc98    35.56%    2.18MiB / 23.32GiB    0.01%
+cliente_hqc97    35.97%    3.77MiB / 23.32GiB    0.02%
+cliente_hqc96    38.45%    4.664MiB / 23.32GiB   0.02%
+cliente_hqc95    19.13%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc92    36.67%    4.355MiB / 23.32GiB   0.02%
+cliente_hqc91    47.65%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc89    33.96%    4.516MiB / 23.32GiB   0.02%
+cliente_hqc87    22.64%    4.074MiB / 23.32GiB   0.02%
+cliente_hqc84    31.61%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc82    32.11%    4.695MiB / 23.32GiB   0.02%
+cliente_hqc76    24.67%    4.176MiB / 23.32GiB   0.02%
+cliente_hqc73    29.21%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc70    33.78%    4.418MiB / 23.32GiB   0.02%
+cliente_hqc69    34.92%    4.344MiB / 23.32GiB   0.02%
+servidor_hqc     271.30%   30.8MiB / 23.32GiB    0.13%
+--- 2026-06-04_08:25:04 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   33.93%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc99    36.61%    3.707MiB / 23.32GiB   0.02%
+cliente_hqc98    21.17%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc97    29.55%    3.938MiB / 23.32GiB   0.02%
+cliente_hqc96    29.76%    4.293MiB / 23.32GiB   0.02%
+cliente_hqc95    26.62%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc92    34.12%    4.367MiB / 23.32GiB   0.02%
+cliente_hqc91    35.67%    2.113MiB / 23.32GiB   0.01%
+cliente_hqc89    36.49%    4.18MiB / 23.32GiB    0.02%
+cliente_hqc87    29.19%    4.191MiB / 23.32GiB   0.02%
+cliente_hqc84    32.88%    4.184MiB / 23.32GiB   0.02%
+cliente_hqc82    40.39%    4.227MiB / 23.32GiB   0.02%
+cliente_hqc76    33.55%    4.656MiB / 23.32GiB   0.02%
+cliente_hqc73    36.31%    3.969MiB / 23.32GiB   0.02%
+cliente_hqc70    25.00%    4.062MiB / 23.32GiB   0.02%
+servidor_hqc     268.98%   29.83MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:25:10 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   52.88%    4.793MiB / 23.32GiB   0.02%
+cliente_hqc99    32.81%    4.383MiB / 23.32GiB   0.02%
+cliente_hqc98    36.18%    4.656MiB / 23.32GiB   0.02%
+cliente_hqc97    36.62%    4.094MiB / 23.32GiB   0.02%
+cliente_hqc96    33.49%    4.746MiB / 23.32GiB   0.02%
+cliente_hqc95    30.29%    4.07MiB / 23.32GiB    0.02%
+cliente_hqc92    34.91%    4.492MiB / 23.32GiB   0.02%
+cliente_hqc91    46.22%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc89    33.30%    3.367MiB / 23.32GiB   0.01%
+cliente_hqc87    39.66%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc84    33.70%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc82    27.59%    3.57MiB / 23.32GiB    0.01%
+cliente_hqc76    40.78%    4.73MiB / 23.32GiB    0.02%
+cliente_hqc73    42.29%    4.555MiB / 23.32GiB   0.02%
+servidor_hqc     263.81%   30.57MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:15 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   41.74%    4.52MiB / 23.32GiB    0.02%
+cliente_hqc99    30.98%    4.312MiB / 23.32GiB   0.02%
+cliente_hqc98    32.91%    4.305MiB / 23.32GiB   0.02%
+cliente_hqc97    35.82%    4.309MiB / 23.32GiB   0.02%
+cliente_hqc96    32.10%    4.68MiB / 23.32GiB    0.02%
+cliente_hqc95    32.88%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc92    43.16%    4.621MiB / 23.32GiB   0.02%
+cliente_hqc91    34.98%    4.078MiB / 23.32GiB   0.02%
+cliente_hqc89    41.12%    4.523MiB / 23.32GiB   0.02%
+cliente_hqc87    35.00%    4.344MiB / 23.32GiB   0.02%
+cliente_hqc84    41.78%    4.426MiB / 23.32GiB   0.02%
+cliente_hqc82    40.71%    4.371MiB / 23.32GiB   0.02%
+cliente_hqc76    37.22%    4.445MiB / 23.32GiB   0.02%
+servidor_hqc     273.67%   31.54MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:19 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   41.41%    4.203MiB / 23.32GiB   0.02%
+cliente_hqc99    49.11%    4.195MiB / 23.32GiB   0.02%
+cliente_hqc98    42.39%    3.793MiB / 23.32GiB   0.02%
+cliente_hqc97    39.05%    4.473MiB / 23.32GiB   0.02%
+cliente_hqc96    29.02%    4.062MiB / 23.32GiB   0.02%
+cliente_hqc95    38.00%    3.41MiB / 23.32GiB    0.01%
+cliente_hqc92    36.67%    3.848MiB / 23.32GiB   0.02%
+cliente_hqc91    43.72%    4.434MiB / 23.32GiB   0.02%
+cliente_hqc89    42.04%    3.742MiB / 23.32GiB   0.02%
+cliente_hqc87    44.43%    4.355MiB / 23.32GiB   0.02%
+cliente_hqc84    28.49%    4.281MiB / 23.32GiB   0.02%
+cliente_hqc82    45.21%    4.004MiB / 23.32GiB   0.02%
+cliente_hqc76    36.04%    4.352MiB / 23.32GiB   0.02%
+servidor_hqc     274.19%   30.07MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:24 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   49.85%    4.496MiB / 23.32GiB   0.02%
+cliente_hqc99    33.42%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc98    36.40%    4.426MiB / 23.32GiB   0.02%
+cliente_hqc97    48.78%    4.035MiB / 23.32GiB   0.02%
+cliente_hqc96    30.45%    3.934MiB / 23.32GiB   0.02%
+cliente_hqc95    48.35%    4.16MiB / 23.32GiB    0.02%
+cliente_hqc92    45.01%    4.586MiB / 23.32GiB   0.02%
+cliente_hqc91    34.66%    4.137MiB / 23.32GiB   0.02%
+cliente_hqc89    28.87%    1.727MiB / 23.32GiB   0.01%
+cliente_hqc87    41.79%    3.484MiB / 23.32GiB   0.01%
+cliente_hqc84    45.17%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc82    33.49%    4.387MiB / 23.32GiB   0.02%
+cliente_hqc76    33.86%    4.68MiB / 23.32GiB    0.02%
+servidor_hqc     271.74%   31.06MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:28 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   44.48%    4.551MiB / 23.32GiB   0.02%
+cliente_hqc99    37.80%    4.297MiB / 23.32GiB   0.02%
+cliente_hqc98    29.77%    4.332MiB / 23.32GiB   0.02%
+cliente_hqc97    34.28%    4.254MiB / 23.32GiB   0.02%
+cliente_hqc96    49.76%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc95    34.68%    4.117MiB / 23.32GiB   0.02%
+cliente_hqc92    37.64%    4.164MiB / 23.32GiB   0.02%
+cliente_hqc91    26.16%    4.617MiB / 23.32GiB   0.02%
+cliente_hqc89    48.85%    4.562MiB / 23.32GiB   0.02%
+cliente_hqc87    31.85%    4.609MiB / 23.32GiB   0.02%
+cliente_hqc84    47.16%    4.445MiB / 23.32GiB   0.02%
+cliente_hqc82    33.63%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc76    39.85%    4.219MiB / 23.32GiB   0.02%
+servidor_hqc     275.17%   31.33MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:32 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   40.08%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc99    36.89%    4.258MiB / 23.32GiB   0.02%
+cliente_hqc98    35.31%    4.059MiB / 23.32GiB   0.02%
+cliente_hqc97    41.72%    4.594MiB / 23.32GiB   0.02%
+cliente_hqc96    44.62%    4.445MiB / 23.32GiB   0.02%
+cliente_hqc95    47.20%    1.34MiB / 23.32GiB    0.01%
+cliente_hqc92    42.82%    3.703MiB / 23.32GiB   0.02%
+cliente_hqc91    39.60%    4.289MiB / 23.32GiB   0.02%
+cliente_hqc89    42.41%    4.277MiB / 23.32GiB   0.02%
+cliente_hqc87    44.11%    4.473MiB / 23.32GiB   0.02%
+cliente_hqc84    40.81%    4.641MiB / 23.32GiB   0.02%
+cliente_hqc82    48.87%    4.371MiB / 23.32GiB   0.02%
+servidor_hqc     284.77%   31.33MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:36 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   43.33%    4.383MiB / 23.32GiB   0.02%
+cliente_hqc99    39.90%    4.836MiB / 23.32GiB   0.02%
+cliente_hqc98    46.71%    4.477MiB / 23.32GiB   0.02%
+cliente_hqc97    55.50%    2.402MiB / 23.32GiB   0.01%
+cliente_hqc96    50.00%    4.359MiB / 23.32GiB   0.02%
+cliente_hqc95    47.53%    1.055MiB / 23.32GiB   0.00%
+cliente_hqc92    34.36%    4.199MiB / 23.32GiB   0.02%
+cliente_hqc91    50.41%    4.641MiB / 23.32GiB   0.02%
+cliente_hqc89    52.01%    4.32MiB / 23.32GiB    0.02%
+cliente_hqc87    51.06%    4.438MiB / 23.32GiB   0.02%
+cliente_hqc84    31.65%    4.117MiB / 23.32GiB   0.02%
+servidor_hqc     272.00%   30.85MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:41 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   58.36%    4.469MiB / 23.32GiB   0.02%
+cliente_hqc99    55.48%    4.262MiB / 23.32GiB   0.02%
+cliente_hqc98    47.60%    4.684MiB / 23.32GiB   0.02%
+cliente_hqc97    44.90%    4.348MiB / 23.32GiB   0.02%
+cliente_hqc96    48.39%    4.609MiB / 23.32GiB   0.02%
+cliente_hqc95    54.23%    4.887MiB / 23.32GiB   0.02%
+cliente_hqc92    53.23%    4.223MiB / 23.32GiB   0.02%
+cliente_hqc91    42.21%    4.617MiB / 23.32GiB   0.02%
+cliente_hqc89    49.12%    4.453MiB / 23.32GiB   0.02%
+cliente_hqc87    42.05%    4.059MiB / 23.32GiB   0.02%
+servidor_hqc     284.58%   30.63MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:45 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   45.61%    4.852MiB / 23.32GiB   0.02%
+cliente_hqc99    39.23%    4.605MiB / 23.32GiB   0.02%
+cliente_hqc98    51.43%    4.441MiB / 23.32GiB   0.02%
+cliente_hqc97    54.62%    4.426MiB / 23.32GiB   0.02%
+cliente_hqc96    46.92%    4.691MiB / 23.32GiB   0.02%
+cliente_hqc95    54.25%    4.551MiB / 23.32GiB   0.02%
+cliente_hqc92    38.28%    4.555MiB / 23.32GiB   0.02%
+cliente_hqc91    53.70%    4.301MiB / 23.32GiB   0.02%
+cliente_hqc89    54.12%    4.535MiB / 23.32GiB   0.02%
+cliente_hqc87    53.49%    4.266MiB / 23.32GiB   0.02%
+servidor_hqc     292.44%   31.26MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:49 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   45.40%    4.66MiB / 23.32GiB    0.02%
+cliente_hqc99    50.31%    4.832MiB / 23.32GiB   0.02%
+cliente_hqc98    43.75%    1.242MiB / 23.32GiB   0.01%
+cliente_hqc97    45.94%    4.113MiB / 23.32GiB   0.02%
+cliente_hqc96    57.29%    3.832MiB / 23.32GiB   0.02%
+cliente_hqc95    49.60%    4.598MiB / 23.32GiB   0.02%
+cliente_hqc92    45.12%    4.016MiB / 23.32GiB   0.02%
+cliente_hqc91    45.84%    4.477MiB / 23.32GiB   0.02%
+cliente_hqc89    51.86%    2.445MiB / 23.32GiB   0.01%
+cliente_hqc87    48.56%    4.23MiB / 23.32GiB    0.02%
+servidor_hqc     289.86%   30.11MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:25:53 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   65.64%    4.633MiB / 23.32GiB   0.02%
+cliente_hqc99    64.09%    4.719MiB / 23.32GiB   0.02%
+cliente_hqc98    64.35%    3.812MiB / 23.32GiB   0.02%
+cliente_hqc97    61.82%    1.773MiB / 23.32GiB   0.01%
+cliente_hqc96    51.97%    4.172MiB / 23.32GiB   0.02%
+cliente_hqc95    68.51%    4.582MiB / 23.32GiB   0.02%
+servidor_hqc     267.71%   30.58MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:26:00 ---
+NAME             CPU %     MEM USAGE / LIMIT     MEM %
+cliente_hqc100   70.84%    4.66MiB / 23.32GiB    0.02%
+cliente_hqc99    71.12%    4.469MiB / 23.32GiB   0.02%
+cliente_hqc98    65.96%    3.621MiB / 23.32GiB   0.02%
+cliente_hqc97    67.45%    4.84MiB / 23.32GiB    0.02%
+cliente_hqc95    67.14%    4.98MiB / 23.32GiB    0.02%
+servidor_hqc     273.55%   30.54MiB / 23.32GiB   0.13%
+--- 2026-06-04_08:26:04 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   127.63%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:11 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.30%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:14 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.13%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:17 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.19%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:20 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.05%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:23 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.19%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:26 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   99.89%    29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:29 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   99.25%    29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:32 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.41%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:35 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.21%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:38 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.16%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:41 ---
+NAME           CPU %     MEM USAGE / LIMIT     MEM %
+servidor_hqc   100.19%   29.59MiB / 23.32GiB   0.12%
+--- 2026-06-04_08:26:44 ---

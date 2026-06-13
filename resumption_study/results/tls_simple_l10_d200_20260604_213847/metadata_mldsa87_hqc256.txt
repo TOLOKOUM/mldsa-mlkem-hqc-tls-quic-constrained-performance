@@ -1,0 +1,11 @@
+protocol=tls
+sig_alg=mldsa87
+kem_alg=hqc256
+runs=1000
+batch_size=500
+approach=batch_separe
+network_profile=simple
+loss_percent=10
+delay_ms=200
+total_time_ms=1574505
+timestamp=20260604_213847

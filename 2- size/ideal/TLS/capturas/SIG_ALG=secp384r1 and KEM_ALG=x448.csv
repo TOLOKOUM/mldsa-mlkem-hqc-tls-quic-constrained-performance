@@ -1,0 +1,13 @@
+frame.number,frame.time_relative,Length,ip.src,ip.dst,Protocol,_ws.col.info
+"1","0.000000000","42",,,"ARP","Who has 172.18.0.2? Tell 172.18.0.3"
+"2","0.000041634","42",,,"ARP","172.18.0.2 is at 12:7b:f1:82:10:bd"
+"3","0.000060708","74","172.18.0.3","172.18.0.2","TCP","34538 → 4433 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=763436290 TSecr=0 WS=1024"
+"4","0.000117517","74","172.18.0.2","172.18.0.3","TCP","4433 → 34538 [SYN, ACK] Seq=0 Ack=1 Win=65160 Len=0 MSS=1460 SACK_PERM TSval=3336492128 TSecr=763436290 WS=1024"
+"5","0.000166962","66","172.18.0.3","172.18.0.2","TCP","34538 → 4433 [ACK] Seq=1 Ack=1 Win=64512 Len=0 TSval=763436290 TSecr=3336492128"
+"6","0.000267375","552","172.18.0.3","172.18.0.2","TLSv1","Client Hello"
+"7","0.000331108","66","172.18.0.2","172.18.0.3","TCP","4433 → 34538 [ACK] Seq=1 Ack=487 Win=65536 Len=0 TSval=3336492128 TSecr=763436290"
+"8","0.009864215","924","172.18.0.2","172.18.0.3","TLSv1.3","Server Hello, Change Cipher Spec, Application Data, Application Data, Application Data, Application Data"
+"9","0.009913861","66","172.18.0.3","172.18.0.2","TCP","34538 → 4433 [ACK] Seq=487 Ack=859 Win=64512 Len=0 TSval=763436300 TSecr=3336492138"
+"10","0.022568592","146","172.18.0.3","172.18.0.2","TLSv1.3","Change Cipher Spec, Application Data"
+"11","0.022805812","66","172.18.0.3","172.18.0.2","TCP","34538 → 4433 [RST, ACK] Seq=567 Ack=859 Win=64512 Len=0 TSval=763436313 TSecr=3336492138"
+"12","5.358744160","42",,,"ARP","Who has 172.18.0.3? Tell 172.18.0.2"

@@ -1,0 +1,30 @@
+=============================================================================
+TEST SUMMARY - HQC - PQ_HQC
+=============================================================================
+Date: mer. 03 juin 2026 22:06:36 WAT
+Protocol: tls
+Number of clients: 10
+Handshakes per client: 500
+Total handshakes: 5000
+Total execution time: 195289 ms
+Overall throughput: 25.60 handshakes/sec
+Network profile: none
+Loss: 2%
+Delay: 35 ms
+
+Algorithms tested:
+  Signatures: mldsa65
+  KEMs: hqc192
+
+⚠️  HQC NOTE: HQC is 4-15× slower than ML-KEM by design.
+    These times are expected and reflect the computational cost
+    of code-based cryptography.
+
+Results location: /home/tolokoum/Documents/TLS-QUIC/mldsa-hqc-study2/result_concurrent/tls_c10_none_l2_d35_20260603_220259
+
+To analyze individual handshake latencies:
+  python3 analyse_concurrent.py /home/tolokoum/Documents/TLS-QUIC/mldsa-hqc-study2/result_concurrent/tls_c10_none_l2_d35_20260603_220259 --plots
+
+To compare with other runs:
+  python3 compare_concurrent.py /home/tolokoum/Documents/TLS-QUIC/mldsa-hqc-study2/result_concurrent/
+=============================================================================

@@ -1,0 +1,37 @@
+=== Classical Signatures ===
+Doing 384 bits sign ecdsa ops for 10s: 31289 384 bits ECDSA sign ops in 9.99s
+Doing 384 bits verify ecdsa ops for 10s: 14166 384 bits ECDSA verify ops in 10.00s
+Doing 521 bits sign ecdsa ops for 10s: 23664 521 bits ECDSA sign ops in 9.97s
+Doing 521 bits verify ecdsa ops for 10s: 10909 521 bits ECDSA verify ops in 10.00s
+Doing 253 bits sign Ed25519 ops for 10s: 186460 253 bits Ed25519 sign ops in 9.99s 
+Doing 253 bits verify Ed25519 ops for 10s: 52990 253 bits Ed25519 verify ops in 10.00s
+version: 3.4.2-dev
+built on: Mon Jun  8 14:24:24 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DBROTLI -DZLIB -DZSTD -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0x7ffaf3bfffebffff:0x29c67af
+                              sign    verify    sign/s verify/s
+ 384 bits ecdsa (nistp384)   0.0003s   0.0007s   3132.0   1416.6
+ 521 bits ecdsa (nistp521)   0.0004s   0.0009s   2373.5   1090.9
+                              sign    verify    sign/s verify/s
+ 253 bits EdDSA (Ed25519)   0.0001s   0.0002s  18664.7   5299.0
+
+=== ML-DSA (OQS provider) ===
+Doing mldsa44 keygen ops for 10s: 188760 mldsa44 signature keygen ops in 9.87s
+Doing mldsa44 signs ops for 10s: 74977 mldsa44 signature sign ops in 9.94s
+Doing mldsa44 verify ops for 10s: 231010 mldsa44 signature verify ops in 9.99s
+Doing mldsa65 keygen ops for 10s: 120280 mldsa65 signature keygen ops in 9.94s
+Doing mldsa65 signs ops for 10s: 49447 mldsa65 signature sign ops in 9.96s
+Doing mldsa65 verify ops for 10s: 134418 mldsa65 signature verify ops in 9.97s
+Doing mldsa87 keygen ops for 10s: 85495 mldsa87 signature keygen ops in 9.95s
+Doing mldsa87 signs ops for 10s: 46220 mldsa87 signature sign ops in 9.97s
+Doing mldsa87 verify ops for 10s: 87190 mldsa87 signature verify ops in 10.00s
+version: 3.4.2-dev
+built on: Mon Jun  8 14:24:24 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DBROTLI -DZLIB -DZSTD -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0x7ffaf3bfffebffff:0x29c67af
+                               keygen     signs    verify keygens/s    sign/s  verify/s
+                    mldsa44 0.000052s 0.000133s 0.000043s   19124.6    7543.0   23124.1
+                    mldsa65 0.000083s 0.000201s 0.000074s   12100.6    4964.6   13482.2
+                    mldsa87 0.000116s 0.000216s 0.000115s    8592.5    4635.9    8719.0

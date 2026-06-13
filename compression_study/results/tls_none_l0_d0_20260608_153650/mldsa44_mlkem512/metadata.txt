@@ -1,0 +1,13 @@
+protocol=tls
+sig_alg=mldsa44
+kem_alg=mlkem512
+pair_label=mldsa44_mlkem512
+runs_per_condition=500
+network_profile=none
+loss_percent=0
+delay_ms=0
+timestamp=20260608_153650
+zlib_available=true
+cert_size_bytes=5429
+approach=certificate_compression_rfc8879
+note=RFC 8879 active in compressed phase

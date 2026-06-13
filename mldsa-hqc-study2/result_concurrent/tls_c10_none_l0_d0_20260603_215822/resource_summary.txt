@@ -1,0 +1,1 @@
+Average container CPU: 7,28361%
