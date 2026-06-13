@@ -1,11 +1,9 @@
-````markdown
+
 # Post-Quantum TLS 1.3 and QUIC Handshakes under Constrained Networks: Combining ML-DSA with ML-KEM and HQC
 
 > David Rive Tolokoum, Yve Bruno MBEZOA, Hervé Talé Kalachi.  
 > *Post-Quantum TLS 1.3 and QUIC Handshakes under Constrained Networks: Combining ML-DSA with ML-KEM and HQC*  
 > Submitted to *Computer Networks*, 2026.
-
----
 
 ## 1. Overview
 
@@ -29,7 +27,6 @@ The repository provides scripts, data, logs, analysis code, and additional figur
 
 Post-quantum protocol performance **cannot be predicted from primitive micro-benchmarks alone**. Once post-quantum signatures are introduced, certificate size, packetization, retransmission behavior, and transport architecture can change the relative ranking of TLS and QUIC.
 
----
 
 ## 2. Key Findings
 
@@ -41,11 +38,9 @@ Post-quantum protocol performance **cannot be predicted from primitive micro-ben
 | **HQC Bottleneck Inversion** | HQC dominates handshake cost in QUIC, making the signature choice nearly neutral under ideal conditions |
 | **Gilbert--Elliott Tail-Latency Regime** | ML-DSA87 + P-521 + HQC-256 reaches 18,595 ms mean latency and p99 above 25 s under GE-unstable burst loss |
 
----
 
 ## 3. Repository Structure
-
-```text
+```
 mldsa-mlkem-hqc-tls-quic-constrained-performance/
 │
 ├── README.md
@@ -145,9 +140,7 @@ mldsa-mlkem-hqc-tls-quic-constrained-performance/
 ├── Launcherv3_mlkem_concurrent.sh                 # ML-KEM concurrent-load orchestrator
 ├── Launcherv3_hqc_concurrent.sh                   # HQC concurrent-load orchestrator
 └── run_concurrent_matrix.sh                       # Run all concurrent experiments
-````
-
----
+```
 
 ## 4. Hardware and Software Requirements
 
@@ -590,7 +583,6 @@ python3 plot_violins_phase6.py
 | Study 2 HQC delta evolution     | `plot_hqc_africa.py`       | `mldsa-hqc-study2/plots/fig*_hqc_delta.*`            |
 | Study 2 HQC deployment heatmap  | `plot_hqc_africa.py`       | `mldsa-hqc-study2/plots/fig*_hqc_heatmap.*`          |
 
----
 
 ## 14. Micro-benchmarks
 
@@ -625,7 +617,6 @@ Measured on HP ProBook 640 G4, Intel Core i5-8250U, AVX2, Ubuntu 24.04 LTS, Open
 
 These values are used only to interpret protocol-level results; they are not used as handshake measurements.
 
----
 
 ## 15. Validation Against Prior TLS/QUIC Measurements
 
@@ -648,7 +639,6 @@ To validate the framework, we reproduced common ideal-condition configurations f
 
 All reproduced values agree within ±3%, with matching KEM rankings.
 
----
 
 ## 16. Supplementary Materials
 
@@ -677,7 +667,6 @@ The following materials are available in the repository and are not included in 
 | `compression_study/analysis/`                              | Certificate-compression analysis outputs, when available |
 | `microbench/microbench_results.txt`                        | Isolated sign/verify micro-benchmark results             |
 
----
 
 ## 17. Contact
 
