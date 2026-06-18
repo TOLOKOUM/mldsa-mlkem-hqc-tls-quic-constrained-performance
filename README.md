@@ -590,16 +590,11 @@ Micro-benchmarks measure isolated cryptographic operation latency to help interp
 
 ### 14.1 Run Micro-benchmarks
 
-```bash
-mkdir -p microbench
-
-docker run --rm uma-tls-quic-pq-34 bash -c "
-    echo '=== Classical Signatures ==='
+```
+ run --rm --cpuset-cpus="0" uma-tls-quic-pq-34 bash -c "
     openssl speed ed25519 ecdsap384 ecdsap521 2>&1
-    echo ''
-    echo '=== ML-DSA (OQS provider) ==='
     openssl speed -provider oqsprovider mldsa44 mldsa65 mldsa87 2>&1
-" > microbench/microbench_results.txt
+" | tee microbench/microbench_results.txt
 ```
 
 ### 14.2 Reference Results
