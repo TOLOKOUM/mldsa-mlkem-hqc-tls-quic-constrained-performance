@@ -3,8 +3,6 @@
 plot_hqc_africa_final.py
 =========================
 Figures pour les conditions réseau africaines — HQC (Phase 6)
-
-Améliorations :
 - Figure 6 : découpée en 3 PDF (L1, L3, L5) pour delta evolution
 - Figure 7 : découpée en 3 PDF (L1, L3, L5) pour protocole reversal
 - Figure 8 : heatmap découpée en 3 PDF (L1, L3, L5) avec chiffres lisibles
