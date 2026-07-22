@@ -312,9 +312,10 @@ def fig2_heatmap_overhead(data, out_dir):
     return True
 
 # ============================================================================
-# FIGURE 3 — Super-additivité (axes des ordonnées clairs et explicites)
 # ============================================================================
-def fig3_superadditivity(data, out_dir):
+# FIGURE 3 — Interaction factorielle (indice I avec IC bootstrap)
+# ============================================================================
+def fig3_superadditivity(data, out_dir, n_boot=10000, seed=42):
     kem_pairs = {
         1: [("P-256", "mlkem512"), ("x25519", "mlkem512"),
             ("P-256", "p256_mlkem512"), ("x25519", "x25519_mlkem512")],
@@ -322,96 +323,97 @@ def fig3_superadditivity(data, out_dir):
             ("P-384", "p384_mlkem768"), ("x448", "x448_mlkem768")],
         5: [("P-521", "mlkem1024"), ("P-521", "p521_mlkem1024")],
     }
-    
+
+    def bootstrap_I(t00, t10, t01, t11, rng):
+        obs = t11.mean() - t10.mean() - t01.mean() + t00.mean()
+        boots = np.empty(n_boot)
+        for i in range(n_boot):
+            b00 = rng.choice(t00, len(t00), replace=True).mean()
+            b10 = rng.choice(t10, len(t10), replace=True).mean()
+            b01 = rng.choice(t01, len(t01), replace=True).mean()
+            b11 = rng.choice(t11, len(t11), replace=True).mean()
+            boots[i] = b11 - b10 - b01 + b00
+        lo, hi = np.percentile(boots, [2.5, 97.5])
+        return obs, lo, hi
+
     fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
-    
+
     for col, proto in enumerate(["TLS", "QUIC"]):
         ax = axes[col]
-        labels, ratios, bar_colors = [], [], []
-        
+        rng = np.random.default_rng(seed)
+        labels, I_vals, err_lo, err_hi, bar_colors = [], [], [], [], []
+
         for sig_c, sig_pq, level, _ in SIG_PAIRS:
             for kem_c, kem_pq in kem_pairs.get(level, []):
                 if (sig_c not in data[proto] or sig_pq not in data[proto] or
-                    kem_c not in data[proto][sig_c] or kem_pq not in data[proto][sig_pq] or
-                    kem_pq not in data[proto][sig_c] or kem_c not in data[proto][sig_pq]):
+                    kem_c not in data[proto][sig_c] or kem_pq not in data[proto][sig_c] or
+                    kem_c not in data[proto][sig_pq] or kem_pq not in data[proto][sig_pq]):
                     continue
-                
-                baseline = np.mean(data[proto][sig_c][kem_c])
-                sig_c_kpq = np.mean(data[proto][sig_c][kem_pq])
-                sig_pq_kc = np.mean(data[proto][sig_pq][kem_c])
-                sig_pq_kpq = np.mean(data[proto][sig_pq][kem_pq])
-                
-                oh_sum = (sig_c_kpq - baseline) + (sig_pq_kc - baseline)
-                oh_both = sig_pq_kpq - baseline
-                
-                if abs(oh_sum) < 1e-6:
-                    continue
-                
-                ratio = oh_both / oh_sum
-                
-                # Nom CLAIR et EXPLICITE pour l'axe des ordonnées
-                proto_sig = "TLS" if proto == "TLS" else "QUIC"
-                label = f"{proto_sig}: {sig_c} + {kem_c}\n→ {sig_pq} + {kem_pq}"
+
+                t00 = data[proto][sig_c][kem_c]   # classical sig, classical KEM
+                t10 = data[proto][sig_c][kem_pq]  # classical sig, target KEM
+                t01 = data[proto][sig_pq][kem_c]  # PQ sig, classical KEM
+                t11 = data[proto][sig_pq][kem_pq] # PQ sig, target KEM (full migration)
+
+                I, lo, hi = bootstrap_I(t00, t10, t01, t11, rng)
+
+                label = f"{proto}: {sig_c} + {kem_c}\n\u2192 {sig_pq} + {kem_pq}"
                 labels.append(label)
-                ratios.append(ratio)
-                
-                if ratio > 1.05:
-                    bar_colors.append(COLORS["pq"])      # Bleu = super-additif
-                elif ratio < 0.95:
-                    bar_colors.append(COLORS["classical"]) # Orange = sub-additif
+                I_vals.append(I)
+                err_lo.append(I - lo)
+                err_hi.append(hi - I)
+
+                if lo > 0:
+                    bar_colors.append(COLORS["pq"])        # significatif super-additif
+                elif hi < 0:
+                    bar_colors.append(COLORS["classical"]) # significatif sous-additif
                 else:
-                    bar_colors.append("#999999")          # Gris = additif
-        
+                    bar_colors.append("#999999")           # IC inclut 0 -> indéterminé
+
         if not labels:
             ax.text(0.5, 0.5, "No data", ha='center', va='center')
             ax.set_title(f"{proto}", fontsize=11, fontweight='bold')
             continue
-        
+
         y_pos = np.arange(len(labels))
-        bars = ax.barh(y_pos, ratios, color=bar_colors, alpha=0.85,
-                      edgecolor='white', linewidth=0.8, height=0.7)
-        
-        # Lignes de référence
-        ax.axvline(1.0, color='#333333', lw=1.5, ls='-', alpha=0.7, label='Additive (1.0)')
-        ax.axvline(1.05, color=COLORS["pq"], lw=1, ls='--', alpha=0.6, label='Super-additive (1.05)')
-        ax.axvline(0.95, color=COLORS["classical"], lw=1, ls='--', alpha=0.6, label='Sub-additive (0.95)')
-        
+        bars = ax.barh(y_pos, I_vals, color=bar_colors, alpha=0.85,
+                        edgecolor='white', linewidth=0.8, height=0.7,
+                        xerr=[err_lo, err_hi], capsize=3,
+                        error_kw={'elinewidth': 1, 'ecolor': '#333333'})
+
+        ax.axvline(0.0, color='#333333', lw=1.5, ls='-', alpha=0.7)
+
         ax.set_yticks(y_pos)
         ax.set_yticklabels(labels, fontsize=7)
-        ax.set_xlabel("Actual overhead / Expected overhead ratio", fontsize=10)
+        ax.set_xlabel("Interaction index $I = T_{11}-T_{10}-T_{01}+T_{00}$ (ms)\n"
+                      "with 95% bootstrap CI", fontsize=9)
         ax.set_title(f"{proto} — Combined migration", fontsize=11, fontweight='bold')
         ax.grid(True, axis='x', alpha=0.25, linestyle=':')
-        
-        # Ajouter les valeurs numériques à droite des barres
-        for i, (bar, r) in enumerate(zip(bars, ratios)):
-            ax.text(r + 0.02, bar.get_y() + bar.get_height()/2,
-                   f"{r:.2f}", va='center', fontsize=7)
-    
-    # Légende en bas de la figure
+
+        for i, (bar, val, lo_e, hi_e) in enumerate(zip(bars, I_vals, err_lo, err_hi)):
+            offset = hi_e + 0.05 if val >= 0 else -(lo_e + 0.05)
+            ha = 'left' if val >= 0 else 'right'
+            ax.text(val + offset, bar.get_y() + bar.get_height()/2,
+                     f"{val:+.2f}", va='center', ha=ha, fontsize=7)
+
     legend_elements = [
-        mpatches.Patch(color=COLORS["pq"], alpha=0.85, label='Super-additive (>1.05)'),
-        mpatches.Patch(color="#999999", alpha=0.85, label='Additive (0.95–1.05)'),
-        mpatches.Patch(color=COLORS["classical"], alpha=0.85, label='Sub-additive (<0.95)'),
+        mpatches.Patch(color=COLORS["pq"], alpha=0.85, label='Super-additive (95% CI > 0)'),
+        mpatches.Patch(color="#999999", alpha=0.85, label='Indeterminate (95% CI spans 0)'),
+        mpatches.Patch(color=COLORS["classical"], alpha=0.85, label='Sub-additive (95% CI < 0)'),
     ]
     fig.legend(handles=legend_elements, loc='lower center',
               bbox_to_anchor=(0.5, -0.08), ncol=3, fontsize=9,
               frameon=True, fancybox=False, edgecolor='#333333')
-    
-    #fig.suptitle("Figure 3 — Super-additivity: actual vs expected combined overhead ratio\n"
-     #           "Ratio > 1.05 = super-additive | 0.95–1.05 = additive | < 0.95 = sub-additive",
-      #          fontsize=10, fontweight='bold', y=0.98)
-    
+
     plt.tight_layout(rect=[0, 0.05, 1, 0.94])
-    
+
     pdf_path = os.path.join(out_dir, "fig3_superadditivity.pdf")
     png_path = os.path.join(out_dir, "fig3_superadditivity.png")
     plt.savefig(pdf_path, format='pdf')
     plt.savefig(png_path, format='png', dpi=150)
     plt.close()
-    print(f"✅ Fig3 superadditivity : {pdf_path} + PNG")
+    print(f"✅ Fig3 interaction index : {pdf_path} + PNG")
     return True
-
-
 # ============================================================================
 # MAIN
 # ============================================================================
