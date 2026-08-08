@@ -1,0 +1,134 @@
+== Campagne de tests IDÉAL — dim. 02 août 2026 07:39:44 WAT ==
+Combo représentatif (charge concurrente / resumption) : SIG=mldsa65 KEM=p384_mlkem768
+
+==================================================
+ ÉTAPE : Sweep TLS single
+ Commande : ./Launcher_pq_mldsa_mlkem_hqc.sh both tls single nocapture none 0 0
+ Début : 07:39:44
+==================================================
+  [OK-SHELL] Sweep TLS single terminé sans erreur shell (exit 0).
+ Fin : 08:07:46
+
+==================================================
+ ÉTAPE : Sweep TLS mutual
+ Commande : ./Launcher_pq_mldsa_mlkem_hqc.sh both tls mutual nocapture none 0 0
+ Début : 08:07:46
+==================================================
+  [OK-SHELL] Sweep TLS mutual terminé sans erreur shell (exit 0).
+ Fin : 08:37:12
+
+==================================================
+ ÉTAPE : Sweep QUIC single
+ Commande : ./Launcher_pq_mldsa_mlkem_hqc.sh both quic single nocapture none 0 0
+ Début : 08:37:12
+==================================================
+  [OK-SHELL] Sweep QUIC single terminé sans erreur shell (exit 0).
+ Fin : 09:04:40
+
+[INFO] QUIC mutual volontairement EXCLU de cette campagne — authentification
+       non appliquée de façon fiable dans cette pile (confirmé empiriquement,
+       cf. diagnostic précédent). Lancez-le séparément si besoin, en marquant
+       les résultats comme non représentatifs d'une auth réelle.
+
+==================================================
+ ÉTAPE : Concurrent TLS ideal
+ Commande : ./Launcher_advanced_tests.sh concurrent tls single mldsa65 p384_mlkem768 ideal 1,5,10,20,50 20
+ Début : 09:04:40
+==================================================
+  [OK-SHELL] Concurrent TLS ideal terminé sans erreur shell (exit 0).
+ Fin : 09:05:14
+
+==================================================
+ ÉTAPE : Concurrent QUIC ideal
+ Commande : ./Launcher_advanced_tests.sh concurrent quic single mldsa65 p384_mlkem768 ideal 1,5,10,20,50 20
+ Début : 09:05:14
+==================================================
+  [OK-SHELL] Concurrent QUIC ideal terminé sans erreur shell (exit 0).
+ Fin : 09:05:51
+
+==================================================
+ ÉTAPE : Resumption TLS ideal
+ Commande : ./Launcher_advanced_tests.sh resumption tls single mldsa65 p384_mlkem768 ideal 50 false
+ Début : 09:05:51
+==================================================
+  [OK-SHELL] Resumption TLS ideal terminé sans erreur shell (exit 0).
+ Fin : 09:06:27
+
+==================================================
+ ÉTAPE : Resumption QUIC ideal
+ Commande : ./Launcher_advanced_tests.sh resumption quic single mldsa65 p384_mlkem768 ideal 50 false
+ Début : 09:06:27
+==================================================
+  [OK-SHELL] Resumption QUIC ideal terminé sans erreur shell (exit 0).
+ Fin : 09:06:50
+
+==================================================
+ VALIDATION DES DONNÉES PRODUITES
+==================================================
+
+--- Logs de handshake : tls/single (/home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/single/none/handshake_logs) ---
+  42 fichier(s) de log trouvé(s).
+42 fichier(s) de log analysé(s) -> /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/validation_tls_single/handshake_stats.csv
+  42 combinaison(s) analysée(s), 42 avec un taux de succès < 95%.
+  [ATTENTION] Voir /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/validation_tls_single/handshake_stats.csv — combinaisons avec échecs à investiguer avant de
+              considérer cette campagne comme un baseline propre.
+
+--- Logs de handshake : tls/mutual (/home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/mutual/none/handshake_logs) ---
+  42 fichier(s) de log trouvé(s).
+42 fichier(s) de log analysé(s) -> /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/validation_tls_mutual/handshake_stats.csv
+  42 combinaison(s) analysée(s), 42 avec un taux de succès < 95%.
+  [ATTENTION] Voir /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/validation_tls_mutual/handshake_stats.csv — combinaisons avec échecs à investiguer avant de
+              considérer cette campagne comme un baseline propre.
+
+--- Logs de handshake : quic/single (/home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/quic/single/none/handshake_logs) ---
+  42 fichier(s) de log trouvé(s).
+42 fichier(s) de log analysé(s) -> /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/validation_quic_single/handshake_stats.csv
+  42 combinaison(s) analysée(s), 42 avec un taux de succès < 95%.
+  [ATTENTION] Voir /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/validation_quic_single/handshake_stats.csv — combinaisons avec échecs à investiguer avant de
+              considérer cette campagne comme un baseline propre.
+
+--- CPU/mémoire : tls/single ---
+  84 ligne(s) dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/single/none/resource_usage/resource_usage_tls_single_none.csv.
+  [OK]
+
+--- CPU/mémoire : tls/mutual ---
+  84 ligne(s) dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/mutual/none/resource_usage/resource_usage_tls_mutual_none.csv.
+  [OK]
+
+--- CPU/mémoire : quic/single ---
+  84 ligne(s) dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/quic/single/none/resource_usage/resource_usage_quic_single_none.csv.
+  [OK]
+
+--- Charge concurrente TLS ---
+  5 fichier(s) trouvé(s) (concurrent_summary_tls_*_ideal_c*.csv dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests).
+  [OK]
+
+--- Charge concurrente QUIC ---
+  5 fichier(s) trouvé(s) (concurrent_summary_quic_*_ideal_c*.csv dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests).
+  [OK]
+
+--- Resumption TLS ---
+  1 fichier(s) trouvé(s) (resumption_summary_tls_*_ideal.csv dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests).
+  [OK]
+
+--- Resumption QUIC ---
+  1 fichier(s) trouvé(s) (resumption_summary_quic_*_ideal.csv dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests).
+  [OK]
+
+==================================================
+ RÉCAPITULATIF FINAL
+==================================================
+  [OK-SHELL]    Sweep TLS single
+  [OK-SHELL]    Sweep TLS mutual
+  [OK-SHELL]    Sweep QUIC single
+  [OK-SHELL]    Concurrent TLS ideal
+  [OK-SHELL]    Concurrent QUIC ideal
+  [OK-SHELL]    Resumption TLS ideal
+  [OK-SHELL]    Resumption QUIC ideal
+
+⚠️  VALIDATION GLOBALE : au moins un point d'attention détecté ci-dessus.
+   Ne lancez pas Modéré/Dégradé avant d'avoir compris et corrigé ces points —
+   relancer sur une base bancale ne ferait que multiplier le problème.
+
+Rapport complet : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/summary.txt
+Logs détaillés par étape : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260802_073944/

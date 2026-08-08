@@ -1,0 +1,56 @@
+*************************************
+Mode:      resumption
+Protocol:  tls
+Auth Mode: single
+SIG_ALG:   mldsa65
+KEM_ALG:   mlkem768
+Network:   modere (delay=30.02ms/interface, loss=0.3%)
+Waves:      50
+Early data: false
+*************************************
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*** NETWORK AND VOLUME ***
+f5199c4ce60de7a7cc0cac9e3a2b96b7270cdd30d6a1dbb241b08651920fdd34
+cert
+
+ ==> Creating Certs and Keys for SIG_ALG=mldsa65
+Creating certificates
+Using default procedure for mldsa65
+-----
+-----
+Certificate request self-signature ok
+subject=CN=localhost
+-----
+Certificate request self-signature ok
+subject=CN=user
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=mldsa65 and certificates created
+
+
+ ==> Starting server...
+f73343aa615b5baa6708ef0b216427d1ad71653dd50abbfc0337ac2d0133dd3a
+    Server IP: 172.18.0.2
+
+ ==> Starting client container (idle, tests run via docker exec)...
+6d79d4564512d2fd3077322fd9a46e0ccaa0239960fee2263cfdbc329ef847c0
+cliente
+
+ ==> Applying network scenario 'modere': delay=30.02ms/interface, loss=0.3% (server only)
+=== Session resumption test ===
+  Protocol: tls | SIG_ALG: mldsa65 | KEM_ALG: mlkem768 | Waves: 50 | 0-RTT: false
+================================
+
+Résultats : /tmp/resumption_summary_tls_mldsa65_mlkem768.csv
+
+ ==> Résultats copiés dans : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests
+Deleted Containers:
+6d79d4564512d2fd3077322fd9a46e0ccaa0239960fee2263cfdbc329ef847c0
+f73343aa615b5baa6708ef0b216427d1ad71653dd50abbfc0337ac2d0133dd3a
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Advanced tests finished.

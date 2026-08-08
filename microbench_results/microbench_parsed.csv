@@ -1,0 +1,39 @@
+algo,operation,family,count,elapsed_s,ops_per_sec,mean_time_us,raw_label
+ecdsa384,sign,classique,29402,9.98,2946.1,339.433,384 bits sign ecdsa
+ecdsa384,verify,classique,13916,10.0,1391.6,718.597,384 bits verify ecdsa
+ecdsa521,sign,classique,22336,9.98,2238.1,446.812,521 bits sign ecdsa
+ecdsa521,verify,classique,12281,9.99,1229.3,813.452,521 bits verify ecdsa
+ed25519,sign,classique,180772,10.0,18077.2,55.318,253 bits sign Ed25519
+ed25519,verify,classique,58890,10.0,5889.0,169.808,253 bits verify Ed25519
+mldsa44,keygen,pq_pur,229248,9.89,23179.8,43.141,mldsa44 keygen
+mldsa44,sign,pq_pur,88057,9.95,8849.9,112.995,mldsa44 signs
+mldsa44,verify,pq_pur,263961,10.0,26396.1,37.884,mldsa44 verify
+mldsa65,keygen,pq_pur,132902,9.94,13370.4,74.792,mldsa65 keygen
+mldsa65,sign,pq_pur,58090,9.97,5826.5,171.63,mldsa65 signs
+mldsa65,verify,pq_pur,153508,10.0,15350.8,65.143,mldsa65 verify
+mldsa87,keygen,pq_pur,84713,9.96,8505.3,117.573,mldsa87 keygen
+mldsa87,sign,pq_pur,45949,9.98,4604.1,217.197,mldsa87 signs
+mldsa87,verify,pq_pur,89140,10.0,8914.0,112.183,mldsa87 verify
+256_bits__ecdh,unknown,classique,135896,10.0,13589.6,73.586,256 bits  ecdh
+384_bits__ecdh,unknown,classique,18866,10.0,1886.6,530.054,384 bits  ecdh
+521_bits__ecdh,unknown,classique,19279,10.0,1927.9,518.699,521 bits  ecdh
+253_bits__ecdh,unknown,classique,178054,9.99,17823.2,56.107,253 bits  ecdh
+448_bits__ecdh,unknown,classique,33761,9.98,3382.9,295.607,448 bits  ecdh
+mlkem512,keygen,pq_pur,621783,9.73,63903.7,15.649,mlkem512 keygen
+mlkem512,encaps,pq_pur,705668,9.69,72824.4,13.732,mlkem512 encaps
+mlkem512,decaps,pq_pur,786204,9.99,78699.1,12.707,mlkem512 decaps
+mlkem768,keygen,pq_pur,412053,9.78,42132.2,23.735,mlkem768 keygen
+mlkem768,encaps,pq_pur,435534,9.78,44533.1,22.455,mlkem768 encaps
+mlkem768,decaps,pq_pur,502798,10.0,50279.8,19.889,mlkem768 decaps
+mlkem1024,keygen,pq_pur,288438,9.88,29194.1,34.253,mlkem1024 keygen
+mlkem1024,encaps,pq_pur,308994,9.82,31465.8,31.781,mlkem1024 encaps
+mlkem1024,decaps,pq_pur,345325,9.97,34636.4,28.871,mlkem1024 decaps
+hqc128,keygen,pq_pur,3140,9.98,314.6,3178.344,hqc128 keygen
+hqc128,encaps,pq_pur,1676,10.0,167.6,5966.587,hqc128 encaps
+hqc128,decaps,pq_pur,1029,10.0,102.9,9718.173,hqc128 decaps
+hqc192,keygen,pq_pur,1069,9.99,107.0,9345.182,hqc192 keygen
+hqc192,encaps,pq_pur,539,9.99,54.0,18534.323,hqc192 encaps
+hqc192,decaps,pq_pur,340,9.97,34.1,29323.529,hqc192 decaps
+hqc256,keygen,pq_pur,641,10.0,64.1,15600.624,hqc256 keygen
+hqc256,encaps,pq_pur,277,10.03,27.6,36209.386,hqc256 encaps
+hqc256,decaps,pq_pur,187,9.99,18.7,53422.46,hqc256 decaps

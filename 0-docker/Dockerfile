@@ -3,7 +3,7 @@ ARG MSQUIC_TAG=nibanks/openss3.3-test
 ARG OQSPROVIDER_TAG=0.8.0
 #ARG OPENSSL_TAG=openssl-3.3.1
 ARG OPENSSL_TAG=openssl-3.4
-ARG MAKE_DEFINES="-j 4"     
+ARG MAKE_DEFINES="-j 4"      
 ARG MSQUIC_DEBUG=off        
 ARG LIBOQS_BUILD_DEFINES="-DOQS_DIST_BUILD=ON"
 ARG BASEDIR=/opt
@@ -20,23 +20,16 @@ ARG LIBDIR
 FROM ubuntu:24.10 AS base
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 1) Escribe sources.list apuntando a old-releases
+# Configuration des dépôts vers old-releases & installation des dépendances
 RUN set -eux; \
-  mv /etc/apt/sources.list /etc/apt/sources.list.bak || true; \
-  cat > /etc/apt/sources.list <<'EOF'
-deb http://old-releases.ubuntu.com/ubuntu oracular main restricted universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu oracular-updates main restricted universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu oracular-backports main restricted universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu oracular-security main restricted universe multiverse
-EOF
-
-# 2) Sustituye cualquier entrada residual (.list y .sources), desactiva Valid-Until e instala
-RUN set -eux; \
-  find /etc/apt -type f \( -name '*.list' -o -name '*.sources' \) -print -exec sed -i \
-    -e 's|https\?://archive\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
-    -e 's|https\?://security\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
-    -e 's|https\?://ports\.ubuntu\.com/ubuntu-ports|http://old-releases.ubuntu.com/ubuntu|g' {} \; || true; \
-  printf 'Acquire::Check-Valid-Until "false";\n' > /etc/apt/apt.conf.d/99no-check-valid; \
+  if [ -f /etc/apt/sources.list.d/ubuntu.sources ]; then \
+    sed -i 's|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources; \
+    sed -i 's|http://security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources; \
+  fi; \
+  if [ -f /etc/apt/sources.list ]; then \
+    sed -i 's|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list; \
+    sed -i 's|http://security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list; \
+  fi; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
     cmake gcc ninja-build libunwind-dev \
@@ -56,30 +49,33 @@ ARG MSQUIC_TAG
 ARG OPENSSL_TAG
 ARG OQSPROVIDER_TAG
 ARG OPENSSLDIR
+ARG LIBOQSDIR
+ARG MSQUICDIR
+ARG OQSPROVIDERDIR
 
 # Download and prepare source files needed for the build process.
 WORKDIR $BASEDIR
 RUN [ ! -d "${LIBOQSDIR}" ] && \ 
-    mkdir liboqs && \  
-    git clone --recursive --depth 1 --branch ${LIBOQS_TAG} https://github.com/open-quantum-safe/liboqs.git 
+    mkdir -p liboqs && \  
+    git clone --recursive --depth 1 --branch ${LIBOQS_TAG} https://github.com/open-quantum-safe/liboqs.git ${LIBOQSDIR} || true
+
 RUN [ ! -d "${MSQUICDIR}" ] && \ 
-    mkdir msquic-pq && \
-    #git clone --recursive --depth 1 --branch ${MSQUIC_TAG} https://github.com/javibc3/msquic-pq.git
-    git clone --recursive --depth 1 --branch ${MSQUIC_TAG} https://github.com/montenegro-montes/msquic-pq.git
+    mkdir -p msquic-pq && \
+    git clone --recursive --depth 1 --branch ${MSQUIC_TAG} https://github.com/montenegro-montes/msquic-pq.git ${MSQUICDIR} || true
+
 RUN [ ! -d "${OPENSSLDIR}" ] && \ 
-    mkdir openssl && \
-    git clone --depth 1 --branch ${OPENSSL_TAG} https://github.com/montenegro-montes/openssl.git
+    mkdir -p openssl && \
+    git clone --depth 1 --branch ${OPENSSL_TAG} https://github.com/montenegro-montes/openssl.git ${OPENSSLDIR} || true
 
 # Modificar límites en speed.c
 WORKDIR ${OPENSSLDIR}
 RUN sed -i 's/#define MAX_SIG_NUM .*/#define MAX_SIG_NUM 512/' ./apps/speed.c && \
     sed -i 's/#define MAX_KEM_NUM .*/#define MAX_KEM_NUM 512/' ./apps/speed.c
 
-
 WORKDIR $BASEDIR    
 RUN [ ! -d "${OQSPROVIDERDIR}" ] && \ 
-    mkdir oqs-provider && \
-    git clone --depth 1 --branch ${OQSPROVIDER_TAG} https://github.com/open-quantum-safe/oqs-provider.git 
+    mkdir -p oqs-provider && \
+    git clone --depth 1 --branch ${OQSPROVIDER_TAG} https://github.com/open-quantum-safe/oqs-provider.git ${OQSPROVIDERDIR} || true
 
 
 # --------------------------------------
@@ -98,7 +94,6 @@ ARG LIBDIR
 
 # Build and install liboqs
 WORKDIR ${LIBOQSDIR}/build
-#RUN cmake -G"Ninja" .. ${LIBOQS_BUILD_DEFINES} -DCMAKE_INSTALL_PREFIX=${INSTALLDIR} && \
 RUN cmake -G"Ninja" .. ${LIBOQS_BUILD_DEFINES} && \
     ninja -j"$(nproc)" && \
     ninja install
@@ -115,29 +110,27 @@ ARG OQSPROVIDERDIR
 ARG LIBDIR
 
 # Install required build tools and system dependencies.
-RUN apt update && apt install -y --no-install-recommends python3 golang-go python3-pip && \ 
+RUN apt-get update && apt-get install -y --no-install-recommends python3 golang-go python3-pip && \ 
     pip install jinja2 tabulate pyyaml --break-system-packages 
 
 # ====================================================================
 # AJOUT : Installation des bibliothèques de compression (build)
 # ====================================================================
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     libbrotli-dev \
     libzstd-dev \
     tcpdump \
     && rm -rf /var/lib/apt/lists/*
 
-
-# Build and install MsQuic. We dupplicate the cmake command to ensure the OQS provider is enabled.
+# Build and install MsQuic.
 WORKDIR ${MSQUICDIR}
-RUN mkdir build && cd build && \ 
+RUN mkdir -p build && cd build && \ 
     cmake -G 'Unix Makefiles' -DQUIC_ENABLE_LOGGING=${MSQUIC_DEBUG} -DQUIC_LOGGING_TYPE=stdout \ 
     -DQUIC_ENABLE_OQS_PROVIDER=on -DQUIC_TLS=openssl3 -DQUIC_BUILD_TOOLS=on .. && \ 
     cmake -G 'Unix Makefiles' -DQUIC_ENABLE_LOGGING=${MSQUIC_DEBUG} -DQUIC_LOGGING_TYPE=stdout \ 
     -DQUIC_ENABLE_OQS_PROVIDER=on -DQUIC_TLS=openssl3 -DQUIC_BUILD_TOOLS=on .. && \
     cmake --build .
-
 
 # ====================================================================
 # Build OpenSSL3 avec support compression (flags corrigés)
@@ -182,7 +175,6 @@ RUN ln -s ../openssl . && \
 RUN LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \ 
     cp _build/lib/oqsprovider.so ${INSTALLDIR}/${LIBDIR}/ossl-modules/
 
-
 # Modify the openssl configuration file to use the OQS provider
 RUN sed -i "s/default = default_sect/default = default_sect\noqsprovider = oqsprovider_sect/g" ${INSTALLDIR}/ssl/openssl.cnf && \
     sed -i "s/\[default_sect\]/\[default_sect\]\nactivate = 1\n\[oqsprovider_sect\]\nactivate = 1\n/g" ${INSTALLDIR}/ssl/openssl.cnf && \
@@ -203,23 +195,16 @@ ENV PATH="${INSTALLDIR}/bin:${PATH}"
 ENV OPENSSL=${INSTALLDIR}/bin/openssl
 ENV OPENSSL_CNF=${INSTALLDIR}/ssl/openssl.cnf
 
-# 1) Escribe sources.list apuntando a old-releases
+# Installation des utilitaires runtime sous Ubuntu 24.10 via old-releases
 RUN set -eux; \
-  mv /etc/apt/sources.list /etc/apt/sources.list.bak || true; \
-  cat > /etc/apt/sources.list <<'EOF'
-deb http://old-releases.ubuntu.com/ubuntu oracular main restricted universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu oracular-updates main restricted universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu oracular-backports main restricted universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu oracular-security main restricted universe multiverse
-EOF
-
-# 2) Sustituye cualquier entrada residual (.list y .sources), desactiva Valid-Until e instala
-RUN set -eux; \
-  find /etc/apt -type f \( -name '*.list' -o -name '*.sources' \) -print -exec sed -i \
-    -e 's|https\?://archive\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
-    -e 's|https\?://security\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
-    -e 's|https\?://ports\.ubuntu\.com/ubuntu-ports|http://old-releases.ubuntu.com/ubuntu|g' {} \; || true; \
-  printf 'Acquire::Check-Valid-Until "false";\n' > /etc/apt/apt.conf.d/99no-check-valid; \
+  if [ -f /etc/apt/sources.list.d/ubuntu.sources ]; then \
+    sed -i 's|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources; \
+    sed -i 's|http://security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources; \
+  fi; \
+  if [ -f /etc/apt/sources.list ]; then \
+    sed -i 's|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list; \
+    sed -i 's|http://security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list; \
+  fi; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
     ca-certificates iproute2 tcpdump net-tools \
@@ -239,9 +224,8 @@ RUN cp $INSTALLDIR/ssl/openssl.cnf $(openssl version -m | cut -d '"' -f2) && \
     LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \ 
     cp ${INSTALLDIR}/${LIBDIR}/ossl-modules/* $(openssl version -d | cut -d '"' -f2)
 
-
 # Copy local files into the machine
-COPY scripts/*.sh ${INSTALLDIR}/bin
+COPY scripts/*.sh ${INSTALLDIR}/bin/
 RUN chmod 755 ${INSTALLDIR}/bin/*.sh
 
 WORKDIR ${INSTALLDIR}/bin

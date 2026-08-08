@@ -1,0 +1,312 @@
+== Campagne de tests — scénario: modere — mer. 05 août 2026 11:54:04 WAT ==
+Launcher principal : profile=simple loss=0.3 delay=30.02
+Waves concurrent=20 | Waves resumption=50
+Combos représentatifs :
+  - mldsa44 mlkem512
+  - mldsa65 mlkem768
+  - mldsa87 mlkem1024
+  - mldsa44 hqc128
+  - mldsa65 hqc192
+  - mldsa87 hqc256
+
+==================================================
+ ÉTAPE : Sweep TLS single (modere)
+ Commande : ./Launcher_pq_mldsa_mlkem_hqc.sh both tls single nocapture simple 0.3 30.02
+ Début : 11:54:04
+==================================================
+  [OK-SHELL] Sweep TLS single (modere) terminé sans erreur shell (exit 0).
+ Fin : 13:18:24
+
+==================================================
+ ÉTAPE : Sweep TLS mutual (modere)
+ Commande : ./Launcher_pq_mldsa_mlkem_hqc.sh both tls mutual nocapture simple 0.3 30.02
+ Début : 13:18:24
+==================================================
+  [OK-SHELL] Sweep TLS mutual (modere) terminé sans erreur shell (exit 0).
+ Fin : 14:49:37
+
+==================================================
+ ÉTAPE : Sweep QUIC single (modere)
+ Commande : ./Launcher_pq_mldsa_mlkem_hqc.sh both quic single nocapture simple 0.3 30.02
+ Début : 14:49:37
+==================================================
+  [OK-SHELL] Sweep QUIC single (modere) terminé sans erreur shell (exit 0).
+ Fin : 16:20:11
+
+[INFO] QUIC mutual volontairement EXCLU — authentification non fiable
+       dans cette pile (confirmé empiriquement).
+
+==================================================
+ ÉTAPE : Concurrent TLS modere (mldsa44/mlkem512)
+ Commande : ./Launcher_advanced_tests.sh concurrent tls single mldsa44 mlkem512 modere 1,5,10,20,50 20
+ Début : 16:20:11
+==================================================
+  [OK-SHELL] Concurrent TLS modere (mldsa44/mlkem512) terminé sans erreur shell (exit 0).
+ Fin : 16:22:40
+
+==================================================
+ ÉTAPE : Concurrent QUIC modere (mldsa44/mlkem512)
+ Commande : ./Launcher_advanced_tests.sh concurrent quic single mldsa44 mlkem512 modere 1,5,10,20,50 20
+ Début : 16:22:40
+==================================================
+  [OK-SHELL] Concurrent QUIC modere (mldsa44/mlkem512) terminé sans erreur shell (exit 0).
+ Fin : 16:23:34
+
+==================================================
+ ÉTAPE : Concurrent TLS modere (mldsa65/mlkem768)
+ Commande : ./Launcher_advanced_tests.sh concurrent tls single mldsa65 mlkem768 modere 1,5,10,20,50 20
+ Début : 16:23:34
+==================================================
+  [OK-SHELL] Concurrent TLS modere (mldsa65/mlkem768) terminé sans erreur shell (exit 0).
+ Fin : 16:26:01
+
+==================================================
+ ÉTAPE : Concurrent QUIC modere (mldsa65/mlkem768)
+ Commande : ./Launcher_advanced_tests.sh concurrent quic single mldsa65 mlkem768 modere 1,5,10,20,50 20
+ Début : 16:26:01
+==================================================
+  [OK-SHELL] Concurrent QUIC modere (mldsa65/mlkem768) terminé sans erreur shell (exit 0).
+ Fin : 16:27:04
+
+==================================================
+ ÉTAPE : Concurrent TLS modere (mldsa87/mlkem1024)
+ Commande : ./Launcher_advanced_tests.sh concurrent tls single mldsa87 mlkem1024 modere 1,5,10,20,50 20
+ Début : 16:27:04
+==================================================
+  [OK-SHELL] Concurrent TLS modere (mldsa87/mlkem1024) terminé sans erreur shell (exit 0).
+ Fin : 16:31:11
+
+==================================================
+ ÉTAPE : Concurrent QUIC modere (mldsa87/mlkem1024)
+ Commande : ./Launcher_advanced_tests.sh concurrent quic single mldsa87 mlkem1024 modere 1,5,10,20,50 20
+ Début : 16:31:11
+==================================================
+  [OK-SHELL] Concurrent QUIC modere (mldsa87/mlkem1024) terminé sans erreur shell (exit 0).
+ Fin : 16:32:20
+
+==================================================
+ ÉTAPE : Concurrent TLS modere (mldsa44/hqc128)
+ Commande : ./Launcher_advanced_tests.sh concurrent tls single mldsa44 hqc128 modere 1,5,10,20,50 20
+ Début : 16:32:20
+==================================================
+  [OK-SHELL] Concurrent TLS modere (mldsa44/hqc128) terminé sans erreur shell (exit 0).
+ Fin : 16:35:48
+
+==================================================
+ ÉTAPE : Concurrent QUIC modere (mldsa44/hqc128)
+ Commande : ./Launcher_advanced_tests.sh concurrent quic single mldsa44 hqc128 modere 1,5,10,20,50 20
+ Début : 16:35:48
+==================================================
+  [OK-SHELL] Concurrent QUIC modere (mldsa44/hqc128) terminé sans erreur shell (exit 0).
+ Fin : 16:37:03
+
+==================================================
+ ÉTAPE : Concurrent TLS modere (mldsa65/hqc192)
+ Commande : ./Launcher_advanced_tests.sh concurrent tls single mldsa65 hqc192 modere 1,5,10,20,50 20
+ Début : 16:37:03
+==================================================
+  [OK-SHELL] Concurrent TLS modere (mldsa65/hqc192) terminé sans erreur shell (exit 0).
+ Fin : 16:42:29
+
+==================================================
+ ÉTAPE : Concurrent QUIC modere (mldsa65/hqc192)
+ Commande : ./Launcher_advanced_tests.sh concurrent quic single mldsa65 hqc192 modere 1,5,10,20,50 20
+ Début : 16:42:29
+==================================================
+  [OK-SHELL] Concurrent QUIC modere (mldsa65/hqc192) terminé sans erreur shell (exit 0).
+ Fin : 16:44:12
+
+==================================================
+ ÉTAPE : Concurrent TLS modere (mldsa87/hqc256)
+ Commande : ./Launcher_advanced_tests.sh concurrent tls single mldsa87 hqc256 modere 1,5,10,20,50 20
+ Début : 16:44:12
+==================================================
+  [OK-SHELL] Concurrent TLS modere (mldsa87/hqc256) terminé sans erreur shell (exit 0).
+ Fin : 16:51:02
+
+==================================================
+ ÉTAPE : Concurrent QUIC modere (mldsa87/hqc256)
+ Commande : ./Launcher_advanced_tests.sh concurrent quic single mldsa87 hqc256 modere 1,5,10,20,50 20
+ Début : 16:51:02
+==================================================
+  [OK-SHELL] Concurrent QUIC modere (mldsa87/hqc256) terminé sans erreur shell (exit 0).
+ Fin : 16:53:56
+
+==================================================
+ ÉTAPE : Resumption TLS modere (mldsa44/mlkem512)
+ Commande : ./Launcher_advanced_tests.sh resumption tls single mldsa44 mlkem512 modere 50 false
+ Début : 16:53:56
+==================================================
+  [OK-SHELL] Resumption TLS modere (mldsa44/mlkem512) terminé sans erreur shell (exit 0).
+ Fin : 16:54:48
+
+==================================================
+ ÉTAPE : Resumption QUIC modere (mldsa44/mlkem512)
+ Commande : ./Launcher_advanced_tests.sh resumption quic single mldsa44 mlkem512 modere 50 false
+ Début : 16:54:48
+==================================================
+  [OK-SHELL] Resumption QUIC modere (mldsa44/mlkem512) terminé sans erreur shell (exit 0).
+ Fin : 16:55:20
+
+==================================================
+ ÉTAPE : Resumption TLS modere (mldsa65/mlkem768)
+ Commande : ./Launcher_advanced_tests.sh resumption tls single mldsa65 mlkem768 modere 50 false
+ Début : 16:55:20
+==================================================
+  [OK-SHELL] Resumption TLS modere (mldsa65/mlkem768) terminé sans erreur shell (exit 0).
+ Fin : 16:56:12
+
+==================================================
+ ÉTAPE : Resumption QUIC modere (mldsa65/mlkem768)
+ Commande : ./Launcher_advanced_tests.sh resumption quic single mldsa65 mlkem768 modere 50 false
+ Début : 16:56:12
+==================================================
+  [OK-SHELL] Resumption QUIC modere (mldsa65/mlkem768) terminé sans erreur shell (exit 0).
+ Fin : 16:56:46
+
+==================================================
+ ÉTAPE : Resumption TLS modere (mldsa87/mlkem1024)
+ Commande : ./Launcher_advanced_tests.sh resumption tls single mldsa87 mlkem1024 modere 50 false
+ Début : 16:56:46
+==================================================
+  [OK-SHELL] Resumption TLS modere (mldsa87/mlkem1024) terminé sans erreur shell (exit 0).
+ Fin : 16:57:38
+
+==================================================
+ ÉTAPE : Resumption QUIC modere (mldsa87/mlkem1024)
+ Commande : ./Launcher_advanced_tests.sh resumption quic single mldsa87 mlkem1024 modere 50 false
+ Début : 16:57:38
+==================================================
+  [OK-SHELL] Resumption QUIC modere (mldsa87/mlkem1024) terminé sans erreur shell (exit 0).
+ Fin : 16:58:09
+
+==================================================
+ ÉTAPE : Resumption TLS modere (mldsa44/hqc128)
+ Commande : ./Launcher_advanced_tests.sh resumption tls single mldsa44 hqc128 modere 50 false
+ Début : 16:58:09
+==================================================
+  [OK-SHELL] Resumption TLS modere (mldsa44/hqc128) terminé sans erreur shell (exit 0).
+ Fin : 16:59:02
+
+==================================================
+ ÉTAPE : Resumption QUIC modere (mldsa44/hqc128)
+ Commande : ./Launcher_advanced_tests.sh resumption quic single mldsa44 hqc128 modere 50 false
+ Début : 16:59:02
+==================================================
+  [OK-SHELL] Resumption QUIC modere (mldsa44/hqc128) terminé sans erreur shell (exit 0).
+ Fin : 16:59:35
+
+==================================================
+ ÉTAPE : Resumption TLS modere (mldsa65/hqc192)
+ Commande : ./Launcher_advanced_tests.sh resumption tls single mldsa65 hqc192 modere 50 false
+ Début : 16:59:35
+==================================================
+  [OK-SHELL] Resumption TLS modere (mldsa65/hqc192) terminé sans erreur shell (exit 0).
+ Fin : 17:00:21
+
+==================================================
+ ÉTAPE : Resumption QUIC modere (mldsa65/hqc192)
+ Commande : ./Launcher_advanced_tests.sh resumption quic single mldsa65 hqc192 modere 50 false
+ Début : 17:00:21
+==================================================
+  [OK-SHELL] Resumption QUIC modere (mldsa65/hqc192) terminé sans erreur shell (exit 0).
+ Fin : 17:00:56
+
+==================================================
+ ÉTAPE : Resumption TLS modere (mldsa87/hqc256)
+ Commande : ./Launcher_advanced_tests.sh resumption tls single mldsa87 hqc256 modere 50 false
+ Début : 17:00:56
+==================================================
+  [OK-SHELL] Resumption TLS modere (mldsa87/hqc256) terminé sans erreur shell (exit 0).
+ Fin : 17:01:37
+
+==================================================
+ ÉTAPE : Resumption QUIC modere (mldsa87/hqc256)
+ Commande : ./Launcher_advanced_tests.sh resumption quic single mldsa87 hqc256 modere 50 false
+ Début : 17:01:37
+==================================================
+  [OK-SHELL] Resumption QUIC modere (mldsa87/hqc256) terminé sans erreur shell (exit 0).
+ Fin : 17:02:23
+
+==================================================
+ VALIDATION DES DONNÉES PRODUITES
+==================================================
+
+--- Logs de handshake : tls/single (/home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/single/simple_loss0.3_delay30.02ms/handshake_logs) ---
+  42 fichier(s) de log trouvé(s) (42 attendus).
+42 fichier(s) de log analysé(s) -> /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260805_115404_modere/validation_tls_single/handshake_stats.csv
+  [OK] Tous les taux de succès sont >= 95%.
+
+--- Logs de handshake : tls/mutual (/home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/mutual/simple_loss0.3_delay30.02ms/handshake_logs) ---
+  42 fichier(s) de log trouvé(s) (42 attendus).
+42 fichier(s) de log analysé(s) -> /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260805_115404_modere/validation_tls_mutual/handshake_stats.csv
+  [OK] Tous les taux de succès sont >= 95%.
+
+--- Logs de handshake : quic/single (/home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/quic/single/simple_loss0.3_delay30.02ms/handshake_logs) ---
+  42 fichier(s) de log trouvé(s) (42 attendus).
+42 fichier(s) de log analysé(s) -> /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260805_115404_modere/validation_quic_single/handshake_stats.csv
+  [OK] Tous les taux de succès sont >= 95%.
+
+--- CPU/mémoire : tls/single ---
+  84 ligne(s) dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/single/simple_loss0.3_delay30.02ms/resource_usage/resource_usage_tls_single_simple_loss0.3_delay30.02ms.csv.
+  [OK]
+
+--- CPU/mémoire : tls/mutual ---
+  84 ligne(s) dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/tls/mutual/simple_loss0.3_delay30.02ms/resource_usage/resource_usage_tls_mutual_simple_loss0.3_delay30.02ms.csv.
+  [OK]
+
+--- CPU/mémoire : quic/single ---
+  84 ligne(s) dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/quic/single/simple_loss0.3_delay30.02ms/resource_usage/resource_usage_quic_single_simple_loss0.3_delay30.02ms.csv.
+  [OK]
+
+--- Charge concurrente TLS ---
+  30 fichier(s) trouvé(s) (concurrent_summary_tls_*_modere_c*.csv), 30 attendu(s).
+  [OK]
+
+--- Charge concurrente QUIC ---
+  30 fichier(s) trouvé(s) (concurrent_summary_quic_*_modere_c*.csv), 30 attendu(s).
+  [OK]
+
+--- Resumption TLS ---
+  6 fichier(s) trouvé(s) (resumption_summary_tls_*_modere.csv), 6 attendu(s).
+  [OK]
+
+--- Resumption QUIC ---
+  6 fichier(s) trouvé(s) (resumption_summary_quic_*_modere.csv), 6 attendu(s).
+  [OK]
+
+==================================================
+ RÉCAPITULATIF FINAL — scénario: modere
+==================================================
+  [OK-SHELL]    Sweep TLS single (modere)
+  [OK-SHELL]    Sweep TLS mutual (modere)
+  [OK-SHELL]    Sweep QUIC single (modere)
+  [OK-SHELL]    Concurrent TLS modere (mldsa44/mlkem512)
+  [OK-SHELL]    Concurrent QUIC modere (mldsa44/mlkem512)
+  [OK-SHELL]    Concurrent TLS modere (mldsa65/mlkem768)
+  [OK-SHELL]    Concurrent QUIC modere (mldsa65/mlkem768)
+  [OK-SHELL]    Concurrent TLS modere (mldsa87/mlkem1024)
+  [OK-SHELL]    Concurrent QUIC modere (mldsa87/mlkem1024)
+  [OK-SHELL]    Concurrent TLS modere (mldsa44/hqc128)
+  [OK-SHELL]    Concurrent QUIC modere (mldsa44/hqc128)
+  [OK-SHELL]    Concurrent TLS modere (mldsa65/hqc192)
+  [OK-SHELL]    Concurrent QUIC modere (mldsa65/hqc192)
+  [OK-SHELL]    Concurrent TLS modere (mldsa87/hqc256)
+  [OK-SHELL]    Concurrent QUIC modere (mldsa87/hqc256)
+  [OK-SHELL]    Resumption TLS modere (mldsa44/mlkem512)
+  [OK-SHELL]    Resumption QUIC modere (mldsa44/mlkem512)
+  [OK-SHELL]    Resumption TLS modere (mldsa65/mlkem768)
+  [OK-SHELL]    Resumption QUIC modere (mldsa65/mlkem768)
+  [OK-SHELL]    Resumption TLS modere (mldsa87/mlkem1024)
+  [OK-SHELL]    Resumption QUIC modere (mldsa87/mlkem1024)
+  [OK-SHELL]    Resumption TLS modere (mldsa44/hqc128)
+  [OK-SHELL]    Resumption QUIC modere (mldsa44/hqc128)
+  [OK-SHELL]    Resumption TLS modere (mldsa65/hqc192)
+  [OK-SHELL]    Resumption QUIC modere (mldsa65/hqc192)
+  [OK-SHELL]    Resumption TLS modere (mldsa87/hqc256)
+  [OK-SHELL]    Resumption QUIC modere (mldsa87/hqc256)
+
+✅ VALIDATION GLOBALE : les données produites semblent réelles et plausibles.
+
+Rapport complet : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260805_115404_modere/summary.txt
+Logs détaillés par étape : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/orchestration_logs/20260805_115404_modere/

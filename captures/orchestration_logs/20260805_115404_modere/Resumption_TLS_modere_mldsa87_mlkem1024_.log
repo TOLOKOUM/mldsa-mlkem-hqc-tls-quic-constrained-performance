@@ -1,0 +1,57 @@
+*************************************
+Mode:      resumption
+Protocol:  tls
+Auth Mode: single
+SIG_ALG:   mldsa87
+KEM_ALG:   mlkem1024
+Network:   modere (delay=30.02ms/interface, loss=0.3%)
+Waves:      50
+Early data: false
+*************************************
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*** NETWORK AND VOLUME ***
+6715a62f395ad5ae6c5dee33b15eb1377841554cde09c541267f90172758a4ff
+cert
+
+ ==> Creating Certs and Keys for SIG_ALG=mldsa87
+Creating certificates
+Using default procedure for mldsa87
+-----
+-----
+Certificate request self-signature ok
+subject=CN=localhost
+-----
+Certificate request self-signature ok
+subject=CN=user
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=mldsa87 and certificates created
+
+
+ ==> Starting server...
+f821d9a4018ba5516346318affb0a3e5ccc630dd25b4ca74b310af8b51a1691a
+    Server IP: 172.18.0.2
+
+ ==> Starting client container (idle, tests run via docker exec)...
+7345267a824b40136f47c9139233792f14e2872736e7e929b5994c0449a68fed
+cliente
+
+ ==> Applying network scenario 'modere': delay=30.02ms/interface, loss=0.3% (server only)
+=== Session resumption test ===
+  Protocol: tls | SIG_ALG: mldsa87 | KEM_ALG: mlkem1024 | Waves: 50 | 0-RTT: false
+================================
+  [!] Vague 1 : pas de ticket de session sauvegardé, reprise ignorée.
+
+Résultats : /tmp/resumption_summary_tls_mldsa87_mlkem1024.csv
+
+ ==> Résultats copiés dans : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests
+Deleted Containers:
+7345267a824b40136f47c9139233792f14e2872736e7e929b5994c0449a68fed
+f821d9a4018ba5516346318affb0a3e5ccc630dd25b4ca74b310af8b51a1691a
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Advanced tests finished.

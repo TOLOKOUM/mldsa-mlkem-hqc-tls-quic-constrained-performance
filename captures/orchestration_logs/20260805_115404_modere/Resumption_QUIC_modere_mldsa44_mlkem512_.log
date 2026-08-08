@@ -1,0 +1,109 @@
+*************************************
+Mode:      resumption
+Protocol:  quic
+Auth Mode: single
+SIG_ALG:   mldsa44
+KEM_ALG:   mlkem512
+Network:   modere (delay=30.02ms/interface, loss=0.3%)
+Waves:      50
+Early data: false
+*************************************
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*** NETWORK AND VOLUME ***
+7079b0aec9bead5d5cb8afad1aeb1c6db33e48da192a9709d202fc91a81cb449
+cert
+
+ ==> Creating Certs and Keys for SIG_ALG=mldsa44
+Creating certificates
+Using default procedure for mldsa44
+-----
+-----
+Certificate request self-signature ok
+subject=CN=localhost
+-----
+Certificate request self-signature ok
+subject=CN=user
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=mldsa44 and certificates created
+
+
+ ==> Starting server...
+c72e82bb4c1dc80fac6ab6a59b87e8794dfe852a29375c8791cea4daf39e3b83
+    Server IP: 172.18.0.2
+
+ ==> Starting client container (idle, tests run via docker exec)...
+e87355dba9d09b52d6aacf008fdc71c93659f6f4c034d43c0d6cfaf7908de7df
+cliente
+
+ ==> Applying network scenario 'modere': delay=30.02ms/interface, loss=0.3% (server only)
+=== Session resumption test ===
+  Protocol: quic | SIG_ALG: mldsa44 | KEM_ALG: mlkem512 | Waves: 50 | 0-RTT: false
+================================
+[!] QUIC : les flags -sess_out:/-sess_in: n'ont pas été vérifiés contre le code
+    source de quics_connection. Si le premier essai échoue avec une erreur de
+    flag inconnu, c'est attendu — corrigez selon 'quics_connection -help'.
+  [!] Vague 1 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 2 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 3 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 4 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 5 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 6 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 7 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 8 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 9 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 10 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 11 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 12 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 13 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 14 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 15 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 16 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 17 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 18 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 19 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 20 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 21 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 22 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 23 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 24 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 25 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 26 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 27 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 28 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 29 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 30 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 31 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 32 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 33 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 34 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 35 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 36 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 37 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 38 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 39 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 40 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 41 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 42 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 43 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 44 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 45 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 46 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 47 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 48 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 49 : pas de ticket de session sauvegardé, reprise ignorée.
+  [!] Vague 50 : pas de ticket de session sauvegardé, reprise ignorée.
+
+Résultats : /tmp/resumption_summary_quic_mldsa44_mlkem512.csv
+
+ ==> Résultats copiés dans : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests
+Deleted Containers:
+e87355dba9d09b52d6aacf008fdc71c93659f6f4c034d43c0d6cfaf7908de7df
+c72e82bb4c1dc80fac6ab6a59b87e8794dfe852a29375c8791cea4daf39e3b83
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Advanced tests finished.

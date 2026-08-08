@@ -75,10 +75,10 @@ if [ -n "$SIG_ALG" ]; then
         # Procedimiento original...
         
              
-         openssl req -x509 -new -newkey $SIG_ALG -keyout $CERT_PATH/CA.key -out $CERT_PATH/CA.crt -nodes -subj "/CN==oqstest CA" -days 365 -config /opt/oqssa/ssl/openssl.cnf
+         openssl req -x509 -new -newkey $SIG_ALG -keyout $CERT_PATH/CA.key -out $CERT_PATH/CA.crt -nodes -subj "/CN=oqstest CA" -days 365 -config /opt/oqssa/ssl/openssl.cnf
 
          # generate new server CSR using pre-set CA.key & cert
-         openssl req -new -newkey $SIG_ALG -keyout $CERT_PATH/server.key -out $CERT_PATH/server.csr -nodes -subj "/CN==localhost"
+         openssl req -new -newkey $SIG_ALG -keyout $CERT_PATH/server.key -out $CERT_PATH/server.csr -nodes -subj "/CN=localhost"
          if [ $? -ne 0 ]; then
                    echo "Error generating keys - aborting."
                    exit 1
@@ -91,7 +91,7 @@ if [ -n "$SIG_ALG" ]; then
          fi
 
          # generate new key CSR using pre-set CA.key & cert
-         openssl req -new -newkey $SIG_ALG -keyout $CERT_PATH/user.key -out $CERT_PATH/user.csr -nodes -subj "/CN==user"
+         openssl req -new -newkey $SIG_ALG -keyout $CERT_PATH/user.key -out $CERT_PATH/user.csr -nodes -subj "/CN=user"
          if [ $? -ne 0 ]; then
                    echo "Error generating keys - aborting."
                    exit 1

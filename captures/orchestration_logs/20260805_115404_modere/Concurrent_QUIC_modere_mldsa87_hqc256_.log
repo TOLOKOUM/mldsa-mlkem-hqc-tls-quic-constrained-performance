@@ -1,0 +1,221 @@
+*************************************
+Mode:      concurrent
+Protocol:  quic
+Auth Mode: single
+SIG_ALG:   mldsa87
+KEM_ALG:   hqc256
+Network:   modere (delay=30.02ms/interface, loss=0.3%)
+Concurrency levels: 1,5,10,20,50
+Waves per level:    20
+*************************************
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*** NETWORK AND VOLUME ***
+598512f1e5b4f712dc319ac3ad0c638bdf56a9cbca3be79ba14780bf9bc17331
+cert
+
+ ==> Creating Certs and Keys for SIG_ALG=mldsa87
+Creating certificates
+Using default procedure for mldsa87
+-----
+-----
+Certificate request self-signature ok
+subject=CN=localhost
+-----
+Certificate request self-signature ok
+subject=CN=user
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=mldsa87 and certificates created
+
+
+ ==> Starting server...
+6f40e04d435b8be75eefe8138feb298b45fa2365e595eb5e2cb3e46bf55abcf9
+    Server IP: 172.18.0.2
+
+ ==> Starting client container (idle, tests run via docker exec)...
+e2067dbcccb33a59d6be0fec04e1c8bfd43f3502372b2ad5cb56fda5a36be623
+cliente
+
+ ==> Applying network scenario 'modere': delay=30.02ms/interface, loss=0.3% (server only)
+
+===================================================
+ Concurrency level: 1
+===================================================
+=== Concurrent load test ===
+  Protocol:    quic
+  SIG_ALG:     mldsa87
+  KEM_ALG:     hqc256
+  Concurrency: 1 simultaneous connections
+  Waves:       20
+=============================
+  -> Vague 1/20 (1 connexions simultanées)
+  -> Vague 2/20 (1 connexions simultanées)
+  -> Vague 3/20 (1 connexions simultanées)
+  -> Vague 4/20 (1 connexions simultanées)
+  -> Vague 5/20 (1 connexions simultanées)
+  -> Vague 6/20 (1 connexions simultanées)
+  -> Vague 7/20 (1 connexions simultanées)
+  -> Vague 8/20 (1 connexions simultanées)
+  -> Vague 9/20 (1 connexions simultanées)
+  -> Vague 10/20 (1 connexions simultanées)
+  -> Vague 11/20 (1 connexions simultanées)
+  -> Vague 12/20 (1 connexions simultanées)
+  -> Vague 13/20 (1 connexions simultanées)
+  -> Vague 14/20 (1 connexions simultanées)
+  -> Vague 15/20 (1 connexions simultanées)
+  -> Vague 16/20 (1 connexions simultanées)
+  -> Vague 17/20 (1 connexions simultanées)
+  -> Vague 18/20 (1 connexions simultanées)
+  -> Vague 19/20 (1 connexions simultanées)
+  -> Vague 20/20 (1 connexions simultanées)
+
+Résultats : /tmp/concurrent_summary_quic_mldsa87_hqc256_c1.csv
+Total connexions : 20 | Échecs : 1
+
+===================================================
+ Concurrency level: 5
+===================================================
+=== Concurrent load test ===
+  Protocol:    quic
+  SIG_ALG:     mldsa87
+  KEM_ALG:     hqc256
+  Concurrency: 5 simultaneous connections
+  Waves:       20
+=============================
+  -> Vague 1/20 (5 connexions simultanées)
+  -> Vague 2/20 (5 connexions simultanées)
+  -> Vague 3/20 (5 connexions simultanées)
+  -> Vague 4/20 (5 connexions simultanées)
+  -> Vague 5/20 (5 connexions simultanées)
+  -> Vague 6/20 (5 connexions simultanées)
+  -> Vague 7/20 (5 connexions simultanées)
+  -> Vague 8/20 (5 connexions simultanées)
+  -> Vague 9/20 (5 connexions simultanées)
+  -> Vague 10/20 (5 connexions simultanées)
+  -> Vague 11/20 (5 connexions simultanées)
+  -> Vague 12/20 (5 connexions simultanées)
+  -> Vague 13/20 (5 connexions simultanées)
+  -> Vague 14/20 (5 connexions simultanées)
+  -> Vague 15/20 (5 connexions simultanées)
+  -> Vague 16/20 (5 connexions simultanées)
+  -> Vague 17/20 (5 connexions simultanées)
+  -> Vague 18/20 (5 connexions simultanées)
+  -> Vague 19/20 (5 connexions simultanées)
+  -> Vague 20/20 (5 connexions simultanées)
+
+Résultats : /tmp/concurrent_summary_quic_mldsa87_hqc256_c5.csv
+Total connexions : 100 | Échecs : 1
+
+===================================================
+ Concurrency level: 10
+===================================================
+=== Concurrent load test ===
+  Protocol:    quic
+  SIG_ALG:     mldsa87
+  KEM_ALG:     hqc256
+  Concurrency: 10 simultaneous connections
+  Waves:       20
+=============================
+  -> Vague 1/20 (10 connexions simultanées)
+  -> Vague 2/20 (10 connexions simultanées)
+  -> Vague 3/20 (10 connexions simultanées)
+  -> Vague 4/20 (10 connexions simultanées)
+  -> Vague 5/20 (10 connexions simultanées)
+  -> Vague 6/20 (10 connexions simultanées)
+  -> Vague 7/20 (10 connexions simultanées)
+  -> Vague 8/20 (10 connexions simultanées)
+  -> Vague 9/20 (10 connexions simultanées)
+  -> Vague 10/20 (10 connexions simultanées)
+  -> Vague 11/20 (10 connexions simultanées)
+  -> Vague 12/20 (10 connexions simultanées)
+  -> Vague 13/20 (10 connexions simultanées)
+  -> Vague 14/20 (10 connexions simultanées)
+  -> Vague 15/20 (10 connexions simultanées)
+  -> Vague 16/20 (10 connexions simultanées)
+  -> Vague 17/20 (10 connexions simultanées)
+  -> Vague 18/20 (10 connexions simultanées)
+  -> Vague 19/20 (10 connexions simultanées)
+  -> Vague 20/20 (10 connexions simultanées)
+
+Résultats : /tmp/concurrent_summary_quic_mldsa87_hqc256_c10.csv
+Total connexions : 200 | Échecs : 1
+
+===================================================
+ Concurrency level: 20
+===================================================
+=== Concurrent load test ===
+  Protocol:    quic
+  SIG_ALG:     mldsa87
+  KEM_ALG:     hqc256
+  Concurrency: 20 simultaneous connections
+  Waves:       20
+=============================
+  -> Vague 1/20 (20 connexions simultanées)
+  -> Vague 2/20 (20 connexions simultanées)
+  -> Vague 3/20 (20 connexions simultanées)
+  -> Vague 4/20 (20 connexions simultanées)
+  -> Vague 5/20 (20 connexions simultanées)
+  -> Vague 6/20 (20 connexions simultanées)
+  -> Vague 7/20 (20 connexions simultanées)
+  -> Vague 8/20 (20 connexions simultanées)
+  -> Vague 9/20 (20 connexions simultanées)
+  -> Vague 10/20 (20 connexions simultanées)
+  -> Vague 11/20 (20 connexions simultanées)
+  -> Vague 12/20 (20 connexions simultanées)
+  -> Vague 13/20 (20 connexions simultanées)
+  -> Vague 14/20 (20 connexions simultanées)
+  -> Vague 15/20 (20 connexions simultanées)
+  -> Vague 16/20 (20 connexions simultanées)
+  -> Vague 17/20 (20 connexions simultanées)
+  -> Vague 18/20 (20 connexions simultanées)
+  -> Vague 19/20 (20 connexions simultanées)
+  -> Vague 20/20 (20 connexions simultanées)
+
+Résultats : /tmp/concurrent_summary_quic_mldsa87_hqc256_c20.csv
+Total connexions : 400 | Échecs : 1
+
+===================================================
+ Concurrency level: 50
+===================================================
+=== Concurrent load test ===
+  Protocol:    quic
+  SIG_ALG:     mldsa87
+  KEM_ALG:     hqc256
+  Concurrency: 50 simultaneous connections
+  Waves:       20
+=============================
+  -> Vague 1/20 (50 connexions simultanées)
+  -> Vague 2/20 (50 connexions simultanées)
+  -> Vague 3/20 (50 connexions simultanées)
+  -> Vague 4/20 (50 connexions simultanées)
+  -> Vague 5/20 (50 connexions simultanées)
+  -> Vague 6/20 (50 connexions simultanées)
+  -> Vague 7/20 (50 connexions simultanées)
+  -> Vague 8/20 (50 connexions simultanées)
+  -> Vague 9/20 (50 connexions simultanées)
+  -> Vague 10/20 (50 connexions simultanées)
+  -> Vague 11/20 (50 connexions simultanées)
+  -> Vague 12/20 (50 connexions simultanées)
+  -> Vague 13/20 (50 connexions simultanées)
+  -> Vague 14/20 (50 connexions simultanées)
+  -> Vague 15/20 (50 connexions simultanées)
+  -> Vague 16/20 (50 connexions simultanées)
+  -> Vague 17/20 (50 connexions simultanées)
+  -> Vague 18/20 (50 connexions simultanées)
+  -> Vague 19/20 (50 connexions simultanées)
+  -> Vague 20/20 (50 connexions simultanées)
+
+Résultats : /tmp/concurrent_summary_quic_mldsa87_hqc256_c50.csv
+Total connexions : 1000 | Échecs : 3
+
+ ==> Résultats copiés dans : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures/advanced_tests
+Deleted Containers:
+e2067dbcccb33a59d6be0fec04e1c8bfd43f3502372b2ad5cb56fda5a36be623
+6f40e04d435b8be75eefe8138feb298b45fa2365e595eb5e2cb3e46bf55abcf9
+
+Total reclaimed space: 127kB
+cert
+localNet
+✅  Cleanup complete. Advanced tests finished.

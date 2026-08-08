@@ -1,0 +1,90 @@
+== Microbenchmarks cryptographiques — Sun Aug  2 12:10:53 UTC 2026 ==
+Durée par opération : 10s
+
+### Signatures classiques ###
+Doing 384 bits sign ecdsa ops for 10s: 29402 384 bits ECDSA sign ops in 9.98s
+Doing 384 bits verify ecdsa ops for 10s: 13916 384 bits ECDSA verify ops in 10.00s
+Doing 521 bits sign ecdsa ops for 10s: 22336 521 bits ECDSA sign ops in 9.98s
+Doing 521 bits verify ecdsa ops for 10s: 12281 521 bits ECDSA verify ops in 9.99s
+Doing 253 bits sign Ed25519 ops for 10s: 180772 253 bits Ed25519 sign ops in 10.00s 
+Doing 253 bits verify Ed25519 ops for 10s: 58890 253 bits Ed25519 verify ops in 10.00s
+version: 3.4.2-dev
+built on: Sat Aug  1 16:13:28 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DBROTLI -DZLIB -DZSTD -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0x7ffaf3bfffebffff:0x29c67af
+                              sign    verify    sign/s verify/s
+ 384 bits ecdsa (nistp384)   0.0003s   0.0007s   2946.1   1391.6
+ 521 bits ecdsa (nistp521)   0.0004s   0.0008s   2238.1   1229.3
+                              sign    verify    sign/s verify/s
+ 253 bits EdDSA (Ed25519)   0.0001s   0.0002s  18077.2   5889.0
+
+### Signatures ML-DSA ###
+Doing mldsa44 keygen ops for 10s: 229248 mldsa44 signature keygen ops in 9.89s
+Doing mldsa44 signs ops for 10s: 88057 mldsa44 signature sign ops in 9.95s
+Doing mldsa44 verify ops for 10s: 263961 mldsa44 signature verify ops in 10.00s
+Doing mldsa65 keygen ops for 10s: 132902 mldsa65 signature keygen ops in 9.94s
+Doing mldsa65 signs ops for 10s: 58090 mldsa65 signature sign ops in 9.97s
+Doing mldsa65 verify ops for 10s: 153508 mldsa65 signature verify ops in 10.00s
+Doing mldsa87 keygen ops for 10s: 84713 mldsa87 signature keygen ops in 9.96s
+Doing mldsa87 signs ops for 10s: 45949 mldsa87 signature sign ops in 9.98s
+Doing mldsa87 verify ops for 10s: 89140 mldsa87 signature verify ops in 10.00s
+version: 3.4.2-dev
+built on: Sat Aug  1 16:13:28 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DBROTLI -DZLIB -DZSTD -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0x7ffaf3bfffebffff:0x29c67af
+                               keygen     signs    verify keygens/s    sign/s  verify/s
+                    mldsa44 0.000043s 0.000113s 0.000038s   23179.8    8849.9   26396.1
+                    mldsa65 0.000075s 0.000172s 0.000065s   13370.4    5826.5   15350.8
+                    mldsa87 0.000118s 0.000217s 0.000112s    8505.3    4604.1    8914.0
+
+### KEM classiques (ECDH) ###
+Doing 256 bits  ecdh ops for 10s: 135896 256-bits ECDH ops in 10.00s
+Doing 384 bits  ecdh ops for 10s: 18866 384-bits ECDH ops in 10.00s
+Doing 521 bits  ecdh ops for 10s: 19279 521-bits ECDH ops in 10.00s
+Doing 253 bits  ecdh ops for 10s: 178054 253-bits ECDH ops in 9.99s
+Doing 448 bits  ecdh ops for 10s: 33761 448-bits ECDH ops in 9.98s
+version: 3.4.2-dev
+built on: Sat Aug  1 16:13:28 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DBROTLI -DZLIB -DZSTD -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0x7ffaf3bfffebffff:0x29c67af
+                              op      op/s
+ 256 bits ecdh (nistp256)   0.0001s  13589.6
+ 384 bits ecdh (nistp384)   0.0005s   1886.6
+ 521 bits ecdh (nistp521)   0.0005s   1927.9
+ 253 bits ecdh (X25519)   0.0001s  17823.2
+ 448 bits ecdh (X448)   0.0003s   3382.9
+
+### KEM post-quantiques (ML-KEM, HQC) ###
+Doing mlkem512 keygen ops for 10s: 621783 mlkem512 KEM keygen ops in 9.73s
+Doing mlkem512 encaps ops for 10s: 705668 mlkem512 KEM encaps ops in 9.69s
+Doing mlkem512 decaps ops for 10s: 786204 mlkem512 KEM decaps ops in 9.99s
+Doing mlkem768 keygen ops for 10s: 412053 mlkem768 KEM keygen ops in 9.78s
+Doing mlkem768 encaps ops for 10s: 435534 mlkem768 KEM encaps ops in 9.78s
+Doing mlkem768 decaps ops for 10s: 502798 mlkem768 KEM decaps ops in 10.00s
+Doing mlkem1024 keygen ops for 10s: 288438 mlkem1024 KEM keygen ops in 9.88s
+Doing mlkem1024 encaps ops for 10s: 308994 mlkem1024 KEM encaps ops in 9.82s
+Doing mlkem1024 decaps ops for 10s: 345325 mlkem1024 KEM decaps ops in 9.97s
+Doing hqc128 keygen ops for 10s: 3140 hqc128 KEM keygen ops in 9.98s
+Doing hqc128 encaps ops for 10s: 1676 hqc128 KEM encaps ops in 10.00s
+Doing hqc128 decaps ops for 10s: 1029 hqc128 KEM decaps ops in 10.00s
+Doing hqc192 keygen ops for 10s: 1069 hqc192 KEM keygen ops in 9.99s
+Doing hqc192 encaps ops for 10s: 539 hqc192 KEM encaps ops in 9.99s
+Doing hqc192 decaps ops for 10s: 340 hqc192 KEM decaps ops in 9.97s
+Doing hqc256 keygen ops for 10s: 641 hqc256 KEM keygen ops in 10.00s
+Doing hqc256 encaps ops for 10s: 277 hqc256 KEM encaps ops in 10.03s
+Doing hqc256 decaps ops for 10s: 187 hqc256 KEM decaps ops in 9.99s
+version: 3.4.2-dev
+built on: Sat Aug  1 16:13:28 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DBROTLI -DZLIB -DZSTD -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0x7ffaf3bfffebffff:0x29c67af
+                               keygen    encaps    decaps keygens/s  encaps/s  decaps/s
+                   mlkem512 0.000016s 0.000014s 0.000013s   63903.7   72824.4   78699.1
+                   mlkem768 0.000024s 0.000022s 0.000020s   42132.2   44533.1   50279.8
+                  mlkem1024 0.000034s 0.000032s 0.000029s   29194.1   31465.8   34636.4
+                     hqc128 0.003178s 0.005967s 0.009718s     314.6     167.6     102.9
+                     hqc192 0.009345s 0.018534s 0.029324s     107.0      54.0      34.1
+                     hqc256 0.015601s 0.036209s 0.053422s      64.1      27.6      18.7
