@@ -1,0 +1,7 @@
+timestamp,protocol,auth_mode,sig_alg,kem,network_profile,role,n_runs,cpu_usec_total,cpu_usec_per_handshake,mem_peak_bytes
+2026-08-08T22:33:29+01:00,tls,single,ed25519,P-256,unstable,server,500,1215169,2430.338,6381568
+2026-08-08T22:33:29+01:00,tls,single,ed25519,P-256,unstable,client,500,15746262,31492.524,5840896
+2026-08-08T22:42:57+01:00,tls,single,ed25519,x25519,unstable,server,500,1491076,2982.152,6414336
+2026-08-08T22:42:57+01:00,tls,single,ed25519,x25519,unstable,client,500,20893876,41787.752,5795840
+2026-08-08T22:57:54+01:00,tls,single,ed25519,p256_mlkem512,unstable,server,500,3416996,6833.992,6758400
+2026-08-08T22:57:54+01:00,tls,single,ed25519,p256_mlkem512,unstable,client,500,29165361,58330.722,5632000

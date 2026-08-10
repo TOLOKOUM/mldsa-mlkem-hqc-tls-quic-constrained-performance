@@ -409,6 +409,19 @@ append_resource_row() {
     echo "$(date -Iseconds),$PROTOCOL,$AUTH_MODE,$SIG_ALG,$KEM,$NETWORK_PROFILE,$role,$NUM_RUNS,$cpu_total,$cpu_per_run,$mem_peak" >> "$RESOURCE_CSV"
 }
 
+
+# ── Reprise idempotente ──────────────────────────────────────────────────
+# Vérifie si (sig_alg, kem) a déjà une ligne "client" dans le CSV de ce
+# scénario -- basé sur les colonnes exactes (pas de correspondance de
+# sous-chaîne, pour ne pas confondre "x25519" et "x25519_mlkem512").
+already_done() {
+    local sig="$1" kem="$2"
+    [[ -f "$RESOURCE_CSV" ]] || return 1
+    awk -F',' -v s="$sig" -v k="$kem" -v np="$NETWORK_PROFILE" \
+        '$4==s && $5==k && $6==np && $7=="client" {found=1} END{exit !found}' \
+        "$RESOURCE_CSV"
+}
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 detect_platform
@@ -477,6 +490,11 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
         echo ""
         echo "****************"
         echo "  -> KEM: $KEM"
+        if already_done "$SIG_ALG" "$KEM"; then
+            echo "     (deja present dans $RESOURCE_CSV pour ce scenario -- ignore, reprise automatique)"
+            continue
+        fi
+
 
             echo ""
             echo "    Executing docker Server..."
