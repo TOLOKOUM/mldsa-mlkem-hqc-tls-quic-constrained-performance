@@ -1,0 +1,5 @@
+protocol,combo,network_scenario,concurrency,n_connections,success_rate_pct,latency_mean_ms,latency_p95_ms,latency_max_ms,wall_clock_ms,throughput_true_hs_per_s
+quic,mldsa65_mlkem768,ideal,1,500,100.0,2.9,3.35,3.96,23157.0,21.59
+quic,mldsa65_mlkem768,ideal,5,2500,100.0,3.01,5.44,10.17,42974.0,58.17
+quic,mldsa65_mlkem768,ideal,10,5000,100.0,4.0,7.92,57.15,69136.0,72.32
+quic,mldsa65_mlkem768,ideal,20,10000,100.0,5.95,14.01,84.55,127158.0,78.64

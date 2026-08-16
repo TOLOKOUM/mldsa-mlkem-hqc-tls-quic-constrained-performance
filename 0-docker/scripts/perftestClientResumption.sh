@@ -1,90 +1,193 @@
 #!/bin/sh
-# perftestClientResumption.sh — Test de reprise de session (0-RTT/PSK)
+# -------------------------------------------------------------------
+# perftestClientResumption.sh
+# Approche "batch séparés" — scénario Idéal
+#
+# Phase 1 : N full handshakes consécutifs
+#           - Chaque handshake établit une nouvelle session TLS/QUIC
+#           - En TLS 1.3, un léger délai est nécessaire avant d'envoyer 'Q'
+#             afin de laisser le temps d'intercepter le NewSessionTicket
+#             asynchrone et d'écrire le fichier de session (-sess_out).
+#
+# Phase 2 : N resumed handshakes consécutifs
+#           - Chaque handshake tente de charger la session du dernier full (-sess_in)
+# -------------------------------------------------------------------
 
+if [ -z "$TC_DELAY" ]; then TC_DELAY=0ms; fi
+if [ -z "$TC_LOSS" ]; then TC_LOSS="0%"; fi
+if [ -z "$DOCKER_HOST" ]; then DOCKER_HOST="localhost"; fi
 if [ -z "$USE_TLS" ]; then USE_TLS="true"; fi
-if [ -z "$KEM_ALG" ]; then KEM_ALG=mlkem512; fi
+if [ -z "$NUM_RUNS" ]; then NUM_RUNS=500; fi         # N par phase
+if [ -z "$CERT_PATH" ]; then export CERT_PATH=/cert; fi
+if [ -z "$MUTUAL" ]; then MUTUAL="false"; fi
+if [ -z "$CLIENT_ID" ]; then CLIENT_ID=0; fi
+if [ -z "$RESULTS_DIR" ]; then RESULTS_DIR=/results; fi
+
+INTERFAZ="lo"
+echo "[client-$CLIENT_ID] Application netem a $INTERFAZ (delay=$TC_DELAY loss=$TC_LOSS)..."
+tc qdisc add dev "$INTERFAZ" root netem delay $TC_DELAY loss $TC_LOSS 2>/dev/null || true
+
+if [ -z "$KEM_ALG" ]; then KEM_ALG=mlkem768; fi
 export DEFAULT_GROUPS=$KEM_ALG
-if [ -z "$SIG_ALG" ]; then SIG_ALG=mldsa44; fi
-if [ -z "$WAVES" ]; then WAVES=20; fi
 
-RESULT_DIR="/tmp/resumption_results_$$"
-rm -rf "$RESULT_DIR"
-mkdir -p "$RESULT_DIR"
-SESSION_FILE="$RESULT_DIR/session.pem"
-FAIL_LOG_DIR="/tmp/resumption_failed_logs_$$"
+if [ -z "$SIG_ALG" ]; then export SIG_ALG=mldsa65; fi
 
-PROTO_LABEL="quic"
-[ "$USE_TLS" = "true" ] && PROTO_LABEL="tls"
+echo "[client-$CLIENT_ID] SIG=$SIG_ALG KEM=$KEM_ALG PROTO=$([ "$USE_TLS" = "true" ] && echo TLS || echo QUIC)"
 
-SUMMARY="/tmp/resumption_summary_${PROTO_LABEL}_${SIG_ALG}_${KEM_ALG}.csv"
-echo "wave,phase,elapsed_ms,exit_status" > "$SUMMARY"
+SESSION_FILE="/tmp/session_${CLIENT_ID}.pem"
 
-wave=1
-while [ "$wave" -le "$WAVES" ]; do
-    rm -f "$SESSION_FILE"
+mkdir -p "$RESULTS_DIR"
+CSV_FILE="${RESULTS_DIR}/resumption_${CLIENT_ID}_${SIG_ALG}_${KEM_ALG}.csv"
+echo "run_id,handshake_type,duration_ms,success" > "$CSV_FILE"
 
-    # ── Phase 1 : Handshake complet + attente du ticket TLS 1.3 ──────
-    stdout_full="$RESULT_DIR/stdout_full_w${wave}.log"
-    start_ns=$(date +%s%N)
+# -------------------------------------------------------------------
+# parse_result: interprète la sortie d'un handshake.
+# -------------------------------------------------------------------
+parse_result() {
+    output="$1"
+    duration_fallback="$2"
+    run_label="$3"
+
+    if printf '%s' "$output" | grep -q "Handshake duration"; then
+        hs_line=$(printf '%s' "$output" | grep "Handshake duration" | head -n1)
+
+        if printf '%s' "$hs_line" | grep -qi "nan"; then
+            echo "[client-$CLIENT_ID] ANOMALY run $run_label: Handshake duration = NaN -> treated as FAILURE" >&2
+            RESULT_DURATION=$duration_fallback
+            RESULT_SUCCESS=0
+            return
+        fi
+
+        hs_duration=$(printf '%s' "$hs_line" | grep -oE '[0-9]+(\.[0-9]+)?' | head -n1)
+        if [ -z "$hs_duration" ]; then
+            echo "[client-$CLIENT_ID] ANOMALY run $run_label: 'Handshake duration' present but unparsable: '$hs_line'" >&2
+            RESULT_DURATION=$duration_fallback
+            RESULT_SUCCESS=0
+            return
+        fi
+
+        RESULT_DURATION=$hs_duration
+        RESULT_SUCCESS=1
+        return
+    fi
+
+    if printf '%s' "$output" | grep -qi "error\|failed\|abort"; then
+        RESULT_DURATION=$duration_fallback
+        RESULT_SUCCESS=0
+        return
+    fi
+
+    RESULT_DURATION=$duration_fallback
+    RESULT_SUCCESS=1
+}
+
+# -------------------------------------------------------------------
+# Phase 1 : N Full Handshakes
+# -------------------------------------------------------------------
+echo "[client-$CLIENT_ID] Phase 1: $NUM_RUNS full handshakes..."
+
+i=1
+while [ $i -le $NUM_RUNS ]; do
+    START_TIME=$(date +%s%3N)
+    HS_TYPE="full"
+
     if [ "$USE_TLS" = "true" ]; then
-        # Utilisation de sleep 1 dans le tube pour laisser le temps au ticket d'arriver
-        { sleep 1; echo "Q"; } | docker run -i --rm --network localNet -v cert:/cert \
-            -e DEFAULT_GROUPS="$KEM_ALG" -e SIG_ALG="$SIG_ALG" \
-            oqs-client openssl s_client -connect servidor:4433 -tls1_3 \
-            -groups "$KEM_ALG" -CAfile /cert/CA.crt -sess_out /tmp/session_out.pem \
-            > "$stdout_full" 2>&1
-        status=$?
-        
-        # Extrait le ticket généré du conteneur vers l'hôte
-        docker run --rm -v cert:/cert oqs-client cat /tmp/session_out.pem > "$SESSION_FILE" 2>/dev/null || true
-    fi
-    end_ns=$(date +%s%N)
-    wall_elapsed_ms=$(( (end_ns - start_ns) / 1000000 ))
-    # Correction de la durée brute pour retirer la pause du sleep 1
-    elapsed_ms=$(( wall_elapsed_ms - 1000 ))
-    [ "$elapsed_ms" -lt 0 ] && elapsed_ms=0
-
-    echo "${wave},full_handshake,${elapsed_ms},${status}" >> "$SUMMARY"
-    if [ "$status" != "0" ]; then
-        mkdir -p "$FAIL_LOG_DIR"
-        cp "$stdout_full" "$FAIL_LOG_DIR/" 2>/dev/null || true
-    fi
-    rm -f "$stdout_full"
-
-    # ── Phase 2 : Reprise de session ──────
-    if [ -s "$SESSION_FILE" ] && grep -q "BEGIN SESSION RECORD" "$SESSION_FILE" 2>/dev/null; then
-        stdout_resumed="$RESULT_DIR/stdout_resumed_w${wave}.log"
-        start_ns=$(date +%s%N)
-        if [ "$USE_TLS" = "true" ]; then
-            # Injection de la session sauvegardée
-            { sleep 0.2; echo "Q"; } | docker run -i --rm --network localNet -v cert:/cert \
-                -v "$SESSION_FILE":/tmp/session_in.pem \
-                -e DEFAULT_GROUPS="$KEM_ALG" -e SIG_ALG="$SIG_ALG" \
-                oqs-client openssl s_client -connect servidor:4433 -tls1_3 \
-                -groups "$KEM_ALG" -CAfile /cert/CA.crt -sess_in /tmp/session_in.pem \
-                > "$stdout_resumed" 2>&1
-            status=$?
+        if [ "$MUTUAL" = "true" ]; then
+            OUTPUT=$( (sleep 0.2; echo 'Q') | openssl s_client -connect "$DOCKER_HOST:4433" \
+                -groups "$KEM_ALG" -sigalgs "$SIG_ALG" \
+                -CAfile "$CERT_PATH/CA.crt" \
+                -cert "$CERT_PATH/user.crt" -key "$CERT_PATH/user.key" \
+                -sess_out "$SESSION_FILE" 2>&1)
+        else
+            OUTPUT=$( (sleep 0.2; echo 'Q') | openssl s_client -connect "$DOCKER_HOST:4433" \
+                -groups "$KEM_ALG" -sigalgs "$SIG_ALG" \
+                -CAfile "$CERT_PATH/CA.crt" \
+                -sess_out "$SESSION_FILE" 2>&1)
         fi
-        end_ns=$(date +%s%N)
-        wall_elapsed_ms=$(( (end_ns - start_ns) / 1000000 ))
-        elapsed_ms=$(( wall_elapsed_ms - 200 ))
-        [ "$elapsed_ms" -lt 0 ] && elapsed_ms=0
-
-        echo "${wave},resumed_handshake,${elapsed_ms},${status}" >> "$SUMMARY"
-        if [ "$status" != "0" ]; then
-            mkdir -p "$FAIL_LOG_DIR"
-            cp "$stdout_resumed" "$FAIL_LOG_DIR/" 2>/dev/null || true
-        fi
-        rm -f "$stdout_resumed"
     else
-        echo "${wave},resumed_handshake,NA,1" >> "$SUMMARY"
-        echo "  [!] Vague $wave : pas de ticket de session sauvegardé, reprise ignorée."
+        if [ "$MUTUAL" = "true" ]; then
+            OUTPUT=$(quics_connection -groups:"$KEM_ALG" -target:"$DOCKER_HOST" \
+                -CAfile:"$CERT_PATH/CA.crt" \
+                -cert "$CERT_PATH/user.crt" -key "$CERT_PATH/user.key" 2>&1)
+        else
+            OUTPUT=$(quics_connection -groups:"$KEM_ALG" -target:"$DOCKER_HOST" \
+                -CAfile:"$CERT_PATH/CA.crt" 2>&1)
+        fi
     fi
 
-    wave=$((wave + 1))
+    END_TIME=$(date +%s%3N)
+    DURATION=$((END_TIME - START_TIME))
+
+    parse_result "$OUTPUT" "$DURATION" "$i"
+    echo "$i,$HS_TYPE,$RESULT_DURATION,$RESULT_SUCCESS" >> "$CSV_FILE"
+
+    i=$((i + 1))
 done
 
-if [ -d "$FAIL_LOG_DIR" ]; then
-    echo "Logs des handshakes en échec conservés dans : $FAIL_LOG_DIR"
-fi
-rm -rf "$RESULT_DIR"
+echo "[client-$CLIENT_ID] Phase 1 terminee. Fichier session enregistre: $SESSION_FILE"
+
+# -------------------------------------------------------------------
+# Phase 2 : N Resumed Handshakes
+# -------------------------------------------------------------------
+echo "[client-$CLIENT_ID] Phase 2: $NUM_RUNS resumed handshakes..."
+
+j=1
+while [ $j -le $NUM_RUNS ]; do
+    RUN_ID=$((NUM_RUNS + j))
+    START_TIME=$(date +%s%3N)
+    HS_TYPE="resumed"
+
+    if [ "$USE_TLS" = "true" ]; then
+        if [ -f "$SESSION_FILE" ] && [ -s "$SESSION_FILE" ]; then
+            if [ "$MUTUAL" = "true" ]; then
+                OUTPUT=$( (sleep 0.2; echo 'Q') | openssl s_client -connect "$DOCKER_HOST:4433" \
+                    -groups "$KEM_ALG" -sigalgs "$SIG_ALG" \
+                    -CAfile "$CERT_PATH/CA.crt" \
+                    -cert "$CERT_PATH/user.crt" -key "$CERT_PATH/user.key" \
+                    -sess_in "$SESSION_FILE" -sess_out "$SESSION_FILE" 2>&1)
+            else
+                OUTPUT=$( (sleep 0.2; echo 'Q') | openssl s_client -connect "$DOCKER_HOST:4433" \
+                    -groups "$KEM_ALG" -sigalgs "$SIG_ALG" \
+                    -CAfile "$CERT_PATH/CA.crt" \
+                    -sess_in "$SESSION_FILE" -sess_out "$SESSION_FILE" 2>&1)
+            fi
+        else
+            echo "[client-$CLIENT_ID] ANOMALY run $RUN_ID: pas de fichier session valide trouve, fallback full handshake" >&2
+            HS_TYPE="full"
+            if [ "$MUTUAL" = "true" ]; then
+                OUTPUT=$( (sleep 0.2; echo 'Q') | openssl s_client -connect "$DOCKER_HOST:4433" \
+                    -groups "$KEM_ALG" -sigalgs "$SIG_ALG" \
+                    -CAfile "$CERT_PATH/CA.crt" \
+                    -cert "$CERT_PATH/user.crt" -key "$CERT_PATH/user.key" \
+                    -sess_out "$SESSION_FILE" 2>&1)
+            else
+                OUTPUT=$( (sleep 0.2; echo 'Q') | openssl s_client -connect "$DOCKER_HOST:4433" \
+                    -groups "$KEM_ALG" -sigalgs "$SIG_ALG" \
+                    -CAfile "$CERT_PATH/CA.crt" \
+                    -sess_out "$SESSION_FILE" 2>&1)
+            fi
+        fi
+    else
+        # QUIC resumption via -resumption:1
+        if [ "$MUTUAL" = "true" ]; then
+            OUTPUT=$(quics_connection -groups:"$KEM_ALG" -target:"$DOCKER_HOST" \
+                -CAfile:"$CERT_PATH/CA.crt" \
+                -cert "$CERT_PATH/user.crt" -key "$CERT_PATH/user.key" \
+                -resumption:1 2>&1)
+        else
+            OUTPUT=$(quics_connection -groups:"$KEM_ALG" -target:"$DOCKER_HOST" \
+                -CAfile:"$CERT_PATH/CA.crt" \
+                -resumption:1 2>&1)
+        fi
+    fi
+
+    END_TIME=$(date +%s%3N)
+    DURATION=$((END_TIME - START_TIME))
+
+    parse_result "$OUTPUT" "$DURATION" "$RUN_ID"
+    echo "$RUN_ID,$HS_TYPE,$RESULT_DURATION,$RESULT_SUCCESS" >> "$CSV_FILE"
+
+    j=$((j + 1))
+done
+
+echo "[client-$CLIENT_ID] Termine. Full=$NUM_RUNS Resumed=$NUM_RUNS. Resultats: $CSV_FILE"

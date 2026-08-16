@@ -1,0 +1,10 @@
+protocol=quic
+sig_alg=mldsa87
+kem_alg=hqc256
+runs_per_phase=500
+total_runs=1000
+approach=batch_separe
+network_profile=none
+mutual=false
+total_time_ms=159085
+timestamp=20260813_230754

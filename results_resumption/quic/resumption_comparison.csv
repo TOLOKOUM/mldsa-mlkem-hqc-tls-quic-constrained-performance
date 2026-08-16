@@ -1,0 +1,3 @@
+protocol,combo,n_full,full_handshake_mean_ms,full_handshake_success_pct,n_resumed,resumed_handshake_mean_ms,resumed_handshake_success_pct,gain_pct
+quic,mldsa65_mlkem768,500,2.9,100.0,500,2.87,100.0,1.0
+quic,mldsa87_hqc256,500,117.53,100.0,500,118.54,100.0,-0.9

@@ -1,0 +1,10 @@
+protocol=tls
+sig_alg=mldsa65
+kem_alg=mlkem768
+runs_per_phase=500
+total_runs=1000
+approach=batch_separe
+network_profile=none
+mutual=false
+total_time_ms=226946
+timestamp=20260813_230500

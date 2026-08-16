@@ -1,0 +1,4 @@
+--- cliente1 ---
+[client-1] Applying netem rules to lo (delay=0ms loss=0%)...
+[client-1] SIG_ALG=mldsa65 KEM_ALG=mlkem768 PROTOCOL=QUIC
+[client-1] Done. Results in /results/client_1_mldsa65_mlkem768.csv
