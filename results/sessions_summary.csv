@@ -1,0 +1,5 @@
+session,operator,connection_type,location,day_of_week,time_slot,hour,n_rtt_samples,rtt_mean_ms,rtt_stdev_ms,rtt_p50_ms,rtt_p95_ms,rtt_p99_ms,loss_pct,transmitted,received,jitter_ms
+20260801_123452_MTN_4G,MTN,4G,Polytechnique_Yaounde_Cameroon,samedi,pointe,12,1017,31.81,26.376,25.2,59.98,163.04,0.0,1000,1000,
+20260801_125752_Orange_4G,Orange,4G,Polytechnique_Yaounde_Cameroon,samedi,pointe,12,1012,135.019,28.077,127.0,194.45,273.14,0.1,1000,999,
+20260801_221256_Orange_4G,Orange,4G,Polytechnique_Yaounde_Cameroon,samedi,creuse,22,998,130.295,14.855,127.0,147.0,212.18,0.2,1000,998,
+20260801_221721_MTN_4G,MTN,4G,Polytechnique_Yaounde_Cameroon,samedi,creuse,22,998,60.036,246.189,21.3,58.835,1590.03,0.3,1000,997,

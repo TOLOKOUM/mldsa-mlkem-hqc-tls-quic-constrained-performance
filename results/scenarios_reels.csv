@@ -1,0 +1,4 @@
+scenario,source_session,operator,connection_type,time_slot,rtt_mean_ms,rtt_p95_ms,loss_pct,severity_score,jitter_ms,tc_delay_per_interface_ms,tc_netem_cmd
+Idéal (Baseline),N/A (Theoretical Control),None,Loopback / Local,N/A,0.0,0.0,0.0,0.0,0.0,0.0,none (pas de restriction tc)
+Modéré (terrain),20260801_221721_MTN_4G,MTN,4G,creuse,60.036,58.835,0.3,0.6367,N/A,30.02,tc qdisc add dev eth0 root netem delay 30.02ms loss 0.3%
+Dégradé (terrain),20260801_221256_Orange_4G,Orange,4G,creuse,130.295,147.0,0.2,0.8104,N/A,65.15,tc qdisc add dev eth0 root netem delay 65.15ms loss 0.2%
