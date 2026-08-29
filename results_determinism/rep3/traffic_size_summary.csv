@@ -1,4 +1,0 @@
-protocol,auth_mode,sig_alg,kem,kem_class,total_bytes,total_packets,ClientHello_bytes,ServerHello_bytes,EncryptedExtensions_bytes,Certificate_bytes,CertificateVerify_bytes,Finished_bytes,CertificateRequest_bytes,NewSessionTicket_bytes
-tls,single,mldsa44,P-256,classique,8993,18,424,151,2,3974,2424,96,NA,458
-tls,single,mldsa44,hqc128,pq_pur,15669,20,2600,4519,2,3974,2424,96,NA,458
-tls,single,mldsa65,mlkem768,pq_pur,13677,20,1535,1174,2,5503,3313,96,NA,458

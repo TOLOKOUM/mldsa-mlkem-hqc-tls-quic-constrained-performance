@@ -1,8 +1,7 @@
 ARG LIBOQS_TAG=0.12.0
-ARG MSQUIC_TAG=nibanks/openss3.3-test
+ARG MSQUIC_TAG=6b7302f8676f9d0e88ad0883bf3980fe5166c4b7
 ARG OQSPROVIDER_TAG=0.8.0
-#ARG OPENSSL_TAG=openssl-3.3.1
-ARG OPENSSL_TAG=openssl-3.4
+ARG OPENSSL_TAG=e7ac728c4aa09f5f234363834a9f8bbac525d99d
 ARG MAKE_DEFINES="-j 4"      
 ARG MSQUIC_DEBUG=off        
 ARG LIBOQS_BUILD_DEFINES="-DOQS_DIST_BUILD=ON"
@@ -38,7 +37,6 @@ RUN set -eux; \
     openssl libssl-dev; \
   rm -rf /var/lib/apt/lists/*
 
-
 # --------------------------------------
 # Stage 2: Download all necessary sources
 # --------------------------------------
@@ -53,30 +51,61 @@ ARG LIBOQSDIR
 ARG MSQUICDIR
 ARG OQSPROVIDERDIR
 
-# Download and prepare source files needed for the build process.
 WORKDIR $BASEDIR
-RUN [ ! -d "${LIBOQSDIR}" ] && \ 
-    mkdir -p liboqs && \  
-    git clone --recursive --depth 1 --branch ${LIBOQS_TAG} https://github.com/open-quantum-safe/liboqs.git ${LIBOQSDIR} || true
 
-RUN [ ! -d "${MSQUICDIR}" ] && \ 
-    mkdir -p msquic-pq && \
-    git clone --recursive --depth 1 --branch ${MSQUIC_TAG} https://github.com/montenegro-montes/msquic-pq.git ${MSQUICDIR} || true
+# Config git globale optimisée : désactivation compression HTTP, augmentation du buffer à 2 Go,
+# timeout allongé et passage forcé en HTTP/1.1 pour empêcher les ruptures de stream (curl 18 / 92)
+RUN git config --global http.version HTTP/1.1 && \
+    git config --global http.postBuffer 2147483648 && \
+    git config --global core.compression 0 && \
+    git config --global net.cURLTimeOut 600 && \
+    git config --global http.lowSpeedLimit 0 && \
+    git config --global http.lowSpeedTime 999999
 
-RUN [ ! -d "${OPENSSLDIR}" ] && \ 
-    mkdir -p openssl && \
-    git clone --depth 1 --branch ${OPENSSL_TAG} https://github.com/montenegro-montes/openssl.git ${OPENSSLDIR} || true
+# Download liboqs avec tentative multiple
+RUN if [ ! -d "${LIBOQSDIR}" ]; then \
+        mkdir -p liboqs && \
+        for i in 1 2 3 4 5; do git clone --recursive --depth 1 --branch ${LIBOQS_TAG} https://github.com/open-quantum-safe/liboqs.git ${LIBOQSDIR} && break || sleep 5; done; \
+    fi
 
-# Modificar límites en speed.c
+# Download msquic-pq avec tentative multiple et isolation unitaire des submodules
+RUN if [ ! -d "${MSQUICDIR}" ]; then \
+        mkdir -p "${MSQUICDIR}" && cd "${MSQUICDIR}" && \
+        git init -q && \
+        git remote add origin https://github.com/montenegro-montes/msquic-pq.git && \
+        (for i in 1 2 3 4 5; do git fetch --depth 1 origin ${MSQUIC_TAG} && break || sleep 5; done) && \
+        git checkout -q FETCH_HEAD && \
+        for sub in submodules/clog submodules/googletest submodules/liboqs submodules/oqsprovider submodules/openssl submodules/openssl3; do \
+            for i in 1 2 3 4 5; do \
+                git submodule update --init --depth 1 -- "$sub" && break || sleep 5; \
+            done; \
+        done; \
+        for sub in submodules/clog submodules/googletest submodules/liboqs submodules/oqsprovider; do \
+            for i in 1 2 3 4 5; do \
+                git submodule update --init --recursive --depth 1 -- "$sub" && break || sleep 5; \
+            done; \
+        done; \
+    fi
+
+# Download openssl avec tentative multiple
+RUN if [ ! -d "${OPENSSLDIR}" ]; then \
+        mkdir -p "${OPENSSLDIR}" && cd "${OPENSSLDIR}" && \
+        git init -q && \
+        git remote add origin https://github.com/montenegro-montes/openssl.git && \
+        (for i in 1 2 3 4 5; do git fetch --depth 1 origin ${OPENSSL_TAG} && break || sleep 5; done) && \
+        git checkout -q FETCH_HEAD ; \
+    fi
+
+# Modification des limites dans speed.c
 WORKDIR ${OPENSSLDIR}
 RUN sed -i 's/#define MAX_SIG_NUM .*/#define MAX_SIG_NUM 512/' ./apps/speed.c && \
     sed -i 's/#define MAX_KEM_NUM .*/#define MAX_KEM_NUM 512/' ./apps/speed.c
 
 WORKDIR $BASEDIR    
-RUN [ ! -d "${OQSPROVIDERDIR}" ] && \ 
-    mkdir -p oqs-provider && \
-    git clone --depth 1 --branch ${OQSPROVIDER_TAG} https://github.com/open-quantum-safe/oqs-provider.git ${OQSPROVIDERDIR} || true
-
+RUN if [ ! -d "${OQSPROVIDERDIR}" ]; then \
+        mkdir -p oqs-provider && \
+        for i in 1 2 3 4 5; do git clone --depth 1 --branch ${OQSPROVIDER_TAG} https://github.com/open-quantum-safe/oqs-provider.git ${OQSPROVIDERDIR} && break || sleep 5; done; \
+    fi
 
 # --------------------------------------
 # Stage 3: Build the tools
@@ -109,13 +138,11 @@ ARG OPENSSLDIR
 ARG OQSPROVIDERDIR
 ARG LIBDIR
 
-# Install required build tools and system dependencies.
+# Install required build tools and system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends python3 golang-go python3-pip && \ 
     pip install jinja2 tabulate pyyaml --break-system-packages 
 
-# ====================================================================
-# AJOUT : Installation des bibliothèques de compression (build)
-# ====================================================================
+# Installation des bibliothèques de compression
 RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     libbrotli-dev \
@@ -123,7 +150,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tcpdump \
     && rm -rf /var/lib/apt/lists/*
 
-# Build and install MsQuic.
+# Build and install MsQuic
 WORKDIR ${MSQUICDIR}
 RUN mkdir -p build && cd build && \ 
     cmake -G 'Unix Makefiles' -DQUIC_ENABLE_LOGGING=${MSQUIC_DEBUG} -DQUIC_LOGGING_TYPE=stdout \ 
@@ -132,9 +159,7 @@ RUN mkdir -p build && cd build && \
     -DQUIC_ENABLE_OQS_PROVIDER=on -DQUIC_TLS=openssl3 -DQUIC_BUILD_TOOLS=on .. && \
     cmake --build .
 
-# ====================================================================
-# Build OpenSSL3 avec support compression (flags corrigés)
-# ====================================================================
+# Build OpenSSL3 avec support compression
 WORKDIR ${OPENSSLDIR}
 RUN LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \ 
     LDFLAGS="-Wl,-rpath -Wl,${INSTALLDIR}/${LIBDIR}" ./config shared \
@@ -149,7 +174,6 @@ RUN LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \
         -Wl,-rpath,${INSTALLDIR}/${LIBDIR} && \
     make ${MAKE_DEFINES} && make install_sw install_ssldirs
 
-
 # --------------------------------------
 # Stage 4: Configure the tools
 # --------------------------------------
@@ -158,7 +182,6 @@ ARG INSTALLDIR
 ARG OQSPROVIDERDIR
 ARG LIBOQSDIR
 
-# set path to use 'new' openssl. Dyn libs have been properly linked in to match
 ENV PATH="${INSTALLDIR}/bin:${PATH}"
 
 # Configure oqs-provider to activate all algorithms
@@ -166,7 +189,7 @@ WORKDIR ${OQSPROVIDERDIR}
 RUN sed -i "s/false/true/g" oqs-template/generate.yml && \ 
     LIBOQS_SRC_DIR=${LIBOQSDIR} python3 oqs-template/generate.py
 
-# Build OQS provider and copy it in the right location
+# Build OQS provider
 WORKDIR ${OQSPROVIDERDIR}
 RUN ln -s ../openssl . && \
     cmake -DOPENSSL_ROOT_DIR=${INSTALLDIR} -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${INSTALLDIR} -S . -B _build && \
@@ -175,7 +198,7 @@ RUN ln -s ../openssl . && \
 RUN LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \ 
     cp _build/lib/oqsprovider.so ${INSTALLDIR}/${LIBDIR}/ossl-modules/
 
-# Modify the openssl configuration file to use the OQS provider
+# Modify the openssl configuration file
 RUN sed -i "s/default = default_sect/default = default_sect\noqsprovider = oqsprovider_sect/g" ${INSTALLDIR}/ssl/openssl.cnf && \
     sed -i "s/\[default_sect\]/\[default_sect\]\nactivate = 1\n\[oqsprovider_sect\]\nactivate = 1\n/g" ${INSTALLDIR}/ssl/openssl.cnf && \
     sed -i "s/providers = provider_sect/providers = provider_sect\nssl_conf = ssl_sect\n\n\[ssl_sect\]\nsystem_default = system_default_sect\n\n\[system_default_sect\]\nGroups = \$ENV\:\:DEFAULT_GROUPS\n/g" ${INSTALLDIR}/ssl/openssl.cnf && \ 
@@ -183,19 +206,17 @@ RUN sed -i "s/default = default_sect/default = default_sect\noqsprovider = oqspr
     sed -i "s/HOME\t\t\t= ./HOME\t\t= .\nDEFAULT_GROUPS\t= ${DEFAULT_GROUPS}/g" ${INSTALLDIR}/ssl/openssl.cnf
 
 # --------------------------------------
-# Stage 5: Runtime - Create a lightweight image with essential binaries and configurations.
+# Stage 5: Runtime
 # --------------------------------------
 FROM ubuntu:24.10 AS runtime
 ARG INSTALLDIR
 ARG MSQUICDIR
 ARG OQSPROVIDERDIR
 
-# set path to use 'new' openssl and link it with the OQS provider
 ENV PATH="${INSTALLDIR}/bin:${PATH}"
 ENV OPENSSL=${INSTALLDIR}/bin/openssl
 ENV OPENSSL_CNF=${INSTALLDIR}/ssl/openssl.cnf
 
-# Installation des utilitaires runtime sous Ubuntu 24.10 via old-releases
 RUN set -eux; \
   if [ -f /etc/apt/sources.list.d/ubuntu.sources ]; then \
     sed -i 's|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources; \
@@ -214,17 +235,14 @@ RUN set -eux; \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy necessary files from the build stage
 COPY --from=configure ${INSTALLDIR} ${INSTALLDIR}
 COPY --from=configure ${MSQUICDIR}/build/bin/Release/ ${INSTALLDIR}/bin/
 COPY --from=configure ${OQSPROVIDERDIR}/_build/lib/oqsprovider.so /tmp
 
-# Copy openssl and oqs files in default location just in case
 RUN cp $INSTALLDIR/ssl/openssl.cnf $(openssl version -m | cut -d '"' -f2) && \
     LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \ 
     cp ${INSTALLDIR}/${LIBDIR}/ossl-modules/* $(openssl version -d | cut -d '"' -f2)
 
-# Copy local files into the machine
 COPY scripts/*.sh ${INSTALLDIR}/bin/
 RUN chmod 755 ${INSTALLDIR}/bin/*.sh
 

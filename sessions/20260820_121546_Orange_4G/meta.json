@@ -1,0 +1,14 @@
+{
+  "timestamp": "20260820_121546",
+  "operator": "Orange",
+  "connection_type": "4G",
+  "location": "ENSPY_Yaounde",
+  "target": "1.1.1.1",
+  "day_of_week": "jeudi",
+  "hour": "12",
+  "time_slot": "pointe",
+  "ping_count": 1000,
+  "ping_interval_s": 0.1,
+  "iperf_server": "13.51.233.53",
+  "note": "Session 2 - Midi pointe"
+}

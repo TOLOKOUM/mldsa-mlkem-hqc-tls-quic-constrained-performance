@@ -22,8 +22,43 @@ CAPTURE_MODE=${4:-nocapture}
 NETWORK_PROFILE=${5:-none}
 LOSS_PERC=${6:-0}
 DELAY_MS=${7:-0}
+# ─────────────────────────────────────────────────────────────────────────
+# AJOUT (résout le point 2 du rejet : "ordre fixe, campagne unique, pas de
+# blocs indépendants") : le sweep total de 500 handshakes par configuration
+# peut être fractionné en N_BLOCKS blocs indépendants, exécutés à des
+# moments différents (idéalement des jours différents) via des invocations
+# séparées du launcher avec un BLOCK_INDEX différent à chaque fois. L'ordre
+# des configurations (SIG_ALG × KEM) est systématiquement mélangé (jamais
+# l'ordre fixe du tableau SUPPORTED_SIG_ALGS), avec une graine tracée dans
+# un manifeste pour audit/reproductibilité.
+#
+#   N_BLOCKS    : nombre total de blocs (défaut 1 = comportement historique,
+#                 mais avec ordre DÉSORMAIS toujours randomisé)
+#   BLOCK_INDEX : indice du bloc exécuté par CET appel (1..N_BLOCKS)
+#   SEED        : graine de mélange. Vide = dérivée de l'horodatage courant
+#                 (et alors loggée pour pouvoir être rejouée à l'identique).
+N_BLOCKS=${8:-1}
+BLOCK_INDEX=${9:-1}
+SEED=${10:-}
 
-USAGE="Usage: $0 [mlkem|hqc|both] [tls|quic] [mutual|single] [capture|captureKey|nocapture] [none|simple|stable|unstable] [loss-percent] [delay-ms]"
+if ! [[ "$N_BLOCKS" =~ ^[0-9]+$ ]] || [[ "$N_BLOCKS" -lt 1 ]]; then
+    echo "Invalid n-blocks: must be a positive integer."
+    exit 1
+fi
+if ! [[ "$BLOCK_INDEX" =~ ^[0-9]+$ ]] || [[ "$BLOCK_INDEX" -lt 1 ]] || [[ "$BLOCK_INDEX" -gt "$N_BLOCKS" ]]; then
+    echo "Invalid block-index: must satisfy 1 <= block-index <= n-blocks ($N_BLOCKS)."
+    exit 1
+fi
+if [[ -z "$SEED" ]]; then
+    SEED=$(date +%s)
+    echo "Aucune graine fournie -- graine dérivée de l'horodatage : $SEED (notez-la pour rejouer cet ordre exact)."
+fi
+if ! [[ "$SEED" =~ ^[0-9]+$ ]]; then
+    echo "Invalid seed: must be a non-negative integer."
+    exit 1
+fi
+
+USAGE="Usage: $0 [mlkem|hqc|both] [tls|quic] [mutual|single] [capture|captureKey|nocapture] [none|simple|delay-only|loss-only|stable|unstable] [loss-percent] [delay-ms] [n-blocks] [block-index] [seed]"
 
 NETIF="eth0"
 MUTUAL_AUTHENTICATION=false
@@ -62,8 +97,16 @@ if [[ "$CAPTURE_MODE" != "capture" && "$CAPTURE_MODE" != "captureKey" && "$CAPTU
 fi
 
 # 4) Network profile
-if [[ "$NETWORK_PROFILE" != "none" && "$NETWORK_PROFILE" != "simple" && "$NETWORK_PROFILE" != "stable" && "$NETWORK_PROFILE" != "unstable" ]]; then
-    echo "Invalid network profile: must be 'none', 'simple', 'stable', or 'unstable'."
+# ─────────────────────────────────────────────────────────────────────────
+# AJOUT "delay-only" / "loss-only" (résout le point 3 du rejet : "Degraded et
+# GE-Stable diffèrent simultanément en délai, perte marginale et burstiness
+# -- aucun plan factoriel ne les isole"). "simple" reste le scénario combiné
+# existant (délai+perte ensemble, tel que Moderate/Degraded dans l'article
+# actuel) ; "delay-only" et "loss-only" isolent chaque dimension séparément,
+# avec la MÊME valeur numérique que "simple" pour permettre la décomposition
+# additive : simple(D,L) vs delay-only(D,0) vs loss-only(0,L).
+if [[ "$NETWORK_PROFILE" != "none" && "$NETWORK_PROFILE" != "simple" && "$NETWORK_PROFILE" != "delay-only" && "$NETWORK_PROFILE" != "loss-only" && "$NETWORK_PROFILE" != "stable" && "$NETWORK_PROFILE" != "unstable" ]]; then
+    echo "Invalid network profile: must be 'none', 'simple', 'delay-only', 'loss-only', 'stable', or 'unstable'."
     echo "$USAGE"
     exit 1
 fi
@@ -95,6 +138,10 @@ fi
 NETWORK_PROFILE_LABEL="$NETWORK_PROFILE"
 if [[ "$NETWORK_PROFILE" == "simple" ]]; then
     NETWORK_PROFILE_LABEL="simple_loss${LOSS_PERC}_delay${DELAY_MS}ms"
+elif [[ "$NETWORK_PROFILE" == "delay-only" ]]; then
+    NETWORK_PROFILE_LABEL="delayonly_delay${DELAY_MS}ms"
+elif [[ "$NETWORK_PROFILE" == "loss-only" ]]; then
+    NETWORK_PROFILE_LABEL="lossonly_loss${LOSS_PERC}"
 fi
 
 ###############################################################################
@@ -105,6 +152,21 @@ fi
 
 if [[ "$CAPTURE_MODE" == "capture" || "$CAPTURE_MODE" == "captureKey" ]]; then
   NUM_RUNS=1
+  if [[ "$N_BLOCKS" != "1" || "$BLOCK_INDEX" != "1" ]]; then
+      echo "ℹ️  Mode capture : le découpage en blocs n'a pas de sens ici (NUM_RUNS=1) -- N_BLOCKS/BLOCK_INDEX ignorés."
+      N_BLOCKS=1
+      BLOCK_INDEX=1
+  fi
+else
+  # ── Découpage en blocs (résout le point 2) ──────────────────────────────
+  if (( NUM_RUNS % N_BLOCKS != 0 )); then
+      echo "ERREUR: N_BLOCKS=$N_BLOCKS ne divise pas NUM_RUNS=$NUM_RUNS exactement."
+      echo "        Choisissez un diviseur de $NUM_RUNS (1, 2, 4, 5, 10, 20, 25, 50, 100, ...)."
+      exit 1
+  fi
+  RUNS_THIS_BLOCK=$(( NUM_RUNS / N_BLOCKS ))
+  echo "Découpage en blocs : $N_BLOCKS blocs de $RUNS_THIS_BLOCK runs -- ce lancement exécute le bloc $BLOCK_INDEX/$N_BLOCKS."
+  NUM_RUNS=$RUNS_THIS_BLOCK
 fi
 
 if [[ "$AUTH_MODE" == "mutual" ]]; then
@@ -393,7 +455,7 @@ init_resource_csv() {
     mkdir -p "$RESOURCE_DIR"
     RESOURCE_CSV="$RESOURCE_DIR/resource_usage_${PROTOCOL}_${AUTH_MODE}_${NETWORK_PROFILE_LABEL}.csv"
     if [[ ! -f "$RESOURCE_CSV" ]]; then
-        echo "timestamp,protocol,auth_mode,sig_alg,kem,network_profile,role,n_runs,cpu_usec_total,cpu_usec_per_handshake,mem_peak_bytes" > "$RESOURCE_CSV"
+        echo "timestamp,protocol,auth_mode,sig_alg,kem,network_profile,role,n_runs,cpu_usec_total,cpu_usec_per_handshake,mem_peak_bytes,block_index,n_blocks,seed" > "$RESOURCE_CSV"
     fi
 }
 
@@ -406,19 +468,23 @@ append_resource_row() {
             cpu_per_run=$(LC_ALL=C awk -v t="$cpu_total" -v n="$NUM_RUNS" 'BEGIN{printf "%.3f", t/n}')
         fi
     fi
-    echo "$(date -Iseconds),$PROTOCOL,$AUTH_MODE,$SIG_ALG,$KEM,$NETWORK_PROFILE,$role,$NUM_RUNS,$cpu_total,$cpu_per_run,$mem_peak" >> "$RESOURCE_CSV"
+    echo "$(date -Iseconds),$PROTOCOL,$AUTH_MODE,$SIG_ALG,$KEM,$NETWORK_PROFILE,$role,$NUM_RUNS,$cpu_total,$cpu_per_run,$mem_peak,$BLOCK_INDEX,$N_BLOCKS,$SEED" >> "$RESOURCE_CSV"
 }
 
 
 # ── Reprise idempotente ──────────────────────────────────────────────────
-# Vérifie si (sig_alg, kem) a déjà une ligne "client" dans le CSV de ce
-# scénario -- basé sur les colonnes exactes (pas de correspondance de
-# sous-chaîne, pour ne pas confondre "x25519" et "x25519_mlkem512").
+# Vérifie si (sig_alg, kem, block_index) a déjà une ligne "client" dans le
+# CSV de ce scénario -- basé sur les colonnes exactes (pas de correspondance
+# de sous-chaîne, pour ne pas confondre "x25519" et "x25519_mlkem512").
+# AJOUT block_index : sans lui, relancer le launcher pour le bloc 2 sauterait
+# à tort les configs déjà faites pour le bloc 1 (et vice-versa) -- chaque
+# (sig, kem, network_profile, block) est maintenant une unité de reprise
+# distincte, ce qui est indispensable pour le découpage multi-jours.
 already_done() {
     local sig="$1" kem="$2"
     [[ -f "$RESOURCE_CSV" ]] || return 1
-    awk -F',' -v s="$sig" -v k="$kem" -v np="$NETWORK_PROFILE" \
-        '$4==s && $5==k && $6==np && $7=="client" {found=1} END{exit !found}' \
+    awk -F',' -v s="$sig" -v k="$kem" -v np="$NETWORK_PROFILE" -v b="$BLOCK_INDEX" \
+        '$4==s && $5==k && $6==np && $7=="client" && $12==b {found=1} END{exit !found}' \
         "$RESOURCE_CSV"
 }
 
@@ -460,40 +526,74 @@ if [[ "$CAPTURE_MODE" == "capture" || "$CAPTURE_MODE" == "captureKey" ]]; then
     launch_edgeshark
  fi
 
-SIG_ALGS=("${SUPPORTED_SIG_ALGS[@]}")
+# ─────────────────────────────────────────────────────────────────────────
+# Construction de la liste à plat (SIG_ALG, KEM) puis mélange (résout le
+# point 2 du rejet). Remplace l'ancienne double boucle imbriquée
+# "for SIG_ALG { for KEM {...} }", qui exécutait toujours mldsa87 après
+# mldsa65 après mldsa44 après secp521r1 après secp384r1 après ed25519, dans
+# cet ordre exact, à chaque appel -- un effet temporel (charge machine,
+# dérive thermique) aurait pu s'aligner systématiquement avec l'identité de
+# l'algorithme sans qu'on puisse le distinguer d'un effet cryptographique.
+# ─────────────────────────────────────────────────────────────────────────
+PAIRS=()
+for SIG_ALG in "${SUPPORTED_SIG_ALGS[@]}"; do
+    if [ "$SIG_ALG" = "ed25519" ] || [ "$SIG_ALG" = "mldsa44" ]; then
+        KEMS_FOR_SIG=("${KEMS_L1[@]}")
+    elif [ "$SIG_ALG" = "secp384r1" ] || [ "$SIG_ALG" = "mldsa65" ]; then
+        KEMS_FOR_SIG=("${KEMS_L3[@]}")
+    elif [ "$SIG_ALG" = "secp521r1" ] || [ "$SIG_ALG" = "mldsa87" ]; then
+        KEMS_FOR_SIG=("${KEMS_L5[@]}")
+    fi
+    for KEM in "${KEMS_FOR_SIG[@]}"; do
+        PAIRS+=("${SIG_ALG}|${KEM}")
+    done
+done
 
-for SIG_ALG in "${SIG_ALGS[@]}"; do
+# Mélange déterministe par graine : deux appels avec le même SEED produisent
+# EXACTEMENT le même ordre (traçabilité/reproductibilité), un SEED différent
+# produit un ordre différent. Technique standard : un flux pseudo-aléatoire
+# dérivé de la graine sert de source à `shuf`.
+mapfile -t PAIRS_SHUFFLED < <(
+    printf '%s\n' "${PAIRS[@]}" | \
+    shuf --random-source=<(openssl enc -aes-256-ctr -pass pass:"$SEED" -nosalt </dev/zero 2>/dev/null)
+)
+
+# ── Manifeste d'audit du bloc (traçabilité exigée par la relecture) ───────
+MANIFEST_DIR="$SCRIPT_DIR/captures/$PROTOCOL/$AUTH_MODE/$NETWORK_PROFILE_LABEL"
+mkdir -p "$MANIFEST_DIR"
+MANIFEST_FILE="$MANIFEST_DIR/block_manifest_block${BLOCK_INDEX}of${N_BLOCKS}_seed${SEED}.log"
+{
+    echo "timestamp_start=$(date -Iseconds)"
+    echo "protocol=$PROTOCOL auth_mode=$AUTH_MODE network_profile=$NETWORK_PROFILE_LABEL"
+    echo "n_blocks=$N_BLOCKS block_index=$BLOCK_INDEX seed=$SEED runs_this_block=$NUM_RUNS"
+    echo "execution_order:"
+    i=1
+    for p in "${PAIRS_SHUFFLED[@]}"; do
+        echo "  $i) $p"
+        i=$((i+1))
+    done
+} > "$MANIFEST_FILE"
+echo "Manifeste d'audit du bloc écrit dans $MANIFEST_FILE"
+
+for PAIR in "${PAIRS_SHUFFLED[@]}"; do
+    SIG_ALG="${PAIR%%|*}"
+    KEM="${PAIR##*|}"
+
     echo ""
-    echo " ==> Executing for SIG_ALG: $SIG_ALG"
-
-    # ── Mapping signature → niveau KEM ────────────────────────────────────
-    if [ "$SIG_ALG" = "ed25519" ]; then
-        KEMS=("${KEMS_L1[@]}")
-    elif [ "$SIG_ALG" = "secp384r1" ]; then
-        KEMS=("${KEMS_L3[@]}")
-    elif [ "$SIG_ALG" = "secp521r1" ]; then
-        KEMS=("${KEMS_L5[@]}")
-    elif [ "$SIG_ALG" = "mldsa44" ]; then
-        KEMS=("${KEMS_L1[@]}")
-    elif [ "$SIG_ALG" = "mldsa65" ]; then
-        KEMS=("${KEMS_L3[@]}")
-    elif [ "$SIG_ALG" = "mldsa87" ]; then
-        KEMS=("${KEMS_L5[@]}")
+    echo "****************"
+    echo " ==> SIG_ALG: $SIG_ALG  |  KEM: $KEM  |  bloc $BLOCK_INDEX/$N_BLOCKS"
+    if already_done "$SIG_ALG" "$KEM"; then
+        echo "     (deja present dans $RESOURCE_CSV pour ce scenario/bloc -- ignore, reprise automatique)"
+        continue
     fi
 
-    echo ""
-    echo " ==> Creating Certs and Keys"
+    # ── Certs régénérés à CHAQUE paire, pas une fois par SIG_ALG ──────────
+    # Indispensable maintenant que l'ordre est mélangé : deux paires
+    # consécutives peuvent appartenir à des SIG_ALG différents, contrairement
+    # à l'ancienne boucle imbriquée où toutes les paires d'un même SIG_ALG
+    # se suivaient et ne nécessitaient qu'une génération de certs.
+    echo " ==> Creating Certs and Keys for $SIG_ALG"
     docker run --rm -v cert:/cert -e CERT_PATH=/cert/ -e SIG_ALG=$SIG_ALG -i "$IMAGE" doCert.sh
-
-
-    for KEM in "${KEMS[@]}"; do
-        echo ""
-        echo "****************"
-        echo "  -> KEM: $KEM"
-        if already_done "$SIG_ALG" "$KEM"; then
-            echo "     (deja present dans $RESOURCE_CSV pour ce scenario -- ignore, reprise automatique)"
-            continue
-        fi
 
 
             echo ""
@@ -565,6 +665,28 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
                   sleep 2
                   docker exec $OQS_SERVER tc qdisc add dev $NETIF root netem \
                     delay ${DELAY_MS}ms loss ${LOSS_PERC}% || true
+                fi
+                ;;
+              delay-only)
+                # Isole le délai : même DELAY_MS que le scénario 'simple'
+                # correspondant, mais SANS la perte -- permet de décomposer
+                # additivement l'effet mesuré sous 'simple' (§3, plan
+                # factoriel demandé par la relecture).
+                if [[ "$DELAY_MS" != "0" ]]; then
+                  echo "   ↳ Applying tc netem on server: delay=${DELAY_MS}ms loss=0% (delay-only)"
+                  sleep 2
+                  docker exec $OQS_SERVER tc qdisc add dev $NETIF root netem \
+                    delay ${DELAY_MS}ms || true
+                fi
+                ;;
+              loss-only)
+                # Isole la perte : même LOSS_PERC que 'simple', mais SANS
+                # délai additionnel.
+                if [[ "$LOSS_PERC" != "0" ]]; then
+                  echo "   ↳ Applying tc netem on server: loss=${LOSS_PERC}% delay=0ms (loss-only)"
+                  sleep 2
+                  docker exec $OQS_SERVER tc qdisc add dev $NETIF root netem \
+                    loss ${LOSS_PERC}% || true
                 fi
                 ;;
               stable|unstable)
@@ -659,7 +781,7 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
             ############################################################################
             PUMBA_PIDS_CLIENT=()
             case "$NETWORK_PROFILE" in
-              simple)
+              simple|delay-only)
                 if [[ "$DELAY_MS" != "0" ]]; then
                   echo "   ↳ Applying tc netem on client: delay=${DELAY_MS}ms"
                   docker exec $OQS_CLIENT tc qdisc add dev $NETIF root netem \
@@ -678,7 +800,7 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
             # ── Capture des logs de handshake (perdus jusqu'ici : docker exec
             #    -it affichait tout dans le terminal sans rien sauvegarder).
             #    tee garde l'affichage live ET écrit dans le fichier.
-            CLIENT_LOG_FILE="$CLIENT_LOG_DIR/handshake_${PROTOCOL}_${AUTH_MODE}_${SIG_ALG}_${KEM}_${NETWORK_PROFILE_LABEL}.log"
+            CLIENT_LOG_FILE="$CLIENT_LOG_DIR/handshake_${PROTOCOL}_${AUTH_MODE}_${SIG_ALG}_${KEM}_${NETWORK_PROFILE_LABEL}_block${BLOCK_INDEX}of${N_BLOCKS}.log"
             docker exec $OQS_CLIENT ./perftestClientTlsQuic.sh 2>&1 | tee "$CLIENT_LOG_FILE"
             echo "     Log de handshake enregistré dans $CLIENT_LOG_FILE"
 
@@ -702,11 +824,11 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
          docker kill $OQS_CLIENT &>/dev/null || true
          for pid in "${PUMBA_PIDS_SERVER[@]:-}"; do kill -9 "$pid" &>/dev/null || true; done
          for pid in "${PUMBA_PIDS_CLIENT[@]:-}"; do kill -9 "$pid" &>/dev/null || true; done
-    done
-
 done
+
+echo "timestamp_end=$(date -Iseconds)" >> "$MANIFEST_FILE"
 
 sleep 3
 
 cleaning
-echo "✅  Cleanup complete. Tests finished."
+echo "✅  Cleanup complete. Tests finished. Bloc $BLOCK_INDEX/$N_BLOCKS terminé (graine $SEED)."

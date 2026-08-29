@@ -1,0 +1,14 @@
+=== AUDIT SUMMARY (v2, base sur les 42 configs officielles) ===
+Fichiers de bloc attendus (42x5x3x4)     : 2520
+Fichiers de bloc trouves                 : 2519
+Fichiers de bloc MANQUANTS               : 1
+    [MISSING] captures/tls/mutual/simple_loss1.3_delay62.51ms/csv/handshake_tls_mutual_secp521r1_p521_hqc256_simple_loss1.3_delay62.51ms_block4of4.csv
+
+Total handshakes attempted (somme lignes) : 314875
+Total handshakes success                  : 314108
+Total handshakes failure                  : 767
+Total attendu si complet (2520 x 125)      : 315000
+
+Aucune incoherence success/duration_ms detectee : les deux colonnes s'accordent partout.
+
+Rapport detaille ecrit dans : audit_report.csv

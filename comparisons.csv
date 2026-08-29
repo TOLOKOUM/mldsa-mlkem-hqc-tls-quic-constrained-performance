@@ -1,4 +1,0 @@
-label,file_a,file_b
-mldsa44_vs_mldsa87_tls,tls/single/none/handshake_logs/handshake_tls_single_mldsa44_P-256_none.log,tls/single/none/handshake_logs/handshake_tls_single_mldsa87_P-256_none.log
-hqc_degraded_vs_stable,tls/single/simple_loss0.2_delay65.15ms/handshake_logs/handshake_tls_single_ed25519_hqc128_simple_loss0.2_delay65.15ms.log,tls/single/stable/handshake_logs/handshake_tls_single_ed25519_hqc128_stable.log
-tls_vs_quic_mldsa65,tls/single/none/handshake_logs/handshake_tls_single_mldsa65_mlkem768_none.log,quic/single/none/handshake_logs/handshake_quic_single_mldsa65_mlkem768_none.log

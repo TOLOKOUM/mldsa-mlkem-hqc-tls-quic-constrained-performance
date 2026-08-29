@@ -1,0 +1,14 @@
+{
+  "timestamp": "20260821_083912",
+  "operator": "Orange",
+  "connection_type": "4G",
+  "location": "ENSPY_Yaounde",
+  "target": "1.1.1.1",
+  "day_of_week": "vendredi",
+  "hour": "08",
+  "time_slot": "creuse",
+  "ping_count": 1000,
+  "ping_interval_s": 0.1,
+  "iperf_server": "13.51.233.53",
+  "note": "Session 1 - Matin creuse"
+}

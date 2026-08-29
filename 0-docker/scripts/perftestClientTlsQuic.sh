@@ -35,6 +35,28 @@ if [ -z "$MUTUAL" ]; then
      MUTUAL="true"
 fi
 
+# ---------------------------------------------------------------------------
+# Budget d'échec commun TLS/QUIC (résout le point 4 du rejet : "timeouts non
+# harmonisés"). Avant ce patch, TLS n'avait AUCUNE échéance explicite
+# (s_connection retransmettait/bloquait indéfiniment jusqu'à succès), alors
+# que QUIC dépendait de la logique de retry/timeout interne de MsQuic. On
+# force maintenant EXACTEMENT le même budget mur-à-mur pour les deux, et on
+# produit le MÊME marqueur d'échec ("Handshake duration: NaN ms") déjà
+# reconnu par scripts_analysis/parse_handshake_logs.py pour QUIC, afin que
+# TLS et QUIC soient comparés sous une politique de timeout identique et
+# que l'exclusion des échecs (§5.4 de l'article) s'applique uniformément
+# aux deux séries de latences.
+#
+# Valeur par défaut : 20x le pire mean observé dans ce dataset pour un
+# handshake complet et réussi (GE-Unstable, TLS, ML-DSA87+HQC256 = 7.3s,
+# cf. Table net-sensitivity de l'article) arrondi à une marge large pour ne
+# pas couper des handshakes légitimement lents en burst-loss. Surchargeable
+# via HANDSHAKE_TIMEOUT_S pour un run de calibration si besoin.
+if [ -z "$HANDSHAKE_TIMEOUT_S" ]; then
+    HANDSHAKE_TIMEOUT_S=150
+fi
+echo "Handshake timeout budget: ${HANDSHAKE_TIMEOUT_S}s (identique TLS/QUIC)"
+
 INTERFAZ="lo"
 
 echo "Applying netem rules to $INTERFAZ..."
@@ -95,11 +117,13 @@ i=1
          if [ "$MUTUAL" = "true" ]; then
            echo "Execution $i - TLS Mutual"
 
-           openssl s_connection -connect $DOCKER_HOST:4433 -new  -verify 1 -CAfile $CERT_PATH/CA.crt -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key 
+           timeout "${HANDSHAKE_TIMEOUT_S}"s openssl s_connection -connect $DOCKER_HOST:4433 -new  -verify 1 -CAfile $CERT_PATH/CA.crt -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key \
+             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
         
          else
            echo "Execution $i - TLS Single" 
-           openssl s_connection -connect $DOCKER_HOST:4433 -new -verify 1 -CAfile $CERT_PATH/CA.crt
+           timeout "${HANDSHAKE_TIMEOUT_S}"s openssl s_connection -connect $DOCKER_HOST:4433 -new -verify 1 -CAfile $CERT_PATH/CA.crt \
+             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
 
          fi   
     else
@@ -118,11 +142,13 @@ i=1
 
          if [ "$MUTUAL" = "true" ]; then
            echo "Execution $i - QUIC Mutual"
-           quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt" -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key 
+           timeout "${HANDSHAKE_TIMEOUT_S}"s quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt" -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key \
+             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
 
          else
            echo "Execution $i - QUIC Single" 
-           quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt"
+           timeout "${HANDSHAKE_TIMEOUT_S}"s quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt" \
+             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
 
          fi   
     fi
