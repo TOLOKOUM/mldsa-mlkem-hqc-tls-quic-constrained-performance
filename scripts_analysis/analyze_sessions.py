@@ -69,6 +69,7 @@ def percentile(values, p):
 
 def load_sessions(sessions_dir: Path):
     rows = []
+    raw_rtts_by_session = {}
     for sdir in sorted(sessions_dir.glob("*")):
         meta_path = sdir / "meta.json"
         ping_path = sdir / "ping.log"
@@ -82,6 +83,7 @@ def load_sessions(sessions_dir: Path):
             print(f"  [!] {sdir.name}: aucune valeur RTT exploitable, session ignorée.")
             continue
 
+        raw_rtts_by_session[sdir.name] = rtts
         rows.append({
             "session": sdir.name,
             "operator": meta.get("operator"),
@@ -101,7 +103,7 @@ def load_sessions(sessions_dir: Path):
             "received": received,
             "jitter_ms": jitter_ms,
         })
-    return rows
+    return rows, raw_rtts_by_session
 
 
 IDEAL_SCENARIO = {
@@ -113,18 +115,120 @@ IDEAL_SCENARIO = {
     "rtt_mean_ms": 0.0,
     "rtt_p95_ms": 0.0,
     "loss_pct": 0.0,
-    "severity_score": 0.0,
+    "severity_score": None,
     "jitter_ms": 0.0,
     "tc_delay_per_interface_ms": 0.0,
     "tc_netem_cmd": "none (pas de restriction tc)",
+    "n_sessions_used": "N/A",
+    "n_sessions_excluded_iqr": "N/A",
+    "n_jitter_sessions": "N/A",
+    "days_covered": "N/A",
 }
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# Mapping opérateur -> scénario, FIXÉ (pas re-dérivé à chaque exécution).
+# Conforme au design déjà établi dans l'article (Table 2, tab:related,
+# §Contributions : "Moderate reproduces an MTN 4G measurement, Degraded an
+# Orange 4G measurement"). Le score de sévérité composite (RTT+perte) sert
+# uniquement de garde-fou de cohérence ci-dessous, plus comme mécanisme de
+# sélection : avec seulement 4 sessions, l'ancienne sélection par score
+# assignait Modéré=MTN par une égalité quasi parfaite (0.0150 vs 0.0150,
+# départagée par l'ordre d'itération Python) -- un mécanisme d'affectation
+# aussi fragile ne doit pas décider quel opérateur porte quel scénario.
+OPERATOR_SCENARIO_MAP = {
+    "MTN": "Modéré (terrain)",
+    "Orange": "Dégradé (terrain)",
+}
+
+
+def iqr_filtered(rows, key="rtt_mean_ms"):
+    """Exclut les sessions aberrantes (méthode IQR) AU SEIN d'un même groupe
+    (même opérateur), plutôt qu'à travers des opérateurs différents comme
+    dans l'ancienne version -- sinon une session MTN à comportement extrême
+    pouvait être comparée/exclue par rapport à des sessions Orange sans
+    rapport. Nécessite au moins 4 sessions pour un calcul IQR significatif;
+    en dessous, on ne filtre rien mais on le signale."""
+    if len(rows) < 4:
+        return rows, []
+    vals = sorted(r[key] for r in rows)
+    q1, q3 = percentile(vals, 25), percentile(vals, 75)
+    iqr = q3 - q1
+    lo, hi = q1 - 1.5 * iqr, q3 + 1.5 * iqr
+    kept = [r for r in rows if lo <= r[key] <= hi]
+    excluded = [r for r in rows if not (lo <= r[key] <= hi)]
+    return (kept or rows), excluded
+
+
+def pool_operator_sessions(rows, operator, pooled_rtt_source=None):
+    """Agrège TOUTES les sessions valides d'un opérateur (au lieu de n'en
+    retenir qu'une seule) :
+      - RTT / perte : moyenne pondérée par n_rtt_samples, + dispersion
+        INTER-sessions (stdev des moyennes de session) rapportée séparément
+        de la dispersion intra-session déjà connue -- ce sont deux sources
+        de variance distinctes, ne pas les confondre.
+      - p95 : si pooled_rtt_source (dict session->liste de RTT bruts) est
+        fourni (mode --sessions-dir), recalculé sur la distribution BRUTE
+        poolée de toutes les sessions retenues (le plus rigoureux). Sinon
+        (mode --from-summary-csv, RTT bruts non disponibles), moyenne des
+        p95 de chaque session -- moins rigoureux, signalé comme tel.
+      - gigue : moyenne sur les seules sessions qui en disposent (n_jitter
+        peut être < n_sessions_used, rapporté explicitement)."""
+    op_rows = [r for r in rows if r["operator"] == operator]
+    if not op_rows:
+        return None
+
+    kept, excluded = iqr_filtered(op_rows, key="rtt_mean_ms")
+
+    total_n = sum(r["n_rtt_samples"] for r in kept)
+    rtt_mean_pooled = sum(r["rtt_mean_ms"] * r["n_rtt_samples"] for r in kept) / total_n
+    loss_pooled = sum(r["loss_pct"] * r["transmitted"] for r in kept) / sum(r["transmitted"] for r in kept)
+
+    session_means = [r["rtt_mean_ms"] for r in kept]
+    rtt_between_session_stdev = (
+        statistics.stdev(session_means) if len(session_means) > 1 else 0.0
+    )
+
+    if pooled_rtt_source is not None:
+        pooled_raw = []
+        for r in kept:
+            pooled_raw.extend(pooled_rtt_source.get(r["session"], []))
+        rtt_p95_pooled = percentile(pooled_raw, 95) if pooled_raw else None
+        p95_method = "recalculé sur RTT bruts poolés"
+    else:
+        rtt_p95_pooled = round(statistics.mean([r["rtt_p95_ms"] for r in kept]), 3)
+        p95_method = "moyenne des p95 par session (RTT bruts non disponibles, --from-summary-csv)"
+
+    jitter_vals = [r["jitter_ms"] for r in kept if r["jitter_ms"] is not None]
+    jitter_pooled = round(statistics.mean(jitter_vals), 3) if jitter_vals else None
+
+    days = sorted(set(r["day_of_week"] for r in kept))
+    slots = sorted(set(r["time_slot"] for r in kept))
+
+    return {
+        "operator": operator,
+        "n_sessions_used": len(kept),
+        "n_sessions_excluded_iqr": len(excluded),
+        "excluded_sessions": [r["session"] for r in excluded],
+        "days_covered": days,
+        "slots_covered": slots,
+        "rtt_mean_ms": round(rtt_mean_pooled, 3),
+        "rtt_between_session_stdev_ms": round(rtt_between_session_stdev, 3),
+        "rtt_p95_ms": round(rtt_p95_pooled, 3) if rtt_p95_pooled is not None else None,
+        "rtt_p95_method": p95_method,
+        "loss_pct": round(loss_pooled, 4),
+        "n_jitter_sessions": len(jitter_vals),
+        "jitter_ms": jitter_pooled,
+        "source_sessions": [r["session"] for r in kept],
+    }
+
+
 def compute_severity_scores(rows):
-    """Score composite = 0.5 * RTT_normalisé + 0.5 * perte_normalisée (min-max
-    sur l'échantillon). Remplace le tri par perte seule, qui produisait une
-    inversion (Modéré avec un RTT plus élevé que Dégradé) car RTT et perte
-    ne sont pas corrélés dans les mesures terrain réelles."""
+    """Conservé UNIQUEMENT comme diagnostic de cohérence (affiché dans le
+    rapport) : si le score composite d'un opérateur dépasse celui de l'autre
+    dans le sens inattendu, c'est un signal à examiner -- mais ce score ne
+    décide plus quel opérateur porte quel scénario (cf. commentaire
+    OPERATOR_SCENARIO_MAP ci-dessus)."""
     rtts = [r["rtt_mean_ms"] for r in rows]
     losses = [r["loss_pct"] for r in rows]
     rtt_min, rtt_max = min(rtts), max(rtts)
@@ -138,63 +242,52 @@ def compute_severity_scores(rows):
     return rows
 
 
-def derive_scenarios(rows):
-    """Idéal = contrôle théorique fixe (0 ms, 0% perte) — PAS dérivé de mesures
-    terrain, sur décision explicite : ce scénario sert de référence de calcul
-    pure, indépendante de toute variabilité d'échantillonnage.
-    Modéré et Dégradé restent dérivés de sessions RÉELLEMENT OBSERVÉES
-    (aucune valeur synthétique), sur la base d'un score de sévérité composite
-    (RTT + perte, poids égal), en écartant les extrêmes non représentatifs
-    (méthode IQR) pour le dégradé."""
-    if len(rows) < 2:
-        raise ValueError("Il faut au moins 2 sessions valides pour distinguer Modéré et Dégradé "
-                          "(Idéal est désormais un contrôle théorique fixe, pas une session).")
+def derive_scenarios(rows, pooled_rtt_source=None):
+    """Idéal = contrôle théorique fixe (0 ms, 0% perte) -- PAS dérivé de
+    mesures terrain. Modéré et Dégradé sont désormais des AGRÉGATS pondérés
+    de TOUTES les sessions valides de l'opérateur correspondant (MTN/Orange,
+    mapping fixé), pas la sélection d'une session unique."""
+    present_operators = set(r["operator"] for r in rows)
+    missing = set(OPERATOR_SCENARIO_MAP) - present_operators
+    if missing:
+        raise ValueError(
+            f"Opérateur(s) manquant(s) pour dériver les scénarios : {missing}. "
+            f"Le mapping fixe requiert au moins 1 session valide pour chacun de "
+            f"{list(OPERATOR_SCENARIO_MAP)}."
+        )
 
-    rows = compute_severity_scores(rows)
-    by_severity = sorted(rows, key=lambda r: (r["severity_score"], r["rtt_mean_ms"]))
-    scores = [r["severity_score"] for r in by_severity]
-
-    if len(rows) == 2:
-        # Avec seulement 2 sessions, l'attribution est directe : la moins
-        # sévère est Modéré, l'autre est Dégradé. Pas assez de points pour
-        # une estimation de médiane/percentile robuste — à noter comme limite.
-        modere, degrade = by_severity[0], by_severity[1]
-    else:
-        median_score = percentile(scores, 50)
-        modere = min(by_severity, key=lambda r: abs(r["severity_score"] - median_score))
-
-        q1, q3 = percentile(scores, 25), percentile(scores, 75)
-        iqr = q3 - q1
-        outlier_threshold = q3 + 1.5 * iqr
-        non_outliers = [r for r in by_severity if r["severity_score"] <= outlier_threshold] or by_severity
-
-        p90_score = percentile([r["severity_score"] for r in non_outliers], 90)
-        worse_than_median = [r for r in non_outliers if r["severity_score"] > modere["severity_score"]]
-        pool = worse_than_median or non_outliers
-        degrade = min(pool, key=lambda r: abs(r["severity_score"] - p90_score))
+    rows = compute_severity_scores(rows)  # diagnostic seulement, cf. docstring
 
     scenarios = [dict(IDEAL_SCENARIO)]
-    for label, r in [("Modéré (terrain)", modere), ("Dégradé (terrain)", degrade)]:
-        rtt_target = r["rtt_mean_ms"]
+    pooled_by_operator = {}
+    for operator, label in OPERATOR_SCENARIO_MAP.items():
+        pooled = pool_operator_sessions(rows, operator, pooled_rtt_source=pooled_rtt_source)
+        pooled_by_operator[operator] = pooled
+        rtt_target = pooled["rtt_mean_ms"]
         tc_delay_per_iface = round(rtt_target / 2, 2)  # cf. hypothèse de doublement RTT
+        jitter_clause = f"{pooled['jitter_ms']}ms " if pooled["jitter_ms"] else ""
         scenarios.append({
             "scenario": label,
-            "source_session": r["session"],
-            "operator": r["operator"],
-            "connection_type": r["connection_type"],
-            "time_slot": r["time_slot"],
+            "source_session": f"pooled({pooled['n_sessions_used']} sessions)",
+            "operator": operator,
+            "connection_type": "4G",
+            "time_slot": ",".join(pooled["slots_covered"]) or "N/A",
             "rtt_mean_ms": rtt_target,
-            "rtt_p95_ms": r["rtt_p95_ms"],
-            "loss_pct": r["loss_pct"],
-            "severity_score": r["severity_score"],
-            "jitter_ms": r["jitter_ms"] if r["jitter_ms"] is not None else "N/A",
+            "rtt_p95_ms": pooled["rtt_p95_ms"],
+            "loss_pct": pooled["loss_pct"],
+            "severity_score": None,  # diagnostic seulement, cf. rapport
+            "jitter_ms": pooled["jitter_ms"] if pooled["jitter_ms"] is not None else "N/A",
             "tc_delay_per_interface_ms": tc_delay_per_iface,
             "tc_netem_cmd": (
                 f"tc qdisc add dev eth0 root netem delay {tc_delay_per_iface}ms "
-                f"{(str(r['jitter_ms']) + 'ms ') if r['jitter_ms'] else ''}loss {r['loss_pct']}%"
+                f"{jitter_clause}loss {pooled['loss_pct']}%"
             ),
+            "n_sessions_used": pooled["n_sessions_used"],
+            "n_sessions_excluded_iqr": pooled["n_sessions_excluded_iqr"],
+            "n_jitter_sessions": pooled["n_jitter_sessions"],
+            "days_covered": ",".join(pooled["days_covered"]),
         })
-    return scenarios
+    return scenarios, pooled_by_operator
 
 
 def write_csv(path, rows):
@@ -233,13 +326,32 @@ def write_report(path, rows, scenarios, warn_n_sessions):
     lines.append(f"\nCréneaux couverts : {', '.join(slots)}\n")
 
     lines.append("\n## Scénarios réseau dérivés (remplacent les scénarios uniform-loss précédents)\n")
-    lines.append("| Scénario | Session source | Opérateur | RTT moyen (ms) | RTT p95 (ms) | "
-                  "Perte (%) | Gigue (ms) | Délai tc/interface (ms) |")
-    lines.append("|---|---|---|---|---|---|---|---|")
+    lines.append("| Scénario | N sessions poolées | RTT moyen (ms) | RTT p95 (ms) | "
+                  "Perte (%) | Gigue (ms, n sessions) | Délai tc/interface (ms) |")
+    lines.append("|---|---|---|---|---|---|---|")
     for s in scenarios:
-        lines.append(f"| {s['scenario']} | {s['source_session']} | {s['operator']} | "
+        n_used = s.get("n_sessions_used", "N/A")
+        if n_used == "N/A":
+            gigue_label = "N/A"
+        else:
+            gigue_label = f"{s['jitter_ms']} (n={s.get('n_jitter_sessions','?')})" if s['jitter_ms'] != "N/A" else "N/A"
+        lines.append(f"| {s['scenario']} | {n_used} | "
                       f"{s['rtt_mean_ms']} | {s['rtt_p95_ms']} | {s['loss_pct']} | "
-                      f"{s['jitter_ms']} | {s['tc_delay_per_interface_ms']} |")
+                      f"{gigue_label} | {s['tc_delay_per_interface_ms']} |")
+
+    lines.append("\n## Traçabilité par scénario (agrégation, pas sélection d'une session unique)\n")
+    lines.append("Chaque scénario Modéré/Dégradé est désormais une **moyenne pondérée sur toutes "
+                  "les sessions valides** de l'opérateur correspondant (MTN→Modéré, Orange→Dégradé, "
+                  "mapping fixé par le design de l'étude), avec exclusion IQR des sessions "
+                  "aberrantes au sein du groupe. Le détail :\n")
+    for s in scenarios:
+        if s["scenario"] == "Idéal (Baseline)":
+            continue
+        lines.append(f"- **{s['scenario']}** ({s['operator']}) : {s['n_sessions_used']} session(s) "
+                      f"utilisée(s), {s.get('n_sessions_excluded_iqr', 0)} exclue(s) par IQR, "
+                      f"jours couverts = {s.get('days_covered', 'N/A')}, "
+                      f"gigue disponible sur {s.get('n_jitter_sessions', 0)}/{s['n_sessions_used']} "
+                      f"session(s).")
 
     lines.append("\n## Commandes tc/netem correspondantes\n")
     lines.append("Rappel méthodologique : le délai est appliqué en bidirectionnel sur eth0 des "
@@ -303,12 +415,16 @@ def main():
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
+    pooled_rtt_source = None
     if args.from_summary_csv:
         print(f"Lecture directe depuis {args.from_summary_csv} ...")
         rows = load_rows_from_summary_csv(args.from_summary_csv)
+        print("  (mode --from-summary-csv : RTT bruts indisponibles -> p95 poolé "
+              "= moyenne des p95 par session, moins rigoureux que le recalcul sur "
+              "données brutes ; préférer --sessions-dir quand possible)")
     else:
         print(f"Lecture des sessions dans {args.sessions_dir} ...")
-        rows = load_sessions(args.sessions_dir)
+        rows, pooled_rtt_source = load_sessions(args.sessions_dir)
     print(f"  -> {len(rows)} session(s) valide(s) trouvée(s).")
 
     if len(rows) < 2:
@@ -318,7 +434,7 @@ def main():
         return
 
     write_csv(args.out_dir / "sessions_summary.csv", rows)
-    scenarios = derive_scenarios(rows)
+    scenarios, pooled_by_operator = derive_scenarios(rows, pooled_rtt_source=pooled_rtt_source)
     write_csv(args.out_dir / "scenarios_reels.csv", scenarios)
     write_report(args.out_dir / "rapport_methodologique.md", rows, scenarios, warn_n_sessions=len(rows) < 18)
 

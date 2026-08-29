@@ -65,6 +65,7 @@ calibrés pour un affichage écran/poster, pas pour un encart d'article.
 -----------------------------------------------------------------------
 """
 
+import statistics
 from pathlib import Path
 import pandas as pd
 import matplotlib as mpl
@@ -215,22 +216,27 @@ SIG_ALG_TO_FAMILY = {
 # =========================================================================
 # 6. SCÉNARIOS RÉSEAU — mapping dossier -> label scientifique
 # =========================================================================
-# IMPORTANT : confirmé avec David le 2026-08-07.
-#   simple_loss0.3_delay30.02ms -> Modéré (MTN 4G)
-#   simple_loss0.2_delay65.15ms -> Dégradé (Orange 4G)
+# IMPORTANT : recalibré sur les mesures terrain de Yaoundé (cf. mémoire
+# projet) -- MTN -> Modéré: delay=62.51ms, loss=1.3% ;
+#             Orange -> Dégradé: delay=83.52ms, loss=1.5833%.
+# Les noms de dossier ci-dessous DOIVENT correspondre exactement aux
+# dossiers réels sous captures/{tls,quic}/{single,mutual}/ -- toute
+# incohérence ici fait échouer silencieusement (avec juste un [SKIP] en
+# console, facile à manquer) les scripts qui itèrent sur SCENARIO_ORDER
+# (ex: plot_global_network_sensitivity.py).
 
 SCENARIO_ORDER = [
     "none",
-    "simple_loss0.3_delay30.02ms",
-    "simple_loss0.2_delay65.15ms",
+    "simple_loss1.3_delay62.51ms",
+    "simple_loss1.5833_delay83.52ms",
     "stable",
     "unstable",
 ]
 
 SCENARIO_LABELS = {
     "none": "Ideal",
-    "simple_loss0.3_delay30.02ms": "Moderate (4G)",
-    "simple_loss0.2_delay65.15ms": "Degraded (4G)",
+    "simple_loss1.3_delay62.51ms": "Moderate (MTN 4G)",
+    "simple_loss1.5833_delay83.52ms": "Degraded (Orange 4G)",
     "stable": "GE-Stable",
     "unstable": "GE-Unstable",
 }
@@ -238,8 +244,8 @@ SCENARIO_LABELS = {
 # Nom court utilisé dans les noms de fichiers (pas d'espaces/accents/parenthèses)
 SCENARIO_SLUGS = {
     "none": "ideal",
-    "simple_loss0.3_delay30.02ms": "moderate",
-    "simple_loss0.2_delay65.15ms": "degraded",
+    "simple_loss1.3_delay62.51ms": "moderate",
+    "simple_loss1.5833_delay83.52ms": "degraded",
     "stable": "ge_stable",
     "unstable": "ge_unstable",
 }
@@ -381,6 +387,16 @@ def resolve_duplicate_runs(df, key_cols, timestamp_col="timestamp", value_cols=N
     de key_cols, et on imprime un rapport transparent des combinaisons
     affectées (jamais un dédoublonnage silencieux).
 
+    IMPORTANT (cf. aggregate_resource_blocks ci-dessous) : depuis le passage
+    à la méthodologie en blocs randomisés, resource_usage_*.csv contient
+    normalement PLUSIEURS lignes voulues par combinaison (une par
+    block_index) -- ce ne sont PAS des doublons à écraser. Pour ces
+    fichiers, `key_cols` DOIT inclure "block_index" ici, afin que cette
+    fonction ne traite comme "doublon" que deux lignes partageant le MÊME
+    block_index (un vrai re-run accidentel). L'agrégation statistique des
+    blocs entre eux se fait ensuite, séparément, via
+    aggregate_resource_blocks.
+
     df           : DataFrame avec une colonne timestamp (parseable par pandas)
     key_cols     : liste de colonnes identifiant une combinaison unique
     value_cols   : colonnes numériques à comparer entre versions pour le
@@ -413,6 +429,89 @@ def resolve_duplicate_runs(df, key_cols, timestamp_col="timestamp", value_cols=N
 
     df = df.sort_values("_ts_parsed").drop_duplicates(subset=key_cols, keep="last")
     return df.drop(columns=["_ts_parsed"]).reset_index(drop=True)
+
+
+def block_bootstrap_mean_ci(block_values, n_resamples=5000, seed=12345):
+    """
+    IC95% de la moyenne par bootstrap de BLOCS ENTIERS (rééchantillonnage
+    avec remise de blocs, jamais d'observations individuelles à l'intérieur
+    d'un bloc). Reçoit directement une liste de valeurs DÉJÀ AGRÉGÉES PAR
+    BLOC (ex: cpu_usec_per_handshake moyen sur les n_runs d'un bloc) --
+    contrairement à block_bootstrap_ci() dans analyze_handshake_performance.py
+    qui rééchantillonne des durées de handshake individuelles à l'intérieur
+    de chaque bloc rééchantillonné (les logs de latence ont l'observation
+    individuelle disponible, pas resource_usage_*.csv qui ne stocke qu'une
+    moyenne par bloc).
+
+    Même graine et même nombre de resamples (seed=12345, n_resamples=5000)
+    que le reste du pipeline statistique, pour rester cohérent.
+
+    Retourne None si moins de 2 blocs (bootstrap non défini avec un seul
+    bloc -- le résultat doit alors être signalé comme "IC non calculable",
+    jamais silencieusement omis).
+    """
+    import random
+    block_values = [v for v in block_values if v is not None]
+    if len(block_values) < 2:
+        return None
+    rng = random.Random(seed)
+    means = sorted(
+        statistics.mean(rng.choice(block_values) for _ in range(len(block_values)))
+        for _ in range(n_resamples)
+    )
+
+    def pct(p):
+        k = (len(means) - 1) * (p / 100)
+        f, c = int(k), min(int(k) + 1, len(means) - 1)
+        if f == c:
+            return means[f]
+        return means[f] + (means[c] - means[f]) * (k - f)
+
+    return (round(pct(2.5), 3), round(pct(97.5), 3))
+
+
+def aggregate_resource_blocks(df, key_cols, value_cols, block_col="block_index"):
+    """
+    Agrège les lignes-blocs de resource_usage_*.csv (une ligne par
+    block_index pour une même combinaison de key_cols, chacune déjà moyennée
+    en interne sur les n_runs handshakes du bloc) en UNE ligne par
+    combinaison, avec moyenne inter-blocs et IC95% par bootstrap de blocs
+    (cf. block_bootstrap_mean_ci).
+
+    À utiliser TOUJOURS APRÈS resolve_duplicate_runs(key_cols + [block_col]),
+    qui doit avoir déjà éliminé les vrais doublons accidentels au même
+    block_index. Ici, les lignes multiples par combinaison de key_cols sont
+    les blocs VOULUS de la méthodologie -- elles sont combinées
+    statistiquement, jamais écrasées ni moyennées en ignorant leur
+    appartenance à des blocs distincts.
+
+    Pour chaque colonne de value_cols, ajoute au DataFrame retourné :
+        {value_col}_mean       -- moyenne des moyennes de bloc
+        {value_col}_ci95_low   -- borne basse IC95% bootstrap de blocs (ou "NA")
+        {value_col}_ci95_high  -- borne haute IC95% bootstrap de blocs (ou "NA")
+        {value_col}_ci_method  -- "bootstrap_blocs" ou message explicite si
+                                   IC non calculable (1 seul bloc)
+    Ajoute aussi "n_blocks_pooled" (nombre de block_index distincts vus pour
+    la combinaison).
+    """
+    rows = []
+    for keys, group in df.groupby(key_cols):
+        key_vals = keys if isinstance(keys, tuple) else (keys,)
+        row = dict(zip(key_cols, key_vals))
+        n_blocks = group[block_col].nunique()
+        row["n_blocks_pooled"] = n_blocks
+        for vc in value_cols:
+            block_means = group.groupby(block_col)[vc].mean().tolist()
+            row[f"{vc}_mean"] = statistics.mean(block_means) if block_means else None
+            ci = block_bootstrap_mean_ci(block_means) if n_blocks > 1 else None
+            if ci is not None:
+                row[f"{vc}_ci95_low"], row[f"{vc}_ci95_high"] = ci
+                row[f"{vc}_ci_method"] = "bootstrap_blocs"
+            else:
+                row[f"{vc}_ci95_low"], row[f"{vc}_ci95_high"] = "NA", "NA"
+                row[f"{vc}_ci_method"] = "normale_naive (1 seul bloc -- IC non calculable ici)"
+        rows.append(row)
+    return pd.DataFrame(rows)
 
 
 # =========================================================================

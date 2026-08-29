@@ -65,18 +65,64 @@ def format_kem_label_flat(kem: str) -> str:
     return "+".join(mapped)
 
 
-def raw_csv_path(root: Path, protocol: str, auth_mode: str, scenario_dir: str,
-                  sig_alg: str, kem: str) -> Path:
-    fname = f"handshake_{protocol}_{auth_mode}_{sig_alg}_{kem}_{scenario_dir}.csv"
-    return root / "csv" / fname
+import re
+
+BLOCK_SUFFIX_RE = re.compile(r"_block(\d+)of(\d+)$")
 
 
-def load_success_durations(csv_path: Path):
-    df = pd.read_csv(csv_path)
+def raw_csv_paths(root: Path, protocol: str, auth_mode: str, scenario_dir: str,
+                   sig_alg: str, kem: str) -> list:
+    """Retourne TOUS les fichiers CSV bruts d'une combinaison, tous blocs confondus.
+
+    Depuis le découpage de la campagne en N_BLOCKS (cf. Launcher_pq_mldsa_mlkem_hqc.sh
+    et logs_to_csv.py), une combinaison SIG_ALG/KEM produit un fichier CSV PAR BLOC
+    (ex: handshake_tls_single_ed25519_P-256_none_block1of4.csv, ..._block2of4.csv, ...)
+    et non plus un seul fichier -- raw_csv_path (ancienne version, un seul chemin en
+    dur sans suffixe) ne trouvait donc plus rien, ce qui vidait silencieusement
+    table_rows et faisait planter table_ax.table() sur une liste vide.
+
+    Un fichier sans suffixe _blockNofM est traité comme bloc unique, pour
+    compatibilité avec d'éventuels logs pré-découpage en blocs (même convention
+    que parse_block_suffix dans logs_to_csv.py)."""
+    base_stem = f"handshake_{protocol}_{auth_mode}_{sig_alg}_{kem}_{scenario_dir}"
+    csv_dir = root / "csv"
+    if not csv_dir.is_dir():
+        return []
+    matches = []
+    for f in sorted(csv_dir.glob(f"{base_stem}*.csv")):
+        suffix = f.stem[len(base_stem):]
+        if suffix == "" or BLOCK_SUFFIX_RE.fullmatch(suffix):
+            matches.append(f)
+    return matches
+
+
+def load_success_durations(csv_paths, expected_n_blocks: int = None, combo_label: str = ""):
+    """Concatène TOUS les blocs d'une combinaison avant de calculer quoi que ce
+    soit -- sinon chaque figure ne représenterait qu'un sous-ensemble arbitraire
+    (souvent un seul bloc sur 4) des 500 handshakes réellement collectés.
+
+    Avertit explicitement si des blocs manquent sur disque par rapport au nombre
+    de blocs déclaré dans les données (colonne n_blocks) -- pour éviter qu'un
+    bloc absent (campagne interrompue, fichier non copié, etc.) passe inaperçu
+    et fausse silencieusement les figures et le tableau (c)."""
+    if not csv_paths:
+        return np.array([]), 0, 0, 0
+    dfs = [pd.read_csv(p) for p in csv_paths]
+    df = pd.concat(dfs, ignore_index=True)
     n_total = len(df)
+
+    n_blocks_seen = df["block_index"].nunique() if "block_index" in df.columns else 1
+    n_blocks_declared = int(df["n_blocks"].max()) if "n_blocks" in df.columns and n_total else 1
+    if expected_n_blocks is None:
+        expected_n_blocks = n_blocks_declared
+    if n_blocks_seen < expected_n_blocks:
+        print(f"[WARN] {combo_label} : seulement {n_blocks_seen}/{expected_n_blocks} "
+              f"bloc(s) trouvé(s) sur disque -- figure/tableau construits sur des "
+              f"données PARTIELLES pour cette combinaison.")
+
     ok = df[df["success"] == 1]
     n_failed = n_total - len(ok)
-    return ok["handshake_duration_ms"].to_numpy(dtype=float), n_failed, n_total
+    return ok["handshake_duration_ms"].to_numpy(dtype=float), n_failed, n_total, n_blocks_seen
 
 
 def fmt_ms(x):
@@ -99,7 +145,7 @@ def fmt_pct(x):
     return f"{x:.1f}"
 
 
-def compute_kem_stats(durations: np.ndarray, n_failed: int, n_total: int) -> dict:
+def compute_kem_stats(durations: np.ndarray, n_failed: int, n_total: int, n_blocks_seen: int = 1) -> dict:
     """Statistiques descriptives calculées sur les durées de handshake réussies."""
     n = durations.size
     mean = float(np.mean(durations)) if n else float("nan")
@@ -114,7 +160,7 @@ def compute_kem_stats(durations: np.ndarray, n_failed: int, n_total: int) -> dic
     else:
         out_pct, max_v = float("nan"), float("nan")
     return dict(mean=mean, cv=cv, out_pct=out_pct, max=max_v,
-                n_failed=int(n_failed), n_total=int(n_total))
+                n_failed=int(n_failed), n_total=int(n_total), n_blocks_seen=int(n_blocks_seen))
 
 
 def build_panel(ax, root, protocol, auth_mode, scenario_dir, sig_alg, level_rows,
@@ -138,21 +184,26 @@ def build_panel(ax, root, protocol, auth_mode, scenario_dir, sig_alg, level_rows
 
     for fam, r in entries:
         kem = r.kem
-        csv_path = raw_csv_path(root, protocol, auth_mode, scenario_dir, sig_alg, kem)
-        if not csv_path.exists():
+        csv_paths = raw_csv_paths(root, protocol, auth_mode, scenario_dir, sig_alg, kem)
+        if not csv_paths:
             continue
-        durations, n_failed, n_total = load_success_durations(csv_path)
-        read_counter["n_files"] += 1
+        ref_n_blocks = getattr(r, "n_blocks_pooled", None)
+        expected_n_blocks = int(ref_n_blocks) if ref_n_blocks is not None and not pd.isna(ref_n_blocks) else None
+        durations, n_failed, n_total, n_blocks_seen = load_success_durations(
+            csv_paths, expected_n_blocks=expected_n_blocks,
+            combo_label=f"{sig_alg}/{kem}/{scenario_dir}",
+        )
+        read_counter["n_files"] += len(csv_paths)
         read_counter["n_rows"] += n_total
 
-        stats = compute_kem_stats(durations, n_failed, n_total)
+        stats = compute_kem_stats(durations, n_failed, n_total, n_blocks_seen)
 
         # --- Vérification croisée avec handshake_stats.csv (si mean_ms est disponible) ---
         ref_mean = getattr(r, "mean_ms", None)
         if ref_mean is not None and not pd.isna(ref_mean) and ref_mean != 0 and stats["mean"] == stats["mean"]:
             rel_diff = abs(stats["mean"] - ref_mean) / abs(ref_mean)
             if rel_diff > MEAN_CROSS_CHECK_TOL:
-                print(f"[WARN] mean_ms diverge de {rel_diff*100:.1f}% pour {csv_path.name} "
+                print(f"[WARN] mean_ms diverge de {rel_diff*100:.1f}% pour {sig_alg}/{kem}/{scenario_dir} "
                       f"(recalculé={stats['mean']:.1f} ms, handshake_stats.csv={ref_mean:.1f} ms)")
 
         table_rows.append(dict(fam=fam, kem=kem, label=format_kem_label_flat(kem), stats=stats))

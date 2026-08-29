@@ -40,6 +40,22 @@ Format de comparisons.csv (une ligne = une comparaison, en-tête requis) :
 
 Les chemins de file_a/file_b sont résolus relativement à --log-dir (par
 défaut, le répertoire courant).
+
+SUPPORT DES BLOCS (résout le point 2 du rejet : "campagne unique, pas de
+blocs indépendants") : depuis le découpage en blocs introduit dans le
+launcher, une même condition peut correspondre à PLUSIEURS fichiers .log
+(un par bloc, ex. ..._block1of5.log ... ..._block5of5.log) plutôt qu'un
+seul. file_a et file_b acceptent donc désormais soit un nom de fichier
+unique (comportement inchangé), soit une liste de fichiers séparés par
+';', soit un motif glob (ex. handshake_tls_single_ed25519_hqc128_none_block*.log)
+résolu par rapport à --log-dir -- tous les fichiers ainsi résolus pour un
+côté sont poolés (durées concaténées) avant le test. ATTENTION : ce
+pooling ne corrige PAS l'hypothèse d'indépendance du test de Mann-Whitney
+lui-même (toujours calculé sur l'échantillon poolé comme s'il était i.i.d.)
+-- seul le bootstrap de blocs de analyze_handshake_performance.py traite
+correctement la corrélation intra-bloc pour les intervalles de confiance.
+Un test de significativité tenant compte des blocs (ex. permutation par
+bloc entier) n'est pas encore implémenté ici.
 """
 
 import argparse
@@ -120,6 +136,39 @@ def benjamini_hochberg(pvalues):
     return adjusted
 
 
+def resolve_side(spec: str, log_dir: Path):
+    """Résout un côté de comparaison (file_a ou file_b) en liste de Path :
+    - "a.log" -> [log_dir/a.log]  (comportement historique, inchangé)
+    - "a.log;b.log" -> [log_dir/a.log, log_dir/b.log]
+    - "block*.log" -> tous les fichiers correspondants sous log_dir (glob)
+    """
+    parts = [p.strip() for p in spec.split(";") if p.strip()]
+    resolved = []
+    for p in parts:
+        if any(ch in p for ch in "*?["):
+            matches = sorted(log_dir.glob(p))
+            if not matches:
+                print(f"    [!] Motif '{p}' ne correspond à aucun fichier sous {log_dir}")
+            resolved.extend(matches)
+        else:
+            resolved.append(log_dir / p)
+    return resolved
+
+
+def load_and_pool(paths):
+    """Concatène les durées de tous les fichiers d'un côté. Retourne
+    (durations, n_nan, n_files_missing)."""
+    durations, n_nan, n_missing = [], 0, 0
+    for p in paths:
+        if not p.exists():
+            n_missing += 1
+            continue
+        d, n = parse_log_file(p)
+        durations.extend(d)
+        n_nan += n
+    return durations, n_nan, n_missing
+
+
 def load_comparisons(path: Path):
     rows = []
     with open(path, newline="") as f:
@@ -142,20 +191,25 @@ def main():
 
     results = []
     for label, fa, fb in comparisons:
-        path_a = args.log_dir / fa
-        path_b = args.log_dir / fb
-        if not path_a.exists() or not path_b.exists():
-            print(f"[!] {label}: fichier manquant ({path_a} ou {path_b}) — ignoré.")
-            continue
+        paths_a = resolve_side(fa, args.log_dir)
+        paths_b = resolve_side(fb, args.log_dir)
 
-        durations_a, n_nan_a = parse_log_file(path_a)
-        durations_b, n_nan_b = parse_log_file(path_b)
+        durations_a, n_nan_a, n_missing_a = load_and_pool(paths_a)
+        durations_b, n_nan_b, n_missing_b = load_and_pool(paths_b)
+
+        if not paths_a or not paths_b or n_missing_a == len(paths_a) or n_missing_b == len(paths_b):
+            print(f"[!] {label}: aucun fichier résolu/trouvé pour un des deux côtés — ignoré.")
+            continue
+        if n_missing_a or n_missing_b:
+            print(f"  [i] {label}: {n_missing_a} fichier(s) manquant(s) côté A, "
+                  f"{n_missing_b} côté B — pooling effectué sur les fichiers trouvés uniquement.")
 
         u1, z, p, delta = mann_whitney_u(durations_a, durations_b)
 
         results.append({
             "label": label,
             "file_a": fa, "file_b": fb,
+            "n_files_a": len(paths_a), "n_files_b": len(paths_b),
             "n_a": len(durations_a), "n_fail_a": n_nan_a,
             "n_b": len(durations_b), "n_fail_b": n_nan_b,
             "median_a": round(statistics.median(durations_a), 3) if durations_a else "NA",
@@ -208,7 +262,14 @@ def main():
         "avec le traitement déjà appliqué dans parse_handshake_logs.py et "
         "analyze_handshake_performance.py. La correction de Benjamini-Hochberg "
         "est appliquée sur l'ensemble des p-values obtenues dans le même run "
-        "de ce script, pas comparaison par comparaison en isolation."
+        "de ce script, pas comparaison par comparaison en isolation. Quand un "
+        "côté de comparaison correspond à plusieurs fichiers-blocs (colonne "
+        "'n_files_a'/'n_files_b' > 1), les durées sont poolées avant le test ; "
+        "ce pooling NE corrige PAS l'hypothèse d'indépendance du test lui-même "
+        "(toujours calculé comme si l'échantillon poolé était i.i.d.) -- seul "
+        "l'intervalle de confiance par bootstrap de blocs de "
+        "analyze_handshake_performance.py traite correctement la corrélation "
+        "intra-bloc ; les p-values de ce fichier restent donc indicatives."
     )
 
     Path(args.out_dir / "significance_tests_report.md").write_text("\n".join(lines))

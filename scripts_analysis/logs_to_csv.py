@@ -31,9 +31,24 @@ from pathlib import Path
 EXEC_RE = re.compile(r"^Execution\s+(\d+)\s*-\s*(.+?)\s*$")
 # "Handshake duration: 17.16 ms" ou "Handshake duration: NaN ms" (échec QUIC connu)
 DURATION_RE = re.compile(r"Handshake duration:\s*([\d.]+|NaN)\s*ms")
+# Suffixe de bloc ajouté par le launcher patché (résout le point 2 du rejet :
+# "campagne unique, pas de blocs indépendants") : handshake_..._block2of5.log
+BLOCK_SUFFIX_RE = re.compile(r"_block(\d+)of(\d+)$")
 
 
-def parse_log_file(path: Path):
+def parse_block_suffix(stem: str):
+    """Retourne (block_index, n_blocks) si le nom de fichier porte un
+    suffixe _blockNofM, sinon (1, 1) -- traite un fichier sans suffixe
+    comme un bloc unique, pour compatibilité avec les logs collectés avant
+    l'introduction du découpage en blocs (aucune session existante à
+    reconvertir)."""
+    m = BLOCK_SUFFIX_RE.search(stem)
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    return 1, 1
+
+
+def parse_log_file(path: Path, block_index: int = 1, n_blocks: int = 1):
     """Scan ligne par ligne, robuste à l'ordre exact des lignes intercalées
     (ex. 's_connection: verify depth is 1' entre Execution et Handshake
     duration) — on garde juste le dernier numéro/mode d'exécution vu."""
@@ -59,6 +74,8 @@ def parse_log_file(path: Path):
                         "mode": current_mode,
                         "handshake_duration_ms": "NaN",
                         "success": 0,
+                        "block_index": block_index,
+                        "n_blocks": n_blocks,
                     })
                 else:
                     rows.append({
@@ -66,6 +83,8 @@ def parse_log_file(path: Path):
                         "mode": current_mode,
                         "handshake_duration_ms": float(val),
                         "success": 1,
+                        "block_index": block_index,
+                        "n_blocks": n_blocks,
                     })
     return rows
 
@@ -85,19 +104,22 @@ def convert_dir(handshake_logs_dir: Path):
 
     n_ok = 0
     for log_path in log_files:
-        rows = parse_log_file(log_path)
+        block_index, n_blocks = parse_block_suffix(log_path.stem)
+        rows = parse_log_file(log_path, block_index=block_index, n_blocks=n_blocks)
         if not rows:
             print(f"  [!] {log_path.name} : aucune exécution reconnue, ignoré (fichier vide ou format inattendu).")
             continue
 
         csv_path = csv_dir / (log_path.stem + ".csv")
         with open(csv_path, "w", newline="") as f:
-            writer = csv.DictWriter(f, fieldnames=["execution", "mode", "handshake_duration_ms", "success"])
+            writer = csv.DictWriter(f, fieldnames=["execution", "mode", "handshake_duration_ms",
+                                                     "success", "block_index", "n_blocks"])
             writer.writeheader()
             writer.writerows(rows)
 
         n_fail = sum(1 for r in rows if r["success"] == 0)
-        print(f"  {log_path.name} -> csv/{csv_path.name}  ({len(rows)} exécutions, {n_fail} échec(s))")
+        block_label = f"bloc {block_index}/{n_blocks}" if n_blocks > 1 else "bloc unique"
+        print(f"  {log_path.name} -> csv/{csv_path.name}  ({len(rows)} exécutions, {n_fail} échec(s), {block_label})")
         n_ok += 1
 
     return n_ok

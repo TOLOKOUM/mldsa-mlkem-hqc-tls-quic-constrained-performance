@@ -1,4 +1,4 @@
-scenario,source_session,operator,connection_type,time_slot,rtt_mean_ms,rtt_p95_ms,loss_pct,severity_score,jitter_ms,tc_delay_per_interface_ms,tc_netem_cmd
-Idéal (Baseline),N/A (Theoretical Control),None,Loopback / Local,N/A,0.0,0.0,0.0,0.0,0.0,0.0,none (pas de restriction tc)
-Modéré (terrain),20260801_221721_MTN_4G,MTN,4G,creuse,60.036,58.835,0.3,0.6367,N/A,30.02,tc qdisc add dev eth0 root netem delay 30.02ms loss 0.3%
-Dégradé (terrain),20260801_221256_Orange_4G,Orange,4G,creuse,130.295,147.0,0.2,0.8104,N/A,65.15,tc qdisc add dev eth0 root netem delay 65.15ms loss 0.2%
+scenario,source_session,operator,connection_type,time_slot,rtt_mean_ms,rtt_p95_ms,loss_pct,severity_score,jitter_ms,tc_delay_per_interface_ms,tc_netem_cmd,n_sessions_used,n_sessions_excluded_iqr,n_jitter_sessions,days_covered
+Idéal (Baseline),N/A (Theoretical Control),None,Loopback / Local,N/A,0.0,0.0,0.0,,0.0,0.0,none (pas de restriction tc),N/A,N/A,N/A,N/A
+Modéré (terrain),pooled(5 sessions),MTN,4G,"creuse,pointe",125.02,271.0,1.3,,9.268,62.51,tc qdisc add dev eth0 root netem delay 62.51ms 9.268ms loss 1.3%,5,1,3,"jeudi,samedi,vendredi"
+Dégradé (terrain),pooled(6 sessions),Orange,4G,"creuse,pointe",167.048,251.0,1.5833,,7.757,83.52,tc qdisc add dev eth0 root netem delay 83.52ms 7.757ms loss 1.5833%,6,0,3,"jeudi,samedi,vendredi"

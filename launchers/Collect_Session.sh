@@ -27,6 +27,7 @@ IPERF_SERVER=""
 COUNT=1000
 INTERVAL=0.1
 NOTE=""
+ALLOW_NO_JITTER=0
 
 usage() {
   echo "Usage: $0 --operator <nom> --conn <4G|WiFi|ADSL|3G> --location <lieu> [--target IP] [--iperf-server IP] [--count N] [--note \"texte\"]"
@@ -43,6 +44,7 @@ while [[ $# -gt 0 ]]; do
     --count) COUNT="$2"; shift 2;;
     --interval) INTERVAL="$2"; shift 2;;
     --note) NOTE="$2"; shift 2;;
+    --allow-no-jitter) ALLOW_NO_JITTER=1; shift 1;;
     -h|--help) usage;;
     *) echo "Option inconnue: $1"; usage;;
   esac
@@ -79,7 +81,13 @@ else
   echo "      -> ping terminé avec code non-zéro (normal si pertes en fin de séquence) : $PING_LOG conservé."
 fi
 
-# --- 2. Capture gigue / bande passante (optionnelle, nécessite un serveur iperf3 dédié) ---
+# --- 2. Capture gigue / bande passante (résout une partie du point 6 : le
+#        relecteur note que "le jitter, les longues queues, le débit... ne
+#        sont pas reproduits". La capture iperf3 était optionnelle et
+#        silencieusement sautée sans --iperf-server ; elle est maintenant
+#        REQUISE par défaut, avec sortie explicite si absente, pour qu'une
+#        session de calibration sans jitter ne soit plus produite par
+#        inadvertance.) ---
 IPERF_LOG=""
 if [[ -n "$IPERF_SERVER" ]]; then
   if command -v iperf3 >/dev/null 2>&1; then
@@ -87,10 +95,25 @@ if [[ -n "$IPERF_SERVER" ]]; then
     IPERF_LOG="$SESSION_DIR/iperf.log"
     iperf3 -u -c "$IPERF_SERVER" -t 60 -b 1M -i 5 > "$IPERF_LOG" 2>&1 || echo "      -> iperf3 a échoué, voir $IPERF_LOG"
   else
-    echo "[2/2] iperf3 non installé sur cette machine — étape sautée."
+    echo "ERREUR: iperf3 non installé -- la capture de gigue est requise par défaut."
+    echo "        Installez iperf3, ou passez --allow-no-jitter pour forcer une session"
+    echo "        RTT/perte seule (à ne faire que pour un test rapide, jamais pour une"
+    echo "        session de calibration retenue dans l'article)."
+    if [[ "$ALLOW_NO_JITTER" != "1" ]]; then
+        exit 1
+    fi
+    echo "      -> --allow-no-jitter actif : session poursuivie SANS mesure de gigue."
   fi
 else
-  echo "[2/2] Pas de --iperf-server fourni — capture jitter sautée (RTT/perte restent valides sans elle)."
+  echo "ERREUR: --iperf-server est requis par défaut (la calibration terrain doit"
+  echo "        inclure le jitter et le débit, pas seulement RTT/perte ICMP -- cf."
+  echo "        limite explicitement soulevée en relecture)."
+  echo "        Passez --iperf-server IP, ou --allow-no-jitter pour forcer une session"
+  echo "        RTT/perte seule (test rapide uniquement, pas pour l'article)."
+  if [[ "$ALLOW_NO_JITTER" != "1" ]]; then
+      exit 1
+  fi
+  echo "      -> --allow-no-jitter actif : capture jitter sautée."
 fi
 
 # --- 3. Métadonnées de session (traçabilité obligatoire pour l'annexe méthodologique) ---

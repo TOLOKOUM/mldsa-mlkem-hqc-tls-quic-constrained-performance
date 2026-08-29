@@ -53,8 +53,8 @@ from plot_style import (
     available_traffic_components, fmt_kb,
 )
 
-SUMMARY_CSV = "results_traffic_size/traffic_size_summary.csv"
-OUTPUT_DIR = "results_traffic_size/plots"
+SUMMARY_CSV = "results_traffic/traffic_size_summary.csv"
+OUTPUT_DIR = "results_traffic/plots"
 
 PROTOCOL_ROW_ORDER = ["tls", "quic"]
 NEGATIVE_RESIDUAL_TOL_BYTES = 2  # tolérance avant d'avertir (arrondis, etc.)
@@ -68,11 +68,25 @@ def load_traffic_data() -> pd.DataFrame:
 
     df = pd.read_csv(path)
 
+    # La taille d'un message handshake est déterministe pour une combinaison
+    # SIG_ALG/KEM donnée (cf. docstring ci-dessus) : elle ne dépend pas du
+    # profil réseau. Le CSV peut désormais contenir plusieurs campagnes
+    # (ex. réémulation sous Modéré/Dégradé) ; on ne garde que la campagne de
+    # référence "none" (Ideal) pour ce graphe de composition du handshake.
+    # Les autres campagnes ont en outre un champ `kem` pollué par le profil
+    # réseau + le timestamp du pcap (bug de génération à corriger séparément
+    # dans le script source du CSV), donc les inclure ici casserait aussi les
+    # labels d'axe.
+    if "campaign" in df.columns:
+        campaigns_found = sorted(df["campaign"].unique())
+        if campaigns_found != ["none"]:
+            print(f"[INFO] Filtrage sur campaign=='none' (campagnes présentes : {campaigns_found})")
+        df = df[df["campaign"] == "none"].copy()
+
     required = {"protocol", "auth_mode", "sig_alg", "kem", "kem_class", "total_bytes"}
     missing = required - set(df.columns)
     if missing:
         raise ValueError(f"{path} : colonnes manquantes {missing}")
-
     unknown_sig = set(df["sig_alg"].unique()) - set(SIG_ALG_TO_LEVEL)
     if unknown_sig:
         raise ValueError(
