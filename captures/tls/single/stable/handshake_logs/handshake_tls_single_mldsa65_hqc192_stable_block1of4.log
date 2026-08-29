@@ -1,0 +1,382 @@
+Handshake timeout budget: 150s (identique TLS/QUIC)
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8268: root refcnt 2 limit 1000 seed 14137026495535235942
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=mldsa65 and KEM_ALG=hqc192
+Execution 1 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 51.54 ms
+Execution 2 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 51.95 ms
+Execution 3 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.77 ms
+Execution 4 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.56 ms
+Execution 5 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1125.59 ms
+Execution 6 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.70 ms
+Execution 7 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1285.92 ms
+Execution 8 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1319.46 ms
+Execution 9 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 55.15 ms
+Execution 10 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.20 ms
+Execution 11 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 474.99 ms
+Execution 12 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 439.53 ms
+Execution 13 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 2585.20 ms
+Execution 14 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1093.75 ms
+Execution 15 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.12 ms
+Execution 16 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 236.80 ms
+Execution 17 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 54.11 ms
+Execution 18 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 690.29 ms
+Execution 19 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.74 ms
+Execution 20 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 234.22 ms
+Execution 21 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 58.45 ms
+Execution 22 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 2132.46 ms
+Execution 23 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 54.90 ms
+Execution 24 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.01 ms
+Execution 25 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 446.89 ms
+Execution 26 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 58.16 ms
+Execution 27 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1107.69 ms
+Execution 28 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.27 ms
+Execution 29 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1476.39 ms
+Execution 30 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1105.13 ms
+Execution 31 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.46 ms
+Execution 32 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.65 ms
+Execution 33 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 233.51 ms
+Execution 34 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 56.49 ms
+Execution 35 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 53.77 ms
+Execution 36 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.57 ms
+Execution 37 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.12 ms
+Execution 38 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.83 ms
+Execution 39 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1900.98 ms
+Execution 40 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 51.10 ms
+Execution 41 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.74 ms
+Execution 42 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1312.95 ms
+Execution 43 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 284.43 ms
+Execution 44 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.76 ms
+Execution 45 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 448.58 ms
+Execution 46 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 55.13 ms
+Execution 47 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.12 ms
+Execution 48 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.92 ms
+Execution 49 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.53 ms
+Execution 50 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 233.80 ms
+Execution 51 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 62.92 ms
+Execution 52 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 659.64 ms
+Execution 53 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 55.25 ms
+Execution 54 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 238.89 ms
+Execution 55 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1093.98 ms
+Execution 56 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1348.14 ms
+Execution 57 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1130.78 ms
+Execution 58 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.83 ms
+Execution 59 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.32 ms
+Execution 60 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.58 ms
+Execution 61 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.90 ms
+Execution 62 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.67 ms
+Execution 63 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.76 ms
+Execution 64 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.79 ms
+Execution 65 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.57 ms
+Execution 66 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 2115.78 ms
+Execution 67 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1681.96 ms
+Execution 68 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 54.01 ms
+Execution 69 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 441.78 ms
+Execution 70 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 69.22 ms
+Execution 71 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 290.81 ms
+Execution 72 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 2344.95 ms
+Execution 73 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 54.65 ms
+Execution 74 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.36 ms
+Execution 75 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.34 ms
+Execution 76 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.01 ms
+Execution 77 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 51.00 ms
+Execution 78 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 5218.23 ms
+Execution 79 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 443.97 ms
+Execution 80 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 55.23 ms
+Execution 81 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 231.10 ms
+Execution 82 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 853.13 ms
+Execution 83 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1764.19 ms
+Execution 84 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 51.75 ms
+Execution 85 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.62 ms
+Execution 86 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.26 ms
+Execution 87 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 3163.90 ms
+Execution 88 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.23 ms
+Execution 89 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.02 ms
+Execution 90 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.84 ms
+Execution 91 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.81 ms
+Execution 92 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.18 ms
+Execution 93 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 232.12 ms
+Execution 94 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 58.82 ms
+Execution 95 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.24 ms
+Execution 96 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1102.92 ms
+Execution 97 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1068.41 ms
+Execution 98 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 58.05 ms
+Execution 99 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 231.01 ms
+Execution 100 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.74 ms
+Execution 101 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 439.35 ms
+Execution 102 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 53.17 ms
+Execution 103 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1085.18 ms
+Execution 104 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.33 ms
+Execution 105 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.59 ms
+Execution 106 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.60 ms
+Execution 107 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 439.49 ms
+Execution 108 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 706.88 ms
+Execution 109 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.32 ms
+Execution 110 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 51.25 ms
+Execution 111 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 3200.64 ms
+Execution 112 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 264.54 ms
+Execution 113 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 450.65 ms
+Execution 114 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 235.06 ms
+Execution 115 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 53.79 ms
+Execution 116 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 1108.44 ms
+Execution 117 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 2605.54 ms
+Execution 118 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 50.46 ms
+Execution 119 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.74 ms
+Execution 120 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.15 ms
+Execution 121 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 48.44 ms
+Execution 122 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 846.51 ms
+Execution 123 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 237.52 ms
+Execution 124 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 55.05 ms
+Execution 125 - TLS Single
+s_connection: verify depth is 1
+Handshake duration: 49.65 ms

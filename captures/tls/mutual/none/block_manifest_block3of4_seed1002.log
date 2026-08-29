@@ -1,0 +1,47 @@
+timestamp_start=2026-08-23T20:41:29+01:00
+protocol=tls auth_mode=mutual network_profile=none
+n_blocks=4 block_index=3 seed=1002 runs_this_block=125
+execution_order:
+  1) secp384r1|mlkem768
+  2) ed25519|mlkem512
+  3) mldsa65|mlkem768
+  4) mldsa44|p256_mlkem512
+  5) mldsa44|p256_hqc128
+  6) ed25519|p256_mlkem512
+  7) mldsa87|p521_mlkem1024
+  8) mldsa87|p521_hqc256
+  9) secp384r1|p384_mlkem768
+  10) secp521r1|p521_mlkem1024
+  11) ed25519|x25519_mlkem512
+  12) mldsa65|hqc192
+  13) mldsa44|x25519_hqc128
+  14) secp384r1|x448_mlkem768
+  15) ed25519|P-256
+  16) ed25519|hqc128
+  17) secp521r1|p521_hqc256
+  18) mldsa65|p384_hqc192
+  19) secp384r1|x448_hqc192
+  20) secp521r1|P-521
+  21) ed25519|x25519_hqc128
+  22) secp521r1|hqc256
+  23) mldsa65|x448_mlkem768
+  24) mldsa44|mlkem512
+  25) mldsa65|x448_hqc192
+  26) secp384r1|hqc192
+  27) mldsa65|p384_mlkem768
+  28) mldsa87|mlkem1024
+  29) mldsa65|x448
+  30) mldsa44|x25519_mlkem512
+  31) mldsa65|P-384
+  32) mldsa87|hqc256
+  33) mldsa44|hqc128
+  34) mldsa44|x25519
+  35) secp384r1|P-384
+  36) ed25519|x25519
+  37) secp384r1|p384_hqc192
+  38) secp384r1|x448
+  39) secp521r1|mlkem1024
+  40) mldsa44|P-256
+  41) mldsa87|P-521
+  42) ed25519|p256_hqc128
+timestamp_end=2026-08-23T20:59:39+01:00

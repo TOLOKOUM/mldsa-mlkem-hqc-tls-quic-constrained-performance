@@ -1,0 +1,257 @@
+Handshake timeout budget: 150s (identique TLS/QUIC)
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 90f9: root refcnt 2 limit 1000 seed 15571255629405028625
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp521r1 and KEM_ALG=hqc256
+Execution 1 - QUIC Single
+Handshake duration: 797.53 ms
+Execution 2 - QUIC Single
+Handshake duration: 680.58 ms
+Execution 3 - QUIC Single
+Handshake duration: 1314.76 ms
+Execution 4 - QUIC Single
+Handshake duration: 687.32 ms
+Execution 5 - QUIC Single
+Handshake duration: 691.91 ms
+Execution 6 - QUIC Single
+Handshake duration: 624.39 ms
+Execution 7 - QUIC Single
+Handshake duration: 674.25 ms
+Execution 8 - QUIC Single
+Handshake duration: 624.26 ms
+Execution 9 - QUIC Single
+Handshake duration: 672.89 ms
+Execution 10 - QUIC Single
+Handshake duration: 672.94 ms
+Execution 11 - QUIC Single
+Handshake duration: 672.17 ms
+Execution 12 - QUIC Single
+Handshake duration: 672.84 ms
+Execution 13 - QUIC Single
+Handshake duration: 673.37 ms
+Execution 14 - QUIC Single
+Handshake duration: 673.56 ms
+Execution 15 - QUIC Single
+Handshake duration: 674.55 ms
+Execution 16 - QUIC Single
+Handshake duration: 673.82 ms
+Execution 17 - QUIC Single
+Handshake duration: 702.08 ms
+Execution 18 - QUIC Single
+Handshake duration: 672.70 ms
+Execution 19 - QUIC Single
+Handshake duration: 673.41 ms
+Execution 20 - QUIC Single
+Handshake duration: 673.34 ms
+Execution 21 - QUIC Single
+Handshake duration: 673.72 ms
+Execution 22 - QUIC Single
+Handshake duration: 674.35 ms
+Execution 23 - QUIC Single
+Handshake duration: 673.33 ms
+Execution 24 - QUIC Single
+Handshake duration: 678.96 ms
+Execution 25 - QUIC Single
+Handshake duration: 672.41 ms
+Execution 26 - QUIC Single
+Handshake duration: 672.82 ms
+Execution 27 - QUIC Single
+Handshake duration: 672.57 ms
+Execution 28 - QUIC Single
+Handshake duration: 688.34 ms
+Execution 29 - QUIC Single
+Handshake duration: 673.29 ms
+Execution 30 - QUIC Single
+Handshake duration: 1313.64 ms
+Execution 31 - QUIC Single
+Handshake duration: 673.16 ms
+Execution 32 - QUIC Single
+Handshake duration: 1314.46 ms
+Execution 33 - QUIC Single
+Handshake duration: 672.89 ms
+Execution 34 - QUIC Single
+Handshake duration: 674.38 ms
+Execution 35 - QUIC Single
+Handshake duration: 680.39 ms
+Execution 36 - QUIC Single
+Handshake duration: 675.78 ms
+Execution 37 - QUIC Single
+Handshake duration: 674.64 ms
+Execution 38 - QUIC Single
+Handshake duration: 673.77 ms
+Execution 39 - QUIC Single
+Handshake duration: 673.02 ms
+Execution 40 - QUIC Single
+Handshake duration: 671.68 ms
+Execution 41 - QUIC Single
+Handshake duration: 673.94 ms
+Execution 42 - QUIC Single
+Handshake duration: 693.18 ms
+Execution 43 - QUIC Single
+Handshake duration: 1342.07 ms
+Execution 44 - QUIC Single
+Handshake duration: 906.62 ms
+Execution 45 - QUIC Single
+Handshake duration: 672.53 ms
+Execution 46 - QUIC Single
+Handshake duration: 677.50 ms
+Execution 47 - QUIC Single
+Handshake duration: 691.48 ms
+Execution 48 - QUIC Single
+Handshake duration: 696.56 ms
+Execution 49 - QUIC Single
+Handshake duration: 685.06 ms
+Execution 50 - QUIC Single
+Handshake duration: 671.91 ms
+Execution 51 - QUIC Single
+Handshake duration: 693.50 ms
+Execution 52 - QUIC Single
+Handshake duration: 681.41 ms
+Execution 53 - QUIC Single
+Handshake duration: 672.89 ms
+Execution 54 - QUIC Single
+Handshake duration: 672.26 ms
+Execution 55 - QUIC Single
+Handshake duration: 681.40 ms
+Execution 56 - QUIC Single
+Handshake duration: 673.85 ms
+Execution 57 - QUIC Single
+Handshake duration: 672.49 ms
+Execution 58 - QUIC Single
+Handshake duration: 673.24 ms
+Execution 59 - QUIC Single
+Handshake duration: 692.35 ms
+Execution 60 - QUIC Single
+Handshake duration: 673.72 ms
+Execution 61 - QUIC Single
+Handshake duration: 674.48 ms
+Execution 62 - QUIC Single
+Handshake duration: 679.17 ms
+Execution 63 - QUIC Single
+Handshake duration: 674.49 ms
+Execution 64 - QUIC Single
+Handshake duration: 672.74 ms
+Execution 65 - QUIC Single
+Handshake duration: 675.90 ms
+Execution 66 - QUIC Single
+Handshake duration: 673.15 ms
+Execution 67 - QUIC Single
+Handshake duration: 694.28 ms
+Execution 68 - QUIC Single
+Handshake duration: 698.15 ms
+Execution 69 - QUIC Single
+Handshake duration: 674.22 ms
+Execution 70 - QUIC Single
+Handshake duration: 674.47 ms
+Execution 71 - QUIC Single
+Handshake duration: 673.15 ms
+Execution 72 - QUIC Single
+Handshake duration: 671.85 ms
+Execution 73 - QUIC Single
+Handshake duration: 673.26 ms
+Execution 74 - QUIC Single
+Handshake duration: 672.78 ms
+Execution 75 - QUIC Single
+Handshake duration: 673.53 ms
+Execution 76 - QUIC Single
+Handshake duration: 674.53 ms
+Execution 77 - QUIC Single
+Handshake duration: 675.94 ms
+Execution 78 - QUIC Single
+Handshake duration: 674.16 ms
+Execution 79 - QUIC Single
+Handshake duration: 890.73 ms
+Execution 80 - QUIC Single
+Handshake duration: 671.95 ms
+Execution 81 - QUIC Single
+Handshake duration: 673.40 ms
+Execution 82 - QUIC Single
+Handshake duration: 674.40 ms
+Execution 83 - QUIC Single
+Handshake duration: 691.70 ms
+Execution 84 - QUIC Single
+Handshake duration: 673.32 ms
+Execution 85 - QUIC Single
+Handshake duration: 674.10 ms
+Execution 86 - QUIC Single
+Handshake duration: 674.18 ms
+Execution 87 - QUIC Single
+Handshake duration: 686.83 ms
+Execution 88 - QUIC Single
+Handshake duration: 686.29 ms
+Execution 89 - QUIC Single
+Handshake duration: 675.34 ms
+Execution 90 - QUIC Single
+Handshake duration: 671.87 ms
+Execution 91 - QUIC Single
+Handshake duration: 673.80 ms
+Execution 92 - QUIC Single
+Handshake duration: 672.81 ms
+Execution 93 - QUIC Single
+Handshake duration: 696.84 ms
+Execution 94 - QUIC Single
+Handshake duration: 672.60 ms
+Execution 95 - QUIC Single
+Handshake duration: 692.42 ms
+Execution 96 - QUIC Single
+Handshake duration: 682.95 ms
+Execution 97 - QUIC Single
+Handshake duration: 691.38 ms
+Execution 98 - QUIC Single
+Handshake duration: 697.09 ms
+Execution 99 - QUIC Single
+Handshake duration: 688.25 ms
+Execution 100 - QUIC Single
+Handshake duration: 672.99 ms
+Execution 101 - QUIC Single
+Handshake duration: 672.82 ms
+Execution 102 - QUIC Single
+Handshake duration: 673.72 ms
+Execution 103 - QUIC Single
+Handshake duration: 673.88 ms
+Execution 104 - QUIC Single
+Handshake duration: 674.07 ms
+Execution 105 - QUIC Single
+Handshake duration: 1314.10 ms
+Execution 106 - QUIC Single
+Handshake duration: 689.52 ms
+Execution 107 - QUIC Single
+Handshake duration: 671.97 ms
+Execution 108 - QUIC Single
+Handshake duration: 695.36 ms
+Execution 109 - QUIC Single
+Handshake duration: 694.78 ms
+Execution 110 - QUIC Single
+Handshake duration: 672.24 ms
+Execution 111 - QUIC Single
+Handshake duration: 671.99 ms
+Execution 112 - QUIC Single
+Handshake duration: 673.67 ms
+Execution 113 - QUIC Single
+Handshake duration: 673.30 ms
+Execution 114 - QUIC Single
+Handshake duration: 672.17 ms
+Execution 115 - QUIC Single
+Handshake duration: 673.95 ms
+Execution 116 - QUIC Single
+Handshake duration: 673.45 ms
+Execution 117 - QUIC Single
+Handshake duration: 680.10 ms
+Execution 118 - QUIC Single
+Handshake duration: 689.61 ms
+Execution 119 - QUIC Single
+Handshake duration: 672.35 ms
+Execution 120 - QUIC Single
+Handshake duration: 672.87 ms
+Execution 121 - QUIC Single
+Handshake duration: 674.01 ms
+Execution 122 - QUIC Single
+Handshake duration: 713.16 ms
+Execution 123 - QUIC Single
+Handshake duration: 673.59 ms
+Execution 124 - QUIC Single
+Handshake duration: 690.06 ms
+Execution 125 - QUIC Single
+Handshake duration: 673.11 ms

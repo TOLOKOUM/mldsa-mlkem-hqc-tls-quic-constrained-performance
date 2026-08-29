@@ -1,0 +1,382 @@
+Handshake timeout budget: 150s (identique TLS/QUIC)
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 84eb: root refcnt 2 limit 1000 seed 18037612709260657634
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp521r1 and KEM_ALG=hqc256
+Execution 1 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 970.09 ms
+Execution 2 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 869.76 ms
+Execution 3 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 702.39 ms
+Execution 4 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 2164.51 ms
+Execution 5 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 810.65 ms
+Execution 6 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 797.37 ms
+Execution 7 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 816.10 ms
+Execution 8 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 784.92 ms
+Execution 9 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 788.81 ms
+Execution 10 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 792.82 ms
+Execution 11 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1101.95 ms
+Execution 12 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 778.12 ms
+Execution 13 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 807.76 ms
+Execution 14 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 787.38 ms
+Execution 15 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 793.07 ms
+Execution 16 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 796.61 ms
+Execution 17 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1117.61 ms
+Execution 18 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 788.90 ms
+Execution 19 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 766.80 ms
+Execution 20 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 800.17 ms
+Execution 21 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 786.54 ms
+Execution 22 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 812.34 ms
+Execution 23 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 817.71 ms
+Execution 24 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 798.49 ms
+Execution 25 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 773.25 ms
+Execution 26 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 790.27 ms
+Execution 27 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 774.65 ms
+Execution 28 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 803.99 ms
+Execution 29 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 784.33 ms
+Execution 30 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 811.17 ms
+Execution 31 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 811.72 ms
+Execution 32 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 977.00 ms
+Execution 33 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 808.57 ms
+Execution 34 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 724.51 ms
+Execution 35 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 865.87 ms
+Execution 36 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 793.73 ms
+Execution 37 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 804.17 ms
+Execution 38 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 816.75 ms
+Execution 39 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 803.59 ms
+Execution 40 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 795.75 ms
+Execution 41 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 799.01 ms
+Execution 42 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 803.30 ms
+Execution 43 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 800.45 ms
+Execution 44 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 785.50 ms
+Execution 45 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 784.97 ms
+Execution 46 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 818.46 ms
+Execution 47 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 800.17 ms
+Execution 48 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 786.85 ms
+Execution 49 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 841.30 ms
+Execution 50 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 790.72 ms
+Execution 51 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1856.40 ms
+Execution 52 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 2165.67 ms
+Execution 53 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 801.39 ms
+Execution 54 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 2200.79 ms
+Execution 55 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 806.36 ms
+Execution 56 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 764.49 ms
+Execution 57 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 815.65 ms
+Execution 58 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 824.54 ms
+Execution 59 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 797.96 ms
+Execution 60 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 798.17 ms
+Execution 61 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 783.04 ms
+Execution 62 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 782.12 ms
+Execution 63 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 789.44 ms
+Execution 64 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 807.01 ms
+Execution 65 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 801.88 ms
+Execution 66 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 786.46 ms
+Execution 67 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 796.63 ms
+Execution 68 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 814.36 ms
+Execution 69 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1359.43 ms
+Execution 70 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 812.62 ms
+Execution 71 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 834.89 ms
+Execution 72 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 798.64 ms
+Execution 73 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 824.15 ms
+Execution 74 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 759.72 ms
+Execution 75 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 765.03 ms
+Execution 76 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 798.66 ms
+Execution 77 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 801.07 ms
+Execution 78 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 799.54 ms
+Execution 79 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 803.80 ms
+Execution 80 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1141.42 ms
+Execution 81 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 772.20 ms
+Execution 82 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 801.39 ms
+Execution 83 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 814.32 ms
+Execution 84 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 804.25 ms
+Execution 85 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 800.28 ms
+Execution 86 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 786.48 ms
+Execution 87 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 816.16 ms
+Execution 88 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1131.09 ms
+Execution 89 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1197.44 ms
+Execution 90 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1138.18 ms
+Execution 91 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 813.69 ms
+Execution 92 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 1302.41 ms
+Execution 93 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 794.12 ms
+Execution 94 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 804.34 ms
+Execution 95 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 788.59 ms
+Execution 96 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 797.27 ms
+Execution 97 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 787.66 ms
+Execution 98 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 794.77 ms
+Execution 99 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 800.94 ms
+Execution 100 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 833.99 ms
+Execution 101 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 819.24 ms
+Execution 102 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 773.28 ms
+Execution 103 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 799.12 ms
+Execution 104 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 804.24 ms
+Execution 105 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 848.31 ms
+Execution 106 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 792.88 ms
+Execution 107 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 772.69 ms
+Execution 108 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 726.59 ms
+Execution 109 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 809.35 ms
+Execution 110 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 2143.41 ms
+Execution 111 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 809.95 ms
+Execution 112 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 803.43 ms
+Execution 113 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 802.61 ms
+Execution 114 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 801.18 ms
+Execution 115 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 802.06 ms
+Execution 116 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 793.79 ms
+Execution 117 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 809.50 ms
+Execution 118 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 814.82 ms
+Execution 119 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 841.38 ms
+Execution 120 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 807.21 ms
+Execution 121 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 811.79 ms
+Execution 122 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 788.44 ms
+Execution 123 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 755.18 ms
+Execution 124 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 803.83 ms
+Execution 125 - TLS Mutual
+s_connection: verify depth is 1
+Handshake duration: 854.22 ms

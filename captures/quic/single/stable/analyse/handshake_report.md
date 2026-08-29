@@ -4,98 +4,98 @@
 
 ## Statistiques détaillées
 
-| Niveau | SIG_ALG | KEM | Classe | N | Succès% | Moyenne (ms) | IC95% | Médiane (ms) | p95 (ms) | p99 (ms) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| L1 | ed25519 | P-256 | classique | 500 | 99.6 | 332.831 | [246.181, 419.481] | 3.345 | 1009.439 | 6998.476 |
-| L1 | ed25519 | x25519 | classique | 500 | 99.0 | 404.759 | [307.13, 502.388] | 2.9 | 3000.232 | 6997.119 |
-| L1 | mldsa44 | P-256 | classique | 500 | 100.0 | 351.574 | [275.877, 427.271] | 3.905 | 2026.783 | 3075.281 |
-| L1 | mldsa44 | x25519 | classique | 500 | 100.0 | 239.706 | [187.096, 292.316] | 3.555 | 1260.308 | 3075.072 |
-| L1 | ed25519 | p256_hqc128 | hybride | 500 | 100.0 | 104.112 | [69.879, 138.346] | 34.05 | 198.159 | 1061.354 |
-| L1 | ed25519 | p256_mlkem512 | hybride | 500 | 100.0 | 246.885 | [200.66, 293.11] | 14.83 | 1045.756 | 3010.283 |
-| L1 | ed25519 | x25519_hqc128 | hybride | 500 | 100.0 | 101.714 | [71.192, 132.236] | 26.67 | 308.685 | 1115.632 |
-| L1 | ed25519 | x25519_mlkem512 | hybride | 500 | 100.0 | 237.412 | [187.062, 287.761] | 5.42 | 1033.698 | 3001.912 |
-| L1 | mldsa44 | p256_hqc128 | hybride | 500 | 100.0 | 206.334 | [153.445, 259.223] | 41.765 | 1088.904 | 3096.843 |
-| L1 | mldsa44 | p256_mlkem512 | hybride | 500 | 100.0 | 286.376 | [221.547, 351.205] | 18.515 | 2035.561 | 4008.442 |
-| L1 | mldsa44 | x25519_hqc128 | hybride | 500 | 99.8 | 166.307 | [110.95, 221.664] | 26.62 | 1067.61 | 2064.715 |
-| L1 | mldsa44 | x25519_mlkem512 | hybride | 500 | 100.0 | 348.354 | [280.937, 415.772] | 5.42 | 2028.134 | 4000.508 |
-| L1 | ed25519 | hqc128 | pq_pur | 500 | 100.0 | 109.513 | [77.507, 141.519] | 23.98 | 1018.063 | 1230.419 |
-| L1 | ed25519 | mlkem512 | pq_pur | 500 | 100.0 | 271.225 | [206.339, 336.11] | 2.635 | 1033.732 | 3001.631 |
-| L1 | mldsa44 | hqc128 | pq_pur | 500 | 100.0 | 157.694 | [113.771, 201.616] | 25.73 | 1064.401 | 2097.612 |
-| L1 | mldsa44 | mlkem512 | pq_pur | 500 | 100.0 | 329.952 | [245.138, 414.765] | 2.945 | 2002.414 | 4003.423 |
-| L3 | mldsa65 | P-384 | classique | 500 | 99.0 | 698.739 | [557.209, 840.268] | 4.79 | 3029.205 | 7077.271 |
-| L3 | mldsa65 | x448 | classique | 500 | 99.8 | 620.869 | [488.234, 753.504] | 3.14 | 3028.865 | 7998.533 |
-| L3 | secp384r1 | P-384 | classique | 500 | 99.6 | 310.285 | [225.308, 395.261] | 9.425 | 1010.847 | 7002.005 |
-| L3 | secp384r1 | x448 | classique | 500 | 99.6 | 255.668 | [189.884, 321.451] | 6.685 | 1008.512 | 3005.773 |
-| L3 | mldsa65 | p384_hqc192 | hybride | 500 | 100.0 | 164.662 | [128.549, 200.775] | 57.86 | 1036.571 | 1116.691 |
-| L3 | mldsa65 | p384_mlkem768 | hybride | 500 | 99.8 | 524.906 | [428.639, 621.172] | 12.25 | 2178.703 | 4052.372 |
-| L3 | mldsa65 | x448_hqc192 | hybride | 500 | 100.0 | 154.239 | [123.937, 184.541] | 48.62 | 1030.688 | 1301.093 |
-| L3 | mldsa65 | x448_mlkem768 | hybride | 500 | 100.0 | 406.803 | [323.17, 490.436] | 5.27 | 2117.629 | 3195.298 |
-| L3 | secp384r1 | p384_hqc192 | hybride | 500 | 100.0 | 137.797 | [119.67, 155.923] | 83.885 | 286.554 | 1081.55 |
-| L3 | secp384r1 | p384_mlkem768 | hybride | 500 | 100.0 | 265.408 | [219.763, 311.053] | 23.945 | 1050.098 | 3016.928 |
-| L3 | secp384r1 | x448_hqc192 | hybride | 500 | 100.0 | 143.104 | [116.975, 169.233] | 74.22 | 352.552 | 1071.592 |
-| L3 | secp384r1 | x448_mlkem768 | hybride | 500 | 100.0 | 243.042 | [185.232, 300.853] | 11.615 | 1039.795 | 3010.524 |
-| L3 | mldsa65 | hqc192 | pq_pur | 500 | 99.8 | 165.408 | [133.355, 197.46] | 49.36 | 1029.059 | 1308.546 |
-| L3 | mldsa65 | mlkem768 | pq_pur | 500 | 100.0 | 558.03 | [455.133, 660.926] | 2.11 | 2999.818 | 4036.331 |
-| L3 | secp384r1 | hqc192 | pq_pur | 500 | 100.0 | 150.077 | [122.518, 177.636] | 70.32 | 1039.473 | 1117.294 |
-| L3 | secp384r1 | mlkem768 | pq_pur | 500 | 100.0 | 241.669 | [191.674, 291.664] | 5.305 | 1008.543 | 3003.162 |
-| L5 | mldsa87 | P-521 | classique | 500 | 97.4 | 733.76 | [591.607, 875.914] | 4.97 | 3031.42 | 7027.364 |
-| L5 | secp521r1 | P-521 | classique | 500 | 99.2 | 413.282 | [319.44, 507.123] | 7.75 | 3005.193 | 7002.98 |
-| L5 | mldsa87 | p521_hqc256 | hybride | 500 | 100.0 | 249.422 | [203.083, 295.762] | 90.995 | 1109.837 | 3056.145 |
-| L5 | mldsa87 | p521_mlkem1024 | hybride | 500 | 99.6 | 574.835 | [457.557, 692.113] | 12.575 | 3064.792 | 7011.485 |
-| L5 | secp521r1 | p521_hqc256 | hybride | 500 | 99.8 | 285.976 | [249.204, 322.748] | 163.37 | 1116.037 | 3093.831 |
-| L5 | secp521r1 | p521_mlkem1024 | hybride | 500 | 100.0 | 249.555 | [197.676, 301.434] | 18.33 | 1044.245 | 3018.084 |
-| L5 | mldsa87 | hqc256 | pq_pur | 500 | 100.0 | 211.138 | [180.564, 241.712] | 81.185 | 1081.815 | 1214.636 |
-| L5 | mldsa87 | mlkem1024 | pq_pur | 500 | 99.8 | 497.597 | [389.822, 605.371] | 2.39 | 3028.286 | 7002.879 |
-| L5 | secp521r1 | hqc256 | pq_pur | 500 | 100.0 | 245.798 | [218.953, 272.643] | 152.39 | 1084.823 | 1172.483 |
-| L5 | secp521r1 | mlkem1024 | pq_pur | 500 | 100.0 | 277.757 | [209.658, 345.855] | 5.4 | 1032.383 | 3004.115 |
+| Niveau | SIG_ALG | KEM | Classe | N | Blocs | Succès% | Moyenne (ms) | IC95% | Méthode IC | Médiane (ms) | p95 (ms) | p99 (ms) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| L1 | ed25519 | P-256 | classique | 500 | 4 | 99.8 | 354.512 | [301.977, 415.337] | bootstrap_blocs | 2.12 | 1126.767 | 3081.383 |
+| L1 | ed25519 | x25519 | classique | 500 | 4 | 98.8 | 265.243 | [236.924, 301.754] | bootstrap_blocs | 1.9 | 1001.917 | 3000.671 |
+| L1 | mldsa44 | P-256 | classique | 500 | 4 | 100.0 | 342.303 | [318.333, 368.305] | bootstrap_blocs | 2.345 | 2074.462 | 4999.253 |
+| L1 | mldsa44 | x25519 | classique | 500 | 4 | 99.8 | 402.654 | [349.447, 438.293] | bootstrap_blocs | 2.1 | 2074.667 | 5078.408 |
+| L1 | ed25519 | p256_hqc128 | hybride | 500 | 4 | 100.0 | 112.658 | [105.034, 123.111] | bootstrap_blocs | 26.01 | 1019.495 | 2122.942 |
+| L1 | ed25519 | p256_mlkem512 | hybride | 500 | 4 | 100.0 | 241.458 | [188.092, 310.571] | bootstrap_blocs | 9.675 | 1037.613 | 3007.225 |
+| L1 | ed25519 | x25519_hqc128 | hybride | 500 | 4 | 100.0 | 139.959 | [98.208, 181.71] | bootstrap_blocs | 17.84 | 1023.903 | 1126.639 |
+| L1 | ed25519 | x25519_mlkem512 | hybride | 500 | 4 | 100.0 | 256.116 | [236.277, 280.027] | bootstrap_blocs | 3.46 | 1031.624 | 3001.961 |
+| L1 | mldsa44 | p256_hqc128 | hybride | 500 | 4 | 100.0 | 184.481 | [155.925, 219.771] | bootstrap_blocs | 27.435 | 1085.889 | 2466.79 |
+| L1 | mldsa44 | p256_mlkem512 | hybride | 500 | 4 | 100.0 | 283.079 | [258.834, 307.323] | bootstrap_blocs | 9.73 | 2014.857 | 4006.038 |
+| L1 | mldsa44 | x25519_hqc128 | hybride | 500 | 4 | 100.0 | 150.273 | [127.742, 172.805] | bootstrap_blocs | 20.815 | 1063.711 | 2135.751 |
+| L1 | mldsa44 | x25519_mlkem512 | hybride | 500 | 4 | 100.0 | 300.203 | [288.768, 309.362] | bootstrap_blocs | 3.85 | 2026.214 | 4027.328 |
+| L1 | ed25519 | hqc128 | pq_pur | 500 | 4 | 100.0 | 83.324 | [63.522, 103.126] | bootstrap_blocs | 16.98 | 128.134 | 1090.042 |
+| L1 | ed25519 | mlkem512 | pq_pur | 500 | 4 | 99.8 | 253.195 | [226.265, 280.017] | bootstrap_blocs | 1.86 | 1055.889 | 3000.83 |
+| L1 | mldsa44 | hqc128 | pq_pur | 500 | 4 | 100.0 | 182.193 | [141.308, 230.336] | bootstrap_blocs | 18.395 | 1073.794 | 2123.166 |
+| L1 | mldsa44 | mlkem512 | pq_pur | 500 | 4 | 100.0 | 411.194 | [348.787, 490.549] | bootstrap_blocs | 2.085 | 2089.053 | 5034.248 |
+| L3 | mldsa65 | P-384 | classique | 500 | 4 | 98.4 | 648.815 | [523.337, 823.102] | bootstrap_blocs | 5.165 | 3028.559 | 7100.825 |
+| L3 | mldsa65 | x448 | classique | 500 | 4 | 99.8 | 635.12 | [589.884, 690.841] | bootstrap_blocs | 3.31 | 3028.774 | 5115.161 |
+| L3 | secp384r1 | P-384 | classique | 500 | 4 | 99.6 | 441.322 | [431.557, 455.191] | bootstrap_blocs | 5.545 | 3003.759 | 7001.047 |
+| L3 | secp384r1 | x448 | classique | 500 | 4 | 99.6 | 299.377 | [258.117, 333.633] | bootstrap_blocs | 3.96 | 3000.91 | 6999.592 |
+| L3 | mldsa65 | p384_hqc192 | hybride | 500 | 4 | 99.8 | 164.09 | [141.524, 186.746] | bootstrap_blocs | 58.76 | 1035.97 | 1208.841 |
+| L3 | mldsa65 | p384_mlkem768 | hybride | 500 | 4 | 100.0 | 428.297 | [364.406, 503.15] | bootstrap_blocs | 13.28 | 3006.727 | 4032.459 |
+| L3 | mldsa65 | x448_hqc192 | hybride | 500 | 4 | 100.0 | 178.989 | [151.702, 209.797] | bootstrap_blocs | 53.545 | 1047.794 | 1490.022 |
+| L3 | mldsa65 | x448_mlkem768 | hybride | 500 | 4 | 100.0 | 550.207 | [502.196, 598.218] | bootstrap_blocs | 5.57 | 3001.651 | 4805.234 |
+| L3 | secp384r1 | p384_hqc192 | hybride | 500 | 4 | 100.0 | 168.518 | [151.044, 179.863] | bootstrap_blocs | 55.255 | 1046.138 | 2125.596 |
+| L3 | secp384r1 | p384_mlkem768 | hybride | 500 | 4 | 100.0 | 219.176 | [176.411, 254.114] | bootstrap_blocs | 12.66 | 1040.106 | 3012.161 |
+| L3 | secp384r1 | x448_hqc192 | hybride | 500 | 4 | 99.8 | 138.264 | [112.186, 163.228] | bootstrap_blocs | 50.48 | 1033.68 | 1110.667 |
+| L3 | secp384r1 | x448_mlkem768 | hybride | 500 | 4 | 99.8 | 232.777 | [161.146, 304.696] | bootstrap_blocs | 6.34 | 1032.247 | 3004.363 |
+| L3 | mldsa65 | hqc192 | pq_pur | 500 | 4 | 100.0 | 162.628 | [136.345, 188.911] | bootstrap_blocs | 48.045 | 1045.531 | 1150.355 |
+| L3 | mldsa65 | mlkem768 | pq_pur | 500 | 4 | 99.8 | 473.624 | [428.848, 499.068] | bootstrap_blocs | 2.22 | 2999.146 | 4001.393 |
+| L3 | secp384r1 | hqc192 | pq_pur | 500 | 4 | 100.0 | 132.932 | [108.366, 176.644] | bootstrap_blocs | 46.395 | 528.025 | 1129.086 |
+| L3 | secp384r1 | mlkem768 | pq_pur | 500 | 4 | 100.0 | 213.423 | [183.47, 249.39] | bootstrap_blocs | 3.425 | 1003.332 | 3000.586 |
+| L5 | mldsa87 | P-521 | classique | 500 | 4 | 99.6 | 719.385 | [638.32, 800.45] | bootstrap_blocs | 4.96 | 3029.778 | 7000.06 |
+| L5 | secp521r1 | P-521 | classique | 500 | 4 | 99.6 | 326.716 | [255.404, 397.457] | bootstrap_blocs | 5.32 | 1307.258 | 3005.003 |
+| L5 | mldsa87 | p521_hqc256 | hybride | 500 | 4 | 100.0 | 260.599 | [217.224, 303.975] | bootstrap_blocs | 91.785 | 1113.296 | 3088.947 |
+| L5 | mldsa87 | p521_mlkem1024 | hybride | 500 | 4 | 99.8 | 477.824 | [390.513, 582.37] | bootstrap_blocs | 12.88 | 3035.277 | 4256.011 |
+| L5 | secp521r1 | p521_hqc256 | hybride | 500 | 4 | 100.0 | 221.818 | [188.905, 269.769] | bootstrap_blocs | 95.78 | 1059.053 | 1891.113 |
+| L5 | secp521r1 | p521_mlkem1024 | hybride | 500 | 4 | 100.0 | 232.672 | [192.073, 273.272] | bootstrap_blocs | 12.72 | 1038.973 | 3011.184 |
+| L5 | mldsa87 | hqc256 | pq_pur | 500 | 4 | 100.0 | 204.796 | [184.504, 231.854] | bootstrap_blocs | 83.04 | 1074.562 | 1493.728 |
+| L5 | mldsa87 | mlkem1024 | pq_pur | 500 | 4 | 99.6 | 540.098 | [409.043, 671.153] | bootstrap_blocs | 2.47 | 3028.599 | 7025.72 |
+| L5 | secp521r1 | hqc256 | pq_pur | 500 | 4 | 100.0 | 163.333 | [148.176, 178.491] | bootstrap_blocs | 85.405 | 577.25 | 1081.022 |
+| L5 | secp521r1 | mlkem1024 | pq_pur | 500 | 4 | 100.0 | 268.994 | [198.498, 339.49] | bootstrap_blocs | 3.48 | 1030.857 | 3002.25 |
 
 ## Surcoût vs baseline classique (même niveau de sécurité)
 
 | Niveau | SIG_ALG | KEM | Classe | Moyenne (ms) | Baseline classique (ms) | Surcoût (%) |
 |---|---|---|---|---|---|---|
-| L1 | ed25519 | P-256 | classique | 332.831 | 332.218 | 0.2 |
-| L1 | mldsa44 | P-256 | classique | 351.574 | 332.218 | 5.8 |
-| L1 | ed25519 | x25519 | classique | 404.759 | 332.218 | 21.8 |
-| L1 | mldsa44 | x25519 | classique | 239.706 | 332.218 | -27.8 |
-| L1 | ed25519 | p256_hqc128 | hybride | 104.112 | 332.218 | -68.7 |
-| L1 | mldsa44 | p256_hqc128 | hybride | 206.334 | 332.218 | -37.9 |
-| L1 | ed25519 | p256_mlkem512 | hybride | 246.885 | 332.218 | -25.7 |
-| L1 | mldsa44 | p256_mlkem512 | hybride | 286.376 | 332.218 | -13.8 |
-| L1 | ed25519 | x25519_hqc128 | hybride | 101.714 | 332.218 | -69.4 |
-| L1 | mldsa44 | x25519_hqc128 | hybride | 166.307 | 332.218 | -49.9 |
-| L1 | ed25519 | x25519_mlkem512 | hybride | 237.412 | 332.218 | -28.5 |
-| L1 | mldsa44 | x25519_mlkem512 | hybride | 348.354 | 332.218 | 4.9 |
-| L1 | ed25519 | hqc128 | pq_pur | 109.513 | 332.218 | -67.0 |
-| L1 | mldsa44 | hqc128 | pq_pur | 157.694 | 332.218 | -52.5 |
-| L1 | ed25519 | mlkem512 | pq_pur | 271.225 | 332.218 | -18.4 |
-| L1 | mldsa44 | mlkem512 | pq_pur | 329.952 | 332.218 | -0.7 |
-| L3 | mldsa65 | P-384 | classique | 698.739 | 471.39 | 48.2 |
-| L3 | secp384r1 | P-384 | classique | 310.285 | 471.39 | -34.2 |
-| L3 | mldsa65 | x448 | classique | 620.869 | 471.39 | 31.7 |
-| L3 | secp384r1 | x448 | classique | 255.668 | 471.39 | -45.8 |
-| L3 | mldsa65 | p384_hqc192 | hybride | 164.662 | 471.39 | -65.1 |
-| L3 | secp384r1 | p384_hqc192 | hybride | 137.797 | 471.39 | -70.8 |
-| L3 | mldsa65 | p384_mlkem768 | hybride | 524.906 | 471.39 | 11.4 |
-| L3 | secp384r1 | p384_mlkem768 | hybride | 265.408 | 471.39 | -43.7 |
-| L3 | mldsa65 | x448_hqc192 | hybride | 154.239 | 471.39 | -67.3 |
-| L3 | secp384r1 | x448_hqc192 | hybride | 143.104 | 471.39 | -69.6 |
-| L3 | mldsa65 | x448_mlkem768 | hybride | 406.803 | 471.39 | -13.7 |
-| L3 | secp384r1 | x448_mlkem768 | hybride | 243.042 | 471.39 | -48.4 |
-| L3 | mldsa65 | hqc192 | pq_pur | 165.408 | 471.39 | -64.9 |
-| L3 | secp384r1 | hqc192 | pq_pur | 150.077 | 471.39 | -68.2 |
-| L3 | mldsa65 | mlkem768 | pq_pur | 558.03 | 471.39 | 18.4 |
-| L3 | secp384r1 | mlkem768 | pq_pur | 241.669 | 471.39 | -48.7 |
-| L5 | mldsa87 | P-521 | classique | 733.76 | 573.521 | 27.9 |
-| L5 | secp521r1 | P-521 | classique | 413.282 | 573.521 | -27.9 |
-| L5 | mldsa87 | p521_hqc256 | hybride | 249.422 | 573.521 | -56.5 |
-| L5 | secp521r1 | p521_hqc256 | hybride | 285.976 | 573.521 | -50.1 |
-| L5 | mldsa87 | p521_mlkem1024 | hybride | 574.835 | 573.521 | 0.2 |
-| L5 | secp521r1 | p521_mlkem1024 | hybride | 249.555 | 573.521 | -56.5 |
-| L5 | mldsa87 | hqc256 | pq_pur | 211.138 | 573.521 | -63.2 |
-| L5 | secp521r1 | hqc256 | pq_pur | 245.798 | 573.521 | -57.1 |
-| L5 | mldsa87 | mlkem1024 | pq_pur | 497.597 | 573.521 | -13.2 |
-| L5 | secp521r1 | mlkem1024 | pq_pur | 277.757 | 573.521 | -51.6 |
+| L1 | ed25519 | P-256 | classique | 354.512 | 341.178 | 3.9 |
+| L1 | mldsa44 | P-256 | classique | 342.303 | 341.178 | 0.3 |
+| L1 | ed25519 | x25519 | classique | 265.243 | 341.178 | -22.3 |
+| L1 | mldsa44 | x25519 | classique | 402.654 | 341.178 | 18.0 |
+| L1 | ed25519 | p256_hqc128 | hybride | 112.658 | 341.178 | -67.0 |
+| L1 | mldsa44 | p256_hqc128 | hybride | 184.481 | 341.178 | -45.9 |
+| L1 | ed25519 | p256_mlkem512 | hybride | 241.458 | 341.178 | -29.2 |
+| L1 | mldsa44 | p256_mlkem512 | hybride | 283.079 | 341.178 | -17.0 |
+| L1 | ed25519 | x25519_hqc128 | hybride | 139.959 | 341.178 | -59.0 |
+| L1 | mldsa44 | x25519_hqc128 | hybride | 150.273 | 341.178 | -56.0 |
+| L1 | ed25519 | x25519_mlkem512 | hybride | 256.116 | 341.178 | -24.9 |
+| L1 | mldsa44 | x25519_mlkem512 | hybride | 300.203 | 341.178 | -12.0 |
+| L1 | ed25519 | hqc128 | pq_pur | 83.324 | 341.178 | -75.6 |
+| L1 | mldsa44 | hqc128 | pq_pur | 182.193 | 341.178 | -46.6 |
+| L1 | ed25519 | mlkem512 | pq_pur | 253.195 | 341.178 | -25.8 |
+| L1 | mldsa44 | mlkem512 | pq_pur | 411.194 | 341.178 | 20.5 |
+| L3 | mldsa65 | P-384 | classique | 648.815 | 506.159 | 28.2 |
+| L3 | secp384r1 | P-384 | classique | 441.322 | 506.159 | -12.8 |
+| L3 | mldsa65 | x448 | classique | 635.12 | 506.159 | 25.5 |
+| L3 | secp384r1 | x448 | classique | 299.377 | 506.159 | -40.9 |
+| L3 | mldsa65 | p384_hqc192 | hybride | 164.09 | 506.159 | -67.6 |
+| L3 | secp384r1 | p384_hqc192 | hybride | 168.518 | 506.159 | -66.7 |
+| L3 | mldsa65 | p384_mlkem768 | hybride | 428.297 | 506.159 | -15.4 |
+| L3 | secp384r1 | p384_mlkem768 | hybride | 219.176 | 506.159 | -56.7 |
+| L3 | mldsa65 | x448_hqc192 | hybride | 178.989 | 506.159 | -64.6 |
+| L3 | secp384r1 | x448_hqc192 | hybride | 138.264 | 506.159 | -72.7 |
+| L3 | mldsa65 | x448_mlkem768 | hybride | 550.207 | 506.159 | 8.7 |
+| L3 | secp384r1 | x448_mlkem768 | hybride | 232.777 | 506.159 | -54.0 |
+| L3 | mldsa65 | hqc192 | pq_pur | 162.628 | 506.159 | -67.9 |
+| L3 | secp384r1 | hqc192 | pq_pur | 132.932 | 506.159 | -73.7 |
+| L3 | mldsa65 | mlkem768 | pq_pur | 473.624 | 506.159 | -6.4 |
+| L3 | secp384r1 | mlkem768 | pq_pur | 213.423 | 506.159 | -57.8 |
+| L5 | mldsa87 | P-521 | classique | 719.385 | 523.051 | 37.5 |
+| L5 | secp521r1 | P-521 | classique | 326.716 | 523.051 | -37.5 |
+| L5 | mldsa87 | p521_hqc256 | hybride | 260.599 | 523.051 | -50.2 |
+| L5 | secp521r1 | p521_hqc256 | hybride | 221.818 | 523.051 | -57.6 |
+| L5 | mldsa87 | p521_mlkem1024 | hybride | 477.824 | 523.051 | -8.6 |
+| L5 | secp521r1 | p521_mlkem1024 | hybride | 232.672 | 523.051 | -55.5 |
+| L5 | mldsa87 | hqc256 | pq_pur | 204.796 | 523.051 | -60.8 |
+| L5 | secp521r1 | hqc256 | pq_pur | 163.333 | 523.051 | -68.8 |
+| L5 | mldsa87 | mlkem1024 | pq_pur | 540.098 | 523.051 | 3.3 |
+| L5 | secp521r1 | mlkem1024 | pq_pur | 268.994 | 523.051 | -48.6 |
 
 ## Note méthodologique
 
-Intervalle de confiance à 95% calculé par approximation normale (z=1.96), la taille d'échantillon (n=500 par combinaison dans la majorité des cas) rendant cette approximation valide par le théorème central limite, indépendamment de la forme de la distribution sous-jacente des latences individuelles. Le surcoût (%) de chaque combinaison est calculé par rapport à la MOYENNE des combinaisons classiques du même niveau de sécurité NIST (pas un unique point de référence arbitraire), pour lisser le bruit de mesure du baseline lui-même.
+Intervalle de confiance à 95% calculé par **bootstrap de blocs entiers** (5000 rééchantillonnages, respectant la corrélation intra-bloc documentée dans l'article, rho1=0.563) pour toute combinaison collectée en plusieurs blocs indépendants ; repli sur l'approximation normale (z=1.96) pour les combinaisons encore sur un seul bloc, avec la colonne 'Méthode IC' indiquant explicitement laquelle a été utilisée ligne par ligne. Le surcoût (%) de chaque combinaison est calculé par rapport à la MOYENNE des combinaisons classiques du même niveau de sécurité NIST (pas un unique point de référence arbitraire), pour lisser le bruit de mesure du baseline lui-même. Des tests de significativité formels (Mann-Whitney U, Cliff's delta, correction FDR de Benjamini-Hochberg) sont générés systématiquement pour chaque combinaison PQ contre le baseline classique pooléé du même niveau -- voir significance_tests_auto.csv dans ce même dossier.
