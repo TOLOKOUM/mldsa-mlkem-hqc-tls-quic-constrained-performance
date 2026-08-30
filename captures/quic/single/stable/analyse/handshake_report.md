@@ -96,6 +96,34 @@
 | L5 | mldsa87 | mlkem1024 | pq_pur | 540.098 | 523.051 | 3.3 |
 | L5 | secp521r1 | mlkem1024 | pq_pur | 268.994 | 523.051 | -48.6 |
 
+## Comparaison appariée classique vs ML-DSA (même KEM, même niveau)
+
+Remplace la logique de chevauchement de deux IC95% séparés : l'IC95% porte directement sur Δ = classique − ML-DSA, par bootstrap de blocs APPARIÉS (même block_index des deux côtés). `exact_permutation_p` est un test de permutation exact complémentaire (2^n_blocs arrangements) ; sa p-value minimale atteignable (`exact_permutation_min_p`) doit être citée à chaque fois que ce nombre est mentionné dans l'article.
+
+| Niveau | KEM | Classique (ms) | ML-DSA (ms) | Δ (ms) | IC95% de Δ | Signif. (bootstrap apparié) | p exacte | p min. atteignable |
+|---|---|---|---|---|---|---|---|---|
+| L1 | P-256 | 354.421 | 342.3031 | 12.1179 | [-21.9279, 51.8208] | non | 0.625 | 0.125 |
+| L1 | hqc128 | 83.324 | 182.1926 | -98.8686 | [-169.8647, -47.5186] | oui | 0.125 | 0.125 |
+| L1 | mlkem512 | 253.1182 | 411.1941 | -158.0759 | [-210.7399, -107.2749] | oui | 0.125 | 0.125 |
+| L1 | p256_hqc128 | 112.6579 | 184.4809 | -71.823 | [-113.6077, -37.2918] | oui | 0.125 | 0.125 |
+| L1 | p256_mlkem512 | 241.4579 | 283.0785 | -41.6207 | [-74.8723, 13.7204] | non | 0.25 | 0.125 |
+| L1 | x25519 | 265.3971 | 402.6965 | -137.2994 | [-179.9105, -94.6884] | oui | 0.125 | 0.125 |
+| L1 | x25519_hqc128 | 139.9587 | 150.2734 | -10.3147 | [-52.3475, 45.0417] | non | 0.75 | 0.125 |
+| L1 | x25519_mlkem512 | 256.1161 | 300.2028 | -44.0867 | [-59.8663, -19.5131] | oui | 0.125 | 0.125 |
+| L3 | P-384 | 441.3019 | 649.4594 | -208.1575 | [-368.9578, -91.7801] | oui | 0.125 | 0.125 |
+| L3 | hqc192 | 132.9318 | 162.628 | -29.6962 | [-53.7117, -9.5747] | oui | 0.125 | 0.125 |
+| L3 | mlkem768 | 213.4233 | 473.6572 | -260.2339 | [-315.3242, -180.9914] | oui | 0.125 | 0.125 |
+| L3 | p384_hqc192 | 168.5185 | 164.1581 | 4.3603 | [-29.0521, 37.7728] | non | 0.875 | 0.125 |
+| L3 | p384_mlkem768 | 219.1756 | 428.2966 | -209.121 | [-326.7389, -136.3043] | oui | 0.125 | 0.125 |
+| L3 | x448 | 299.4544 | 635.0081 | -335.5537 | [-374.2084, -301.0811] | oui | 0.125 | 0.125 |
+| L3 | x448_hqc192 | 138.2871 | 178.9892 | -40.7021 | [-98.8512, -6.8898] | oui | 0.125 | 0.125 |
+| L3 | x448_mlkem768 | 233.0109 | 550.2069 | -317.196 | [-416.6441, -190.7996] | oui | 0.125 | 0.125 |
+| L5 | P-521 | 326.4306 | 719.5002 | -393.0696 | [-561.5722, -269.4821] | oui | 0.125 | 0.125 |
+| L5 | hqc256 | 163.3332 | 204.7962 | -41.463 | [-84.4576, -8.7009] | oui | 0.25 | 0.125 |
+| L5 | mlkem1024 | 268.994 | 540.1623 | -271.1683 | [-341.129, -165.8107] | oui | 0.125 | 0.125 |
+| L5 | p521_hqc256 | 221.8184 | 260.5992 | -38.7808 | [-98.3753, 25.1036] | non | 0.375 | 0.125 |
+| L5 | p521_mlkem1024 | 232.6723 | 477.6674 | -244.9951 | [-331.1245, -161.8301] | oui | 0.125 | 0.125 |
+
 ## Note méthodologique
 
 Intervalle de confiance à 95% calculé par **bootstrap de blocs entiers** (5000 rééchantillonnages, respectant la corrélation intra-bloc documentée dans l'article, rho1=0.563) pour toute combinaison collectée en plusieurs blocs indépendants ; repli sur l'approximation normale (z=1.96) pour les combinaisons encore sur un seul bloc, avec la colonne 'Méthode IC' indiquant explicitement laquelle a été utilisée ligne par ligne. Le surcoût (%) de chaque combinaison est calculé par rapport à la MOYENNE des combinaisons classiques du même niveau de sécurité NIST (pas un unique point de référence arbitraire), pour lisser le bruit de mesure du baseline lui-même. Des tests de significativité formels (Mann-Whitney U, Cliff's delta, correction FDR de Benjamini-Hochberg) sont générés systématiquement pour chaque combinaison PQ contre le baseline classique pooléé du même niveau -- voir significance_tests_auto.csv dans ce même dossier.

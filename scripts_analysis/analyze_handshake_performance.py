@@ -272,8 +272,9 @@ def analyze_folder(folder: Path):
             w.writerows(overhead_rows)
 
     compute_systematic_significance(rows, durations_by_combo, blocks_by_combo, out_dir)
+    paired_sig_results = compute_paired_signature_comparisons(rows, blocks_by_combo, out_dir)
 
-    write_report(out_dir / "handshake_report.md", folder, rows, overhead_rows)
+    write_report(out_dir / "handshake_report.md", folder, rows, overhead_rows, paired_sig_results)
     write_figures(out_dir, rows, overhead_rows)
 
     print(f"[OK] {folder} : {len(rows)} combinaison(s) -> {out_dir}/")
@@ -445,7 +446,114 @@ def compute_systematic_significance(rows, durations_by_combo, blocks_by_combo, o
           "et ne corrigent PAS pour l'autocorrélation intra-bloc (cf. §5.4 de l'article).")
 
 
-def write_report(path, folder, rows, overhead_rows):
+def compute_paired_signature_comparisons(rows, blocks_by_combo, out_dir):
+    """
+    Reproduit exactement la structure de Table~sig-effect-summary /
+    auth-cost / degraded-deepdive (une comparaison appariee : meme KEM,
+    meme reseau, meme mode d'auth -- SEULE la signature varie entre
+    classique et ML-DSA au meme niveau NIST), et remplace la decision
+    "les deux IC95% se chevauchent-ils ?" par :
+      - IC95% de Delta = mean(classique) - mean(ML-DSA) par bootstrap de
+        blocs APPARIES (paired_block_bootstrap_delta) ;
+      - p-value exacte par test de permutation (exact_paired_permutation_test).
+
+    Contrairement a compute_systematic_significance() (qui compare une
+    config PQ au baseline classique POOLE du niveau, pour une detection
+    systematique large), cette fonction compare deux configs PRECISES
+    partageant le meme KEM -- c'est la comparaison que Table sig-effect-
+    summary/auth-cost/degraded-deepdive rapportent dans l'article, donc
+    celle qui doit utiliser la methode la plus rigoureuse disponible.
+
+    Ecrit signature_paired_comparisons.csv dans out_dir. Ne modifie rien
+    d'autre : purement additif.
+    """
+    try:
+        from compare_distributions import paired_block_bootstrap_delta, exact_paired_permutation_test
+    except ImportError:
+        print("  [!] compare_distributions.py introuvable -- comparaisons appariees non calculees.")
+        return []
+
+    # (sig_classique, sig_pq) par niveau -- identique a SECURITY_LEVEL_BY_SIG/SIG_FAMILY
+    sig_pairs_by_level = {}
+    for sig, fam in SIG_FAMILY.items():
+        level = SECURITY_LEVEL_BY_SIG[sig]
+        sig_pairs_by_level.setdefault(level, {})[fam] = sig
+
+    # Quels KEM existent, par niveau, pour identifier les paires a comparer
+    kems_by_level = defaultdict(set)
+    for r in rows:
+        kems_by_level[r["security_level"]].add(r["kem"])
+
+    results = []
+    for level, kems in sorted(kems_by_level.items()):
+        pair = sig_pairs_by_level.get(level)
+        if not pair or "classique" not in pair or "pq" not in pair:
+            continue
+        sig_classical, sig_pq = pair["classique"], pair["pq"]
+
+        for kem in sorted(kems):
+            blocks_classical = blocks_by_combo.get((sig_classical, kem))
+            blocks_pq = blocks_by_combo.get((sig_pq, kem))
+            if not blocks_classical or not blocks_pq:
+                continue  # une des deux configs absente de ce dossier -- rien a comparer
+
+            # Moyennes de bloc, appariees par block_index commun (pas juste
+            # "les 4 premieres valeurs dans l'ordre d'iteration du dict")
+            common_blocks = sorted(set(blocks_classical.keys()) & set(blocks_pq.keys()))
+            if len(common_blocks) < 2:
+                results.append({
+                    "security_level": level, "kem": kem,
+                    "sig_classical": sig_classical, "sig_pq": sig_pq,
+                    "n_blocks_common": len(common_blocks),
+                    "classical_mean_ms": "NA", "pq_mean_ms": "NA",
+                    "delta_ms": "NA", "delta_ci95_low": "NA", "delta_ci95_high": "NA",
+                    "significant_paired_bootstrap": "NA (moins de 2 blocs communs)",
+                    "exact_permutation_p": "NA", "exact_permutation_min_p": "NA",
+                })
+                continue
+
+            means_classical = [statistics.mean(blocks_classical[b]) for b in common_blocks]
+            means_pq = [statistics.mean(blocks_pq[b]) for b in common_blocks]
+
+            boot = paired_block_bootstrap_delta(means_classical, means_pq)
+            perm = exact_paired_permutation_test(means_classical, means_pq)
+
+            results.append({
+                "security_level": level, "kem": kem,
+                "sig_classical": sig_classical, "sig_pq": sig_pq,
+                "n_blocks_common": len(common_blocks),
+                "classical_mean_ms": round(statistics.mean(means_classical), 4),
+                "pq_mean_ms": round(statistics.mean(means_pq), 4),
+                "delta_ms": boot["delta_mean"] if boot else "NA",
+                "delta_ci95_low": boot["ci95_low"] if boot else "NA",
+                "delta_ci95_high": boot["ci95_high"] if boot else "NA",
+                "significant_paired_bootstrap": ("oui" if boot["significant"] else "non") if boot else "NA",
+                "exact_permutation_p": perm["p_value_two_sided"] if perm else "NA",
+                "exact_permutation_min_p": perm["min_achievable_p"] if perm else "NA",
+            })
+
+    if not results:
+        return results
+
+    with open(out_dir / "signature_paired_comparisons.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(results[0].keys()))
+        w.writeheader()
+        w.writerows(results)
+
+    n_sig = sum(1 for r in results if r["significant_paired_bootstrap"] == "oui")
+    n_valid = sum(1 for r in results if r["significant_paired_bootstrap"] in ("oui", "non"))
+    print(f"  [OK] {len(results)} comparaison(s) appariee(s) classique-vs-ML-DSA (meme KEM/niveau) "
+          f"-> {out_dir}/signature_paired_comparisons.csv")
+    print(f"       {n_sig}/{n_valid} significative(s) par bootstrap de blocs apparie sur Delta "
+          f"(IC95% de Delta exclut zero) -- colonnes delta_ms/delta_ci95_low/delta_ci95_high/"
+          f"significant_paired_bootstrap remplacent la logique de chevauchement de deux IC separes.")
+    print(f"       exact_permutation_p fourni en complement (test exact, {results[0].get('n_blocks_common', '?')} "
+          f"blocs -> p minimale atteignable = {results[0].get('exact_permutation_min_p', '?')}, "
+          f"a citer explicitement si ce nombre est utilise dans l'article).")
+    return results
+
+
+def write_report(path, folder, rows, overhead_rows, paired_sig_results=None):
     lines = [f"# Performance de handshake — {folder}\n"]
     lines.append(f"**{len(rows)} combinaison(s) SIG_ALG/KEM analysée(s)**\n")
 
@@ -467,6 +575,24 @@ def write_report(path, folder, rows, overhead_rows):
         for r in sorted(overhead_rows, key=lambda r: (r["security_level"], r["kem_class"], r["kem"])):
             lines.append(f"| {r['security_level']} | {r['sig_alg']} | {r['kem']} | {r['kem_class']} | "
                           f"{r['mean_ms']} | {r['baseline_classique_mean_ms']} | {r['overhead_pct']} |")
+
+    if paired_sig_results:
+        lines.append("\n## Comparaison appariée classique vs ML-DSA (même KEM, même niveau)\n")
+        lines.append("Remplace la logique de chevauchement de deux IC95% séparés : l'IC95% "
+                      "porte directement sur Δ = classique − ML-DSA, par bootstrap de blocs "
+                      "APPARIÉS (même block_index des deux côtés). `exact_permutation_p` est un "
+                      "test de permutation exact complémentaire (2^n_blocs arrangements) ; sa "
+                      "p-value minimale atteignable (`exact_permutation_min_p`) doit être citée "
+                      "à chaque fois que ce nombre est mentionné dans l'article.\n")
+        lines.append("| Niveau | KEM | Classique (ms) | ML-DSA (ms) | Δ (ms) | IC95% de Δ | "
+                      "Signif. (bootstrap apparié) | p exacte | p min. atteignable |")
+        lines.append("|---|---|---|---|---|---|---|---|---|")
+        for r in sorted(paired_sig_results, key=lambda r: (r["security_level"], r["kem"])):
+            ci = f"[{r['delta_ci95_low']}, {r['delta_ci95_high']}]" if r["delta_ci95_low"] != "NA" else "NA"
+            lines.append(f"| {r['security_level']} | {r['kem']} | {r['classical_mean_ms']} | "
+                          f"{r['pq_mean_ms']} | {r['delta_ms']} | {ci} | "
+                          f"{r['significant_paired_bootstrap']} | {r['exact_permutation_p']} | "
+                          f"{r['exact_permutation_min_p']} |")
 
     lines.append("\n## Note méthodologique\n")
     lines.append("Intervalle de confiance à 95% calculé par **bootstrap de blocs entiers** "

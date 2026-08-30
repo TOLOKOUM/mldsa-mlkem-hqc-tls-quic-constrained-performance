@@ -60,6 +60,7 @@ bloc entier) n'est pas encore implémenté ici.
 
 import argparse
 import csv
+import itertools
 import math
 import statistics
 from pathlib import Path
@@ -120,6 +121,198 @@ def interpret_cliffs_delta(d):
         return "moyen"
     else:
         return "grand"
+
+
+def paired_block_bootstrap_delta(block_means_a, block_means_b, n_resamples=5000, seed=12345):
+    """
+    IC95% de Delta = mean(A) - mean(B) par bootstrap de blocs APPARIES.
+
+    Remplace la logique "deux IC separes, on regarde s'ils se chevauchent"
+    (utilisee jusqu'ici pour Table sig-effect-summary / auth-cost /
+    degraded-deepdive) par un IC construit DIRECTEMENT sur la difference.
+    Plus puissant que deux IC separes quand les deux bras sont apparies
+    par bloc (meme block_index = meme passe du sweep, meme etat thermique/
+    systeme du moment), puisque la variance inter-bloc commune aux deux
+    bras s'annule dans la difference au lieu de s'additionner dans deux IC
+    independants.
+
+    block_means_a, block_means_b : listes de MEME LONGUEUR, block_means_a[i]
+    et block_means_b[i] DOIVENT venir du meme block_index (verifie par
+    l'appelant, cf. compute_paired_signature_comparisons).
+
+    Meme graine et meme nombre de resamples que le reste du pipeline
+    (seed=12345, n_resamples=5000) pour rester coherent avec
+    block_bootstrap_ci / block_bootstrap_mean_ci.
+
+    Retourne un dict avec delta_mean, ci_low, ci_high, significant
+    (IC exclut zero), ou None si moins de 2 blocs communs.
+    """
+    import random
+    n_blocks = min(len(block_means_a), len(block_means_b))
+    if n_blocks < 2:
+        return None
+
+    block_means_a = block_means_a[:n_blocks]
+    block_means_b = block_means_b[:n_blocks]
+    observed_delta = statistics.mean(block_means_a) - statistics.mean(block_means_b)
+
+    rng = random.Random(seed)
+    boot_deltas = []
+    for _ in range(n_resamples):
+        idx = [rng.randrange(n_blocks) for _ in range(n_blocks)]
+        resampled_a = [block_means_a[i] for i in idx]
+        resampled_b = [block_means_b[i] for i in idx]
+        boot_deltas.append(statistics.mean(resampled_a) - statistics.mean(resampled_b))
+    boot_deltas.sort()
+
+    n = len(boot_deltas)
+    lo = boot_deltas[int(0.025 * n)]
+    hi = boot_deltas[min(int(0.975 * n), n - 1)]
+
+    return {
+        "delta_mean": round(observed_delta, 4),
+        "ci95_low": round(lo, 4),
+        "ci95_high": round(hi, 4),
+        "significant": (lo > 0) or (hi < 0),
+        "n_blocks_paired": n_blocks,
+        "n_resamples": n_resamples,
+    }
+
+
+def exact_paired_permutation_test(block_means_a, block_means_b):
+    """
+    Test de permutation EXACT sur des moyennes de bloc appariees : enumere
+    les 2^n_blocks facons d'echanger les labels A/B bloc par bloc (n_blocks
+    petit -- typiquement 4, donc 16 arrangements -- rend l'enumeration
+    exhaustive triviale, pas d'approximation asymptotique necessaire).
+
+    A UTILISER EN COMPLEMENT du bootstrap ci-dessus, pas a sa place : ce
+    test ne fait AUCUNE hypothese distributionnelle, mais sa resolution est
+    structurellement limitee par le nombre de blocs (avec n=4, la p-value
+    bilaterale minimale atteignable est 2/16=0.125, quelle que soit la
+    taille reelle de l'effet) -- a annoncer explicitement dans l'article,
+    jamais a interpreter comme "non significatif" sans cette precision.
+
+    Retourne un dict avec delta_observed, p_value_two_sided, n_permutations,
+    min_achievable_p. None si moins de 2 blocs communs.
+    """
+    n_blocks = min(len(block_means_a), len(block_means_b))
+    if n_blocks < 2:
+        return None
+    block_means_a = block_means_a[:n_blocks]
+    block_means_b = block_means_b[:n_blocks]
+
+    observed_delta = statistics.mean(block_means_a) - statistics.mean(block_means_b)
+    observed_abs = abs(observed_delta)
+
+    null_deltas = []
+    for flips in itertools.product([False, True], repeat=n_blocks):
+        perm_a = [block_means_b[i] if f else block_means_a[i] for i, f in enumerate(flips)]
+        perm_b = [block_means_a[i] if f else block_means_b[i] for i, f in enumerate(flips)]
+        null_deltas.append(statistics.mean(perm_a) - statistics.mean(perm_b))
+
+    n_perms = len(null_deltas)
+    n_as_extreme = sum(1 for d in null_deltas if abs(d) >= observed_abs - 1e-12)
+
+    return {
+        "delta_observed": round(observed_delta, 4),
+        "p_value_two_sided": round(n_as_extreme / n_perms, 4),
+        "n_permutations": n_perms,
+        "min_achievable_p": round(2.0 / n_perms, 4),
+    }
+
+
+def independent_block_bootstrap_delta(block_means_a, block_means_b, n_resamples=5000, seed=12345):
+    """
+    IC95% de Delta = mean(A) - mean(B) par bootstrap de blocs INDEPENDANTS
+    (pas apparies) : les indices de bloc sont rééchantillonnés separement
+    pour A et pour B, chacun sur sa propre plage (len(A) et len(B) peuvent
+    différer).
+
+    A UTILISER quand A et B viennent de deux campagnes/dossiers distincts
+    sans correspondance de bloc verifiee (ex: single-auth vs mutual-auth,
+    executes comme deux invocations separees du launcher) -- contrairement
+    a paired_block_bootstrap_delta, qui suppose que block_means_a[i] et
+    block_means_b[i] partagent la meme occasion d'execution. Rééchantillonner
+    avec les MEMES indices dans ce cas supposerait une correlation qu'on
+    n'a pas verifiee, et sous-estimerait potentiellement la variance de
+    Delta (IC artificiellement trop etroit) -- ce bootstrap independant
+    est le choix conservateur et toujours valide par defaut.
+
+    Retourne un dict avec delta_mean, ci_low, ci_high, significant, ou None
+    si l'un des deux bras a moins de 2 blocs.
+    """
+    import random
+    n_a, n_b = len(block_means_a), len(block_means_b)
+    if n_a < 2 or n_b < 2:
+        return None
+
+    observed_delta = statistics.mean(block_means_a) - statistics.mean(block_means_b)
+
+    rng = random.Random(seed)
+    boot_deltas = []
+    for _ in range(n_resamples):
+        resampled_a = [block_means_a[rng.randrange(n_a)] for _ in range(n_a)]
+        resampled_b = [block_means_b[rng.randrange(n_b)] for _ in range(n_b)]
+        boot_deltas.append(statistics.mean(resampled_a) - statistics.mean(resampled_b))
+    boot_deltas.sort()
+
+    n = len(boot_deltas)
+    lo = boot_deltas[int(0.025 * n)]
+    hi = boot_deltas[min(int(0.975 * n), n - 1)]
+
+    return {
+        "delta_mean": round(observed_delta, 4),
+        "ci95_low": round(lo, 4),
+        "ci95_high": round(hi, 4),
+        "significant": (lo > 0) or (hi < 0),
+        "n_blocks_a": n_a, "n_blocks_b": n_b,
+        "n_resamples": n_resamples,
+    }
+
+
+def exact_two_sample_permutation_test(block_means_a, block_means_b):
+    """
+    Test de permutation EXACT pour deux echantillons INDEPENDANTS (pas
+    apparies) : sous H0, les n_a+n_b moyennes de bloc sont exchangeables
+    entre A et B ; on enumere TOUTES les C(n_a+n_b, n_a) facons de repartir
+    l'ensemble combine en un groupe de taille n_a et un groupe de taille
+    n_b (test de permutation de Fisher-Pitman classique).
+
+    Avec n_a=n_b=4 (cas typique ici), C(8,4)=70 arrangements -- resolution
+    bien plus fine que le test apparie a 16 arrangements (min p=2/70≈0.029
+    contre 2/16=0.125), PARCE QU'on ne suppose plus de structure d'
+    appariement, pas malgre cela.
+
+    Retourne un dict avec delta_observed, p_value_two_sided,
+    n_permutations, min_achievable_p. None si l'un des deux bras a moins
+    de 2 valeurs.
+    """
+    n_a, n_b = len(block_means_a), len(block_means_b)
+    if n_a < 2 or n_b < 2:
+        return None
+
+    combined = list(block_means_a) + list(block_means_b)
+    n_total = len(combined)
+    observed_delta = statistics.mean(block_means_a) - statistics.mean(block_means_b)
+    observed_abs = abs(observed_delta)
+
+    null_deltas = []
+    for combo_idx in itertools.combinations(range(n_total), n_a):
+        idx_set = set(combo_idx)
+        group_a = [combined[i] for i in range(n_total) if i in idx_set]
+        group_b = [combined[i] for i in range(n_total) if i not in idx_set]
+        null_deltas.append(statistics.mean(group_a) - statistics.mean(group_b))
+
+    n_perms = len(null_deltas)
+    n_as_extreme = sum(1 for d in null_deltas if abs(d) >= observed_abs - 1e-12)
+
+    return {
+        "delta_observed": round(observed_delta, 4),
+        "p_value_two_sided": round(n_as_extreme / n_perms, 4),
+        "n_permutations": n_perms,
+        "min_achievable_p": round(2.0 / n_perms, 4),
+    }
 
 
 def benjamini_hochberg(pvalues):
