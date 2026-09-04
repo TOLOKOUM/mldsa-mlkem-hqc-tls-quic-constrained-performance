@@ -1,9 +1,5 @@
 # position_sensitivity.py
-import os
-import re
-import glob
-from math import erf, sqrt
-
+import os, re, glob
 import numpy as np
 import pandas as pd
 
@@ -13,7 +9,6 @@ KNOWN_SIG_ALGS = ["ed25519", "mldsa44", "secp384r1", "mldsa65",
 
 
 def parse_manifest(path):
-    """Return dict: 'sig|kem' -> sweep_position (1-indexed int)."""
     order = {}
     in_order = False
     with open(path) as f:
@@ -91,7 +86,7 @@ for csv_path in glob.glob(os.path.join(BASE, "*", "*", "*", "csv", "handshake_*.
     df["cell_id"] = cell_id
     df["sweep_position"] = sweep_position
     rows.append(df[["handshake_duration_ms", "config_id", "cell_id",
-                     "sweep_position", "block_index", "n_blocks"]])
+                     "sweep_position"]])
 
 if warnings:
     print(f"{len(warnings)} warnings (showing first 10):")
@@ -99,55 +94,85 @@ if warnings:
         print("  ", w)
 
 full = pd.concat(rows, ignore_index=True)
-full.to_csv("all_runs_with_position.csv", index=False)
-print(f"\nBuilt all_runs_with_position.csv: {len(full)} rows, "
-      f"{full.cell_id.nunique()} cells, {full.config_id.nunique()} configs")
 
-# ---- Pooled regression across ALL cells (fixes the collinearity issue) ----
-# handshake_duration_ms ~ config_id (fixed effect) + cell_id (fixed effect)
-#                        + sweep_position (continuous, the effect of interest)
-# This works because a given config_id occupies DIFFERENT sweep_position
-# values across the ~630 independently-seeded cells, breaking the
-# within-cell collinearity between config_id and sweep_position.
+# ---- Step 1: collapse to the 630 configuration-cell MEANS -----------------
+# Corrected unit of analysis: one row per (config_id, cell_id), not one row
+# per individual handshake. sweep_position is constant within a
+# (config_id, cell_id) group by construction (fixed sweep order per cell).
+cell_means = (
+    full.groupby(["config_id", "cell_id", "sweep_position"], as_index=False)
+        ["handshake_duration_ms"].mean()
+)
+cell_means.to_csv("configuration_cell_means.csv", index=False)
+print(f"\nCollapsed to {len(cell_means)} configuration-cell means "
+      f"({cell_means.config_id.nunique()} configs x "
+      f"{cell_means.cell_id.nunique()} cells)")
 
-sub = full.copy()
-
-# To keep the design matrix tractable, drop the rarest configs/cells if needed
-# (not expected to be necessary here: 42 configs x ~630 cells is standard).
-X = pd.get_dummies(sub[["config_id", "cell_id"]].astype(str), drop_first=True)
+# ---- Step 2: regression on the 630 means, config + cell fixed effects,
+#              cluster-robust SEs clustered by cell_id (15 clusters) -------
+y = cell_means["handshake_duration_ms"].astype(float).values
+X = pd.get_dummies(cell_means[["config_id", "cell_id"]].astype(str),
+                    drop_first=True)
 X.insert(0, "intercept", 1.0)
-X["sweep_position"] = sub["sweep_position"].astype(float).values
+X["sweep_position"] = cell_means["sweep_position"].astype(float).values
 X = X.astype(float)
-y = sub["handshake_duration_ms"].astype(float).values
+cluster_ids = cell_means["cell_id"].values
 
-print(f"\nDesign matrix: {X.shape[0]} rows x {X.shape[1]} columns")
-
-XtX_inv = np.linalg.pinv(X.values.T @ X.values)
-beta = XtX_inv @ X.values.T @ y
-resid = y - X.values @ beta
 n, k = X.shape
-dof = max(n - k, 1)
-sigma2 = (resid @ resid) / dof
-se = np.sqrt(np.clip(np.diag(XtX_inv) * sigma2, 0, None))
+G = len(np.unique(cluster_ids))
+Xm = X.values
+
+XtX_inv = np.linalg.pinv(Xm.T @ Xm)
+beta = XtX_inv @ Xm.T @ y
+resid = y - Xm @ beta
+
+# Cluster-robust (CR1) sandwich estimator, clustered by sweep cell
+meat = np.zeros((k, k))
+for cid in np.unique(cluster_ids):
+    idx = cluster_ids == cid
+    Xg = Xm[idx]
+    ug = resid[idx]
+    score_g = Xg.T @ ug
+    meat += np.outer(score_g, score_g)
+
+# Standard small-cluster correction (Stata/Cameron-Miller default)
+correction = (G / (G - 1)) * ((n - 1) / (n - k))
+V_cluster = correction * XtX_inv @ meat @ XtX_inv
+se_cluster = np.sqrt(np.clip(np.diag(V_cluster), 0, None))
 
 pos_idx = list(X.columns).index("sweep_position")
 coef = beta[pos_idx]
-coef_se = se[pos_idx]
-t_stat = coef / coef_se if coef_se > 0 else np.nan
-p_approx = (2 * (1 - 0.5 * (1 + erf(abs(t_stat) / sqrt(2))))
-            if not np.isnan(t_stat) else np.nan)
+se = se_cluster[pos_idx]
 
-print(f"\nPooled sweep_position effect: {coef:.4f} ms per rank "
-      f"(SE={coef_se:.4f}), t={t_stat:.2f}, p≈{p_approx:.4g}")
-print(f"Interpretation: over the full 1-42 rank range, this implies an "
-      f"average drift of {coef*41:.2f} ms between the first and last "
-      f"executed configuration, after controlling for configuration "
-      f"identity and cell (protocol/auth/network) identity.")
+# t-distribution with G-1 dof, standard for cluster-robust inference
+# with few clusters (Cameron & Miller, 2015)
+try:
+    from scipy import stats as _stats
+    dof = G - 1
+    t_stat = coef / se
+    p_val = 2 * (1 - _stats.t.cdf(abs(t_stat), dof))
+    crit = _stats.t.ppf(0.975, dof)
+except ImportError:
+    from math import erf, sqrt
+    t_stat = coef / se
+    p_val = 2 * (1 - 0.5 * (1 + erf(abs(t_stat) / sqrt(2))))
+    crit = 1.96
+    print("NOTE: scipy unavailable, using normal approximation "
+          "instead of t(G-1) — install scipy for the exact reported CI.")
+
+ci_low, ci_high = coef - crit * se, coef + crit * se
+
+print(f"\nSweep-position effect (630 configuration-cell means, "
+      f"cluster-robust by {G} sweep cells):")
+print(f"  coef = {coef:.4f} ms/rank")
+print(f"  cluster-robust SE = {se:.4f}")
+print(f"  95% CI = [{ci_low:.2f}, {ci_high:.2f}]")
+print(f"  p-value = {p_val:.4f}")
 
 pd.DataFrame([{
-    "coef_ms_per_rank": coef, "se": coef_se, "t_stat": t_stat,
-    "p_approx": p_approx, "n_obs": n, "n_configs": sub.config_id.nunique(),
-    "n_cells": sub.cell_id.nunique(),
-    "implied_range_effect_ms": coef * 41
+    "coef_ms_per_rank": coef, "cluster_robust_se": se,
+    "ci_low": ci_low, "ci_high": ci_high, "p_value": p_val,
+    "n_obs": n, "n_clusters": G, "n_configs": cell_means.config_id.nunique()
 }]).to_csv("position_sensitivity_results.csv", index=False)
-print("\nSaved position_sensitivity_results.csv")
+print("\nSaved position_sensitivity_results.csv "
+      "and configuration_cell_means.csv")
