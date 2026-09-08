@@ -1,4 +1,4 @@
-# Post-Quantum TLS 1.3 and QUIC Handshakes under Emulated Delay and Loss: Combining ML-DSA with ML-KEM and HQC
+# Joint Post-Quantum Authentication and Key Establishment in TLS 1.3 and QUIC under Network Impairments
 
 > **David Rive Tolokoum**, **Yve Bruno MBEZOA**, **Hervé Talé Kalachi**
 
