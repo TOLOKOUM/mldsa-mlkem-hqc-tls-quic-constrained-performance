@@ -1,0 +1,11 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+pilot_res_tls_rtt50,tls,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+pilot_res_quic_rtt50,quic,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+pilot_comp_tls_chain1_rtt50_none,tls,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CERT_COMP=none;MICRO_BATCHES=2
+pilot_comp_tls_ctl16000_rtt50_none,tls,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;secp384r1|hqc192,CERT_COMP=none;CERT_PAD_TARGET_DER=16000;MICRO_BATCHES=2
+pilot_comp_tls_chain1_rtt50_zlib,tls,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CERT_COMP=zlib;MICRO_BATCHES=2
+pilot_comp_tls_ctl16000_rtt50_zlib,tls,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;secp384r1|hqc192,CERT_COMP=zlib;CERT_PAD_TARGET_DER=16000;MICRO_BATCHES=2
+pilot_comp_tls_chain1_rtt50_brotli,tls,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CERT_COMP=brotli;MICRO_BATCHES=2
+pilot_comp_tls_ctl16000_rtt50_brotli,tls,single,both,delay-only,0,25,20,secp384r1|x448_mlkem768;secp384r1|hqc192,CERT_COMP=brotli;CERT_PAD_TARGET_DER=16000;MICRO_BATCHES=2
+pilot_load_tls_mt_rtt0,tls,single,both,none,0,0,1,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,LOAD=1;TLS_SERVER=mt;CONC_LEVELS=1 4 16;LOAD_SECONDS=12
+pilot_load_quic_rtt0,quic,single,both,none,0,0,1,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,LOAD=1;CONC_LEVELS=1 4 16;LOAD_SECONDS=12

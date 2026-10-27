@@ -1,0 +1,5 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+res0rtt_quic_rtt0,quic,single,both,none,0,0,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;ZERORTT_ARM=1;MICRO_BATCHES=2
+res0rtt_quic_rtt50,quic,single,both,delay-only,0,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;ZERORTT_ARM=1;MICRO_BATCHES=2
+res0rtt_quic_rtt100,quic,single,both,delay-only,0,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;ZERORTT_ARM=1;MICRO_BATCHES=2
+res0rtt_quic_rtt150,quic,single,both,delay-only,0,75,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;ZERORTT_ARM=1;MICRO_BATCHES=2

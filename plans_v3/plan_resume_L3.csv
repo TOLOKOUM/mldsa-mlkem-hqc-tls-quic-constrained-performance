@@ -1,0 +1,15 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+res_tls_rtt0,tls,single,both,none,0,0,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_tls_rtt50,tls,single,both,delay-only,0,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_tls_rtt100,tls,single,both,delay-only,0,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_tls_rtt150,tls,single,both,delay-only,0,75,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_tls_rtt50_loss1_iid,tls,single,both,simple,1,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_tls_rtt50_loss2_iid,tls,single,both,simple,2,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_tls_rtt50_loss5_iid,tls,single,both,simple,5,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_quic_rtt0,quic,single,both,none,0,0,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_quic_rtt50,quic,single,both,delay-only,0,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_quic_rtt100,quic,single,both,delay-only,0,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_quic_rtt150,quic,single,both,delay-only,0,75,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_quic_rtt50_loss1_iid,quic,single,both,simple,1,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_quic_rtt50_loss2_iid,quic,single,both,simple,2,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
+res_quic_rtt50_loss5_iid,quic,single,both,simple,5,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,RESUME=1;MICRO_BATCHES=2
