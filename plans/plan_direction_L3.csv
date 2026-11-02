@@ -1,0 +1,9 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+dir_tls_iid_c2s,tls,single,mlkem,simple,2,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=c2s;MICRO_BATCHES=2
+dir_tls_gemild_c2s,tls,single,mlkem,ge-mild-2,0,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=c2s;MICRO_BATCHES=2
+dir_tls_iid_both,tls,single,mlkem,simple,2,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=both;MICRO_BATCHES=2
+dir_tls_gemild_both,tls,single,mlkem,ge-mild-2,0,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=both;MICRO_BATCHES=2
+dir_quic_iid_c2s,quic,single,mlkem,simple,2,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=c2s;MICRO_BATCHES=2
+dir_quic_gemild_c2s,quic,single,mlkem,ge-mild-2,0,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=c2s;MICRO_BATCHES=2
+dir_quic_iid_both,quic,single,mlkem,simple,2,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=both;MICRO_BATCHES=2
+dir_quic_gemild_both,quic,single,mlkem,ge-mild-2,0,50,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOSS_DIRECTION=both;MICRO_BATCHES=2

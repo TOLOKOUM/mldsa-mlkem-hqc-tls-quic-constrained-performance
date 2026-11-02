@@ -1,0 +1,17 @@
+timestamp,event,block_index,n_blocks,position,sig_alg,kem,cpu_temp_c,cpu_mhz_mean,load1,governor,no_turbo
+2026-10-27T11:09:34+01:00,before,1,1,1,secp384r1,x448_mlkem768,51.0,1600,1.45,performance,1
+2026-10-27T11:09:38+01:00,after,1,1,1,secp384r1,x448_mlkem768,48.0,1600,1.34,performance,1
+2026-10-27T11:10:10+01:00,before,1,1,2,mldsa65,x448_mlkem768,50.0,1600,1.98,performance,1
+2026-10-27T11:10:14+01:00,after,1,1,2,mldsa65,x448_mlkem768,48.0,1600,2.14,performance,1
+2026-10-27T11:10:45+01:00,before,1,1,3,secp384r1,hqc192,51.0,1600,2.79,performance,1
+2026-10-27T11:10:50+01:00,after,1,1,3,secp384r1,hqc192,50.0,1600,2.83,performance,1
+2026-10-27T11:11:20+01:00,before,1,1,4,mldsa65,hqc192,51.0,1601,2.86,performance,1
+2026-10-27T11:11:25+01:00,after,1,1,4,mldsa65,hqc192,51.0,1600,2.65,performance,1
+2026-10-27T11:11:56+01:00,before,1,1,5,mldsa65,hqc192,49.0,1300,3.09,performance,1
+2026-10-27T11:12:01+01:00,after,1,1,5,mldsa65,hqc192,49.0,1450,2.92,performance,1
+2026-10-27T11:12:31+01:00,before,1,1,6,mldsa65,x448_mlkem768,49.0,1600,2.73,performance,1
+2026-10-27T11:12:35+01:00,after,1,1,6,mldsa65,x448_mlkem768,47.0,1300,2.67,performance,1
+2026-10-27T11:13:05+01:00,before,1,1,7,secp384r1,x448_mlkem768,48.0,1150,2.71,performance,1
+2026-10-27T11:13:09+01:00,after,1,1,7,secp384r1,x448_mlkem768,47.0,1450,2.58,performance,1
+2026-10-27T11:13:38+01:00,before,1,1,8,secp384r1,hqc192,47.0,1450,1.90,performance,1
+2026-10-27T11:13:43+01:00,after,1,1,8,secp384r1,hqc192,47.0,1450,1.75,performance,1

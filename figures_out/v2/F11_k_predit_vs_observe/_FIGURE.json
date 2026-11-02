@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "campaign": "v2",
+  "fid": "F11",
+  "slug": "k_predit_vs_observe",
+  "title": "Predicted versus observed number of extra RTTs (k) caused by ML-DSA",
+  "fingerprint": "db94db7e8f75f89983059fdd6cb934e9c83837c08c20ddd2296a758cdae509e7",
+  "variants": [
+    "tous"
+  ],
+  "created_utc": "20261029T035048Z",
+  "inputs": {
+    "v2_kpred": {
+      "path": "analysis_v2/phase3/p3_k_pred_vs_obs.csv",
+      "sha256": "521338e8302a9023c35de5c7c48195bfa658785fcefe9276b5809b6258768b28",
+      "bytes": 19179
+    }
+  }
+}

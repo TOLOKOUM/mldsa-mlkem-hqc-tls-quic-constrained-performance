@@ -1,0 +1,9 @@
+timestamp,protocol,auth_mode,sig_alg,kem,network_profile,role,n_runs,cpu_usec_total,cpu_usec_per_handshake,mem_peak_bytes,block_index,n_blocks,seed
+2026-10-27T11:48:18+01:00,tls,single,secp384r1,x448_mlkem768,delay-only,server,10,384413,25627.533,5750784,1,1,2668564251
+2026-10-27T11:48:18+01:00,tls,single,secp384r1,x448_mlkem768,delay-only,client,10,577391,38492.733,4616192,1,1,2668564251
+2026-10-27T11:48:52+01:00,tls,single,secp384r1,hqc192,delay-only,server,10,928654,61910.267,6086656,1,1,2668564251
+2026-10-27T11:48:52+01:00,tls,single,secp384r1,hqc192,delay-only,client,10,1348891,89926.067,4640768,1,1,2668564251
+2026-10-27T11:49:27+01:00,tls,single,secp384r1,hqc192,delay-only,server,10,934686,62312.400,5890048,1,1,2668564251
+2026-10-27T11:49:27+01:00,tls,single,secp384r1,hqc192,delay-only,client,10,1341493,89432.867,4435968,1,1,2668564251
+2026-10-27T11:50:00+01:00,tls,single,secp384r1,x448_mlkem768,delay-only,server,10,378947,25263.133,5799936,1,1,2668564251
+2026-10-27T11:50:00+01:00,tls,single,secp384r1,x448_mlkem768,delay-only,client,10,576674,38444.933,4947968,1,1,2668564251

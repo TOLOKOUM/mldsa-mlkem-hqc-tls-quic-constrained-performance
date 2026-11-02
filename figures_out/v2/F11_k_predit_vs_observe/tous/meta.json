@@ -1,0 +1,39 @@
+{
+  "campaign": "v2",
+  "fid": "F11",
+  "slug": "k_predit_vs_observe",
+  "variant": "tous",
+  "note": "dashed line = perfect prediction; marker = level, colour = KEM family",
+  "n_data_rows": 42,
+  "data_columns": [
+    "proto",
+    "auth",
+    "level",
+    "kem",
+    "k_pred",
+    "k_pool",
+    "k_pool_lo",
+    "k_pool_hi",
+    "evidence"
+  ],
+  "inputs": {
+    "v2_kpred": {
+      "path": "analysis_v2/phase3/p3_k_pred_vs_obs.csv",
+      "sha256": "521338e8302a9023c35de5c7c48195bfa658785fcefe9276b5809b6258768b28",
+      "bytes": 19179
+    }
+  },
+  "fingerprint": "db94db7e8f75f89983059fdd6cb934e9c83837c08c20ddd2296a758cdae509e7",
+  "created_utc": "20261029T035048Z",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "matplotlib": "3.6.3"
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 12345,
+    "unit": "blocs entiers, percentile 2.5/97.5"
+  }
+}

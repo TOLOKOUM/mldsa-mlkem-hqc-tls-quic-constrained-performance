@@ -1,0 +1,11 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+pilot_tls_rtt0_loss0,tls,single,both,none,0,0,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,
+pilot_tls_rtt50_loss2_iid,tls,single,both,simple,2,25,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,
+pilot_tls_rtt100_loss5_gemild,tls,single,both,ge-mild-5,0,50,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,
+pilot_quic_rtt0_loss0,quic,single,both,none,0,0,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,
+pilot_quic_rtt50_loss2_iid,quic,single,both,simple,2,25,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,
+pilot_quic_rtt100_loss5_gemild,quic,single,both,ge-mild-5,0,50,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,
+pilot_tls_mb5,tls,single,both,simple,2,25,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,MICRO_BATCHES=5
+pilot_quic_rtt50_loss2_pcap,quic,single,mlkem,simple,2,25,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,PER_CONN_PCAP=1
+pilot_tls_rtt50_loss2_pcap,tls,single,mlkem,simple,2,25,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,PER_CONN_PCAP=1
+pilot_quic_pcap_mb5,quic,single,mlkem,simple,2,25,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,PER_CONN_PCAP=1;MICRO_BATCHES=5

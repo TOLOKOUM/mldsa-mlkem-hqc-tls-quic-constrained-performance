@@ -1,0 +1,3 @@
+timestamp,block,kind,cell_id,visit,exit_code,seed
+2026-11-01T11:34:53+01:00,1,blockstart,,,0,20261298
+2026-11-01T11:40:29+01:00,1,cell,pilot3_load_quic_rtt0,,0,4098969137

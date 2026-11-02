@@ -1,0 +1,1 @@
+proto,auth,label,block,bad_mtu,bad_dir,bad_mb,bad_runs,bad_rate_mbit,bad_netem_limit,bad_governor,bad_no_turbo,bad_offload_off,bad_udp_gso,bad_offload_on

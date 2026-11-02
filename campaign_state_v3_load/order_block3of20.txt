@@ -1,0 +1,5 @@
+# bloc=3 n_blocks=20 master_seed=20261203 block_seed=498493059 date=2026-11-01T21:50:01+01:00
+load_tls_mt_rtt0
+loadcal_tls_stock_rtt0
+load_quic_rtt0
+loadcal_tls_mt_rtt0

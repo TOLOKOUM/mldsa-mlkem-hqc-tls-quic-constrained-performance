@@ -87,6 +87,17 @@ RUN if [ ! -d "${MSQUICDIR}" ]; then \
         done; \
     fi
 
+# Point 4 du prescreen TDSC (TDSC-2026-09-3862) : injection des patchs
+# "App-ready duration" par-dessus le clone pinne de msquic-pq.
+COPY patches/s_connection_quic.c ${MSQUICDIR}/src/tools/s_connection/s_connection.c
+COPY patches/s_server_quic.c ${MSQUICDIR}/src/tools/s_server/s_server.c
+
+# Critique 2/4 (AE) : UDP GSO desactive par defaut dans MsQuic (un super-paquet GSO = 1 seul
+# tirage de perte netem pour plusieurs datagrammes, contrairement a TCP avec TSO coupe).
+# Le script ECHOUE (donc le build) si le patch ne s'applique pas exactement une fois.
+COPY patches/apply_no_udp_gso.sh /tmp/apply_no_udp_gso.sh
+RUN sh /tmp/apply_no_udp_gso.sh ${MSQUICDIR}/src/platform/datapath_epoll.c && rm -f /tmp/apply_no_udp_gso.sh
+
 # Download openssl avec tentative multiple
 RUN if [ ! -d "${OPENSSLDIR}" ]; then \
         mkdir -p "${OPENSSLDIR}" && cd "${OPENSSLDIR}" && \
@@ -95,6 +106,11 @@ RUN if [ ! -d "${OPENSSLDIR}" ]; then \
         (for i in 1 2 3 4 5; do git fetch --depth 1 origin ${OPENSSL_TAG} && break || sleep 5; done) && \
         git checkout -q FETCH_HEAD ; \
     fi
+
+# Point 4 du prescreen TDSC (TDSC-2026-09-3862) : injection du patch
+# "App-ready duration" par-dessus le clone pinne (evite de forker/pousser
+# une branche a chaque iteration -- cf. discussion avec Claude 27/09/2026).
+COPY patches/s_connection_tls.c ${OPENSSLDIR}/apps/s_connection.c
 
 # Modification des limites dans speed.c
 WORKDIR ${OPENSSLDIR}
@@ -181,8 +197,24 @@ FROM build_1 AS configure
 ARG INSTALLDIR
 ARG OQSPROVIDERDIR
 ARG LIBOQSDIR
+ARG OQSPROVIDER_TAG
 
 ENV PATH="${INSTALLDIR}/bin:${PATH}"
+
+# Garde-fou : la boucle de clonage de l'etage "download" (for ... && break || sleep) retourne 0 meme quand les
+# 5 tentatives echouent (reseau/DNS intermittent) : le build continue alors avec un dossier oqs-provider VIDE et
+# n'echoue qu'ici ("oqs-template/generate.yml: No such file"). On reclone donc ICI si le dossier est vide, et on
+# echoue explicitement si le clonage est impossible. (Place dans l'etage configure pour ne pas invalider les
+# couches de compilation de liboqs/OpenSSL/MsQuic deja en cache.)
+RUN if [ ! -f "${OQSPROVIDERDIR}/oqs-template/generate.yml" ]; then \
+        echo ">>> oqs-provider absent ou vide : nouveau clonage (${OQSPROVIDER_TAG})"; \
+        rm -rf "${OQSPROVIDERDIR}"; \
+        for i in 1 2 3 4 5 6; do \
+            git clone --depth 1 --branch "${OQSPROVIDER_TAG}" https://github.com/open-quantum-safe/oqs-provider.git "${OQSPROVIDERDIR}" && break; \
+            echo "   clonage oqs-provider: tentative $i echouee"; rm -rf "${OQSPROVIDERDIR}"; sleep 10; \
+        done; \
+    fi && \
+    test -f "${OQSPROVIDERDIR}/oqs-template/generate.yml" || { echo "ERREUR: oqs-provider introuvable (reseau ?)"; exit 1; }
 
 # Configure oqs-provider to activate all algorithms
 WORKDIR ${OQSPROVIDERDIR}
@@ -228,7 +260,7 @@ RUN set -eux; \
   fi; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
-    ca-certificates iproute2 tcpdump net-tools \
+    ca-certificates iproute2 tcpdump net-tools ethtool \
     zlib1g \
     libbrotli1 \
     libzstd1 \
@@ -245,6 +277,13 @@ RUN cp $INSTALLDIR/ssl/openssl.cnf $(openssl version -m | cut -d '"' -f2) && \
 
 COPY scripts/*.sh ${INSTALLDIR}/bin/
 RUN chmod 755 ${INSTALLDIR}/bin/*.sh
+
+# Point 4 du prescreen TDSC (TDSC-2026-09-3862) : charge utile fixe de 100
+# octets, servie par "openssl s_server -WWW" (perftestServerTlsQuic.sh) et
+# demandee par "openssl s_connection -www /payload.bin"
+# (perftestClientTlsQuic.sh). Meme taille que SendBufferLength cote QUIC
+# (s_connection_quic.c / s_server_quic.c), pour une comparaison symetrique.
+COPY patches/payload.bin ${INSTALLDIR}/bin/payload.bin
 
 WORKDIR ${INSTALLDIR}/bin
 

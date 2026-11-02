@@ -1,0 +1,21 @@
+modele,estimateur,proto,tous_conforme,tous_partiel,tous_infirme,tous_n,informatives_conforme,informatives_partiel,informatives_infirme,informatives_n
+trivial k=0,med,quic,2,0,19,21,2,0,0,2
+trivial k=0,med,tls,16,1,4,21,0,1,4,5
+trivial k=0,mean,quic,0,2,19,21,0,2,0,2
+trivial k=0,mean,tls,16,1,4,21,0,1,4,5
+trivial k=1,med,quic,19,0,2,21,0,0,2,2
+trivial k=1,med,tls,2,3,16,21,2,3,0,5
+trivial k=1,mean,quic,16,5,0,21,0,2,0,2
+trivial k=1,mean,tls,3,2,16,21,3,2,0,5
+"constant par protocole (QUIC=1, TLS=0)",med,quic,19,0,2,21,0,0,2,2
+"constant par protocole (QUIC=1, TLS=0)",med,tls,16,1,4,21,0,1,4,5
+"constant par protocole (QUIC=1, TLS=0)",mean,quic,16,5,0,21,0,2,0,2
+"constant par protocole (QUIC=1, TLS=0)",mean,tls,16,1,4,21,0,1,4,5
+"seuil, octets seuls (ecrit avant les resultats)",med,quic,21,0,0,21,2,0,0,2
+"seuil, octets seuls (ecrit avant les resultats)",med,tls,16,3,2,21,0,3,2,5
+"seuil, octets seuls (ecrit avant les resultats)",mean,quic,16,5,0,21,0,2,0,2
+"seuil, octets seuls (ecrit avant les resultats)",mean,tls,17,2,2,21,1,2,2,5
+"seuil, deux ecritures (ajoute apres avoir vu TLS L5 ML-KEM-1024)",med,quic,21,0,0,21,2,0,0,2
+"seuil, deux ecritures (ajoute apres avoir vu TLS L5 ML-KEM-1024)",med,tls,18,3,0,21,2,3,0,5
+"seuil, deux ecritures (ajoute apres avoir vu TLS L5 ML-KEM-1024)",mean,quic,16,5,0,21,0,2,0,2
+"seuil, deux ecritures (ajoute apres avoir vu TLS L5 ML-KEM-1024)",mean,tls,19,2,0,21,3,2,0,5

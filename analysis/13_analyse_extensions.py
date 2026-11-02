@@ -20,7 +20,7 @@ Une prediction FAIL est un resultat a rapporter tel quel (pas de re-calage des b
 
 Sorties (dossier --out) : p6_resume_*.csv, p6_comp_*.csv, p6_load_*.csv, p6_predictions.csv, p6_load_curves.pdf (si matplotlib).
 
-Usage : python3 13_analyse_extensions.py --root captures_v3 --out analysis_v3 [--v2-root captures_v2] [--boot 4000]
+Usage : python3 13_analyse_extensions.py --root captures_v3_resume captures_v3_comp captures_v3_load --out analysis_v3 [--v2-root captures_v2] [--boot 4000]
 """
 from __future__ import annotations
 import argparse, glob, os, re, sys
@@ -29,6 +29,7 @@ import pandas as pd
 
 SIGS = ["secp384r1", "mldsa65", "ed25519", "mldsa44", "mldsa87", "secp521r1"]
 PRED = []        # liste de dicts : voir add_pred()
+SCRIPT_VERSION = "v3.1 (addendum charge 2026-11-01 : bandes L2, L3 revues ; L3q, L7 ajoutees ; L4a/L4b retirees)"
 
 
 # ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -148,7 +149,8 @@ def util(trace, t0_ms, t1_ms):
     return (c1 - c0) / 1e6
 
 
-def walk(root):
+def walk(root, arm=None):
+    arm = arm or os.path.basename(os.path.normpath(root))
     conn, load = [], []
     for ldir in sorted(glob.glob(os.path.join(root, "*", "*", "*"))):
         if not os.path.isdir(ldir): continue
@@ -174,7 +176,7 @@ def walk(root):
                     wsec = (w1 - w0) / 1000.0
                     n = len(sub)
                     srv_cpu = util(st, w0, w1); cli_cpu = util(ct, w0, w1)
-                    load.append(dict(proto=proto, label=label, rtt=info["rtt"], tls_server="quic" if proto == "quic" else info["tls_server"],
+                    load.append(dict(arm=arm, proto=proto, label=label, rtt=info["rtt"], tls_server="quic" if proto == "quic" else info["tls_server"],
                                      srv_cpus=info["srv_cpus"], sig=sig, kem=kem, block=blk, conc=lv["conc"], n=n, n_ok=len(ok),
                                      X=len(ok) / wsec if wsec > 0 else np.nan, fail=(n - len(ok)) / n if n else np.nan,
                                      app_med=ok.app_ms.median() if len(ok) else np.nan, app_mean=ok.app_ms.mean() if len(ok) else np.nan,
@@ -185,7 +187,7 @@ def walk(root):
                                      Scli_ms=1000.0 * cli_cpu / len(ok) if np.isfinite(cli_cpu) and len(ok) else np.nan))
             else:
                 for r in parse_conn_log(lf):
-                    r.update(proto=proto, label=label, sig=sig, kem=kem, block=blk, nblocks=nb, **{k: v for k, v in info.items()})
+                    r.update(arm=arm, proto=proto, label=label, sig=sig, kem=kem, block=blk, nblocks=nb, **{k: v for k, v in info.items()})
                     conn.append(r)
     cdf = pd.DataFrame(conn); ldf = pd.DataFrame(load)
     if len(cdf):
@@ -360,8 +362,7 @@ def analyse_comp(cdf, out, B, rng):
     if d.empty:
         print("  (aucune donnee de compression)"); return
     d = d[d.app_ms.notna()]
-    d["groupe"] = np.where(d.pad > 0, "ctl%d" % 1, "chain%d" % 1)
-    d["groupe"] = np.where(d.pad > 0, "ctl" + d.pad.astype(int).astype(str), "chain" + d.chain.astype(int).astype(str))
+    d["groupe"] = np.where(d["pad"] > 0, "ctl" + d["pad"].astype(int).astype(str), "chain" + d.chain.astype(int).astype(str))
     # tailles de messages Certificate observees sur le fil
     cm = d.groupby(["proto", "groupe", "sig", "kem", "comp"]).agg(rx_med=("rx", "median"), cert_type=("cert_type", "median"),
                                                                    cert_comp=("cert_comp", "median"), cert_plain=("cert_plain", "median"), n=("rx", "size")).reset_index()
@@ -475,13 +476,24 @@ def analyse_load(ldf, out, B, rng):
             e = TX.col(MX, mx0, a)[0] / TX.col(MX, mx0, bk)[0]; bb = TX.col(MX, mx0, a)[1] / TX.col(MX, mx0, bk)[1]; l, h = ci(bb)
             rows.append(dict(proto="tls", srv="mt", rtt=rtt, sig="secp384r1", kem="x448_mlkem768/hqc192", quantite="X_sat(ML-KEM)/X_sat(HQC)", estimate=e, lo=l, hi=h))
             if rtt == 0:
-                add_pred("L2", "charge", "TLS (MT) ECDSA, RTT 0 : X_sat(ML-KEM-768)/X_sat(HQC-192) dans [3.0, 4.6] (rapport des CPU serveur 51/13,5)", e, l, h, (3.0, 4.6))
+                add_pred("L2", "charge", "TLS (MT) ECDSA, RTT 0 : X_sat(ML-KEM-768)/X_sat(HQC-192) dans [11, 17] (addendum 2026-11-01 : rapport des CPU serveur par connexion ~3/41)", e, l, h, (11.0, 17.0))
     # L3 : effet de la signature sur le debit sature (ML-KEM, TLS-MT, RTT 0)
     a, bk = key("tls", "mt", 0.0, "mldsa65", "x448_mlkem768", cmax), key("tls", "mt", 0.0, "secp384r1", "x448_mlkem768", cmax)
     if TX.has(a, bk):
         e = TX.col(MX, mx0, a)[0] / TX.col(MX, mx0, bk)[0]; bb = TX.col(MX, mx0, a)[1] / TX.col(MX, mx0, bk)[1]; l, h = ci(bb)
         rows.append(dict(proto="tls", srv="mt", rtt=0.0, sig="mldsa65/secp384r1", kem="x448_mlkem768", quantite="X_sat(ML-DSA)/X_sat(ECDSA)", estimate=e, lo=l, hi=h))
-        add_pred("L3", "charge", "TLS (MT) ML-KEM-768, RTT 0 : X_sat(ML-DSA-65)/X_sat(ECDSA P-384) dans [0.90, 1.20] (la signature pese peu face au KEM)", e, l, h, (0.90, 1.20))
+        add_pred("L3", "charge", "TLS (MT) ML-KEM-768, RTT 0 : X_sat(ML-DSA-65)/X_sat(ECDSA P-384) dans [0.82, 1.02] (addendum 2026-11-01 : le vol ML-DSA de 10 ko coute un peu de CPU serveur en plus)", e, l, h, (0.82, 1.02))
+    # L3q (addendum 2026-11-01) : meme rapport en QUIC ; L7 : TLS-MT / QUIC au debit sature (ML-DSA-65 + ML-KEM-768, RTT 0)
+    aq, bq = key("quic", "quic", 0.0, "mldsa65", "x448_mlkem768", cmax), key("quic", "quic", 0.0, "secp384r1", "x448_mlkem768", cmax)
+    if TX.has(aq, bq):
+        e = TX.col(MX, mx0, aq)[0] / TX.col(MX, mx0, bq)[0]; bb = TX.col(MX, mx0, aq)[1] / TX.col(MX, mx0, bq)[1]; l, h = ci(bb)
+        rows.append(dict(proto="quic", srv="quic", rtt=0.0, sig="mldsa65/secp384r1", kem="x448_mlkem768", quantite="X_sat(ML-DSA)/X_sat(ECDSA)", estimate=e, lo=l, hi=h))
+        add_pred("L3q", "charge", "QUIC ML-KEM-768, RTT 0 : X_sat(ML-DSA-65)/X_sat(ECDSA P-384) dans [0.95, 1.30] (addendum 2026-11-01 ; serveur sature a c max)", e, l, h, (0.95, 1.30))
+    at = key("tls", "mt", 0.0, "mldsa65", "x448_mlkem768", cmax)
+    if TX.has(at, aq):
+        e = TX.col(MX, mx0, at)[0] / TX.col(MX, mx0, aq)[0]; bb = TX.col(MX, mx0, at)[1] / TX.col(MX, mx0, aq)[1]; l, h = ci(bb)
+        rows.append(dict(proto="tls/quic", srv="mt/quic", rtt=0.0, sig="mldsa65", kem="x448_mlkem768", quantite="X_sat(TLS-MT)/X_sat(QUIC)", estimate=e, lo=l, hi=h))
+        add_pred("L7", "charge", "RTT 0, ML-DSA-65+ML-KEM-768 : X_sat(TLS-MT)/X_sat(QUIC) dans [1.00, 1.30] (addendum 2026-11-01)", e, l, h, (1.00, 1.30))
     # L4 : QUIC, penalite ML-DSA : +1 RTT a c=1, mais noyee sous la file a forte charge
     for rtt in (50.0,):
         for kem in ("x448_mlkem768",):
@@ -564,7 +576,7 @@ def analyse_bridge(cdf3, root2, out, B, rng):
     for (proto, sig, kem), g3 in s3.groupby(["proto", "sig", "kem"]):
         g2 = s2[(s2.proto == proto) & (s2.sig == sig) & (s2.kem == kem)]
         if g2.empty: continue
-        b3 = g3.groupby("block").app_ms.median().to_numpy(); b2 = g2.groupby("block").app_ms.median().to_numpy()
+        b3 = g3.groupby(["arm", "block"]).app_ms.median().to_numpy(); b2 = g2.groupby(["arm", "block"]).app_ms.median().to_numpy()
         e = np.median(b3) - np.median(b2)
         bb = np.array([np.median(rng.choice(b3, len(b3))) - np.median(rng.choice(b2, len(b2))) for _ in range(B)]); l, h = ci(bb)
         rows.append(dict(proto=proto, sig=sig, kem=kem, delta_med_ms=e, lo=l, hi=h, n3=len(b3), n2=len(b2)))
@@ -574,13 +586,17 @@ def analyse_bridge(cdf3, root2, out, B, rng):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--root", required=True); ap.add_argument("--out", default="analysis_v3")
+    ap.add_argument("--root", required=True, nargs="+", help="un ou plusieurs dossiers de captures (un par bras : captures_v3_resume captures_v3_comp captures_v3_load)"); ap.add_argument("--out", default="analysis_v3")
     ap.add_argument("--v2-root", default=""); ap.add_argument("--boot", type=int, default=4000); ap.add_argument("--seed", type=int, default=20261027)
     a = ap.parse_args()
+    import hashlib
+    print("version du script : %s | sha256 : %s" % (SCRIPT_VERSION, hashlib.sha256(open(os.path.abspath(__file__), "rb").read()).hexdigest()[:16]))
     os.makedirs(a.out, exist_ok=True)
     rng = np.random.default_rng(a.seed)
-    print("lecture de %s ..." % a.root)
-    cdf, ldf = walk(a.root)
+    print("lecture de %s ..." % " ".join(a.root))
+    parts = [walk(r) for r in a.root]
+    cdf = pd.concat([c for c, _ in parts if len(c)], ignore_index=True) if any(len(c) for c, _ in parts) else pd.DataFrame()
+    ldf = pd.concat([l for _, l in parts if len(l)], ignore_index=True) if any(len(l) for _, l in parts) else pd.DataFrame()
     print("  %d connexions (hors charge), %d niveaux de charge" % (len(cdf), len(ldf)))
     if len(cdf):
         cdf.to_csv(os.path.join(a.out, "p6_connexions.csv.gz"), index=False)

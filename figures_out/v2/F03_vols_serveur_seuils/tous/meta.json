@@ -1,0 +1,41 @@
+{
+  "campaign": "v2",
+  "fid": "F03",
+  "slug": "vols_serveur_seuils",
+  "variant": "tous",
+  "note": "single deterministic capture per configuration (no error bars); labels in KB above bars",
+  "n_data_rows": 12,
+  "data_columns": [
+    "proto",
+    "cfg",
+    "sig",
+    "pair",
+    "client_bytes",
+    "b1_bytes",
+    "b2_bytes",
+    "rest_bytes",
+    "server_bytes",
+    "n_bursts",
+    "b1_over_client"
+  ],
+  "inputs": {
+    "v2_flight": {
+      "path": "analysis_v2/phase2/flight_timeline_summary.csv",
+      "sha256": "76bf5b39a0c0ee925d72c116881863d2176c0bbd651a0679709bf07e6da5bac7",
+      "bytes": 2181
+    }
+  },
+  "fingerprint": "4d259a95fb0dcad10ed44825a07d64c7b5f386060f13ccde31477c77ad961e8c",
+  "created_utc": "20261029T034742Z",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "matplotlib": "3.6.3"
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 12345,
+    "unit": "blocs entiers, percentile 2.5/97.5"
+  }
+}

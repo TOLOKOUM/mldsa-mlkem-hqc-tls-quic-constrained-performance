@@ -1,0 +1,17 @@
+plan : 137 cellules (137 labels uniques)
+fichiers de log : 24440
+visites (env_metadata) : 24440 | occurrences ecartees (cellules relancees) env=1
+
+=== COMPLETUDE (visites paire x tour x bloc x cellule) ===
+   ok         24440
+
+=== CELLULES INTERROMPUES (state.csv) ===
+ block                         cell_id visit codes  n_attempts  last_code  visites_non_ok_apres
+     7   fx_quic_rtt150_loss2_gesevere       130;0           2          0                     0
+    13           main_tls_mutual_ideal       130;0           2          0                     0
+    15        main_tls_mutual_degraded       141;0           2          0                     0
+    16       main_quic_single_moderate       130;0           2          0                     0
+    18 size_tls_ecdsapad_mtu1500_loss1       130;0           2          0                     0
+code 98 (suspension) : 0 visite(s)
+
+connexions : 343800 | echecs (app NaN) : 143 | cellules : 139 | blocs : 20

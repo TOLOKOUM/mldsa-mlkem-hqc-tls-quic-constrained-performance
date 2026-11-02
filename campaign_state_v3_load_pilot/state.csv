@@ -1,0 +1,6 @@
+timestamp,block,kind,cell_id,visit,exit_code,seed
+2026-11-01T10:51:30+01:00,1,blockstart,,,0,20261299
+2026-11-01T10:54:45+01:00,1,cell,pilot2_loadcal_tls_mt_rtt0,,0,4032198075
+2026-11-01T11:01:05+01:00,1,cell,pilot2_load_tls_mt_rtt0,,0,3770819743
+2026-11-01T11:04:13+01:00,1,cell,pilot2_loadcal_tls_stock_rtt0,,0,1891044715
+2026-11-01T11:10:58+01:00,1,cell,pilot2_load_quic_rtt0,,0,1742228243

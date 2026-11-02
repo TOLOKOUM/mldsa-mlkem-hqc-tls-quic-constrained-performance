@@ -1,0 +1,7 @@
+label,pair,mss,ecritures_modele,sequence_modele,sequence_observee,part_flux_sequence_observee,identique,exacte,octets_modele,octets_observes
+delayonly_delay25ms__padto8700__pcap__mb2,secp384r1_x448_mlkem768,1448,4096+5912+207,"1448x2,1200,1448x4,120,207","1448x2,1200,1448x4,120,207",0.5333333333333333,True,True,10215,10215
+delayonly_delay25ms__pcap__mb2,mldsa65_x448_mlkem768,1448,4096+4096+2023,"1448x2,1200,1448x2,1200,1448,575","1448x2,1200,1448x2,1200,1448,575",1.0,True,True,10215,10215
+delayonly_delay25ms__pcap__mb2,secp384r1_x448_mlkem768,1448,1945,"1448,497","1448,496",0.4,True,False,1945,1944
+delayonly_delay25ms_mtu1280__padto8700__pcap__mb2,secp384r1_x448_mlkem768,1228,4096+5912+207,"1228x3,412,1228x4,1000,207","1228x3,412,1228x4,1000,207",0.6666666666666666,True,True,10215,10215
+delayonly_delay25ms_mtu1280__pcap__mb2,mldsa65_x448_mlkem768,1228,4096+4096+2023,"1228x3,412,1228x3,412,1228,795","1228x3,412,1228x3,412,1228,795",1.0,True,True,10215,10215
+delayonly_delay25ms_mtu1280__pcap__mb2,secp384r1_x448_mlkem768,1228,1945,"1228,717","1228,719",0.2666666666666666,True,False,1945,1947

@@ -1,0 +1,9 @@
+timestamp,block_index,n_blocks,position,sig_alg,kem,role,pkts_before,dropped_before,pkts_after,dropped_after,effective_drop_pct
+2026-11-01T10:52:13+01:00,1,1,1,mldsa65,x448_mlkem768,server_egress,0,0,36207,0,0.0000
+2026-11-01T10:52:13+01:00,1,1,1,mldsa65,x448_mlkem768,client_egress,0,0,34124,0,0.0000
+2026-11-01T10:52:59+01:00,1,1,2,secp384r1,x448_mlkem768,server_egress,0,0,15029,0,0.0000
+2026-11-01T10:52:59+01:00,1,1,2,secp384r1,x448_mlkem768,client_egress,0,0,13604,0,0.0000
+2026-11-01T10:53:45+01:00,1,1,3,mldsa65,hqc192,server_egress,0,0,3196,0,0.0000
+2026-11-01T10:53:45+01:00,1,1,3,mldsa65,hqc192,client_egress,0,0,3215,0,0.0000
+2026-11-01T10:54:33+01:00,1,1,4,secp384r1,hqc192,server_egress,0,0,2361,0,0.0000
+2026-11-01T10:54:33+01:00,1,1,4,secp384r1,hqc192,client_egress,0,0,2577,0,0.0000

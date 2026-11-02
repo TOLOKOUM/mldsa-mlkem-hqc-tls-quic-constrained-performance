@@ -1,0 +1,40 @@
+{
+  "campaign": "v3_load",
+  "fid": "L01",
+  "slug": "charge_debit_latence_cpu",
+  "variant": "hqc192_rtt0",
+  "note": "median over blocks of per-block level statistics; band = 95% block bootstrap; red x = client-bound levels (generator saturated, not a server result)",
+  "n_data_rows": 112,
+  "data_columns": [
+    "proto",
+    "sig",
+    "kem",
+    "rtt_ms",
+    "metric",
+    "conc",
+    "value",
+    "ci_lo",
+    "ci_hi",
+    "client_bound"
+  ],
+  "inputs": {
+    "v3_load": {
+      "path": "analysis_v3/p6_load_niveaux.csv",
+      "sha256": "7dfe408df8cf0af001719423b77aeee79417e32791e5893556322f647632f732",
+      "bytes": 300301
+    }
+  },
+  "fingerprint": "53727366d674c2a4fca0105314c52c9b3c34394c1823eb76a9982c5f45442dbe",
+  "created_utc": "20261102T115942Z",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "matplotlib": "3.6.3"
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 12345,
+    "unit": "blocs entiers, percentile 2.5/97.5"
+  }
+}

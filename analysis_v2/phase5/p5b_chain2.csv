@@ -1,0 +1,3 @@
+kem,k,ecritures_ml,segments_ml,segments_cl
+x448_mlkem768,1,4096+8249+3413,12,2
+hqc192,1,4096+5041+4096+7010+3413,18,8

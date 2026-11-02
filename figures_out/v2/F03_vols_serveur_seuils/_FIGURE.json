@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "campaign": "v2",
+  "fid": "F03",
+  "slug": "vols_serveur_seuils",
+  "title": "Server flight size versus initial-window and anti-amplification thresholds",
+  "fingerprint": "4d259a95fb0dcad10ed44825a07d64c7b5f386060f13ccde31477c77ad961e8c",
+  "variants": [
+    "tous"
+  ],
+  "created_utc": "20261029T034742Z",
+  "inputs": {
+    "v2_flight": {
+      "path": "analysis_v2/phase2/flight_timeline_summary.csv",
+      "sha256": "76bf5b39a0c0ee925d72c116881863d2176c0bbd651a0679709bf07e6da5bac7",
+      "bytes": 2181
+    }
+  }
+}

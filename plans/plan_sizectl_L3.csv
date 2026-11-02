@@ -1,0 +1,17 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+size_tls_ecdsapad_mtu1280_loss0,tls,single,mlkem,delay-only,0,25,200,secp384r1|x448_mlkem768,MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_tls_ecdsapad_mtu1280_loss1,tls,single,mlkem,simple,1,25,200,secp384r1|x448_mlkem768,MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_tls_ecdsapad_mtu1280_loss2,tls,single,mlkem,simple,2,25,200,secp384r1|x448_mlkem768,MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_tls_ecdsapad_mtu1280_loss5,tls,single,mlkem,simple,5,25,200,secp384r1|x448_mlkem768,MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_tls_ecdsapad_mtu1500_loss0,tls,single,mlkem,delay-only,0,25,200,secp384r1|x448_mlkem768,MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_tls_ecdsapad_mtu1500_loss1,tls,single,mlkem,simple,1,25,200,secp384r1|x448_mlkem768,MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_tls_ecdsapad_mtu1500_loss2,tls,single,mlkem,simple,2,25,200,secp384r1|x448_mlkem768,MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_tls_ecdsapad_mtu1500_loss5,tls,single,mlkem,simple,5,25,200,secp384r1|x448_mlkem768,MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1280_loss0,quic,single,mlkem,delay-only,0,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1280_loss1,quic,single,mlkem,simple,1,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1280_loss2,quic,single,mlkem,simple,2,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1280_loss5,quic,single,mlkem,simple,5,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1500_loss0,quic,single,mlkem,delay-only,0,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1500_loss1,quic,single,mlkem,simple,1,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1500_loss2,quic,single,mlkem,simple,2,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2
+size_quic_ecdsapad_mtu1500_loss5,quic,single,mlkem,simple,5,25,200,secp384r1|x448_mlkem768,QUIC_MTU_SYNC=1;MTU=1500;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2

@@ -1,0 +1,37 @@
+{
+  "campaign": "v3_load",
+  "fid": "L02",
+  "slug": "charge_calibration_serveur_mt",
+  "variant": "c1",
+  "note": "gray band = pre-registered equivalence band; the MT server may only be used for the load arm if it lies inside",
+  "n_data_rows": 8,
+  "data_columns": [
+    "metric",
+    "rtt_ms",
+    "sig",
+    "kem",
+    "est",
+    "ci_lo",
+    "ci_hi"
+  ],
+  "inputs": {
+    "v3_load": {
+      "path": "analysis_v3/p6_load_niveaux.csv",
+      "sha256": "7dfe408df8cf0af001719423b77aeee79417e32791e5893556322f647632f732",
+      "bytes": 300301
+    }
+  },
+  "fingerprint": "53727366d674c2a4fca0105314c52c9b3c34394c1823eb76a9982c5f45442dbe",
+  "created_utc": "20261102T115943Z",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "matplotlib": "3.6.3"
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 12345,
+    "unit": "blocs entiers, percentile 2.5/97.5"
+  }
+}

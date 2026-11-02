@@ -1,0 +1,227 @@
+
+========== 1. PLAN ==========
+fichier: plans/plan_all.csv | lignes: 137
+colonnes: ['cell_id', 'protocol', 'auth', 'kem_family', 'profile', 'loss', 'delay', 'total_runs', 'only_pairs', 'extra_env']
+  cell_id: 137 valeurs distinctes, ex: ['main_tls_single_ideal', 'main_tls_single_moderate', 'main_tls_single_degraded', 'main_tls_mutual_ideal']
+  protocol: {'tls': 70, 'quic': 67}
+  auth: {'single': 134, 'mutual': 3}
+  kem_family: {'both': 97, 'mlkem': 40}
+  profile: {'none': 5, 'simple': 64, 'ge-mild-1': 8, 'ge-severe-1': 8, 'ge-mild-2': 12, 'ge-severe-2': 8, 'ge-mild-5': 8, 'ge-severe-5': 8, 'delay-only': 16}
+  loss: {'0': 73, '1.3': 3, '1.5833': 3, '1': 18, '2': 22, '5': 18}
+  delay: {'0': 23, '62.51': 3, '83.52': 3, '25': 60, '50': 28, '75': 20}
+  total_runs: {'500': 9, '200': 42, '400': 86}
+  only_pairs: {'': 9, 'secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192': 88, 'secp384r1|x448_mlkem768;mldsa65|x448_mlkem768': 24, 'secp384r1|x448_mlkem768': 16}
+  extra_env: 13 valeurs distinctes, ex: ['', 'MICRO_BATCHES=2', 'LOSS_DIRECTION=c2s;MICRO_BATCHES=2', 'LOSS_DIRECTION=both;MICRO_BATCHES=2']
+  exemple [main]: {'cell_id': 'main_tls_single_ideal', 'protocol': 'tls', 'auth': 'single', 'kem_family': 'both', 'profile': 'none', 'loss': '0', 'delay': '0', 'total_runs': '500', 'only_pairs': '', 'extra_env': ''}
+  exemple [fx]: {'cell_id': 'fx_tls_rtt0_loss0', 'protocol': 'tls', 'auth': 'single', 'kem_family': 'both', 'profile': 'none', 'loss': '0', 'delay': '0', 'total_runs': '200', 'only_pairs': 'secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192', 'extra_env': 'MICRO_BATCHES=2'}
+  exemple [dir]: {'cell_id': 'dir_tls_iid_c2s', 'protocol': 'tls', 'auth': 'single', 'kem_family': 'mlkem', 'profile': 'simple', 'loss': '2', 'delay': '50', 'total_runs': '400', 'only_pairs': 'secp384r1|x448_mlkem768;mldsa65|x448_mlkem768', 'extra_env': 'LOSS_DIRECTION=c2s;MICRO_BATCHES=2'}
+  exemple [mech]: {'cell_id': 'mech_tls_mtu1280_loss0', 'protocol': 'tls', 'auth': 'single', 'kem_family': 'mlkem', 'profile': 'delay-only', 'loss': '0', 'delay': '25', 'total_runs': '200', 'only_pairs': 'secp384r1|x448_mlkem768;mldsa65|x448_mlkem768', 'extra_env': 'MTU=1280;PER_CONN_PCAP=1;MICRO_BATCHES=2'}
+  exemple [chain]: {'cell_id': 'chain_tls_rtt50_loss0', 'protocol': 'tls', 'auth': 'single', 'kem_family': 'both', 'profile': 'delay-only', 'loss': '0', 'delay': '25', 'total_runs': '200', 'only_pairs': 'secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192', 'extra_env': 'CHAIN_DEPTH=2;MICRO_BATCHES=2'}
+  exemple [size]: {'cell_id': 'size_tls_ecdsapad_mtu1280_loss0', 'protocol': 'tls', 'auth': 'single', 'kem_family': 'mlkem', 'profile': 'delay-only', 'loss': '0', 'delay': '25', 'total_runs': '200', 'only_pairs': 'secp384r1|x448_mlkem768', 'extra_env': 'MTU=1280;PER_CONN_PCAP=1;CERT_PAD_TARGET_DER=8700;MICRO_BATCHES=2'}
+
+========== 2. ETAT DE LA CAMPAGNE (state.csv) ==========
+lignes: 3140 | colonnes: ['timestamp', 'block', 'kind', 'cell_id', 'visit', 'exit_code', 'seed']
+kind: {'blockstart': 275, 'sentinel': 120, 'cell': 2745}
+exit_code: {'0': 3135, '130': 4, '141': 1}
+lignes avec exit_code != 0: 5
+    {'timestamp': '2026-10-13T06:35:20+01:00', 'block': '7', 'kind': 'cell', 'cell_id': 'fx_quic_rtt150_loss2_gesevere', 'visit': '', 'exit_code': '130', 'seed': '2230869321'}
+    {'timestamp': '2026-10-17T11:15:30+01:00', 'block': '13', 'kind': 'cell', 'cell_id': 'main_tls_mutual_ideal', 'visit': '', 'exit_code': '130', 'seed': '643940703'}
+    {'timestamp': '2026-10-18T18:15:32+01:00', 'block': '15', 'kind': 'cell', 'cell_id': 'main_tls_mutual_degraded', 'visit': '', 'exit_code': '141', 'seed': '3801773649'}
+    {'timestamp': '2026-10-19T07:06:10+01:00', 'block': '16', 'kind': 'cell', 'cell_id': 'main_quic_single_moderate', 'visit': '', 'exit_code': '130', 'seed': '2867781493'}
+    {'timestamp': '2026-10-21T07:14:49+01:00', 'block': '18', 'kind': 'cell', 'cell_id': 'size_tls_ecdsapad_mtu1500_loss1', 'visit': '', 'exit_code': '130', 'seed': '1978978895'}
+  bloc 1: 137 cellules, 6 sentinelles, 2026-10-08T19:55:21+01:00 -> 2026-10-23T00:24:28+01:00
+  bloc 2: 137 cellules, 6 sentinelles, 2026-10-09T09:20:44+01:00 -> 2026-10-23T00:24:30+01:00
+  bloc 3: 137 cellules, 6 sentinelles, 2026-10-09T22:39:32+01:00 -> 2026-10-23T00:24:31+01:00
+  bloc 4: 137 cellules, 6 sentinelles, 2026-10-10T11:58:08+01:00 -> 2026-10-23T00:24:33+01:00
+  bloc 5: 137 cellules, 6 sentinelles, 2026-10-11T15:18:25+01:00 -> 2026-10-23T00:24:34+01:00
+  bloc 6: 137 cellules, 6 sentinelles, 2026-10-12T04:39:26+01:00 -> 2026-10-23T00:24:36+01:00
+  bloc 7: 138 cellules, 6 sentinelles, 2026-10-12T18:20:21+01:00 -> 2026-10-23T00:24:37+01:00
+  bloc 8: 137 cellules, 6 sentinelles, 2026-10-13T14:34:46+01:00 -> 2026-10-23T00:24:39+01:00
+  bloc 9: 137 cellules, 6 sentinelles, 2026-10-14T08:00:43+01:00 -> 2026-10-23T00:24:41+01:00
+  bloc 10: 137 cellules, 6 sentinelles, 2026-10-14T21:29:10+01:00 -> 2026-10-23T00:24:42+01:00
+  bloc 11: 137 cellules, 6 sentinelles, 2026-10-16T01:13:37+01:00 -> 2026-10-23T00:24:44+01:00
+  bloc 12: 137 cellules, 6 sentinelles, 2026-10-16T14:31:07+01:00 -> 2026-10-23T00:24:45+01:00
+  bloc 13: 138 cellules, 6 sentinelles, 2026-10-17T03:50:17+01:00 -> 2026-10-23T00:24:47+01:00
+  bloc 14: 137 cellules, 6 sentinelles, 2026-10-17T21:46:28+01:00 -> 2026-10-23T00:24:48+01:00
+  bloc 15: 138 cellules, 6 sentinelles, 2026-10-18T16:18:52+01:00 -> 2026-10-23T00:24:50+01:00
+  bloc 16: 138 cellules, 6 sentinelles, 2026-10-19T06:39:29+01:00 -> 2026-10-23T00:24:51+01:00
+  bloc 17: 137 cellules, 6 sentinelles, 2026-10-19T23:34:20+01:00 -> 2026-10-23T00:24:53+01:00
+  bloc 18: 138 cellules, 6 sentinelles, 2026-10-20T16:25:29+01:00 -> 2026-10-23T00:24:55+01:00
+  bloc 19: 137 cellules, 6 sentinelles, 2026-10-21T07:53:49+01:00 -> 2026-10-23T00:24:56+01:00
+  bloc 20: 137 cellules, 6 sentinelles, 2026-10-22T01:38:24+01:00 -> 2026-10-23T06:02:56+01:00
+contenu de campaign_state :
+    campaign_state/master_seed.txt 9
+    campaign_state/order_block10of20.txt 3622
+    campaign_state/order_block11of20.txt 3623
+    campaign_state/order_block12of20.txt 3623
+    campaign_state/order_block13of20.txt 3623
+    campaign_state/order_block14of20.txt 3623
+    campaign_state/order_block15of20.txt 3623
+    campaign_state/order_block16of20.txt 3623
+    campaign_state/order_block17of20.txt 3622
+    campaign_state/order_block18of20.txt 3623
+    campaign_state/order_block19of20.txt 3623
+    campaign_state/order_block1of20.txt 3622
+    campaign_state/order_block20of20.txt 3622
+    campaign_state/order_block2of20.txt 3621
+    campaign_state/order_block3of20.txt 3622
+    campaign_state/order_block4of20.txt 3622
+    campaign_state/order_block5of20.txt 3621
+    campaign_state/order_block6of20.txt 3622
+    campaign_state/order_block7of20.txt 3622
+    campaign_state/order_block8of20.txt 3620
+    campaign_state/order_block9of20.txt 3622
+    campaign_state/state.csv 222703
+
+========== 3. INVENTAIRE de captures_v2 ==========
+entrees de premier niveau: ['quic', 'tls']
+fichiers: 40843 | taille totale (Mo): 291.8
+extensions: {'.log': 29220, '.csv': 7783, '.pcap': 1920, '.err': 1920}
+dossiers proto/auth/<label> :
+    ('quic', 'single') 70 labels ; exemples: ['delayonly_delay25ms__chain2__mb2', 'delayonly_delay25ms__mb2', 'delayonly_delay25ms__qmtu__padto8700__pcap__mb2', 'delayonly_delay25ms__qmtu__pcap__mb2', 'delayonly_delay25ms_mtu1280__qmtu__padto8700__pcap__mb2', 'delayonly_delay25ms_mtu1280__qmtu__pcap__mb2', 'delayonly_delay50ms__mb2', 'delayonly_delay75ms__mb2']
+    ('tls', 'mutual') 3 labels ; exemples: ['none', 'simple_loss1.3_delay62.51ms', 'simple_loss1.5833_delay83.52ms']
+    ('tls', 'single') 70 labels ; exemples: ['delayonly_delay25ms__chain2__mb2', 'delayonly_delay25ms__mb2', 'delayonly_delay25ms__padto8700__pcap__mb2', 'delayonly_delay25ms__pcap__mb2', 'delayonly_delay25ms_mtu1280__padto8700__pcap__mb2', 'delayonly_delay25ms_mtu1280__pcap__mb2', 'delayonly_delay50ms__mb2', 'delayonly_delay75ms__mb2']
+exemples de chemins 'sentinelle': ['quic/single/none__sentinel_mid/block_manifest_block10of20_seed3834251287.log', 'quic/single/none__sentinel_mid/block_manifest_block11of20_seed688282786.log', 'quic/single/none__sentinel_mid/block_manifest_block12of20_seed2069085386.log', 'quic/single/none__sentinel_mid/block_manifest_block13of20_seed3068127359.log', 'quic/single/none__sentinel_mid/block_manifest_block14of20_seed3757603866.log', 'quic/single/none__sentinel_mid/block_manifest_block15of20_seed309602479.log']
+types de fichiers (sous-dossier du label, extension) :
+    ('handshake_logs', '.log') n=24440 ex: captures_v2/tls/single/ge-mild-5_delay25ms__mb2/handshake_logs/handshake_tls_single_mldsa65_hqc192_ge-mild-5_delay25ms__mb2_block6of20_mb1of2.log
+    ('<dans le dossier label>', 'env_metadata_blockNofN_seedN.csv') n=2860 ex: captures_v2/tls/single/ge-mild-5_delay25ms__mb2/env_metadata_block15of20_seed4008089246.csv
+    ('<dans le dossier label>', 'qdisc_stats_blockNofN_seedN.csv') n=2860 ex: captures_v2/tls/single/ge-mild-5_delay25ms__mb2/qdisc_stats_block18of20_seed3546369671.csv
+    ('<dans le dossier label>', 'block_manifest_blockNofN_seedN.log') n=2860 ex: captures_v2/tls/single/ge-mild-5_delay25ms__mb2/block_manifest_block18of20_seed3546369671.log
+    ('pcap_perconn', '.csv') n=1920 ex: captures_v2/tls/single/simple_loss2_delay25ms__pcap__mb2/pcap_perconn/block15of20_mb1of2/secp384r1_x448_mlkem768/conn_windows.csv
+    ('pcap_perconn', '.pcap') n=1920 ex: captures_v2/tls/single/simple_loss2_delay25ms__pcap__mb2/pcap_perconn/block15of20_mb1of2/secp384r1_x448_mlkem768/block.pcap
+    ('pcap_perconn', '.err') n=1920 ex: captures_v2/tls/single/simple_loss2_delay25ms__pcap__mb2/pcap_perconn/block15of20_mb1of2/secp384r1_x448_mlkem768/tcpdump.err
+    ('pcap_perconn', '.log') n=1920 ex: captures_v2/tls/single/simple_loss2_delay25ms__pcap__mb2/pcap_perconn/block15of20_mb1of2/secp384r1_x448_mlkem768/sslkeys_server_secp384r1_x448_mlkem768.log
+    ('resource_usage', '.csv') n=143 ex: captures_v2/tls/single/ge-mild-5_delay25ms__mb2/resource_usage/resource_usage_tls_single_ge-mild-5_delay25ms__mb2.csv
+
+========== 4. EN-TETES D'UN EXEMPLE PAR TYPE (hors pcap) ==========
+
+-- ('handshake_logs', '.log') | captures_v2/tls/single/ge-mild-5_delay25ms__mb2/handshake_logs/handshake_tls_single_mldsa65_hqc192_ge-mild-5_delay25ms__mb2_block6of20_mb1of2.log
+     Handshake timeout budget: 150s (identique TLS/QUIC)
+     Applying netem rules to lo...
+     Showing qdisc status for the interface: lo
+     qdisc netem 9cc8: root refcnt 2 limit 1000 seed 10809245403112085424
+      Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+      backlog 0b 0p requeues 0
+     Running ./perftestClientTlsQuic.sh with SIG_ALG=mldsa65 and KEM_ALG=hqc192
+     Warm-up: 5 connexion(s) jetee(s) avant mesure
+
+-- ('<dans le dossier label>', 'env_metadata_blockNofN_seedN.csv') | captures_v2/tls/single/ge-mild-5_delay25ms__mb2/env_metadata_block15of20_seed4008089246.csv
+     timestamp,event,block_index,n_blocks,position,sig_alg,kem,cpu_temp_c,cpu_mhz_mean,load1,governor,no_turbo
+     2026-10-18T17:09:53+01:00,before,15,20,1,secp384r1,hqc192,50.0,1600,3.36,performance,1
+     2026-10-18T17:10:02+01:00,after,15,20,1,secp384r1,hqc192,49.0,1600,3.29,performance,1
+     2026-10-18T17:10:37+01:00,before,15,20,2,secp384r1,x448_mlkem768,50.0,1600,2.99,performance,1
+     2026-10-18T17:10:41+01:00,after,15,20,2,secp384r1,x448_mlkem768,49.0,1600,3.16,performance,1
+     2026-10-18T17:11:20+01:00,before,15,20,3,mldsa65,hqc192,46.0,1450,2.94,performance,1
+     2026-10-18T17:11:29+01:00,after,15,20,3,mldsa65,hqc192,46.0,1600,2.87,performance,1
+     2026-10-18T17:12:12+01:00,before,15,20,4,mldsa65,x448_mlkem768,46.0,1600,3.04,performance,1
+
+-- ('<dans le dossier label>', 'qdisc_stats_blockNofN_seedN.csv') | captures_v2/tls/single/ge-mild-5_delay25ms__mb2/qdisc_stats_block18of20_seed3546369671.csv
+     timestamp,block_index,n_blocks,position,sig_alg,kem,role,pkts_before,dropped_before,pkts_after,dropped_after,effective_drop_pct
+     2026-10-20T19:17:35+01:00,18,20,1,mldsa65,hqc192,server_egress,0,0,327,21,6.0345
+     2026-10-20T19:17:35+01:00,18,20,1,mldsa65,hqc192,client_egress,0,0,350,0,0.0000
+     2026-10-20T19:18:11+01:00,18,20,2,secp384r1,hqc192,server_egress,0,0,236,7,2.8807
+     2026-10-20T19:18:11+01:00,18,20,2,secp384r1,hqc192,client_egress,0,0,284,0,0.0000
+     2026-10-20T19:18:46+01:00,18,20,3,mldsa65,x448_mlkem768,server_egress,0,0,207,14,6.3348
+     2026-10-20T19:18:46+01:00,18,20,3,mldsa65,x448_mlkem768,client_egress,0,0,227,0,0.0000
+     2026-10-20T19:19:20+01:00,18,20,4,secp384r1,x448_mlkem768,server_egress,0,0,118,2,1.6667
+
+-- ('<dans le dossier label>', 'block_manifest_blockNofN_seedN.log') | captures_v2/tls/single/ge-mild-5_delay25ms__mb2/block_manifest_block18of20_seed3546369671.log
+     timestamp_start=2026-10-20T19:17:05+01:00
+     protocol=tls auth_mode=single network_profile=ge-mild-5_delay25ms__mb2
+     n_blocks=20 block_index=18 seed=3546369671 runs_this_block=20 micro_batches=2 runs_per_round=10
+     kernel=6.8.0-146-generic
+     cpu_model=Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+     governor=performance no_turbo=1
+     mtu=1500 loss_direction=s2c netem_limit=1000 pin_cpus=auto server_cpuset=--cpuset-cpus=1,5 client_cpuset=--cpuset-cpus=2,6
+     bandwidth=100Mbit/s_netem_rate100 rate_mbit=100 jitter=0(pas_d_argument_jitter) file=netem_limit_1000_paquets
+
+-- ('pcap_perconn', '.csv') | captures_v2/tls/single/simple_loss2_delay25ms__pcap__mb2/pcap_perconn/block15of20_mb1of2/secp384r1_x448_mlkem768/conn_windows.csv
+     execution,t_start_epoch,t_end_epoch
+     1,1792339679.429000117,1792339679.621464903
+     2,1792339679.622958525,1792339679.810220805
+     3,1792339679.811884507,1792339680.006357133
+     4,1792339680.008293695,1792339680.197785907
+     5,1792339680.199323891,1792339680.385539441
+
+-- ('pcap_perconn', '.err') | captures_v2/tls/single/simple_loss2_delay25ms__pcap__mb2/pcap_perconn/block15of20_mb1of2/secp384r1_x448_mlkem768/tcpdump.err
+     tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+     85 packets captured
+     85 packets received by filter
+     0 packets dropped by kernel
+
+-- ('pcap_perconn', '.log') | captures_v2/tls/single/simple_loss2_delay25ms__pcap__mb2/pcap_perconn/block15of20_mb1of2/secp384r1_x448_mlkem768/sslkeys_server_secp384r1_x448_mlkem768.log
+     # SSL/TLS secrets log file, generated by OpenSSL
+     SERVER_HANDSHAKE_TRAFFIC_SECRET fd47f7570115c169f3fbada17f4042f66cd7b10fea3a1ea07d423cdba08581b5 8052bebb00754f39fe9bc272e274ba66a1ec7be1655e7170fe8e8b443b2bca498f11ec8b9deb0f424dc6ccf5b48fe14f
+     CLIENT_HANDSHAKE_TRAFFIC_SECRET fd47f7570115c169f3fbada17f4042f66cd7b10fea3a1ea07d423cdba08581b5 98dc73975fd21a863a00bd5825ecef1b1e21835c755367c33fcfd2420595496b3d9dcdfd0c6f4db027e56fcc4ce94c9e
+     EXPORTER_SECRET fd47f7570115c169f3fbada17f4042f66cd7b10fea3a1ea07d423cdba08581b5 06097e985106611c159f46dfce429fc94bc87b880fb4862cb01413e97d176b29ddd41cd198a3f3eea3c839f35a17e559
+     SERVER_TRAFFIC_SECRET_0 fd47f7570115c169f3fbada17f4042f66cd7b10fea3a1ea07d423cdba08581b5 fe609a34a5d981370417a1ca31fc11a437ed9e1de43f38e509b95ab7e2d2569b1296567af63a5bd96d9ada15b0662f3e
+     CLIENT_TRAFFIC_SECRET_0 fd47f7570115c169f3fbada17f4042f66cd7b10fea3a1ea07d423cdba08581b5 d6a7e6ec0c06ef7a4b1db157d70878defd5deb78581044b4cc3651659e75f68d8d09444e1535beea397034076c1daec9
+     SERVER_HANDSHAKE_TRAFFIC_SECRET 5f48f9b1f67d856fb5574b20fa3c0040ef9d507bb3b2b20ec790db743e281346 05964b2f01d348bf4450b02ca848a32ae588f793ef3813b0b2cb2e4ed40329fe32257796b0690797365b92ba847d473c
+     CLIENT_HANDSHAKE_TRAFFIC_SECRET 5f48f9b1f67d856fb5574b20fa3c0040ef9d507bb3b2b20ec790db743e281346 76c575fdf6c479ddf284f43737cffdd3a00cb018a0d0896706d42c71a2515494977a5a8feca751cf44cdc38c7c148759
+
+-- ('resource_usage', '.csv') | captures_v2/tls/single/ge-mild-5_delay25ms__mb2/resource_usage/resource_usage_tls_single_ge-mild-5_delay25ms__mb2.csv
+     timestamp,protocol,auth_mode,sig_alg,kem,network_profile,role,n_runs,cpu_usec_total,cpu_usec_per_handshake,mem_peak_bytes,block_index,n_blocks,seed
+     2026-10-08T20:47:41+01:00,tls,single,mldsa65,hqc192,ge-mild-5,server,10,930755,62050.333,5525504,1,20,312931806
+     2026-10-08T20:47:41+01:00,tls,single,mldsa65,hqc192,ge-mild-5,client,10,1311563,87437.533,4730880,1,20,312931806
+     2026-10-08T20:48:13+01:00,tls,single,secp384r1,x448_mlkem768,ge-mild-5,server,10,378863,25257.533,5398528,1,20,312931806
+     2026-10-08T20:48:13+01:00,tls,single,secp384r1,x448_mlkem768,ge-mild-5,client,10,588626,39241.733,4763648,1,20,312931806
+     2026-10-08T20:48:47+01:00,tls,single,mldsa65,x448_mlkem768,ge-mild-5,server,10,393819,26254.600,5492736,1,20,312931806
+     2026-10-08T20:48:47+01:00,tls,single,mldsa65,x448_mlkem768,ge-mild-5,client,10,560652,37376.800,4800512,1,20,312931806
+     2026-10-08T20:49:21+01:00,tls,single,secp384r1,hqc192,ge-mild-5,server,10,942754,62850.267,5464064,1,20,312931806
+
+========== 5. LOGS handshake : coherence structurelle ==========
+fichiers .log: 24440
+noms non reconnus par le motif attendu: 0 []
+fichiers sans aucune 'Execution': 0 []
+fichiers avec numeros d'execution dupliques: 0 []
+executions par fichier (nb executions -> nb fichiers): {5: 3520, 10: 13120, 25: 7800}
+  ('quic', 'single'): {'files': 10960, 'executions': 140400, 'hs_ok': 140331, 'hs_nan': 69, 'app_ok': 140318, 'app_nan': 82} | App-ready ms min/med/max = 4.4 / 260.7 / 16006.7
+  ('tls', 'mutual'): {'files': 2520, 'executions': 63000, 'hs_ok': 63000, 'hs_nan': 0, 'app_ok': 63000, 'app_nan': 0} | App-ready ms min/med/max = 10.9 / 453.5 / 3315.4
+  ('tls', 'single'): {'files': 10960, 'executions': 140400, 'hs_ok': 140339, 'hs_nan': 61, 'app_ok': 140339, 'app_nan': 61} | App-ready ms min/med/max = 3.3 / 310.9 / 132891.8
+nb de labels: 86
+nb de blocs distincts par label (valeur -> nb de labels): {20: 86}
+tours (mb) vus par label (ex.): {'delayonly_delay25ms__chain2__mb2': ["('1', '2')", "('2', '2')"], 'delayonly_delay25ms__mb2': ["('1', '2')", "('2', '2')"], 'delayonly_delay25ms__qmtu__padto8700__pcap__mb2': ["('1', '2')", "('2', '2')"], 'delayonly_delay25ms__qmtu__pcap__mb2': ["('1', '2')", "('2', '2')"]}
+nb de paires sig_kem par label (valeur -> nb de labels): {4: 44, 1: 16, 2: 23, 42: 3}
+   label delayonly_delay25ms__chain2__mb2 -> ['mldsa65_hqc192', 'mldsa65_x448_mlkem768', 'secp384r1_hqc192', 'secp384r1_x448_mlkem768']
+   label delayonly_delay25ms__mb2 -> ['mldsa65_hqc192', 'mldsa65_x448_mlkem768', 'secp384r1_hqc192', 'secp384r1_x448_mlkem768']
+   label delayonly_delay25ms__qmtu__padto8700__pcap__mb2 -> ['secp384r1_x448_mlkem768']
+   label delayonly_delay25ms__qmtu__pcap__mb2 -> ['mldsa65_x448_mlkem768', 'secp384r1_x448_mlkem768']
+   label delayonly_delay25ms_mtu1280__qmtu__padto8700__pcap__mb2 -> ['secp384r1_x448_mlkem768']
+   label delayonly_delay25ms_mtu1280__qmtu__pcap__mb2 -> ['mldsa65_x448_mlkem768', 'secp384r1_x448_mlkem768']
+   label delayonly_delay50ms__mb2 -> ['mldsa65_hqc192', 'mldsa65_x448_mlkem768', 'secp384r1_hqc192', 'secp384r1_x448_mlkem768']
+   label delayonly_delay75ms__mb2 -> ['mldsa65_hqc192', 'mldsa65_x448_mlkem768', 'secp384r1_hqc192', 'secp384r1_x448_mlkem768']
+formes de lignes hors Execution/Handshake/App-ready (top 25) :
+   412314  verify return:N
+   343657  App-bytes: N
+   203400  s_connection: verify depth is N
+   203357  depth=N CN=oqstest CA
+   203357  depth=N CN=localhost
+    24440  Handshake timeout budget: Ns (identique TLS/QUIC)
+    24440  Applying netem rules to lo...
+    24440  Showing qdisc status for the interface: lo
+    24440  Sent N bytes N pkt (dropped N, overlimits N requeues N)
+    24440  backlog Nb Np requeues N
+    24440  Warm-up: N connexion(s) jetee(s) avant mesure
+     8180  [strm][NxNeNdN] Starting...
+     8180  [strm][NxNeNdN] Sending data...
+     8180  [strm][NxNeNdN] Data sent
+     8180  [strm][NxNeNdN] Data received
+     8180  [strm][NxNeNdN] Peer shut down
+     8180  [strm][NxNeNdN] All done
+     5862  [strm][NxNcNeNdN] Starting...
+     5862  [strm][NxNcNeNdN] Sending data...
+     5862  [strm][NxNcNeNdN] Data sent
+     5862  [strm][NxNcNeNdN] Data received
+     5862  [strm][NxNcNeNdN] Peer shut down
+     5862  [strm][NxNcNeNdN] All done
+     5780  Running ./perftestClientTlsQuic.sh with SIG_ALG=secpNrN and KEM_ALG=xN
+     5600  depth=N CN=oqstest Intermediate CA
+
+========== 6. CORRESPONDANCE cell_id (plan) <-> dossier (label) ==========
+cell_id recherches: ['main_tls_single_ideal', 'fx_tls_rtt0_loss0', 'dir_tls_iid_c2s', 'mech_tls_mtu1280_loss0', 'chain_tls_rtt50_loss0', 'size_tls_ecdsapad_mtu1280_loss0']
+   main_tls_single_ideal -> ['campaign_state/order_block3of20.txt :: main_tls_single_ideal', 'campaign_state/order_block1of20.txt :: main_tls_single_ideal']
+   fx_tls_rtt0_loss0 -> ['campaign_state/order_block3of20.txt :: fx_tls_rtt0_loss0', 'campaign_state/order_block1of20.txt :: fx_tls_rtt0_loss0']
+   dir_tls_iid_c2s -> ['campaign_state/order_block3of20.txt :: dir_tls_iid_c2s', 'campaign_state/order_block1of20.txt :: dir_tls_iid_c2s']
+   mech_tls_mtu1280_loss0 -> ['campaign_state/order_block3of20.txt :: mech_tls_mtu1280_loss0', 'campaign_state/order_block1of20.txt :: mech_tls_mtu1280_loss0']
+   chain_tls_rtt50_loss0 -> ['campaign_state/order_block3of20.txt :: chain_tls_rtt50_loss0', 'campaign_state/order_block1of20.txt :: chain_tls_rtt50_loss0']
+   size_tls_ecdsapad_mtu1280_loss0 -> ['campaign_state/order_block3of20.txt :: size_tls_ecdsapad_mtu1280_loss0', 'campaign_state/order_block1of20.txt :: size_tls_ecdsapad_mtu1280_loss0']

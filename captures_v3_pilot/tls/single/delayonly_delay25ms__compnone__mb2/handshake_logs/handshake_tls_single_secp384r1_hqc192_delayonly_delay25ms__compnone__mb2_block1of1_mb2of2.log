@@ -1,0 +1,149 @@
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=none
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8030: root refcnt 2 limit 1000 seed 4462342932903238264
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=hqc192
+Warm-up: 5 connexion(s) jetee(s) avant mesure
+Execution 1 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9777
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 196.85 ms
+App-ready duration: 247.61 ms
+Execution 2 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9778
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 195.89 ms
+App-ready duration: 246.75 ms
+Execution 3 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9778
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 196.20 ms
+App-ready duration: 247.21 ms
+Execution 4 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9779
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 196.05 ms
+App-ready duration: 246.80 ms
+Execution 5 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9778
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 196.19 ms
+App-ready duration: 247.00 ms
+Execution 6 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9777
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 196.00 ms
+App-ready duration: 247.10 ms
+Execution 7 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9778
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 196.04 ms
+App-ready duration: 246.89 ms
+Execution 8 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9778
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 195.55 ms
+App-ready duration: 246.41 ms
+Execution 9 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9778
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 195.75 ms
+App-ready duration: 246.76 ms
+Execution 10 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 9779
+Tx-bytes: 5024
+CertMsg: type=11 len_comp=0 len_plain=442
+Cert-comp: none
+Handshake duration: 195.76 ms
+App-ready duration: 246.56 ms

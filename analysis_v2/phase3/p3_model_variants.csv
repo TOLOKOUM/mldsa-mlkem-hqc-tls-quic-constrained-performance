@@ -1,0 +1,13 @@
+variante,proto,famille,n,conforme,partiel,infirme
+bytes,quic,tous,21,16,5,0
+bytes,quic,hors_HQC,13,10,3,0
+bytes,quic,HQC,8,6,2,0
+bytes,tls,tous,21,17,2,2
+bytes,tls,hors_HQC,13,11,0,2
+bytes,tls,HQC,8,6,2,0
+writes,quic,tous,21,16,5,0
+writes,quic,hors_HQC,13,10,3,0
+writes,quic,HQC,8,6,2,0
+writes,tls,tous,21,19,2,0
+writes,tls,hors_HQC,13,13,0,0
+writes,tls,HQC,8,6,2,0

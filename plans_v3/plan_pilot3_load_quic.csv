@@ -1,0 +1,2 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+pilot3_load_quic_rtt0,quic,single,both,none,0,0,1,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,LOAD=1;CONC_LEVELS=8 16 24 32 48 64;LOAD_SECONDS=12

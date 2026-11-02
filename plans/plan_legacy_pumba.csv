@@ -1,0 +1,7 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+legacy_tls_single_gestable,tls,single,both,stable,0,0,500,,RATE_MBIT=
+legacy_tls_single_geunstable,tls,single,both,unstable,0,0,500,,RATE_MBIT=
+legacy_tls_mutual_gestable,tls,mutual,both,stable,0,0,500,,RATE_MBIT=
+legacy_tls_mutual_geunstable,tls,mutual,both,unstable,0,0,500,,RATE_MBIT=
+legacy_quic_single_gestable,quic,single,both,stable,0,0,500,,RATE_MBIT=
+legacy_quic_single_geunstable,quic,single,both,unstable,0,0,500,,RATE_MBIT=

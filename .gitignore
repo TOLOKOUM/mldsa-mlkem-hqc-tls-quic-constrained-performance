@@ -19,3 +19,11 @@ uma-tls-quic-pq-34.tar.gz
 *.tar.gz
 *.tar.gz
 *.bak
+
+# Donnees brutes des campagnes A et B1-B3 : hebergees sur Zenodo (DOI dans le README)
+captures_v2/
+captures_v3_load/
+captures_v3_comp/
+captures_v3_resume/
+campagne_*.log
+governor_watch.log

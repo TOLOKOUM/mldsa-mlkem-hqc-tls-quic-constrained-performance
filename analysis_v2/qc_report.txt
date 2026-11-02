@@ -1,0 +1,198 @@
+==============================================================================
+A. INTEGRITE DE LA MESURE
+==============================================================================
+visites attendues/trouvees non conformes : 0 (voir audit_completeness.csv)
+succes avec App-bytes != 100 : 0
+execution avec lignes Handshake/App-ready multiples : 0 | sans ligne App-ready : 0
+succes avec Handshake > App-ready (incoherent) : 0
+warm-up distincts : [5] | budget timeout (s) : [150]
+
+echecs (App-ready NaN) : 143/343800 = 0.0416% | cellules avec >=1 echec : 30/139
+                      cell_id    n  k  cp_lo  cp_hi  rate_pct
+fx_quic_rtt100_loss5_gesevere 1600 16  0.006  0.016     1.000
+             dir_tls_iid_both  800  7  0.004  0.018     0.875
+ fx_quic_rtt50_loss5_gesevere 1600 14  0.005  0.015     0.875
+fx_quic_rtt150_loss5_gesevere 1600 13  0.004  0.014     0.812
+fx_quic_rtt150_loss2_gesevere 1600 10  0.003  0.011     0.625
+ fx_tls_rtt100_loss5_gesevere 1600 10  0.003  0.011     0.625
+
+echecs par protocole / raison / handshake abouti (1) ou non (0) :
+proto   auth                         raison  hs_completed  n
+ quic single client-side timeout after 150s             0 44
+ quic single                    unspecified             0 25
+ quic single                    unspecified             1 13
+  tls single client-side timeout after 150s             0 61
+
+succes > 10x la mediane de leur paire-cellule : 1105 (conserves) | par protocole : {'quic': 333, 'tls': 772}
+succes > 10 s : {'quic': 16, 'tls': 151} | > 60 s : {'tls': 20} | max (ms) : {'quic': 16007.0, 'tls': 132892.0}
+proto                      cell_id  n    max_ms
+  tls  fx_tls_rtt50_loss2_gesevere 28 132891.75
+  tls fx_tls_rtt150_loss5_gesevere 49 124494.37
+  tls fx_tls_rtt150_loss1_gesevere 10 120910.19
+  tls   fx_tls_rtt0_loss1_gesevere 22 107682.60
+  tls   fx_tls_rtt0_loss2_gesevere 41 105958.79
+  tls fx_tls_rtt100_loss1_gesevere  8  81868.94
+
+==============================================================================
+B. CONFIGURATION REELLEMENT APPLIQUEE (manifestes) vs PREVUE (labels / plan)
+==============================================================================
+   offloads reellement actifs (modifiables) : 0 cellule-blocs | actifs NON modifiables [fixed] : 0 | etats distincts : 1
+   bad_mtu            0
+   bad_dir            0
+   bad_mb             0
+   bad_runs           0
+   bad_rate_mbit      0
+   bad_netem_limit    0
+   bad_governor       0
+   bad_no_turbo       0
+   bad_offload_off    0
+   bad_udp_gso        0
+   bad_offload_on     0
+   any_bad            0
+   cpusets distincts serveur/client : 1/1 | modeles CPU : 1 | images Docker : 1
+
+   noyaux Linux rencontres :
+           kernel  cell_blocs  bloc_min  bloc_max                     debut                       fin
+6.8.0-146-generic        2800         1        20 2026-10-08T19:55:24+01:00 2026-10-22T09:24:08+01:00
+6.8.0-147-generic          60        20        20 2026-10-23T00:25:02+01:00 2026-10-23T06:01:47+01:00
+
+==============================================================================
+C. ENVIRONNEMENT : gouverneur, turbo, thermique, charge, suspension, noyau
+==============================================================================
+gouverneur : {'performance': 24432, 'powersave': 8} | no_turbo : {1: 24440}
+visites hors gouverneur 'performance' (par bloc / cellule) :
+ block proto                       label  visites
+     4  quic simple_loss5_delay75ms__mb2        8
+temperature CPU (C) avant visite : min 38 / med 44 / p95 47 / max 53
+frequence moyenne (MHz) : min 1000 / med 1451 / max 1606
+load1 avant visite : med 1.16 / p95 2.02 / max 8.56 | visites load1>4 : 29
+visites avec surcout inexplique ~ budget de timeout (150 s) = connexion de warm-up expiree, hors mesure : 44
+visites avec autre surcout inexplique (>2 s/exec, z>8) = suspension / blocage probables : 40
+visites code 98 (suspension) : 0
+
+changement de noyau en cours de campagne : noyau majoritaire 6.8.0-146-generic; 536 visites sous un autre noyau (blocs mixtes : [20])
+   effet du noyau minoritaire sur le niveau de latence (blocs mixtes, residu log vs blocs non mixtes, bootstrap par cellule) : +0.84% IC95% [+0.06, +1.60] (n_min=58 cellules, n_maj=79)
+   le noyau est constant a l'interieur d'une cellule-bloc : les contrastes ENTRE paires d'une meme cellule restent comparables ; covariable 'kernel' obligatoire, sensibilite en excluant les cellule-blocs au noyau minoritaire
+
+==============================================================================
+D. PERTE REELLE (qdisc netem) vs PERTE NOMINALE  [serveur=s2c ; client=c2s ; perte = pertes/(paquets envoyes + pertes)]
+==============================================================================
+cellule-cotes avec perte nominale 0 mais pertes observees > 0 : 0
+cellule-cotes avec perte nominale > 0 : 120 | nominal hors IC95% bootstrap(blocs) : 55 | ecart > 15% : 47
+   ecart > 15% par protocole : {'quic': 1, 'tls': 46}
+
+------------------------------------------------------------------------------
+D2. EXPOSITION REELLE A LA PERTE : rapport perte realisee / perte nominale (1.00 = perte par paquet conforme)
+------------------------------------------------------------------------------
+(toutes cellules a perte nominale > 0 ; table complete, y compris par RTT et par cote, dans qc_netem_exposure.csv)
+       decoupage proto    niveau  ratio    lo    hi  visites
+           proto  quic    toutes  0.996 0.984 1.009     9120
+           proto   tls    toutes  0.803 0.793 0.813    10800
+   proto+process  quic   ge-mild  1.001 0.981 1.022     2160
+   proto+process  quic ge-severe  0.997 0.959 1.036     1920
+   proto+process  quic       iid  0.994 0.983 1.006     5040
+   proto+process   tls   ge-mild  0.782 0.758 0.806     2160
+   proto+process   tls ge-severe  0.808 0.763 0.856     1920
+   proto+process   tls       iid  0.808 0.800 0.817     6720
+ proto+sig_class  quic classical  1.000 0.977 1.022     4680
+ proto+sig_class  quic       pqc  0.994 0.980 1.009     4440
+ proto+sig_class   tls classical  0.852 0.837 0.866     5520
+ proto+sig_class   tls       pqc  0.772 0.758 0.786     5280
+proto+kem_family  quic classical  0.987 0.931 1.043      400
+proto+kem_family  quic       hqc  0.992 0.976 1.009     3760
+proto+kem_family  quic     mlkem  1.004 0.984 1.025     4960
+proto+kem_family   tls classical  0.905 0.872 0.938      800
+proto+kem_family   tls       hqc  0.772 0.755 0.792     4400
+proto+kem_family   tls     mlkem  0.833 0.820 0.848     5600
+
+QUIC : 0.996 [0.984, 1.009] | TLS : 0.803 [0.793, 0.813]
+   TLS classique 0.852 [0.837, 0.866] vs TLS ML-DSA 0.772 [0.758, 0.786] -> DEPEND de la taille du vol (IC disjoints)
+   DIAGNOSTIC : la perte effectivement appliquee aux paquets TLS est inferieure au nominal alors que celle de QUIC est conforme. Le deficit croit avec la taille des messages : profil compatible avec une perte decidee par SUPER-PAQUET (segmentation TCP non desactivee) et comptee par segment. A verifier (ethtool -k sur l'interface portant netem, taille des trames emises cote serveur).
+
+==============================================================================
+E. RANDOMISATION : les classes de signature sont-elles equilibrees en rang de visite ?
+==============================================================================
+cellules testees : 121 | p_Holm < 0.05 : 0 (attendu ~0 sous randomisation) | p brut < 0.05 : 2 (attendu ~6.1)
+                      cell_id  n_blocks  mean_rank_diff      p  p_holm
+     fx_quic_rtt100_loss2_iid        20         -0.4000 0.0343  1.0000
+   fx_quic_rtt50_loss1_gemild        20          0.4250 0.0449  1.0000
+fx_quic_rtt150_loss5_gesevere        20         -0.3750 0.0659  1.0000
+        chain_tls_rtt50_loss0        20         -0.4250 0.0782  1.0000
+
+enchainement sig_class(i-1)==sig_class(i) : observe 0.377 vs attendu sous permutation 0.377 (ecart -0.000, ~-0.0 ecarts-types binomiaux)
+
+==============================================================================
+F. DERIVE TEMPORELLE (sentinelles : meme paire, 3 visites par bloc)
+==============================================================================
+derive intra-bloc, moyenne des differences par bloc en % (IC95% bootstrap par blocs, p exact sign-flip, Holm sur les 8 tests) :
+proto                    pair contrast  n_blocks  pct_change     lo     hi     p  hl_pct  p_holm
+ quic   mldsa65|x448_mlkem768  mid-pre        20      -0.748 -2.097  0.116 0.244  -0.189   1.000
+ quic   mldsa65|x448_mlkem768 post-pre        20       0.405 -1.578  2.962 0.717   0.047   1.000
+ quic secp384r1|x448_mlkem768  mid-pre        20      -0.187 -0.384  0.049 0.111  -0.229   0.666
+ quic secp384r1|x448_mlkem768 post-pre        20      -0.210 -0.415 -0.004 0.066  -0.227   0.462
+  tls   mldsa65|x448_mlkem768  mid-pre        20       0.653 -1.407  4.284 0.999  -0.891   1.000
+  tls   mldsa65|x448_mlkem768 post-pre        20       0.326 -0.594  1.591 0.723   0.149   1.000
+  tls secp384r1|x448_mlkem768  mid-pre        20      -1.040 -3.579  1.439 0.454  -0.806   1.000
+  tls secp384r1|x448_mlkem768 post-pre        20      -1.936 -4.211 -0.343 0.029  -0.502   0.230
+
+tendance inter-blocs (toutes cellules, effets fixes cellule x paire x tour) : +0.030 % par bloc  IC95% [-0.001, +0.061]  p=0.0556 (G=20) => cumul sur 19 blocs ~ +0.57%
+
+==============================================================================
+G. EFFETS DE NUISANCE (rang de visite, temperature) -- covariables du modele, pas des resultats
+==============================================================================
+famille                                        covariable  pct_effect      lo     hi      p     n  p_holm
+   tous dernier vs premier rang de visite (rang/rang_max)     -0.1063 -0.2985 0.0864 0.2624 24200  1.0000
+   tous                      fin vs debut de bloc (temps)      0.1223 -0.2480 0.4939 0.4983 24200  1.0000
+   tous                                       par degre C     -0.0072 -0.0824 0.0680 0.8432 24200  1.0000
+  chain dernier vs premier rang de visite (rang/rang_max)     -0.2325 -2.3181 1.8976 0.8200  1280  1.0000
+  chain                      fin vs debut de bloc (temps)      0.5748 -1.1237 2.3025 0.4898  1280  1.0000
+  chain                                       par degre C     -0.0036 -0.4333 0.4280 0.9863  1280  1.0000
+    dir dernier vs premier rang de visite (rang/rang_max)     -0.6139 -1.3579 0.1357 0.1026   640  1.0000
+    dir                      fin vs debut de bloc (temps)      0.2973 -0.2174 0.8146 0.2420   640  1.0000
+    dir                                       par degre C     -0.0462 -0.1247 0.0323 0.2329   640  1.0000
+     fx dernier vs premier rang de visite (rang/rang_max)     -0.3172 -0.7404 0.1079 0.1346 12800  1.0000
+     fx                      fin vs debut de bloc (temps)     -0.0188 -0.3911 0.3549 0.9173 12800  1.0000
+     fx                                       par degre C     -0.0277 -0.1149 0.0597 0.5149 12800  1.0000
+   main dernier vs premier rang de visite (rang/rang_max)     -0.0371 -0.2052 0.1314 0.6500  7560  1.0000
+   main                      fin vs debut de bloc (temps)      0.0716 -0.2730 0.4174 0.6689  7560  1.0000
+   main                                       par degre C      0.0225 -0.0236 0.0687 0.3192  7560  1.0000
+   mech dernier vs premier rang de visite (rang/rang_max)      0.7676 -2.2951 3.9262 0.6101  1280  1.0000
+   mech                      fin vs debut de bloc (temps)      0.6207 -0.7242 1.9837 0.3479  1280  1.0000
+   mech                                       par degre C      0.0666 -0.3167 0.4514 0.7204  1280  1.0000
+   size                      fin vs debut de bloc (temps)      2.1670 -1.3517 5.8112 0.2158   640  1.0000
+   size                                       par degre C     -0.0001 -0.4547 0.4565 0.9995   640  1.0000
+
+==============================================================================
+H. HETEROGENEITE ENTRE BLOCS (justifie le bloc comme unite d'inference)
+==============================================================================
+ecart-type entre blocs (moyenne des cellules) : 1.16% | intra-bloc/visite : 2.60%
+   -> l'inference DOIT se faire au niveau bloc (sign-flip / bootstrap de blocs / effet aleatoire), jamais sur les connexions poolees.
+
+==============================================================================
+I. CAPTURES tcpdump : 1920 fichiers | pertes noyau > 0 : 0 | illisibles : 0
+==============================================================================
+
+==============================================================================
+DRAPEAUX DE VISITE (regles pre-specifiees)
+==============================================================================
+   code98                            0   [EXCLUE]
+   config_mismatch                   0   [EXCLUE]
+   governor_or_turbo                 8   [EXCLUE]
+   offload_active                    0   [EXCLUE]
+   missing_visit_meta                0   [EXCLUE]
+   duration_outlier                 40   [sensibilite]
+   warmup_timeout                   44   [sensibilite]
+   thermal_hot                     157   [sensibilite]
+   load_high                       245   [sensibilite]
+   qdisc_zero_loss_violation         0   [sensibilite]
+   kernel_minor                    536   [sensibilite]
+visites exclues de l'analyse primaire : 8/24440 | a signaler en sensibilite : 960
+
+##############################################################################
+PORTE QUALITE : A TRAITER AVANT TOUT CONTRASTE :
+   - deficit de perte specifique a TLS et dependant de la taille du vol (exposition a la perte differente entre classique et ML-DSA) : perte nominale != perte appliquee ; contraste entre protocoles 'a perte egale' NON valide en l'etat
+   - 1 cellule-cotes dont la perte netem observee s'ecarte de >15% du nominal (hors IC)
+A DOCUMENTER (non bloquant) :
+   * 38 echecs NE SONT PAS des expirations du budget de 150 s (raison absente/autre) : leur duree reelle est inconnue -> RMST/completion en phase 2 (pas de latence conditionnelle) ; a decrire dans l'article
+   * changement de noyau (6.8.0-146-generic -> autre) dans le(s) bloc(s) [20]: covariable + sensibilite; desactiver unattended-upgrades pour toute campagne future
+   * 8 visites exclues par regle dure, soit 1 cellule-bloc(s) entier(s) : quic/simple_loss5_delay75ms__mb2 bloc 4

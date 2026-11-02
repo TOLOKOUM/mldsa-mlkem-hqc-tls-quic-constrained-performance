@@ -1,0 +1,105 @@
+  (manifeste sans les colonnes ['sig'] -> tailles de chaine par defaut = valeurs des manifestes de reference ; relancer 01_ingest.py si besoin)
+PHASE 3 -- modele de seuil. Tailles de chaine serveur utilisees (octets) : {'ed25519': 304, 'mldsa44': 3965, 'mldsa65': 5494, 'mldsa87': 7452, 'secp384r1': 430, 'secp521r1': 504}
+Constantes : A_TLS=267 SH_FIX=100 RHO_QUIC=1.037 MSS=1448 IW=10 | QUIC : dgram=1252 IW=12520 CH_BASE=300 CH_CAP=1200
+
+=== 1. CELLULES SANS PERTE (famille fx, ROBUSTE) : D(RTT) = a + b*RTT sur RTT in {50,100,150} ; tau = D(0) - a ===
+   QUIC hqc192         pente 1.011 [0.960;1.056]   tau = 30.2 [23.2;36.4] ms 
+   QUIC x448_mlkem768  pente 1.000 [0.997;1.003]   tau = -0.6 [-1.2;-0.2] ms 
+   TLS hqc192         pente 1.002 [0.993;1.012]   tau = 39.7 [38.6;41.0] ms 
+   TLS x448_mlkem768  pente 0.001 [-0.001;0.003]   tau = 0.0 [-0.2;0.3] ms (pente ~0 : pas d'aller-retour supplementaire, tau sans objet)
+
+=== 2. PREDICTION (octets seuls, constantes fixees) CONTRE OBSERVATION : nombre d'allers-retours supplementaires k ===
+-- variante 'bytes' (profils moderate=125 ms, degraded=167 ms) --
+   QUIC : hors HQC 10/13 conformes ; HQC 6 conformes, 2 partiels, 0 infirmes (sur 8)
+   TLS : hors HQC 11/13 conformes ; HQC 6 conformes, 2 partiels, 0 infirmes (sur 8)
+-- variante 'writes' (profils moderate=125 ms, degraded=167 ms) --
+   QUIC : hors HQC 10/13 conformes ; HQC 6 conformes, 2 partiels, 0 infirmes (sur 8)
+   TLS : hors HQC 13/13 conformes ; HQC 6 conformes, 2 partiels, 0 infirmes (sur 8)
+
+   [QUIC] paire (niveau KEM) : k_pred | k_obs(app) @125 / @167 | k_hs | verdict
+   L1 P-256            pred=1 | 1.05 [0.82;1.32] / 1.09 [0.93;1.24] | hs 1.08 / 1.10 | conforme
+   L1 hqc128           pred=1 | 0.91 [0.86;0.96] / 0.95 [0.88;1.02] | hs 0.89 / 0.94 | conforme
+   L1 mlkem512         pred=1 | 1.03 [0.88;1.20] / 1.00 [0.88;1.14] | hs 1.02 / 1.01 | conforme
+   L1 p256_hqc128      pred=1 | 0.97 [0.87;1.07] / 1.01 [0.92;1.11] | hs 0.94 / 1.01 | conforme
+   L1 p256_mlkem512    pred=1 | 0.95 [0.82;1.08] / 1.20 [0.98;1.43] | hs 0.96 / 1.20 | conforme
+   L1 x25519           pred=1 | 1.10 [0.94;1.29] / 1.06 [0.95;1.19] | hs 1.11 / 1.06 | conforme
+   L1 x25519_hqc128    pred=1 | 0.99 [0.93;1.06] / 0.98 [0.89;1.08] | hs 1.00 / 0.96 | conforme
+   L1 x25519_mlkem512  pred=1 | 1.14 [0.98;1.30] / 1.26 [1.13;1.41] | hs 1.15 / 1.24 | partiel
+   L3 P-384            pred=1 | 1.20 [0.98;1.50] / 1.27 [1.08;1.48] | hs 1.22 / 1.26 | partiel
+   L3 hqc192           pred=1 | 0.90 [0.83;0.97] / 0.81 [0.72;0.89] | hs 0.91 / 0.81 | conforme
+   L3 mlkem768         pred=1 | 1.13 [1.00;1.25] / 1.11 [0.99;1.24] | hs 1.10 / 1.14 | conforme
+   L3 p384_hqc192      pred=1 | 0.78 [0.70;0.86] / 0.85 [0.79;0.92] | hs 0.79 / 0.87 | conforme
+   L3 p384_mlkem768    pred=1 | 1.18 [1.12;1.24] / 1.08 [1.00;1.17] | hs 1.18 / 1.08 | conforme
+   L3 x448             pred=1 | 1.41 [1.15;1.70] / 1.26 [1.08;1.44] | hs 1.41 / 1.28 | partiel
+   L3 x448_hqc192      pred=1 | 0.83 [0.75;0.91] / 0.87 [0.78;0.97] | hs 0.84 / 0.88 | conforme
+   L3 x448_mlkem768    pred=1 | 1.10 [1.03;1.16] / 1.09 [1.01;1.20] | hs 1.11 / 1.13 | conforme
+   L5 P-521            pred=1 | 1.10 [0.98;1.25] / 1.22 [1.09;1.37] | hs 1.10 / 1.24 | conforme
+   L5 hqc256           pred=0 | 0.27 [0.18;0.36] / 0.31 [0.23;0.40] | hs 0.27 / 0.30 | partiel
+   L5 mlkem1024        pred=1 | 1.06 [0.99;1.13] / 0.99 [0.92;1.07] | hs 1.05 / 1.01 | conforme
+   L5 p521_hqc256      pred=0 | 0.31 [0.21;0.41] / 0.31 [0.21;0.41] | hs 0.33 / 0.31 | partiel
+   L5 p521_mlkem1024   pred=1 | 1.11 [1.06;1.16] / 1.17 [1.08;1.27] | hs 1.11 / 1.20 | conforme
+
+   [TLS] paire (niveau KEM) : k_pred | k_obs(app) @125 / @167 | k_hs | verdict
+   L1 P-256            pred=0 | 0.02 [-0.09;0.13] / 0.24 [0.12;0.36] | hs 0.03 / 0.20 | conforme
+   L1 hqc128           pred=0 | -0.01 [-0.15;0.11] / 0.09 [-0.05;0.23] | hs -0.01 / 0.11 | conforme
+   L1 mlkem512         pred=0 | 0.03 [-0.10;0.15] / 0.15 [0.01;0.30] | hs 0.03 / 0.16 | conforme
+   L1 p256_hqc128      pred=0 | 0.02 [-0.16;0.21] / 0.09 [-0.10;0.27] | hs 0.02 / 0.09 | conforme
+   L1 p256_mlkem512    pred=0 | 0.04 [-0.14;0.20] / 0.01 [-0.15;0.15] | hs 0.02 / 0.00 | conforme
+   L1 x25519           pred=0 | 0.12 [-0.02;0.28] / 0.10 [-0.01;0.21] | hs 0.14 / 0.09 | conforme
+   L1 x25519_hqc128    pred=0 | 0.04 [-0.10;0.19] / 0.13 [-0.02;0.25] | hs 0.02 / 0.14 | conforme
+   L1 x25519_mlkem512  pred=0 | 0.03 [-0.09;0.15] / 0.03 [-0.10;0.16] | hs 0.03 / 0.03 | conforme
+   L3 P-384            pred=0 | 0.16 [0.04;0.29] / 0.05 [-0.06;0.16] | hs 0.15 / 0.05 | conforme
+   L3 hqc192           pred=1 | 0.82 [0.69;0.95] / 0.83 [0.66;0.99] | hs 0.82 / 0.82 | conforme
+   L3 mlkem768         pred=0 | 0.07 [-0.08;0.22] / 0.03 [-0.16;0.22] | hs 0.07 / 0.02 | conforme
+   L3 p384_hqc192      pred=1 | 0.56 [0.45;0.68] / 0.73 [0.59;0.87] | hs 0.56 / 0.73 | partiel
+   L3 p384_mlkem768    pred=0 | 0.17 [0.05;0.30] / 0.08 [-0.04;0.19] | hs 0.16 / 0.08 | conforme
+   L3 x448             pred=0 | 0.10 [-0.01;0.21] / 0.21 [0.08;0.36] | hs 0.10 / 0.21 | conforme
+   L3 x448_hqc192      pred=1 | 0.80 [0.65;0.97] / 0.63 [0.47;0.77] | hs 0.80 / 0.62 | partiel
+   L3 x448_mlkem768    pred=0 | 0.18 [0.03;0.34] / 0.11 [-0.01;0.22] | hs 0.17 / 0.11 | conforme
+   L5 P-521            pred=0 | 0.21 [0.05;0.38] / 0.23 [0.09;0.38] | hs 0.20 / 0.23 | conforme
+   L5 hqc256           pred=0 | 0.14 [-0.00;0.27] / 0.08 [-0.02;0.19] | hs 0.13 / 0.08 | conforme
+   L5 mlkem1024        pred=1 | 0.98 [0.87;1.09] / 0.97 [0.83;1.11] | hs 0.97 / 0.98 | conforme  (octets seuls : infirme)
+   L5 p521_hqc256      pred=0 | 0.08 [-0.06;0.25] / 0.08 [-0.07;0.26] | hs 0.07 / 0.07 | conforme
+   L5 p521_mlkem1024   pred=1 | 0.90 [0.78;1.02] / 1.02 [0.85;1.19] | hs 0.90 / 1.00 | conforme  (octets seuls : infirme)
+
+   Estimateur MEDIAN par bloc (robuste a l'exposition aux pertes, k = nombre d'aller-retours de la connexion typique) :
+   QUIC : conformes 21, partiels 0, infirmes 0 (sur 21) ; hors HQC conformes 13/13
+      L5 hqc256 : k median = 0.07 / 0.07 (pred 0)
+      L5 p521_hqc256 : k median = 0.06 / 0.05 (pred 0)
+   TLS : conformes 18, partiels 3, infirmes 0 (sur 21) ; hors HQC conformes 13/13
+      L5 hqc256 : k median = -0.00 / -0.01 (pred 0)
+      L5 p521_hqc256 : k median = -0.00 / -0.00 (pred 0)
+
+   HQC-192 : k predit par tau mesure SANS perte (k = 1 - tau/RTT), confronte aux profils avec perte :
+      QUIC hqc192       predit 0.76 / 0.82 | observe 0.90 [0.83;0.97] / 0.81 [0.72;0.89]
+      QUIC p384_hqc192  predit 0.76 / 0.82 | observe 0.78 [0.70;0.86] / 0.85 [0.79;0.92]
+      QUIC x448_hqc192  predit 0.76 / 0.82 | observe 0.83 [0.75;0.91] / 0.87 [0.78;0.97]
+      TLS hqc192       predit 0.68 / 0.76 | observe 0.82 [0.69;0.95] / 0.83 [0.66;0.99]
+      TLS p384_hqc192  predit 0.68 / 0.76 | observe 0.56 [0.45;0.68] / 0.73 [0.59;0.87]
+      TLS x448_hqc192  predit 0.68 / 0.76 | observe 0.80 [0.65;0.97] / 0.63 [0.47;0.77]
+
+   Ecart max |k(app_ms) - k(hs_ms)| sur toutes les paires : 0.022 (la penalite est entierement dans le handshake)
+
+=== 3. SENSIBILITE : les verdicts QUIC dependent-ils des constantes (ClientHello de base, octets utiles par datagramme) ? ===
+   16 combinaisons de constantes : conformes entre 16 et 16 sur 21 ; infirmes entre 0 et 0
+
+=== 4. VALIDATION INDEPENDANTE DE L'OCTET-COMPTAGE : paquets serveur par visite (compteurs d'interface) contre octets du vol modelise ===
+   TLS : r = 0.981 sur 42 paires (compteurs agreges par tour de visite : valide la proportionnalite aux octets, ne resout pas +-1 segment)
+   QUIC : r = 0.975 sur 42 paires (compteurs agreges par tour de visite : valide la proportionnalite aux octets, ne resout pas +-1 segment)
+
+=== 5. TLS MUTUELLE A RTT 0 : d'ou vient le surcout de ML-DSA ? (CPU par connexion, difference-de-differences mutuelle - simple) ===
+   L1 : surcout mutuel ML-DSA = +33.9 ms [33.6;34.2] ; dont CPU client +34.2 ms [33.8;34.6], CPU serveur -0.2 ms [-0.3;-0.1]
+   L3 : surcout mutuel ML-DSA = +48.2 ms [47.4;49.1] ; dont CPU client +50.6 ms [49.7;51.6], CPU serveur -1.7 ms [-1.9;-1.6]
+   L5 : surcout mutuel ML-DSA = +74.0 ms [72.1;75.8] ; dont CPU client +76.4 ms [74.5;78.3], CPU serveur -2.1 ms [-2.4;-1.7]
+   Lecture : si le CPU client explique l'essentiel et que le CPU serveur est inchange, le cout n'est pas reseau mais un calcul cote client.
+
+=== 6. HQC : calcul client (RTT 0, signature classique) face a tau ===
+   TLS L1 hqc128 : CPU client +17.7 ms, CPU serveur +12.6 ms, handshake +30.3 ms
+   TLS L3 hqc192 : CPU client +52.0 ms, CPU serveur +38.2 ms, handshake +89.8 ms  | tau mesure (sans perte) = 39.7 ms
+   TLS L5 hqc256 : CPU client +95.5 ms, CPU serveur +69.6 ms, handshake +165.1 ms
+   QUIC L1 hqc128 : CPU client +18.0 ms, CPU serveur +12.7 ms, handshake +30.3 ms
+   QUIC L3 hqc192 : CPU client +52.7 ms, CPU serveur +38.5 ms, handshake +90.5 ms  | tau mesure (sans perte) = 30.2 ms
+   QUIC L5 hqc256 : CPU client +96.1 ms, CPU serveur +70.2 ms, handshake +165.9 ms
+   Hypothese a tester (non demontree) : tau = partie du calcul client (decapsulation HQC) qui recouvre l'aller-retour supplementaire.
+  figure: fig6_modele_seuil_k_predit_observe
+  figure: fig7_tau_sans_perte

@@ -1,0 +1,30 @@
+{
+  "status": "complete",
+  "campaign": "v2",
+  "fid": "F06",
+  "slug": "sensibilite_perte_rtt",
+  "title": "Handshake latency (median and p95) versus packet loss for each RTT (factorial design)",
+  "fingerprint": "9cb11f9ee6663e9213e5905e113cf86b4f9404f92127da648b4c5ab3bad9657e",
+  "variants": [
+    "median_tls_iid",
+    "median_tls_ge_mild",
+    "median_tls_ge_severe",
+    "median_quic_iid",
+    "median_quic_ge_mild",
+    "median_quic_ge_severe",
+    "p95_tls_iid",
+    "p95_tls_ge_mild",
+    "p95_tls_ge_severe",
+    "p95_quic_iid",
+    "p95_quic_ge_mild",
+    "p95_quic_ge_severe"
+  ],
+  "created_utc": "20261029T035014Z",
+  "inputs": {
+    "v2_conn": {
+      "path": "analysis_v2/conn.csv.gz",
+      "sha256": "0463d6f2813a00086e21b9bf71c81bd78410d1aca58c96d21b55a3b0bdbbc3de",
+      "bytes": 5287913
+    }
+  }
+}

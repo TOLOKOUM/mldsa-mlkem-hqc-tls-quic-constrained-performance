@@ -65,6 +65,27 @@ echo "=================================================="
 echo " TOTAL (port $PORT uniquement) : $TOTAL_PKTS paquets, $TOTAL_BYTES octets"
 echo "=================================================="
 
+# Répartition par SENS (le port $PORT est celui du serveur : source = serveur->client).
+# Octets = frame.len (trame complète, en-tête Ethernet inclus). Le ratio S->C / C->S
+# sert à discuter la limite d'amplification x3 de QUIC avant validation d'adresse
+# (un vol serveur PQ volumineux peut coûter un aller-retour de plus qu'en TCP).
+echo ""
+echo "=================================================="
+echo " Répartition par sens (serveur = port $PORT)"
+echo "=================================================="
+tshark "${TSHARK_OPTS[@]}" -Y "$PORT_FILTER" -T fields -e frame.len -e tcp.srcport -e udp.srcport 2>/dev/null \
+    | awk -F'\t' -v P="$PORT" '
+        { sp = $2 $3                       # un seul des deux champs est non vide
+          if (sp == P) { s2c_b += $1; s2c_n++ } else { c2s_b += $1; c2s_n++ } }
+        END {
+            printf "  client -> serveur : %4d paquets  %7d octets\n", c2s_n, c2s_b
+            printf "  serveur -> client : %4d paquets  %7d octets\n", s2c_n, s2c_b
+            if (c2s_b > 0) printf "  ratio octets S->C / C->S : %.2f\n", s2c_b / c2s_b
+        }'
+echo " Note : le total inclut la fermeture de connexion (RST côté TLS s_connection,"
+echo " CONNECTION_CLOSE côté QUIC) ; la capture est celle de la connexion EXACTE"
+echo " mesurée par la campagne (échange applicatif de 100 octets, sans tickets)."
+
 # Décomposition par type de message handshake si le déchiffrement est actif
 if [ -n "$KEYLOG" ] && [ -f "$KEYLOG" ]; then
     echo ""

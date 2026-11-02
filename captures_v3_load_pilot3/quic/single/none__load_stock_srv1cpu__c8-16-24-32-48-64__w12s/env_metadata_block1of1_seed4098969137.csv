@@ -1,0 +1,5 @@
+timestamp,event,block_index,n_blocks,position,sig_alg,kem,cpu_temp_c,cpu_mhz_mean,load1,governor,no_turbo
+2026-11-01T11:35:20+01:00,before,1,1,1,secp384r1,x448_mlkem768,45.0,1600,0.87,performance,1
+2026-11-01T11:37:41+01:00,after,1,1,1,secp384r1,x448_mlkem768,49.0,1600,2.82,performance,1
+2026-11-01T11:38:22+01:00,before,1,1,2,mldsa65,x448_mlkem768,48.0,1450,4.55,performance,1
+2026-11-01T11:40:17+01:00,after,1,1,2,mldsa65,x448_mlkem768,46.0,1450,3.07,performance,1

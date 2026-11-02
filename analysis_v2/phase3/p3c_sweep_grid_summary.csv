@@ -1,0 +1,5 @@
+proto,variante,conformes_reference,min,mediane,max,part_grille_au_moins_reference,part_grille_strictement_meilleure,n_combinaisons
+quic,bytes,21,18,21.0,21,0.7777777777777778,0.0,1215
+tls,bytes,16,16,16.0,18,1.0,0.14814814814814814,1215
+quic,writes,21,18,21.0,21,0.7777777777777778,0.0,1215
+tls,writes,18,18,18.0,18,1.0,0.0,1215

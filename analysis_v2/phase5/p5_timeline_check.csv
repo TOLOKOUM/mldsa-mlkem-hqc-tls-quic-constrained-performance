@@ -1,0 +1,13 @@
+proto,label,pair,client_bytes,b1_obs,b1_over_client,b1_pred_3x_client,b1_minus_3x,n_bursts,tours_pred,flight_pred,cap_pred,flight_obs
+quic,delayonly_delay25ms__qmtu__padto8700__pcap__mb2,secp384r1_x448_mlkem768,2944.0,8804.0,2.9904891304347827,8832.0,-28.0,4.0,2,10591.918,8832,10594.0
+quic,delayonly_delay25ms__qmtu__pcap__mb2,mldsa65_x448_mlkem768,2944.0,8804.0,2.9904891304347827,8832.0,-28.0,4.0,2,10591.918,8832,10594.0
+quic,delayonly_delay25ms__qmtu__pcap__mb2,secp384r1_x448_mlkem768,2944.0,2061.0,0.7000679347826086,8832.0,-6771.0,3.0,1,2015.9279999999999,8832,2061.0
+quic,delayonly_delay25ms_mtu1280__qmtu__padto8700__pcap__mb2,secp384r1_x448_mlkem768,2504.0,7484.0,2.988817891373802,7512.0,-28.0,4.0,2,10591.918,7512,10595.0
+quic,delayonly_delay25ms_mtu1280__qmtu__pcap__mb2,mldsa65_x448_mlkem768,2504.0,7484.0,2.988817891373802,7512.0,-28.0,4.0,2,10591.918,7512,10595.0
+quic,delayonly_delay25ms_mtu1280__qmtu__pcap__mb2,secp384r1_x448_mlkem768,2504.0,2019.0,0.8063099041533547,7512.0,-5493.0,3.0,1,2015.9279999999999,7512,2019.0
+tls,delayonly_delay25ms__padto8700__pcap__mb2,secp384r1_x448_mlkem768,1673.0,10215.0,6.105797967722654,,,2.0,1,10214.0,14480,
+tls,delayonly_delay25ms__pcap__mb2,mldsa65_x448_mlkem768,1673.0,10215.0,6.105797967722654,,,2.0,1,10214.0,14480,
+tls,delayonly_delay25ms__pcap__mb2,secp384r1_x448_mlkem768,1673.0,1945.0,1.16258218768679,,,2.0,1,1944.0,14480,
+tls,delayonly_delay25ms_mtu1280__padto8700__pcap__mb2,secp384r1_x448_mlkem768,1673.0,10215.0,6.105797967722654,,,2.0,1,10214.0,12280,
+tls,delayonly_delay25ms_mtu1280__pcap__mb2,mldsa65_x448_mlkem768,1673.0,10215.0,6.105797967722654,,,2.0,1,10214.0,12280,
+tls,delayonly_delay25ms_mtu1280__pcap__mb2,secp384r1_x448_mlkem768,1673.0,1945.0,1.16258218768679,,,2.0,1,1944.0,12280,

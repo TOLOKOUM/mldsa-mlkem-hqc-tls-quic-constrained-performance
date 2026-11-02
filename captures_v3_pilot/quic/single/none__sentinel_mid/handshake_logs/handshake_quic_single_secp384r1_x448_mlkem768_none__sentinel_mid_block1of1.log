@@ -1,0 +1,409 @@
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8088: root refcnt 2 limit 1000 seed 13690921111540841143
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 5 connexion(s) jetee(s) avant mesure
+Execution 1 - QUIC Single
+[strm][0x79b0f008c970] Starting...
+[strm][0x79b0f008c970] Sending data...
+[strm][0x79b0f008c970] Data sent
+[strm][0x79b0f008c970] Data received
+[strm][0x79b0f008c970] Peer shut down
+[strm][0x79b0f008c970] All done
+Handshake duration: 11.99 ms
+App-bytes: 100
+App-ready duration: 13.10 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[strm][0x76fb2007ab40] Starting...
+[strm][0x76fb2007ab40] Sending data...
+[strm][0x76fb2007ab40] Data sent
+[strm][0x76fb2007ab40] Data received
+[strm][0x76fb2007ab40] Peer shut down
+[strm][0x76fb2007ab40] All done
+Handshake duration: 12.23 ms
+App-bytes: 100
+App-ready duration: 13.39 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[strm][0x73dea808c970] Starting...
+[strm][0x73dea808c970] Sending data...
+[strm][0x73dea808c970] Data sent
+[strm][0x73dea808c970] Data received
+[strm][0x73dea808c970] Peer shut down
+[strm][0x73dea808c970] All done
+Handshake duration: 11.94 ms
+App-bytes: 100
+App-ready duration: 13.06 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[strm][0x72fd8808c970] Starting...
+[strm][0x72fd8808c970] Sending data...
+[strm][0x72fd8808c970] Data sent
+[strm][0x72fd8808c970] Data received
+[strm][0x72fd8808c970] Peer shut down
+[strm][0x72fd8808c970] All done
+Handshake duration: 11.97 ms
+App-bytes: 100
+App-ready duration: 13.04 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[strm][0x77754408c970] Starting...
+[strm][0x77754408c970] Sending data...
+[strm][0x77754408c970] Data sent
+[strm][0x77754408c970] Data received
+[strm][0x77754408c970] Peer shut down
+[strm][0x77754408c970] All done
+Handshake duration: 11.90 ms
+App-bytes: 100
+App-ready duration: 12.99 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[strm][0x76719808c970] Starting...
+[strm][0x76719808c970] Sending data...
+[strm][0x76719808c970] Data sent
+[strm][0x76719808c970] Data received
+[strm][0x76719808c970] Peer shut down
+[strm][0x76719808c970] All done
+Handshake duration: 11.94 ms
+App-bytes: 100
+App-ready duration: 13.03 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[strm][0x76df4408c970] Starting...
+[strm][0x76df4408c970] Sending data...
+[strm][0x76df4408c970] Data sent
+[strm][0x76df4408c970] Data received
+[strm][0x76df4408c970] Peer shut down
+[strm][0x76df4408c970] All done
+Handshake duration: 12.04 ms
+App-bytes: 100
+App-ready duration: 13.19 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[strm][0x7bda4808c970] Starting...
+[strm][0x7bda4808c970] Sending data...
+[strm][0x7bda4808c970] Data sent
+[strm][0x7bda4808c970] Data received
+[strm][0x7bda4808c970] Peer shut down
+[strm][0x7bda4808c970] All done
+Handshake duration: 12.44 ms
+App-bytes: 100
+App-ready duration: 13.65 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[strm][0x7cddf408c970] Starting...
+[strm][0x7cddf408c970] Sending data...
+[strm][0x7cddf408c970] Data sent
+[strm][0x7cddf408c970] Data received
+[strm][0x7cddf408c970] Peer shut down
+[strm][0x7cddf408c970] All done
+Handshake duration: 11.97 ms
+App-bytes: 100
+App-ready duration: 13.11 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[strm][0x77eb1008c970] Starting...
+[strm][0x77eb1008c970] Sending data...
+[strm][0x77eb1008c970] Data sent
+[strm][0x77eb1008c970] Data received
+[strm][0x77eb1008c970] Peer shut down
+[strm][0x77eb1008c970] All done
+Handshake duration: 11.98 ms
+App-bytes: 100
+App-ready duration: 13.07 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 11 - QUIC Single
+[strm][0x763e3408c970] Starting...
+[strm][0x763e3408c970] Sending data...
+[strm][0x763e3408c970] Data sent
+[strm][0x763e3408c970] Data received
+[strm][0x763e3408c970] Peer shut down
+[strm][0x763e3408c970] All done
+Handshake duration: 12.04 ms
+App-bytes: 100
+App-ready duration: 13.16 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 12 - QUIC Single
+[strm][0x77a0a408c970] Starting...
+[strm][0x77a0a408c970] Sending data...
+[strm][0x77a0a408c970] Data sent
+[strm][0x77a0a408c970] Data received
+[strm][0x77a0a408c970] Peer shut down
+[strm][0x77a0a408c970] All done
+Handshake duration: 11.94 ms
+App-bytes: 100
+App-ready duration: 13.01 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 13 - QUIC Single
+[strm][0x730ec008c970] Starting...
+[strm][0x730ec008c970] Sending data...
+[strm][0x730ec008c970] Data sent
+[strm][0x730ec008c970] Data received
+[strm][0x730ec008c970] Peer shut down
+[strm][0x730ec008c970] All done
+Handshake duration: 12.00 ms
+App-bytes: 100
+App-ready duration: 13.11 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 14 - QUIC Single
+[strm][0x7ab56c08c970] Starting...
+[strm][0x7ab56c08c970] Sending data...
+[strm][0x7ab56c08c970] Data sent
+[strm][0x7ab56c08c970] Data received
+[strm][0x7ab56c08c970] Peer shut down
+[strm][0x7ab56c08c970] All done
+Handshake duration: 11.98 ms
+App-bytes: 100
+App-ready duration: 13.06 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 15 - QUIC Single
+[strm][0x733af408c970] Starting...
+[strm][0x733af408c970] Sending data...
+[strm][0x733af408c970] Data sent
+[strm][0x733af408c970] Data received
+[strm][0x733af408c970] Peer shut down
+[strm][0x733af408c970] All done
+Handshake duration: 12.27 ms
+App-bytes: 100
+App-ready duration: 13.40 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 16 - QUIC Single
+[strm][0x7f127008c970] Starting...
+[strm][0x7f127008c970] Sending data...
+[strm][0x7f127008c970] Data sent
+[strm][0x7f127008c970] Data received
+[strm][0x7f127008c970] Peer shut down
+[strm][0x7f127008c970] All done
+Handshake duration: 11.96 ms
+App-bytes: 100
+App-ready duration: 13.07 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 17 - QUIC Single
+[strm][0x711f1008c970] Starting...
+[strm][0x711f1008c970] Sending data...
+[strm][0x711f1008c970] Data sent
+[strm][0x711f1008c970] Data received
+[strm][0x711f1008c970] Peer shut down
+[strm][0x711f1008c970] All done
+Handshake duration: 11.90 ms
+App-bytes: 100
+App-ready duration: 13.00 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 18 - QUIC Single
+[strm][0x77b1dc08c970] Starting...
+[strm][0x77b1dc08c970] Sending data...
+[strm][0x77b1dc08c970] Data sent
+[strm][0x77b1dc08c970] Data received
+[strm][0x77b1dc08c970] Peer shut down
+[strm][0x77b1dc08c970] All done
+Handshake duration: 11.89 ms
+App-bytes: 100
+App-ready duration: 13.03 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 19 - QUIC Single
+[strm][0x754eb008c970] Starting...
+[strm][0x754eb008c970] Sending data...
+[strm][0x754eb008c970] Data sent
+[strm][0x754eb008c970] Data received
+[strm][0x754eb008c970] Peer shut down
+[strm][0x754eb008c970] All done
+Handshake duration: 11.94 ms
+App-bytes: 100
+App-ready duration: 13.05 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 20 - QUIC Single
+[strm][0x73f92c08c970] Starting...
+[strm][0x73f92c08c970] Sending data...
+[strm][0x73f92c08c970] Data sent
+[strm][0x73f92c08c970] Data received
+[strm][0x73f92c08c970] Peer shut down
+[strm][0x73f92c08c970] All done
+Handshake duration: 12.30 ms
+App-bytes: 100
+App-ready duration: 13.41 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 21 - QUIC Single
+[strm][0x73a70008c970] Starting...
+[strm][0x73a70008c970] Sending data...
+[strm][0x73a70008c970] Data sent
+[strm][0x73a70008c970] Data received
+[strm][0x73a70008c970] Peer shut down
+[strm][0x73a70008c970] All done
+Handshake duration: 11.86 ms
+App-bytes: 100
+App-ready duration: 12.94 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 22 - QUIC Single
+[strm][0x7f8cb408c970] Starting...
+[strm][0x7f8cb408c970] Sending data...
+[strm][0x7f8cb408c970] Data sent
+[strm][0x7f8cb408c970] Data received
+[strm][0x7f8cb408c970] Peer shut down
+[strm][0x7f8cb408c970] All done
+Handshake duration: 11.97 ms
+App-bytes: 100
+App-ready duration: 13.05 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 23 - QUIC Single
+[strm][0x7073f008c970] Starting...
+[strm][0x7073f008c970] Sending data...
+[strm][0x7073f008c970] Data sent
+[strm][0x7073f008c970] Data received
+[strm][0x7073f008c970] Peer shut down
+[strm][0x7073f008c970] All done
+Handshake duration: 11.94 ms
+App-bytes: 100
+App-ready duration: 13.06 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 24 - QUIC Single
+[strm][0x704c3008c970] Starting...
+[strm][0x704c3008c970] Sending data...
+[strm][0x704c3008c970] Data sent
+[strm][0x704c3008c970] Data received
+[strm][0x704c3008c970] Peer shut down
+[strm][0x704c3008c970] All done
+Handshake duration: 12.02 ms
+App-bytes: 100
+App-ready duration: 13.14 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 25 - QUIC Single
+[strm][0x7a392808c970] Starting...
+[strm][0x7a392808c970] Sending data...
+[strm][0x7a392808c970] Data sent
+[strm][0x7a392808c970] Data received
+[strm][0x7a392808c970] Peer shut down
+[strm][0x7a392808c970] All done
+Handshake duration: 11.93 ms
+App-bytes: 100
+App-ready duration: 13.00 ms
+Resumed: 0
+Rx-bytes: 2440
+Tx-bytes: 2440
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0

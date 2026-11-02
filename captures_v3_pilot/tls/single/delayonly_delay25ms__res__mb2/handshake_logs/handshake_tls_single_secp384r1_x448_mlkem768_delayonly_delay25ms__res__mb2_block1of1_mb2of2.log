@@ -1,0 +1,154 @@
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=1 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8058: root refcnt 2 limit 1000 seed 9239346089077435680
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 5 connexion(s) jetee(s) avant mesure
+Execution 1 - TLS Single
+Mode: full
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 1946
+Tx-bytes: 1753
+CertMsg: type=11 len_comp=0 len_plain=443
+Cert-comp: default
+Ticket: 1
+Ticket-bytes: 786
+Handshake duration: 109.78 ms
+App-ready duration: 160.86 ms
+Execution 2 - TLS Single
+Mode: resumed
+s_connection: verify depth is 1
+Ticket-in: loaded
+App-bytes: 100
+Resumed: 1
+Rx-bytes: 1353
+Tx-bytes: 2024
+CertMsg: type=0 len_comp=0 len_plain=0
+Cert-comp: default
+Handshake duration: 106.65 ms
+App-ready duration: 157.37 ms
+Execution 3 - TLS Single
+Mode: full
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 1945
+Tx-bytes: 1753
+CertMsg: type=11 len_comp=0 len_plain=443
+Cert-comp: default
+Ticket: 1
+Ticket-bytes: 786
+Handshake duration: 109.07 ms
+App-ready duration: 159.97 ms
+Execution 4 - TLS Single
+Mode: resumed
+s_connection: verify depth is 1
+Ticket-in: loaded
+App-bytes: 100
+Resumed: 1
+Rx-bytes: 1353
+Tx-bytes: 2024
+CertMsg: type=0 len_comp=0 len_plain=0
+Cert-comp: default
+Handshake duration: 106.43 ms
+App-ready duration: 157.53 ms
+Execution 5 - TLS Single
+Mode: full
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 1945
+Tx-bytes: 1753
+CertMsg: type=11 len_comp=0 len_plain=443
+Cert-comp: default
+Ticket: 1
+Ticket-bytes: 785
+Handshake duration: 109.79 ms
+App-ready duration: 161.11 ms
+Execution 6 - TLS Single
+Mode: resumed
+s_connection: verify depth is 1
+Ticket-in: loaded
+App-bytes: 100
+Resumed: 1
+Rx-bytes: 1353
+Tx-bytes: 2024
+CertMsg: type=0 len_comp=0 len_plain=0
+Cert-comp: default
+Handshake duration: 106.17 ms
+App-ready duration: 157.07 ms
+Execution 7 - TLS Single
+Mode: full
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 1945
+Tx-bytes: 1753
+CertMsg: type=11 len_comp=0 len_plain=443
+Cert-comp: default
+Ticket: 1
+Ticket-bytes: 785
+Handshake duration: 109.51 ms
+App-ready duration: 160.54 ms
+Execution 8 - TLS Single
+Mode: resumed
+s_connection: verify depth is 1
+Ticket-in: loaded
+App-bytes: 100
+Resumed: 1
+Rx-bytes: 1353
+Tx-bytes: 2024
+CertMsg: type=0 len_comp=0 len_plain=0
+Cert-comp: default
+Handshake duration: 106.52 ms
+App-ready duration: 157.40 ms
+Execution 9 - TLS Single
+Mode: full
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 1945
+Tx-bytes: 1753
+CertMsg: type=11 len_comp=0 len_plain=443
+Cert-comp: default
+Ticket: 1
+Ticket-bytes: 786
+Handshake duration: 109.44 ms
+App-ready duration: 160.30 ms
+Execution 10 - TLS Single
+Mode: resumed
+s_connection: verify depth is 1
+Ticket-in: loaded
+App-bytes: 100
+Resumed: 1
+Rx-bytes: 1353
+Tx-bytes: 2024
+CertMsg: type=0 len_comp=0 len_plain=0
+Cert-comp: default
+Handshake duration: 106.34 ms
+App-ready duration: 157.34 ms

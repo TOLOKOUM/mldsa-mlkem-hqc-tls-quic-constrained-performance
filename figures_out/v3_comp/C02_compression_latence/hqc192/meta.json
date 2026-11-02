@@ -1,0 +1,38 @@
+{
+  "campaign": "v3_comp",
+  "fid": "C02",
+  "slug": "compression_latence",
+  "variant": "hqc192",
+  "note": "paired by block versus compression 'none'; ML-DSA chains are incompressible (expect ~0)",
+  "n_data_rows": 36,
+  "data_columns": [
+    "kem",
+    "group",
+    "sig",
+    "comp",
+    "rtt_ms",
+    "delta_ms",
+    "ci_lo",
+    "ci_hi"
+  ],
+  "inputs": {
+    "v3_conn": {
+      "path": "analysis_v3/p6_connexions.csv.gz",
+      "sha256": "6b5007550bf3279b11db660f6ef639fd06a967d0f2b6c120246cb1ef27cf82c6",
+      "bytes": 611266
+    }
+  },
+  "fingerprint": "0bb4bd2aaad45acf3f773f67caf86480335ec28c8680e7d793e43b6b78a82f41",
+  "created_utc": "20261101T103027Z",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "matplotlib": "3.6.3"
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 12345,
+    "unit": "blocs entiers, percentile 2.5/97.5"
+  }
+}

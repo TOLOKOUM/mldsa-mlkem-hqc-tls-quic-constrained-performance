@@ -1,0 +1,9 @@
+timestamp,event,block_index,n_blocks,position,sig_alg,kem,cpu_temp_c,cpu_mhz_mean,load1,governor,no_turbo
+2026-10-27T11:21:24+01:00,before,1,1,1,secp384r1,x448_mlkem768,46.0,1600,1.23,performance,1
+2026-10-27T11:22:11+01:00,after,1,1,1,secp384r1,x448_mlkem768,47.0,1300,6.02,performance,1
+2026-10-27T11:22:40+01:00,before,1,1,2,secp384r1,hqc192,46.0,1600,4.90,performance,1
+2026-10-27T11:23:28+01:00,after,1,1,2,secp384r1,hqc192,48.0,1600,5.28,performance,1
+2026-10-27T11:23:56+01:00,before,1,1,3,mldsa65,hqc192,47.0,1300,3.48,performance,1
+2026-10-27T11:24:44+01:00,after,1,1,3,mldsa65,hqc192,47.0,1600,4.94,performance,1
+2026-10-27T11:25:13+01:00,before,1,1,4,mldsa65,x448_mlkem768,47.0,1601,3.55,performance,1
+2026-10-27T11:26:00+01:00,after,1,1,4,mldsa65,x448_mlkem768,48.0,1450,7.53,performance,1

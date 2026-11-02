@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "campaign": "v3_load",
+  "fid": "L03",
+  "slug": "charge_cpu_par_connexion",
+  "title": "CPU per connection: server versus client (load generator)",
+  "fingerprint": "53727366d674c2a4fca0105314c52c9b3c34394c1823eb76a9982c5f45442dbe",
+  "variants": [
+    "rtt0"
+  ],
+  "created_utc": "20261102T115945Z",
+  "inputs": {
+    "v3_load": {
+      "path": "analysis_v3/p6_load_niveaux.csv",
+      "sha256": "7dfe408df8cf0af001719423b77aeee79417e32791e5893556322f647632f732",
+      "bytes": 300301
+    }
+  }
+}

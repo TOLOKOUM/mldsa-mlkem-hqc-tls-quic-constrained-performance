@@ -1,0 +1,47 @@
+id,arm,description,estimate,ic_lo,ic_hi,band_lo,band_hi,verdict,note
+R3-quic,reprise,QUIC : le surcout CPU de HQC n'est pas economise par la reprise (decalage full - res ~0 ms),-0.11799999999998079,-0.4057749999999558,0.13275000000001605,-3.0,3.0,PASS,
+R2-full,reprise,QUIC x448_mlkem768 : pente de D(RTT) en connexion complete ~1 (penalite ML-DSA = 1 RTT),1.0060120000000001,1.0036794624999998,1.0085095375000004,0.8,1.2,PASS,
+R2-res,reprise,QUIC x448_mlkem768 : pente de D(RTT) en reprise ~0 (plus de certificat => plus de penalite),0.0007219999999999231,-0.001449587499999468,0.00283299999999996,-0.15,0.15,PASS,
+R2-diff,reprise,QUIC x448_mlkem768 : difference des pentes complete - reprise ~1,1.0052900000000002,1.0025971875000006,1.0082030499999997,0.8,1.2,PASS,
+R5,reprise,QUIC : la reprise reduit la pente en perte de D=ML-DSA-ECDSA (full - res > 0),2.101142857142862,0.36484553571427913,4.341852678571416,0.0,inf,PASS,sens seulement
+R3-tls,reprise,TLS : le surcout CPU de HQC n'est pas economise par la reprise (decalage full - res ~0 ms),-0.6375000000000028,-0.7565062500000306,-0.5262375000000045,-3.0,3.0,PASS,
+R1-full,reprise,"TLS x448_mlkem768 : pente de D(RTT)=ML-DSA-ECDSA, mode full, ~0",-0.0003395000000002462,-0.003025050000000788,0.002373549999998764,-0.1,0.1,PASS,
+R1-res,reprise,"TLS x448_mlkem768 : pente de D(RTT)=ML-DSA-ECDSA, mode res, ~0",-0.00044349999999950993,-0.0031470250000001725,0.0020315375000001727,-0.1,0.1,PASS,
+R4-quic,reprise,"QUIC ML-DSA-65 : octets recus en reprise <= 30 % de ceux d'une connexion complete (le certificat ML-DSA disparait ; pour ECDSA le certificat est petit, le ratio reste eleve : non teste)",0.2293879853342108,0.2293879853342108,0.2293879853342108,0.0,0.3,PASS,"valeur deterministe (mediane), sans IC"
+R4-tls,reprise,"TLS ML-DSA-65 : octets recus en reprise <= 25 % de ceux d'une connexion complete (le certificat ML-DSA disparait ; pour ECDSA le certificat est petit, le ratio reste eleve : non teste)",0.13245227606461088,0.13245227606461088,0.13245227606461088,0.0,0.25,PASS,"valeur deterministe (mediane), sans IC"
+R0-quic,reprise,QUIC : >= 98 % des connexions prevues en reprise ont reellement repris (ticket accepte),0.9898214285714285,0.9898214285714285,0.9898214285714285,0.98,1.0,PASS,proportion globale ; voir p6_resume_taux_reprise.csv par cellule
+R0-tls,reprise,TLS : >= 98 % des connexions prevues en reprise ont reellement repris (ticket accepte),1.0,1.0,1.0,0.98,1.0,PASS,proportion globale ; voir p6_resume_taux_reprise.csv par cellule
+C0-on,compression,"TLS temoins ECDSA remplis, zlib/brotli : >= 98 % des Certificate sont compresses (type 25) : la compression est effective",1.0,1.0,1.0,0.98,1.0,PASS,verification de manipulation
+C0-off,compression,TLS bras 'none' : aucun Certificate compresse (<= 1 %),0.0,0.0,0.0,0.0,0.01,PASS,verification de manipulation
+C2:tls/chain1/mldsa65/brotli,compression,TLS : ML-DSA-65 chain1 compresse (brotli) ne change pas k (pente ~0),0.0019149999999986988,-0.0036151250000002813,0.00721524999999985,-0.15,0.15,PASS,
+C1:tls/chain1/mldsa65/brotli,compression,TLS : gain en octets pour ML-DSA-65 chain1 (brotli) <= 400 o (donnees quasi aleatoires),0.0,0.0,0.0,-10.0,400.0,PASS,
+C5:tls/brotli,compression,"TLS : |dT| a RTT 0 (cout CPU de la decompression) <= 0,5 ms",0.03324999999999889,-0.03500000000000194,0.1317562499999985,-0.5,0.5,PASS,
+C2:tls/chain1/mldsa65/zlib,compression,TLS : ML-DSA-65 chain1 compresse (zlib) ne change pas k (pente ~0),-0.0016100000000000491,-0.00933012500000041,0.005770500000000649,-0.15,0.15,PASS,
+C1:tls/chain1/mldsa65/zlib,compression,TLS : gain en octets pour ML-DSA-65 chain1 (zlib) <= 400 o (donnees quasi aleatoires),0.0,0.0,0.0,-10.0,400.0,PASS,
+C5:tls/zlib,compression,"TLS : |dT| a RTT 0 (cout CPU de la decompression) <= 0,5 ms",-0.07200000000000095,-0.19876250000000129,0.01526875000000001,-0.5,0.5,PASS,
+C2:tls/chain1/mldsa65/zstd,compression,TLS : ML-DSA-65 chain1 compresse (zstd) ne change pas k (pente ~0),0.006454999999999717,0.0005047499999994672,0.01231512499999971,-0.15,0.15,PASS,
+C1:tls/chain1/mldsa65/zstd,compression,TLS : gain en octets pour ML-DSA-65 chain1 (zstd) <= 400 o (donnees quasi aleatoires),0.049999999999272404,0.0,0.1499999999996362,-10.0,400.0,PASS,
+C5:tls/zstd,compression,"TLS : |dT| a RTT 0 (cout CPU de la decompression) <= 0,5 ms",-0.044500000000000206,-0.14100000000000004,0.033512500000000944,-0.5,0.5,PASS,
+C2:tls/chain2/mldsa65/brotli,compression,TLS : ML-DSA-65 chain2 compresse (brotli) ne change pas k (pente ~0),-0.013580000000000609,-0.02550549999999956,-0.002194874999999581,-0.15,0.15,PASS,
+C1:tls/chain2/mldsa65/brotli,compression,TLS : gain en octets pour ML-DSA-65 chain2 (brotli) <= 400 o (donnees quasi aleatoires),0.0,0.0,0.0,-10.0,400.0,PASS,
+C2:tls/chain2/mldsa65/zlib,compression,TLS : ML-DSA-65 chain2 compresse (zlib) ne change pas k (pente ~0),-0.0019050000000001433,-0.014501624999999806,0.009876374999999424,-0.15,0.15,PASS,
+C1:tls/chain2/mldsa65/zlib,compression,TLS : gain en octets pour ML-DSA-65 chain2 (zlib) <= 400 o (donnees quasi aleatoires),0.024999999999636202,0.0,0.0750000000007276,-10.0,400.0,PASS,
+C2:tls/chain2/mldsa65/zstd,compression,TLS : ML-DSA-65 chain2 compresse (zstd) ne change pas k (pente ~0),-0.010245000000000443,-0.02182099999999887,0.0008319999999998885,-0.15,0.15,PASS,
+C1:tls/chain2/mldsa65/zstd,compression,TLS : gain en octets pour ML-DSA-65 chain2 (zstd) <= 400 o (donnees quasi aleatoires),0.0,0.0,0.0,-10.0,400.0,PASS,
+C3:tls/ctl16000/secp384r1/brotli,compression,"TLS : temoin ECDSA rempli a 16000 o, compression => k 1 -> 0 (pente ~ -1)",-0.9878899999999998,-0.997270374999999,-0.9788696249999994,-1.3,-0.7,PASS,
+C3:tls/ctl16000/secp384r1/zlib,compression,"TLS : temoin ECDSA rempli a 16000 o, compression => k 1 -> 0 (pente ~ -1)",-0.9966399999999996,-1.0077500000000004,-0.985173999999999,-1.3,-0.7,PASS,
+C3:tls/ctl16000/secp384r1/zstd,compression,"TLS : temoin ECDSA rempli a 16000 o, compression => k 1 -> 0 (pente ~ -1)",-0.9991649999999997,-1.0068352500000002,-0.9918942499999999,-1.3,-0.7,PASS,
+C4:tls/ctl8700/secp384r1/brotli,compression,"TLS : temoin ECDSA 8700 o, k reste 0 (vol < IW10) : pente ~0",0.0035050000000009618,-0.002270750000001013,0.009985125000000662,-0.15,0.15,PASS,
+C4:tls/ctl8700/secp384r1/zlib,compression,"TLS : temoin ECDSA 8700 o, k reste 0 (vol < IW10) : pente ~0",-0.00407999999999987,-0.012120125000000825,0.003250125000000997,-0.15,0.15,PASS,
+C4:tls/ctl8700/secp384r1/zstd,compression,"TLS : temoin ECDSA 8700 o, k reste 0 (vol < IW10) : pente ~0",-0.005804999999999296,-0.013200374999999709,0.0013501249999997777,-0.15,0.15,PASS,
+L0,charge,garde : >= 90 % des niveaux de concurrence maximale ont un client non sature (< 85 % CPU),1.0,1.0,1.0,0.9,1.0,PASS,si FAIL : donnees de saturation INUTILISABLES (le client est le goulot) -> ajouter des coeurs client
+L1,charge,"TLS (MT) ML-DSA-65+ML-KEM-768, RTT 0 : utilisation CPU du serveur a c max dans [0.90, 1.05] (le serveur sature)",0.9968793580224468,0.9959834236282431,0.9978149147758193,0.9,1.05,PASS,
+L1b,charge,"TLS (MT) ML-DSA-65+ML-KEM-768, RTT 0 : X(c max) x S_marginal dans [0.85, 1.15] (debit sature = 1/CPU marginal)",1.0040856696797,0.9981063055199176,1.0099468455969298,0.85,1.15,PASS,
+L2,charge,"TLS (MT) ECDSA, RTT 0 : X_sat(ML-KEM-768)/X_sat(HQC-192) dans [11, 17] (addendum 2026-11-01 : rapport des CPU serveur par connexion ~3/41)",14.029821073558649,13.961325331540644,14.098119277974543,11.0,17.0,PASS,
+L3,charge,"TLS (MT) ML-KEM-768, RTT 0 : X_sat(ML-DSA-65)/X_sat(ECDSA P-384) dans [0.82, 1.02] (addendum 2026-11-01 : le vol ML-DSA de 10 ko coute un peu de CPU serveur en plus)",0.9734483491568654,0.9717211837086719,0.9751729140337431,0.82,1.02,PASS,
+L3q,charge,"QUIC ML-KEM-768, RTT 0 : X_sat(ML-DSA-65)/X_sat(ECDSA P-384) dans [0.95, 1.30] (addendum 2026-11-01 ; serveur sature a c max)",1.0882780788813027,1.0742757804218441,1.1044632153937104,0.95,1.3,PASS,
+L7,charge,"RTT 0, ML-DSA-65+ML-KEM-768 : X_sat(TLS-MT)/X_sat(QUIC) dans [1.00, 1.30] (addendum 2026-11-01)",1.184839436437526,1.1815058938660727,1.18823941707635,1.0,1.3,PASS,
+L5:secp384r1/rtt0,charge,"calibration RTT 0, secp384r1 : serveur MT equivalent au serveur stock a c=1 (|dApp| <= 0,5 ms)",-0.030025000000001967,-0.03244999999999811,-0.027800000000001802,-0.5,0.5,PASS,
+L5:mldsa65/rtt0,charge,"calibration RTT 0, mldsa65 : serveur MT equivalent au serveur stock a c=1 (|dApp| <= 0,5 ms)",-0.02740000000000009,-0.03071249999999994,-0.024224999999999476,-0.5,0.5,PASS,
+L5cpu:rtt0,charge,"calibration RTT 0 : CPU serveur par connexion MT/stock dans [0.85, 1.15]",1.04521123943104,1.0427830806897342,1.0474491767198069,0.85,1.15,PASS,
+L6,charge,taux d'echec moyen pour c <= 8 inferieur a 1 %,0.0,0.0,0.0,0.0,0.01,PASS,

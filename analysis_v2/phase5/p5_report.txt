@@ -1,0 +1,149 @@
+PHASE 5 -- experiences naturelles. Constantes GELEES de 07 : A_TLS=267 SH_FIX=100 RHO_QUIC=1.037 MSS=1448 IW=10 QUIC_IW=12520 ; chaines : {'secp384r1': 430, 'mldsa65': 5494}
+
+=== 1. CELLULES SANS PERTE, RTT 50 : k predit (constantes gelees) CONTRE k observe ===
+    k observe = [D(50) - D(0)] / 50 par bloc, D = ML-DSA-65 - ECDSA P-384 (estimateur : MEDIANE par bloc ; moyenne en sensibilite) ;
+    D(0) = meme contraste a RTT 0 (fx, memes blocs). Contraste ECDSA rempli - ECDSA non rempli : D(0) pris egal a 0 (non mesure).
+    T (recouvrement HQC-192 mesure sur fx) TLS : 38.9 [38.5 ; 39.2] ms
+    T (recouvrement HQC-192 mesure sur fx) QUIC : 28.1 [21.6 ; 33.7] ms
+
+    -- PREDICTIONS (calculees avant la comparaison) --
+    CHAINE A 2 NIVEAUX                 TLS  x448_mlkem768  k_pred=1 (octets : test  15752 / ref   2417 ; plafond 1er vol  14480)
+    CHAINE A 2 NIVEAUX                 TLS  hqc192         k_pred=1 (octets : test  23650 / ref  10315 ; plafond 1er vol  14480)   [HQC : k_apparent = 1 - T/RTT]
+    CHAINE A 2 NIVEAUX                 QUIC x448_mlkem768  k_pred=1 (octets : test  16335 / ref   2507 ; plafond 1er vol   7512)
+    CHAINE A 2 NIVEAUX                 QUIC hqc192         k_pred=1 (octets : test  24525 / ref  10698 ; plafond 1er vol  12520)   [HQC : k_apparent = 1 - T/RTT]
+    MTU 1500                           TLS  x448_mlkem768  k_pred=0 (octets : test  10214 / ref   1944 ; plafond 1er vol  14480)
+    ECDSA REMPLI 8700 o (MTU 1500)     TLS  x448_mlkem768  k_pred=0 (octets : test  10214 / ref   1944 ; plafond 1er vol  14480)
+    MTU 1280                           TLS  x448_mlkem768  k_pred=0 (octets : test  10214 / ref   1944 ; plafond 1er vol  12280)
+    ECDSA REMPLI 8700 o (MTU 1280)     TLS  x448_mlkem768  k_pred=0 (octets : test  10214 / ref   1944 ; plafond 1er vol  12280)
+    MTU 1500                           QUIC x448_mlkem768  k_pred=1 (octets : test  10592 / ref   2016 ; plafond 1er vol   8832)
+    ECDSA REMPLI 8700 o (MTU 1500)     QUIC x448_mlkem768  k_pred=1 (octets : test  10592 / ref   2016 ; plafond 1er vol   8832)
+    MTU 1280                           QUIC x448_mlkem768  k_pred=1 (octets : test  10592 / ref   2016 ; plafond 1er vol   7512)
+    ECDSA REMPLI 8700 o (MTU 1280)     QUIC x448_mlkem768  k_pred=1 (octets : test  10592 / ref   2016 ; plafond 1er vol   7512)
+
+    cellule                            prot KEM             k_pred k_obs (mediane) [IC95 %]   k_moy trivial informatif verdict  marge test/ref au plafond
+    REFERENCE chaine simple (fx, deja  TLS  x448_mlkem768     0.00  0.00 [-0.00 ; 0.01]    0.00      0       non conforme -29.5 % / -86.6 %   (in-sample)
+    CHAINE A 2 NIVEAUX                 TLS  x448_mlkem768     1.00   0.95 [0.94 ; 0.96]    0.95      0       OUI conforme +8.8 % / -83.3 %
+    REFERENCE chaine simple (fx, deja  TLS  hqc192            0.22   0.21 [0.20 ; 0.22]    0.20      0       OUI conforme +25.1 % / -32.0 %   (in-sample)
+    CHAINE A 2 NIVEAUX                 TLS  hqc192            0.22   0.19 [0.18 ; 0.20]    0.18      0       OUI conforme +63.3 % / -28.8 %
+    REFERENCE chaine simple (fx, deja  QUIC x448_mlkem768     1.00   1.02 [1.01 ; 1.02]    1.01      1       non conforme +41.0 % / -73.2 %   (in-sample)
+    CHAINE A 2 NIVEAUX                 QUIC x448_mlkem768     1.00   1.00 [1.00 ; 1.01]    1.00      1       non conforme +117.4 % / -66.6 %
+    REFERENCE chaine simple (fx, deja  QUIC hqc192            0.44   0.42 [0.29 ; 0.59]    0.41      1       non conforme +50.0 % / -18.5 %   (in-sample)
+    CHAINE A 2 NIVEAUX                 QUIC hqc192            0.44   0.55 [0.39 ; 0.71]    0.52      1       non conforme +95.9 % / -14.6 %
+    MTU 1500                           TLS  x448_mlkem768     0.00 -0.00 [-0.01 ; 0.00]   -0.00      0       non conforme -29.5 % / -86.6 %
+    ECDSA REMPLI 8700 o (MTU 1500)     TLS  x448_mlkem768     0.00 -0.01 [-0.02 ; 0.00]   -0.01      0       non conforme -29.5 % / -86.6 %
+    MTU 1280                           TLS  x448_mlkem768     0.00 -0.00 [-0.01 ; 0.00]    0.00      0       non conforme -16.8 % / -84.2 %
+    ECDSA REMPLI 8700 o (MTU 1280)     TLS  x448_mlkem768     0.00  0.00 [-0.00 ; 0.01]    0.00      0       non conforme -16.8 % / -84.2 %
+    MTU 1500                           QUIC x448_mlkem768     1.00   1.01 [1.01 ; 1.02]    1.01      1       non conforme +19.9 % / -77.2 %
+    ECDSA REMPLI 8700 o (MTU 1500)     QUIC x448_mlkem768     1.00   1.02 [1.01 ; 1.03]    1.02      0       OUI conforme +19.9 % / -77.2 %
+    MTU 1280                           QUIC x448_mlkem768     1.00   1.02 [1.01 ; 1.04]    1.02      1       non conforme +41.0 % / -73.2 %
+    ECDSA REMPLI 8700 o (MTU 1280)     QUIC x448_mlkem768     1.00   1.03 [1.02 ; 1.04]    1.03      0       OUI conforme +41.0 % / -73.2 %
+
+    Hors echantillon (12 cellules) : {'conforme': 12}
+    Dont INFORMATIVES (le modele trivial echoue) : 4 -> {'conforme': 4}
+      * CHAINE A 2 NIVEAUX TLS x448_mlkem768 : k_obs 0.95 [0.94 ; 0.96] contre predit 1.00, trivial 0
+      * CHAINE A 2 NIVEAUX TLS hqc192 : k_obs 0.19 [0.18 ; 0.20] contre predit 0.22, trivial 0
+      * ECDSA REMPLI 8700 o (MTU 1500) QUIC x448_mlkem768 : k_obs 1.02 [1.01 ; 1.03] contre predit 1.00, trivial 0
+      * ECDSA REMPLI 8700 o (MTU 1280) QUIC x448_mlkem768 : k_obs 1.03 [1.02 ; 1.04] contre predit 1.00, trivial 0
+    Controle handshake seul : ecart max |k(hs) - k(app)| = 0.008
+    Limites : un seul RTT (50 ms) ; baseline D(0) issue de fx ; contraste rempli - non rempli sans D(0) ; HQC : T calibre sur fx (non independant de la chaine simple).
+
+=== 2. LE RECOUVREMENT T (calcul client HQC pendant le tour supplementaire) EST-IL CONSTANT ? ===
+    Hypothese : si le client dechiffre le chiffre HQC (decapsulation) pendant l'attente du 2e vol, alors D(RTT) - D(0) = k x max(0, RTT - T)
+    et le k apparent d'un profil de RTT donne vaut 1 - T/RTT. On estime T = RTT x (1 - k) sur chaque profil (mediane par bloc) et on compare.
+    prot  niv KEM                     T(RTT 125) ms          T(RTT 167) ms      T fx  CPU srv HQC  1er vol borne par
+    QUIC  L1  hqc128               0.2 [-1.1 ; 2.1]      -0.4 [-1.0 ; 0.2]         -         12.6  anti-amplification
+    QUIC  L1  p256_hqc128          0.4 [-0.9 ; 2.3]       2.0 [-0.4 ; 4.8]         -         15.2  anti-amplification
+    QUIC  L1  x25519_hqc128        0.9 [-0.8 ; 3.0]       2.0 [-0.2 ; 4.8]         -         13.2  anti-amplification
+    QUIC  L3  hqc192             20.1 [10.9 ; 28.5]     31.5 [25.0 ; 36.0]      28.1         38.6  fenetre initiale
+    QUIC  L3  p384_hqc192        26.5 [17.0 ; 35.8]     29.9 [21.2 ; 37.5]         -         43.6  fenetre initiale
+    QUIC  L3  x448_hqc192        24.2 [13.5 ; 34.4]     26.9 [18.0 ; 35.2]         -         40.3  fenetre initiale
+    TLS   L3  hqc192             38.6 [38.1 ; 39.0]     39.2 [38.8 ; 39.8]      38.9         38.2  fenetre initiale
+    TLS   L3  p384_hqc192        42.2 [41.3 ; 43.0]     42.8 [42.0 ; 43.6]         -         41.9  fenetre initiale
+    TLS   L3  x448_hqc192        39.4 [38.8 ; 39.9]     39.7 [39.3 ; 40.1]         -         39.7  fenetre initiale
+    TLS : |T(125) - T(167)| moyen = 0.5 ms sur 3 paires
+    TLS : |T moyen - CPU serveur HQC| : moyenne 0.5 ms, maximum 0.7 ms (3 paires)
+    QUIC : |T(125) - T(167)| moyen = 3.5 ms sur 6 paires
+    QUIC : |T moyen - CPU serveur HQC| : moyenne 13.6 ms, maximum 15.4 ms (6 paires)
+    Lecture : T constant entre profils ET egal au cout CPU de HQC = mecanisme de recouvrement compatible ; un T qui croit avec le RTT l'infirme.
+    QUIC : si le 1er vol est borne par l'anti-amplification, le serveur attend un paquet Handshake du client, donc la fin du calcul de decapsulation : T attendu ~ 0
+    (hypothese POST HOC, non testee directement : aucun pcap HQC). Si le 1er vol est borne par la fenetre initiale, les ACK Initial suffisent : recouvrement possible.
+    ATTENTION : profils main avec perte -> TLS = preuve SECONDAIRE ; T(fx) vient de cellules sans perte (independantes des profils main).
+
+=== 3. REPONSE A LA PERTE i.i.d. (RTT 50) : pente de la penalite ML-DSA en ms par % de perte, chaine simple contre chaine a 2 niveaux ===
+    D(p) = ML-DSA-65 - ECDSA P-384 (moyenne par bloc, car l'exposition aux pertes est le phenomene mesure) ; pente OLS sur p in {0, 1, 2, 5} par bloc ;
+    difference de pentes chaine 2 - chaine 1 appariee par bloc, IC95 % bootstrap sur 20 blocs. Hypothese a priori : plus de paquets exposes -> pente plus forte.
+    prot  KEM            estim.  chaine                     pente ms/%  [IC95 %]   D(0)/D(1)/D(2)/D(5) ms
+    QUIC  x448_mlkem768  mean    chaine 1                     1.97 [0.44 ; 3.60]     48.1 /  56.4 /  52.6 /  60.1
+    QUIC  x448_mlkem768  mean    chaine 2                    7.99 [2.76 ; 13.44]     47.4 /  51.9 /  71.8 /  86.2
+    QUIC  x448_mlkem768  mean    chaine 2 - chaine 1         6.01 [0.53 ; 11.76]   
+    QUIC  x448_mlkem768  median  chaine 1                     1.66 [0.34 ; 3.49]     48.2 /  48.6 /  48.1 /  56.0
+    QUIC  x448_mlkem768  median  chaine 2                     4.30 [2.38 ; 6.42]     47.5 /  47.7 /  48.3 /  67.6
+    QUIC  x448_mlkem768  median  chaine 2 - chaine 1          2.65 [0.13 ; 5.04]   
+    QUIC  hqc192         mean    chaine 1                     4.11 [1.52 ; 6.64]     18.0 /  20.2 /  25.7 /  37.9
+    QUIC  hqc192         mean    chaine 2                   12.89 [8.54 ; 17.46]     23.6 /  29.2 /  49.3 /  85.6
+    QUIC  hqc192         mean    chaine 2 - chaine 1         8.78 [3.17 ; 14.88]   
+    QUIC  hqc192         median  chaine 1                     5.24 [2.10 ; 8.36]     18.4 /  22.5 /  21.9 /  44.2
+    QUIC  hqc192         median  chaine 2                   12.59 [9.89 ; 15.61]     24.9 /  28.7 /  35.2 /  85.0
+    QUIC  hqc192         median  chaine 2 - chaine 1         7.35 [3.43 ; 11.27]   
+    TLS   x448_mlkem768  mean    chaine 1                   -1.63 [-9.74 ; 5.96]     -2.3 /  17.3 /  14.2 /  -3.4  (secondaire)
+    TLS   x448_mlkem768  mean    chaine 2                   1.61 [-8.45 ; 10.59]     45.0 /  43.5 /  34.7 /  52.1  (secondaire)
+    TLS   x448_mlkem768  mean    chaine 2 - chaine 1       3.25 [-12.20 ; 18.54]     (secondaire)
+    TLS   x448_mlkem768  median  chaine 1                    0.28 [-0.01 ; 0.83]     -2.2 /  -2.4 /  -2.1 /  -0.9  (secondaire)
+    TLS   x448_mlkem768  median  chaine 2                    0.02 [-0.09 ; 0.14]     45.3 /  45.3 /  45.3 /  45.4  (secondaire)
+    TLS   x448_mlkem768  median  chaine 2 - chaine 1        -0.26 [-0.85 ; 0.10]     (secondaire)
+    TLS   hqc192         mean    chaine 1                   10.82 [3.93 ; 17.83]      8.6 /   9.7 /  -7.2 /  59.4  (secondaire)
+    TLS   hqc192         mean    chaine 2                   4.05 [-3.19 ; 10.90]      7.2 /  13.1 /  29.3 /  28.0  (secondaire)
+    TLS   hqc192         mean    chaine 2 - chaine 1       -6.77 [-16.08 ; 2.49]     (secondaire)
+    TLS   hqc192         median  chaine 1                     2.68 [1.16 ; 4.32]      8.8 /   8.6 /   8.2 /  21.3  (secondaire)
+    TLS   hqc192         median  chaine 2                     3.11 [1.52 ; 4.82]      7.8 /   7.8 /   8.1 /  22.3  (secondaire)
+    TLS   hqc192         median  chaine 2 - chaine 1         0.43 [-1.65 ; 2.55]     (secondaire)
+    Lecture : la penalite ML-DSA sous perte croit-elle avec le volume du vol ? Differences de pentes dont l'IC exclut 0 = oui (QUIC seul interprete).
+
+=== 4. VERIFICATION PAR LES VOLS RECONSTITUES (06, pcap reels) ===
+    QUIC : le 1er vol serveur vaut-il 3 x octets client, y compris quand la taille du datagramme change (2 944 o a MTU 1500, 2 504 o a MTU 1280) ?
+      delayonly_delay25ms__qmtu__padto8700__pcap__mb2            secp384r1_x448_mlkem768    client  2944  b1  8804  b1/client 2.990  b1-3x   -28 | vol obs (b1+b2 si 2 tours)  10594  vol modele   10592 (-0.02 %)  plafond modele   8832  tours modele 2  rafales 4
+      delayonly_delay25ms__qmtu__pcap__mb2                       mldsa65_x448_mlkem768      client  2944  b1  8804  b1/client 2.990  b1-3x   -28 | vol obs (b1+b2 si 2 tours)  10594  vol modele   10592 (-0.02 %)  plafond modele   8832  tours modele 2  rafales 4
+      delayonly_delay25ms__qmtu__pcap__mb2                       secp384r1_x448_mlkem768    client  2944  b1  2061  b1/client 0.700  b1-3x -6771 | vol obs (b1+b2 si 2 tours)   2061  vol modele    2016 (-2.19 %)  plafond modele   8832  tours modele 1  rafales 3
+      delayonly_delay25ms_mtu1280__qmtu__padto8700__pcap__mb2    secp384r1_x448_mlkem768    client  2504  b1  7484  b1/client 2.989  b1-3x   -28 | vol obs (b1+b2 si 2 tours)  10595  vol modele   10592 (-0.03 %)  plafond modele   7512  tours modele 2  rafales 4
+      delayonly_delay25ms_mtu1280__qmtu__pcap__mb2               mldsa65_x448_mlkem768      client  2504  b1  7484  b1/client 2.989  b1-3x   -28 | vol obs (b1+b2 si 2 tours)  10595  vol modele   10592 (-0.03 %)  plafond modele   7512  tours modele 2  rafales 4
+      delayonly_delay25ms_mtu1280__qmtu__pcap__mb2               secp384r1_x448_mlkem768    client  2504  b1  2019  b1/client 0.806  b1-3x -5493 | vol obs (b1+b2 si 2 tours)   2019  vol modele    2016 (-0.15 %)  plafond modele   7512  tours modele 1  rafales 3
+    NB : RHO_QUIC (1,037) a ete cale sur la ligne ML-DSA-65 / MTU 1500 (10 594 o) : cette ligne est une identite, pas une validation.
+    Les lignes MTU 1280, ECDSA rempli et classique sont independantes de ce calage.
+    TLS : octets du 1er vol observes contre octets du vol modelises (A_TLS calee sur ML-DSA-65 seulement ; classique et rempli = verifications independantes)
+      delayonly_delay25ms__padto8700__pcap__mb2                  secp384r1_x448_mlkem768    b1 obs  10215  vol modele   10214  ecart   +1 o  rafales 2  tours modele 1
+      delayonly_delay25ms__pcap__mb2                             mldsa65_x448_mlkem768      b1 obs  10215  vol modele   10214  ecart   +1 o  rafales 2  tours modele 1
+      delayonly_delay25ms__pcap__mb2                             secp384r1_x448_mlkem768    b1 obs   1945  vol modele    1944  ecart   +1 o  rafales 2  tours modele 1
+      delayonly_delay25ms_mtu1280__padto8700__pcap__mb2          secp384r1_x448_mlkem768    b1 obs  10215  vol modele   10214  ecart   +1 o  rafales 2  tours modele 1
+      delayonly_delay25ms_mtu1280__pcap__mb2                     mldsa65_x448_mlkem768      b1 obs  10215  vol modele   10214  ecart   +1 o  rafales 2  tours modele 1
+      delayonly_delay25ms_mtu1280__pcap__mb2                     secp384r1_x448_mlkem768    b1 obs   1945  vol modele    1944  ecart   +1 o  rafales 2  tours modele 1
+    TLS : ecart absolu max entre octets observes et modelises = 1 o (sur 6 cellules)
+    Les rafales (n_bursts) comptent le vol de poignee de main et les emissions post-handshake ; le nombre de tours est lu sur D(RTT), pas ici.
+
+=== 5. SEGMENTS DU 1er VOL SERVEUR DANS LES PCAP : le ServerHello est-il ecrit a part ? ===
+    QUIC delayonly_delay25ms__qmtu__padto8700__pcap__mb2            secp384r1_x448_mlkem768    flux  15  taille modale  1472  1er segment modal  1472  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale (100 % des flux) : 1472x5,1444   | 8804 o : segments observes 6 ; modele 'octets' 6 ; modele 'deux ecritures' 7 ; repartition 6:15
+    QUIC delayonly_delay25ms__qmtu__pcap__mb2                       mldsa65_x448_mlkem768      flux  15  taille modale  1472  1er segment modal  1472  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale (100 % des flux) : 1472x5,1444   | 8804 o : segments observes 6 ; modele 'octets' 6 ; modele 'deux ecritures' 7 ; repartition 6:15
+    QUIC delayonly_delay25ms__qmtu__pcap__mb2                       secp384r1_x448_mlkem768    flux  15  taille modale  1472  1er segment modal  1472  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale ( 40 % des flux) : 1472,588   | 2060 o : segments observes 2 ; modele 'octets' 2 ; modele 'deux ecritures' 2 ; repartition 2:15
+    QUIC delayonly_delay25ms_mtu1280__qmtu__padto8700__pcap__mb2    secp384r1_x448_mlkem768    flux  15  taille modale  1252  1er segment modal  1252  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale (100 % des flux) : 1252,1251,1252x3,1225   | 7484 o : segments observes 6 ; modele 'octets' 6 ; modele 'deux ecritures' 6 ; repartition 6:15
+    QUIC delayonly_delay25ms_mtu1280__qmtu__pcap__mb2               mldsa65_x448_mlkem768      flux  15  taille modale  1252  1er segment modal  1252  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale (100 % des flux) : 1252,1251,1252x3,1225   | 7484 o : segments observes 6 ; modele 'octets' 6 ; modele 'deux ecritures' 6 ; repartition 6:15
+    QUIC delayonly_delay25ms_mtu1280__qmtu__pcap__mb2               secp384r1_x448_mlkem768    flux  15  taille modale  1252  1er segment modal  1252  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale ( 47 % des flux) : 1252,766   | 2018 o : segments observes 2 ; modele 'octets' 2 ; modele 'deux ecritures' 2 ; repartition 2:15
+    TLS  delayonly_delay25ms__padto8700__pcap__mb2                  secp384r1_x448_mlkem768    flux  15  taille modale  1448  1er segment modal  1448  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale ( 53 % des flux) : 1448x2,1200,1448x4,120,207   | 10215 o : segments observes 9 ; modele 'octets' 8 ; modele 'deux ecritures' 8 ; repartition 9:15
+    TLS  delayonly_delay25ms__pcap__mb2                             mldsa65_x448_mlkem768      flux  15  taille modale  1448  1er segment modal  1448  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale (100 % des flux) : 1448x2,1200,1448x2,1200,1448,575   | 10215 o : segments observes 8 ; modele 'octets' 8 ; modele 'deux ecritures' 8 ; repartition 8:15
+    TLS  delayonly_delay25ms__pcap__mb2                             secp384r1_x448_mlkem768    flux  15  taille modale  1448  1er segment modal  1448  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale ( 40 % des flux) : 1448,496   | 1944 o : segments observes 2 ; modele 'octets' 2 ; modele 'deux ecritures' 2 ; repartition 2:15
+    TLS  delayonly_delay25ms_mtu1280__padto8700__pcap__mb2          secp384r1_x448_mlkem768    flux  15  taille modale  1228  1er segment modal  1228  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale ( 67 % des flux) : 1228x3,412,1228x4,1000,207   | 10215 o : segments observes 10 ; modele 'octets' 9 ; modele 'deux ecritures' 10 ; repartition 10:15
+    TLS  delayonly_delay25ms_mtu1280__pcap__mb2                     mldsa65_x448_mlkem768      flux  15  taille modale  1228  1er segment modal  1228  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale (100 % des flux) : 1228x3,412,1228x3,412,1228,795   | 10215 o : segments observes 10 ; modele 'octets' 9 ; modele 'deux ecritures' 10 ; repartition 10:15
+    TLS  delayonly_delay25ms_mtu1280__pcap__mb2                     secp384r1_x448_mlkem768    flux  15  taille modale  1228  1er segment modal  1228  1er < 2e :   0 %  super-paquets : 0 %  (SH modele 1244 o)
+         sequence modale ( 27 % des flux) : 1228,719   | 1947 o : segments observes 2 ; modele 'octets' 2 ; modele 'deux ecritures' 3 ; repartition 2:15
+    Lecture TLS : variante 'deux ecritures' -> 1er segment ~ taille du ServerHello (< MSS) puis segments pleins ; variante 'octets' -> segments pleins des le debut.
+    Si 'super-paquets' > 0 %, la capture voit des segments agreges (GSO) : la structure en segments n'est alors pas observable pour ces flux.
+Figure : analysis_v2/phase5/fig8_experiences_naturelles.pdf

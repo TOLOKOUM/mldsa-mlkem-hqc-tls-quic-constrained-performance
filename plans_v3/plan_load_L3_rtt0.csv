@@ -1,0 +1,5 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+load_tls_mt_rtt0,tls,single,both,none,0,0,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,LOAD=1;TLS_SERVER=mt;CONC_LEVELS=1 2 4 8 16 32 64
+load_quic_rtt0,quic,single,both,none,0,0,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,LOAD=1;CONC_LEVELS=1 2 4 8 16 32 64
+loadcal_tls_stock_rtt0,tls,single,both,none,0,0,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,LOAD=1;TLS_SERVER=stock;CONC_LEVELS=1
+loadcal_tls_mt_rtt0,tls,single,both,none,0,0,20,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,LOAD=1;TLS_SERVER=mt;CONC_LEVELS=1

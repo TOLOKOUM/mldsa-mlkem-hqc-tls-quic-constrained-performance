@@ -1,0 +1,9 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+chain_tls_rtt50_loss0,tls,single,both,delay-only,0,25,200,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2
+chain_tls_rtt50_loss1_iid,tls,single,both,simple,1,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2
+chain_tls_rtt50_loss2_iid,tls,single,both,simple,2,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2
+chain_tls_rtt50_loss5_iid,tls,single,both,simple,5,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2
+chain_quic_rtt50_loss0,quic,single,both,delay-only,0,25,200,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2
+chain_quic_rtt50_loss1_iid,quic,single,both,simple,1,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2
+chain_quic_rtt50_loss2_iid,quic,single,both,simple,2,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2
+chain_quic_rtt50_loss5_iid,quic,single,both,simple,5,25,400,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768;secp384r1|hqc192;mldsa65|hqc192,CHAIN_DEPTH=2;MICRO_BATCHES=2

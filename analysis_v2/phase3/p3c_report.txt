@@ -1,0 +1,70 @@
+PHASE 3c -- robustesse du modele de seuil. 42 paires observees. Tailles de chaine : {'ed25519': 304, 'mldsa44': 3965, 'mldsa65': 5494, 'mldsa87': 7452, 'secp384r1': 430, 'secp521r1': 504}
+
+=== Q1. LE MODELE BAT-IL DES MODELES TRIVIAUX ? (verdicts sur les 21 paires par protocole) ===
+  Paires informatives (le modele 'constant par protocole' y echoue, estimateur median) : 7
+     QUIC L5 hqc256         : k median observe = 0.07/0.07 | predit (octets seuls / deux ecritures) = 0 / 0
+     QUIC L5 p521_hqc256    : k median observe = 0.06/0.05 | predit (octets seuls / deux ecritures) = 0 / 0
+     TLS L3 hqc192         : k median observe = 0.69/0.77 | predit (octets seuls / deux ecritures) = 1 / 1
+     TLS L3 p384_hqc192    : k median observe = 0.66/0.74 | predit (octets seuls / deux ecritures) = 1 / 1
+     TLS L3 x448_hqc192    : k median observe = 0.68/0.76 | predit (octets seuls / deux ecritures) = 1 / 1
+     TLS L5 mlkem1024      : k median observe = 1.00/1.00 | predit (octets seuls / deux ecritures) = 0 / 1
+     TLS L5 p521_mlkem1024 : k median observe = 0.97/0.97 | predit (octets seuls / deux ecritures) = 0 / 1
+
+  -- estimateur MEDIAN par bloc : conformes / partiels / infirmes --
+  modele                                                               QUIC (21)        TLS (21)         informatives (7)
+  trivial k=0                                                          2/0/19           16/1/4           2/1/4           
+  trivial k=1                                                          19/0/2           2/3/16           2/3/2           
+  constant par protocole (QUIC=1, TLS=0)                               19/0/2           16/1/4           0/1/6           
+  seuil, octets seuls (ecrit avant les resultats)                      21/0/0           16/3/2           2/3/2           
+  seuil, deux ecritures (ajoute apres avoir vu TLS L5 ML-KEM-1024)     21/0/0           18/3/0           4/3/0           
+
+  -- estimateur MOYENNE par bloc : conformes / partiels / infirmes --
+  modele                                                               QUIC (21)        TLS (21)         informatives (7)
+  trivial k=0                                                          0/2/19           16/1/4           0/3/4           
+  trivial k=1                                                          16/5/0           3/2/16           3/4/0           
+  constant par protocole (QUIC=1, TLS=0)                               16/5/0           16/1/4           0/3/4           
+  seuil, octets seuls (ecrit avant les resultats)                      16/5/0           17/2/2           1/4/2           
+  seuil, deux ecritures (ajoute apres avoir vu TLS L5 ML-KEM-1024)     16/5/0           19/2/0           3/4/0           
+
+  Lecture : seules les paires informatives distinguent le modele de seuil d'une regle triviale. Le test de prediction
+  honnete = la ligne 'octets seuls' (ecrite avant les temps) ; la ligne 'deux ecritures' est une correction post hoc.
+
+=== Q2. MARGE DE CHAQUE VOL AU SEUIL LE PLUS PROCHE (octets et % du seuil) ===
+  Paires dont un vol est a moins de 5 % d'un seuil (predictions fragiles) : 5 sur 42
+     QUIC L1 hqc128         : vol ML-DSA    de 11562 o, au-dessus du seuil precedent (marge +294 o), soit 2.6 %
+     QUIC L1 x25519_hqc128  : vol ML-DSA    de 11595 o, au-dessus du seuil precedent (marge +327 o), soit 2.9 %
+     TLS L5 p521_mlkem1024 : vol ML-DSA    de 14047 o, sous le seuil de 14480 o (marge +433 o), soit 3.0 %
+     QUIC L1 p256_hqc128    : vol ML-DSA    de 11629 o, au-dessus du seuil precedent (marge +361 o), soit 3.2 %
+     TLS L5 mlkem1024      : vol ML-DSA    de 13914 o, sous le seuil de 14480 o (marge +566 o), soit 3.9 %
+     TLS L5 hqc256         : vol classique de 15378 o, au-dessus du seuil precedent (marge +898 o), soit 6.2 %
+     TLS L5 p521_hqc256    : vol classique de 15511 o, au-dessus du seuil precedent (marge +1031 o), soit 7.1 %
+     TLS L5 P-521          : vol ML-DSA    de 12479 o, sous le seuil de 14480 o (marge +2001 o), soit 13.8 %
+  (TLS : octets / MSS compares a IW=10 segments, estimation sans l'arrondi par ecriture ; QUIC : octets du vol chiffre x 1,037.)
+
+=== Q3. BALAYAGE DES CONSTANTES DU MODELE (estimateur median ; reglage de reference = celui de 07) ===
+  -- un parametre a la fois (autres = reference) : nombre de predictions qui changent / conformes (median) --
+   RHO_QUIC     1.0: QUIC 3 chg/18 ok, TLS 0 chg/18 ok | 1.02: QUIC 0 chg/21 ok, TLS 0 chg/18 ok | 1.037: QUIC 0 chg/21 ok, TLS 0 chg/18 ok [ref] | 1.06: QUIC 0 chg/21 ok, TLS 0 chg/18 ok | 1.08: QUIC 0 chg/21 ok, TLS 0 chg/18 ok
+   A_TLS        167: QUIC 0 chg/21 ok, TLS 0 chg/18 ok | 267: QUIC 0 chg/21 ok, TLS 0 chg/18 ok [ref] | 367: QUIC 0 chg/21 ok, TLS 0 chg/18 ok
+   SH_FIX       50: QUIC 0 chg/21 ok, TLS 0 chg/18 ok | 100: QUIC 0 chg/21 ok, TLS 0 chg/18 ok [ref] | 150: QUIC 0 chg/21 ok, TLS 0 chg/18 ok
+   chain_scale  0.95: QUIC 0 chg/21 ok, TLS 0 chg/18 ok | 1.0: QUIC 0 chg/21 ok, TLS 0 chg/18 ok [ref] | 1.05: QUIC 0 chg/21 ok, TLS 0 chg/18 ok
+   TCP_IW       4: QUIC 0 chg/21 ok, TLS 13 chg/5 ok | 8: QUIC 0 chg/21 ok, TLS 4 chg/14 ok | 10: QUIC 0 chg/21 ok, TLS 0 chg/18 ok [ref] | 12: QUIC 0 chg/21 ok, TLS 4 chg/14 ok | 16: QUIC 0 chg/21 ok, TLS 7 chg/14 ok
+   QUIC_IW      12000: QUIC 0 chg/21 ok, TLS 0 chg/18 ok | 12520: QUIC 0 chg/21 ok, TLS 0 chg/18 ok [ref] | 14720: QUIC 0 chg/21 ok, TLS 0 chg/18 ok
+   TCP_MSS      1428: QUIC 0 chg/21 ok, TLS 0 chg/18 ok | 1448: QUIC 0 chg/21 ok, TLS 0 chg/18 ok [ref] | 1460: QUIC 0 chg/21 ok, TLS 0 chg/18 ok
+
+  -- TEST DU MECANISME : quelle fenetre initiale TCP les donnees selectionnent-elles ? (TLS, conformes sur 21, median) --
+   variante bytes  : IW=4 : 2/21 (18 predictions changees) | IW=8 : 17/21 (3 predictions changees) | IW=10 : 16/21 (0 predictions changees) | IW=12 : 14/21 (2 predictions changees) | IW=16 : 14/21 (5 predictions changees)
+   variante writes : IW=4 : 5/21 (13 predictions changees) | IW=8 : 14/21 (4 predictions changees) | IW=10 : 18/21 (0 predictions changees) | IW=12 : 14/21 (4 predictions changees) | IW=16 : 14/21 (7 predictions changees)
+   (le defaut Linux est IW=10 ; la valeur n'est pas ajustee sur les temps)
+
+  -- grille complete sur les constantes de nuisance (IW TCP = 10) : 1215 combinaisons de 6 constantes --
+   QUIC bytes  : reference 21/21 conformes ; sur la grille min 18, mediane 21, max 21 ; 78 % des combinaisons font >= la reference, 0 % font mieux
+   TLS  bytes  : reference 16/21 conformes ; sur la grille min 16, mediane 16, max 18 ; 100 % des combinaisons font >= la reference, 15 % font mieux
+   QUIC writes : reference 21/21 conformes ; sur la grille min 18, mediane 21, max 21 ; 78 % des combinaisons font >= la reference, 0 % font mieux
+   TLS  writes : reference 18/21 conformes ; sur la grille min 18, mediane 18, max 18 ; 100 % des combinaisons font >= la reference, 0 % font mieux
+
+  Paires dont la prediction (variante deux ecritures) change dans plus de 5 % des combinaisons de nuisance : 3 sur 42
+     QUIC L1 hqc128         : prediction de reference k=1, inchangee dans 78 % des combinaisons, conforme dans 78 %
+     QUIC L1 p256_hqc128    : prediction de reference k=1, inchangee dans 84 % des combinaisons, conforme dans 84 %
+     QUIC L1 x25519_hqc128  : prediction de reference k=1, inchangee dans 84 % des combinaisons, conforme dans 84 %
+     (octets seuls) TLS L5 mlkem1024      : conforme dans 7 % des combinaisons
+     (octets seuls) TLS L5 p521_mlkem1024 : conforme dans 15 % des combinaisons

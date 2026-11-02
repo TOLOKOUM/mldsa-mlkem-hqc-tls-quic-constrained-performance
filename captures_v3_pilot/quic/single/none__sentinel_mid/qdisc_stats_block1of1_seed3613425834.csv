@@ -1,0 +1,5 @@
+timestamp,block_index,n_blocks,position,sig_alg,kem,role,pkts_before,dropped_before,pkts_after,dropped_after,effective_drop_pct
+2026-10-27T11:33:04+01:00,1,1,1,mldsa65,x448_mlkem768,server_egress,0,0,476,0,0.0000
+2026-10-27T11:33:04+01:00,1,1,1,mldsa65,x448_mlkem768,client_egress,0,0,300,0,0.0000
+2026-10-27T11:33:36+01:00,1,1,2,secp384r1,x448_mlkem768,server_egress,0,0,261,0,0.0000
+2026-10-27T11:33:36+01:00,1,1,2,secp384r1,x448_mlkem768,client_egress,0,0,240,0,0.0000

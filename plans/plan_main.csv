@@ -1,0 +1,10 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+main_tls_single_ideal,tls,single,both,none,0,0,500,,
+main_tls_single_moderate,tls,single,both,simple,1.3,62.51,500,,
+main_tls_single_degraded,tls,single,both,simple,1.5833,83.52,500,,
+main_tls_mutual_ideal,tls,mutual,both,none,0,0,500,,
+main_tls_mutual_moderate,tls,mutual,both,simple,1.3,62.51,500,,
+main_tls_mutual_degraded,tls,mutual,both,simple,1.5833,83.52,500,,
+main_quic_single_ideal,quic,single,both,none,0,0,500,,
+main_quic_single_moderate,quic,single,both,simple,1.3,62.51,500,,
+main_quic_single_degraded,quic,single,both,simple,1.5833,83.52,500,,

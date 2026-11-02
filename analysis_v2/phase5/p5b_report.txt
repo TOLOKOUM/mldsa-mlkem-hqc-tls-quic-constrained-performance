@@ -1,0 +1,57 @@
+PHASE 5b -- modele d'ecritures TLS (tampon d'ecriture OpenSSL de 4096 o). Chaines : {'secp384r1': 430, 'mldsa65': 5494}
+=== (a) LE MODELE D'ECRITURES REPRODUIT-IL LES SEQUENCES DE SEGMENTS OBSERVEES (pcap reels) ? ===
+    delayonly_delay25ms__padto8700__pcap__mb2            secp384r1_x448_mlkem768  modele : 1448x2,1200,1448x4,120,207                 observe : 1448x2,1200,1448x4,120,207                 IDENTIQUE
+                                                                                  ecritures du modele : 4096+5912+207 (octets 10215 contre 10215 observes)
+    delayonly_delay25ms__pcap__mb2                       mldsa65_x448_mlkem768    modele : 1448x2,1200,1448x2,1200,1448,575           observe : 1448x2,1200,1448x2,1200,1448,575           IDENTIQUE
+                                                                                  ecritures du modele : 4096+4096+2023 (octets 10215 contre 10215 observes)
+    delayonly_delay25ms__pcap__mb2                       secp384r1_x448_mlkem768  modele : 1448,497                                   observe : 1448,496                                   IDENTIQUE a 3 o pres
+                                                                                  ecritures du modele : 1945 (octets 1945 contre 1944 observes)
+    delayonly_delay25ms_mtu1280__padto8700__pcap__mb2    secp384r1_x448_mlkem768  modele : 1228x3,412,1228x4,1000,207                 observe : 1228x3,412,1228x4,1000,207                 IDENTIQUE
+                                                                                  ecritures du modele : 4096+5912+207 (octets 10215 contre 10215 observes)
+    delayonly_delay25ms_mtu1280__pcap__mb2               mldsa65_x448_mlkem768    modele : 1228x3,412,1228x3,412,1228,795             observe : 1228x3,412,1228x3,412,1228,795             IDENTIQUE
+                                                                                  ecritures du modele : 4096+4096+2023 (octets 10215 contre 10215 observes)
+    delayonly_delay25ms_mtu1280__pcap__mb2               secp384r1_x448_mlkem768  modele : 1228,717                                   observe : 1228,719                                   IDENTIQUE a 3 o pres
+                                                                                  ecritures du modele : 1945 (octets 1945 contre 1947 observes)
+    -> 4 / 6 cellules reproduites exactement, 6 / 6 a 3 o pres (la longueur DER d'une signature ECDSA varie de quelques octets).
+    NB : _delay25ms_mtu1280__padto8700__pcap__mb2 secp384r1_x448_mlkem768 remplit EXACTEMENT la fenetre initiale (10 segments sur 10) et ne bascule pas (k observe ~ 0) : un segment de plus => k = 1.
+    NB : delayonly_delay25ms_mtu1280__pcap__mb2 mldsa65_x448_mlkem768 remplit EXACTEMENT la fenetre initiale (10 segments sur 10) et ne bascule pas (k observe ~ 0) : un segment de plus => k = 1.
+    Le 1er segment plein et le segment partiel a la fin de chaque ecriture sont reproduits sans parametre ajuste.
+
+=== (b) k PREDIT PAR LE MODELE D'ECRITURES CONTRE k OBSERVE (21 paires TLS, estimateur MEDIAN par bloc, profils RTT 125 / 167) ===
+    niv KEM              seg.cl seg.ML  oct.cl  oct.ML | k : octets 2 ecr. BIO    | obs 125/167    | verdicts : octets / 2 ecritures / BIO / BIO+T
+    L1  P-256                1     5     701    6718 | k : 0      0      0      | -0.00 / -0.00 | conforme / conforme / conforme / conforme
+    L1  x25519               1     5     668    6685 | k : 0      0      0      |  0.00 /  0.00 | conforme / conforme / conforme / conforme
+    L1  p256_mlkem512        2     6    1469    7486 | k : 0      0      0      | -0.00 /  0.00 | conforme / conforme / conforme / conforme
+    L1  x25519_mlkem512      1     6    1436    7453 | k : 0      0      0      |  0.00 /  0.00 | conforme / conforme / conforme / conforme
+    L1  mlkem512             1     6    1404    7421 | k : 0      0      0      | -0.00 /  0.00 | conforme / conforme / conforme / conforme
+    L1  hqc128               4     9    5133   11150 | k : 0      0      0      |  0.00 / -0.00 | conforme / conforme / conforme / conforme
+    L1  p256_hqc128          4     9    5198   11215 | k : 0      0      0      |  0.00 /  0.00 | conforme / conforme / conforme / conforme
+    L1  x25519_hqc128        4     9    5165   11182 | k : 0      0      0      |  0.00 /  0.00 | conforme / conforme / conforme / conforme
+    L3  P-384                1     7     898    9168 | k : 0      0      0      |  0.00 / -0.00 | conforme / conforme / conforme / conforme
+    L3  x448                 1     7     857    9127 | k : 0      0      0      | -0.00 / -0.00 | conforme / conforme / conforme / conforme
+    L3  p384_mlkem768        2     8    1986   10256 | k : 0      0      0      | -0.00 / -0.00 | conforme / conforme / conforme / conforme
+    L3  x448_mlkem768        2     8    1945   10215 | k : 0      0      0      | -0.00 / -0.00 | conforme / conforme / conforme / conforme
+    L3  mlkem768             2     8    1889   10159 | k : 0      0      0      |  0.00 / -0.00 | conforme / conforme / conforme / conforme
+    L3  hqc192               8    14    9843   18113 | k : 1      1      1      |  0.69 /  0.77 | partiel / partiel / partiel / conforme   <-- informative
+    L3  p384_hqc192          8    14    9940   18210 | k : 1      1      1      |  0.66 /  0.74 | partiel / partiel / partiel / conforme   <-- informative
+    L3  x448_hqc192          8    14    9899   18169 | k : 1      1      1      |  0.68 /  0.76 | partiel / partiel / partiel / conforme   <-- informative
+    L5  P-521                1    10    1043   12480 | k : 0      0      0      |  0.00 /  0.00 | conforme / conforme / conforme / conforme
+    L5  p521_mlkem1024       2    11    2611   14048 | k : 0      1      1      |  0.97 /  0.97 | infirme / conforme / conforme / conforme   <-- informative
+    L5  mlkem1024            2    11    2478   13915 | k : 0      1      1      |  1.00 /  1.00 | infirme / conforme / conforme / conforme   <-- informative
+    L5  hqc256              11    19   15379   26816 | k : 0      0      0      | -0.00 / -0.01 | conforme / conforme / conforme / conforme
+    L5  p521_hqc256         11    19   15512   26949 | k : 0      0      0      | -0.00 / -0.00 | conforme / conforme / conforme / conforme
+
+    octets seuls (07)                              21 paires : 16 conformes / 3 partiels / 2 infirmes   | 5 informatives : 0 / 3 / 2
+    deux ecritures (07, post hoc)                  21 paires : 18 conformes / 3 partiels / 0 infirmes   | 5 informatives : 2 / 3 / 0
+    ecritures BIO (mecanisme deduit des pcap)      21 paires : 18 conformes / 3 partiels / 0 infirmes   | 5 informatives : 2 / 3 / 0
+    ecritures BIO + recouvrement T (HQC-192)       21 paires : 21 conformes / 0 partiels / 0 infirmes   | 5 informatives : 5 / 0 / 0
+
+    Paires a +-1 segment de la limite de 10 (predictions fragiles) : L1 hqc128 (9 segments), L1 p256_hqc128 (9 segments), L1 x25519_hqc128 (9 segments), L5 P-521 (10 segments), L5 p521_mlkem1024 (11 segments), L5 mlkem1024 (11 segments)
+
+    Paires ou les trois modeles divergent : L5 p521_mlkem1024 (octets 0 / 2 ecr. 1 / BIO 1 ; observe 0.97-0.97), L5 mlkem1024 (octets 0 / 2 ecr. 1 / BIO 1 ; observe 1.00-1.00)
+    Lecture : si le modele BIO reproduit les paires proches du seuil (TLS L5 ML-KEM-1024 : 13 914 / 14 047 o contre 14 480 o) SANS avoir ete ajuste sur elles,
+    la correction 'deux ecritures' (post hoc) est remplacee par un mecanisme observe sur pcap : chaque ecriture consomme un segment de fenetre partiel.
+
+=== (c) CELLULES NATURELLES TLS (chaine a 2 niveaux, x448_mlkem768 / hqc192) : vols predits par le modele d'ecritures ===
+    x448_mlkem768  classique : ecritures 2423, segments 2, tours 1 | ML-DSA : ecritures 4096+8249+3413, segments 12, tours 2 | k = 1
+    hqc192         classique : ecritures 4096+5041+1184, segments 8, tours 1 | ML-DSA : ecritures 4096+5041+4096+7010+3413, segments 18, tours 2 | k = 1

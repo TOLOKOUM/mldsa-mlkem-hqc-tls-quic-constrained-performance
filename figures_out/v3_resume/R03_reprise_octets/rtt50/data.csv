@@ -1,0 +1,17 @@
+proto,sig,kem,mode,rx_bytes_median
+tls,secp384r1,x448_mlkem768,full,1945.0
+tls,secp384r1,hqc192,full,9779.0
+tls,mldsa65,x448_mlkem768,full,10215.0
+tls,mldsa65,hqc192,full,18049.0
+tls,secp384r1,x448_mlkem768,resumed,1353.0
+tls,secp384r1,hqc192,resumed,9187.0
+tls,mldsa65,x448_mlkem768,resumed,1353.0
+tls,mldsa65,hqc192,resumed,9187.0
+quic,secp384r1,x448_mlkem768,full,2440.0
+quic,secp384r1,hqc192,full,11463.0
+quic,mldsa65,x448_mlkem768,full,10637.0
+quic,mldsa65,hqc192,full,20035.0
+quic,secp384r1,x448_mlkem768,resumed,2440.0
+quic,secp384r1,hqc192,resumed,11020.0
+quic,mldsa65,x448_mlkem768,resumed,2440.0
+quic,mldsa65,hqc192,resumed,11020.0

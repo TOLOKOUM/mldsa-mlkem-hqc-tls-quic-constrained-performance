@@ -63,6 +63,15 @@ if [ -z "$MUTUAL" ]; then
      MUTUAL="true"
 fi
 
+# Chaine realiste (CHAIN_DEPTH=2 de doCert.sh) : l option -cert de s_server ne charge QUE le premier
+# certificat du fichier (verifie sous OpenSSL 3.0.13) ; l'intermediaire doit etre fourni par
+# -cert_chain, sinon TLS enverrait la feuille seule alors que MsQuic envoie toute la chaine.
+CHAIN_ARGS=""
+if [ -s "$CERT_PATH/ICA.crt" ]; then
+    CHAIN_ARGS="-cert_chain $CERT_PATH/ICA.crt"
+    echo "Chaine de certificats: intermediaire $CERT_PATH/ICA.crt envoye par s_server"
+fi
+
 # ---------------------------
 # Create certificates 
 # ---------------------------
@@ -82,24 +91,35 @@ echo "Running $0 with SIG_ALG=$SIG_ALG and KEM_ALG=$KEM_ALG"
 
 if [ "$USE_TLS" = "true" ]; then
 
+    # Point 4 du prescreen TDSC (TDSC-2026-09-3862) : -WWW (majuscule) sert
+    # un vrai fichier depuis le repertoire courant ($INSTALLDIR/bin, ou se
+    # trouve payload.bin genere au build -- voir le patch du Dockerfile),
+    # au lieu de la page de statut de taille variable de -www (minuscule).
+    # Ca donne une charge applicative de taille fixe (100 octets), la meme
+    # des deux cotes TLS/QUIC (cf. SendBufferLength dans s_connection_quic.c
+    # / s_server_quic.c), pour que "App-ready duration" soit comparable.
+    # Critique 4 (AE) : -num_tickets 0 supprime les NewSessionTicket post-handshake
+    # que s_server envoie par defaut en TLS 1.3, alors que le serveur QUIC
+    # n'en envoie pas (ConnectionSendResumptionTicket desactive) : sans cela,
+    # TLS transporterait des octets/paquets supplementaires absents de QUIC.
     if [ -n "${SSL_DIR:-}" ]; then
         KEYLOG_PATH="${SSL_DIR}/sslkeys_server_${SIG_ALG}_${KEM_ALG}.log"
         echo "🔐 TLS Keys stored in: $KEYLOG_PATH"     
 
         if [ "$MUTUAL" = "true" ]; then    
          echo "Executing TLS - Mutual Key"
-         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -verify 1 -verifyCAfile $CERT_PATH/CA.crt  -accept :4433 -keylogfile "$KEYLOG_PATH"
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key $CHAIN_ARGS -groups $DEFAULT_GROUPS -WWW -tls1_3 -num_tickets 0 -verify 1 -verifyCAfile $CERT_PATH/CA.crt  -accept :4433 -keylogfile "$KEYLOG_PATH"
         else
          echo "Executing TLS - Single Key"   
-         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -accept :4433 -keylogfile "$KEYLOG_PATH" 
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key $CHAIN_ARGS -groups $DEFAULT_GROUPS -WWW -tls1_3 -num_tickets 0 -accept :4433 -keylogfile "$KEYLOG_PATH" 
         fi 
     else
         if [ "$MUTUAL" = "true" ]; then    
          echo "Executing TLS - Mutual"
-         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -verify 1 -verifyCAfile $CERT_PATH/CA.crt  -accept :4433
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key $CHAIN_ARGS -groups $DEFAULT_GROUPS -WWW -tls1_3 -num_tickets 0 -verify 1 -verifyCAfile $CERT_PATH/CA.crt  -accept :4433
         else
          echo "Executing TLS - Single"   
-         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -accept :4433
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key $CHAIN_ARGS -groups $DEFAULT_GROUPS -WWW -tls1_3 -num_tickets 0 -accept :4433
         fi 
     fi    
 
@@ -116,4 +136,3 @@ fi
 
 # Give server time to come up first:
 #sleep 1
-

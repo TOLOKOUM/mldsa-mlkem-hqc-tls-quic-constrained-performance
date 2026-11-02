@@ -1,0 +1,5 @@
+proto,auth,raison,hs_completed,n
+quic,single,client-side timeout after 150s,0,44
+quic,single,unspecified,0,25
+quic,single,unspecified,1,13
+tls,single,client-side timeout after 150s,0,61

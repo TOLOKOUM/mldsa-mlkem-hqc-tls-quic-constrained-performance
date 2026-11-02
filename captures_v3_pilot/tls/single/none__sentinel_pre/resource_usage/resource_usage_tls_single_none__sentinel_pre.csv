@@ -1,0 +1,5 @@
+timestamp,protocol,auth_mode,sig_alg,kem,network_profile,role,n_runs,cpu_usec_total,cpu_usec_per_handshake,mem_peak_bytes,block_index,n_blocks,seed
+2026-10-27T11:07:08+01:00,tls,single,mldsa65,x448_mlkem768,none,server,25,438685,14622.833,5427200,1,1,536290827
+2026-10-27T11:07:08+01:00,tls,single,mldsa65,x448_mlkem768,none,client,25,991809,33060.300,4628480,1,1,536290827
+2026-10-27T11:07:41+01:00,tls,single,secp384r1,x448_mlkem768,none,server,25,431437,14381.233,5394432,1,1,536290827
+2026-10-27T11:07:41+01:00,tls,single,secp384r1,x448_mlkem768,none,client,25,1051609,35053.633,5054464,1,1,536290827

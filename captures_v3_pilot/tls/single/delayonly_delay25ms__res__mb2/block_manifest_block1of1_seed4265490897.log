@@ -1,0 +1,106 @@
+timestamp_start=2026-10-27T11:16:23+01:00
+protocol=tls auth_mode=single network_profile=delayonly_delay25ms__res__mb2
+n_blocks=1 block_index=1 seed=4265490897 runs_this_block=20 micro_batches=2 runs_per_round=10
+kernel=6.8.0-147-generic
+cpu_model=Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+governor=performance no_turbo=1
+mtu=1500 loss_direction=s2c netem_limit=1000 pin_cpus=auto server_cpuset=--cpuset-cpus=1,5 client_cpuset=--cpuset-cpus=2,6
+bandwidth=100Mbit/s_netem_rate100 rate_mbit=100 jitter=0(pas_d_argument_jitter) file=netem_limit_1000_paquets
+docker_version=29.1.3
+image_id=sha256:b7e8c244a3c6e0565f21f155db22c1f567597fb14cb8af84bb155f6356963950
+only_pairs=secp384r1|x448_mlkem768,mldsa65|x448_mlkem768,secp384r1|hqc192,mldsa65|hqc192 per_conn_pcap=0
+chain_depth=1 cert_pad_bytes=0 cert_pad_target_der=0 udp_gso=0 quic_mtu_sync=0 quic_mtu=default(1280+DPLPMTUD)
+total_runs=20 n_blocks=1 warmup_runs=5 handshake_timeout_s=150
+v3: cert_comp=off resume=1 zerortt_arm=0 load=0 tls_server=stock conc_levels="1 2 4 8 16 32" load_seconds=20 load_trim_s=2 srv_logical_cpus=1 image=uma-tls-quic-pq-34-v3
+cooldown_temp_c=off offload_off=1 visit_tag=none tcp_isolate=1
+execution_order round=1/2:
+  1) secp384r1|hqc192
+  2) mldsa65|hqc192
+  3) secp384r1|x448_mlkem768
+  4) mldsa65|x448_mlkem768
+execution_order round=2/2:
+  1) mldsa65|x448_mlkem768
+  2) secp384r1|x448_mlkem768
+  3) secp384r1|hqc192
+  4) mldsa65|hqc192
+cert_sizes[secp384r1|hqc192 block=1]: sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=447 intermediate=0 server_leaf=430 user_leaf=425 server_chain_sent=430 user_chain_sent=425 
+offload[pair=secp384r1|hqc192][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|hqc192][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=secp384r1|hqc192][servidor]=qdisc netem 8042: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 12017976518086906367
+offload[pair=secp384r1|hqc192][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|hqc192][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=secp384r1|hqc192]=permanent srv=172.18.0.2/fe:59:05:54:37:81 cli=172.18.0.3/be:e6:ef:21:ed:e1
+netem[pair=secp384r1|hqc192][cliente]=qdisc netem 8043: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 7549178543840502352
+tcp_metrics_entries[pair=secp384r1|hqc192][cliente]=0
+tcp_metrics_entries[pair=secp384r1|hqc192][servidor]=0
+cert_sizes[mldsa65|hqc192 block=1]: sig=mldsa65 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=5512 intermediate=0 server_leaf=5494 user_leaf=5489 server_chain_sent=5494 user_chain_sent=5489 
+offload[pair=mldsa65|hqc192][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|hqc192][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=mldsa65|hqc192][servidor]=qdisc netem 8046: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 4022629199843657038
+offload[pair=mldsa65|hqc192][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|hqc192][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=mldsa65|hqc192]=permanent srv=172.18.0.2/d2:f3:10:24:cf:a9 cli=172.18.0.3/1a:45:f1:96:0b:8f
+netem[pair=mldsa65|hqc192][cliente]=qdisc netem 8047: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 16951582427729456078
+tcp_metrics_entries[pair=mldsa65|hqc192][cliente]=0
+tcp_metrics_entries[pair=mldsa65|hqc192][servidor]=0
+cert_sizes[secp384r1|x448_mlkem768 block=1]: sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=448 intermediate=0 server_leaf=431 user_leaf=426 server_chain_sent=431 user_chain_sent=426 
+offload[pair=secp384r1|x448_mlkem768][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|x448_mlkem768][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=secp384r1|x448_mlkem768][servidor]=qdisc netem 804a: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 10180469177562056663
+offload[pair=secp384r1|x448_mlkem768][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|x448_mlkem768][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=secp384r1|x448_mlkem768]=permanent srv=172.18.0.2/2a:ac:9c:a4:ca:cb cli=172.18.0.3/3a:f9:6b:38:6b:b1
+netem[pair=secp384r1|x448_mlkem768][cliente]=qdisc netem 804b: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 4285541927460932959
+tcp_metrics_entries[pair=secp384r1|x448_mlkem768][cliente]=0
+tcp_metrics_entries[pair=secp384r1|x448_mlkem768][servidor]=0
+cert_sizes[mldsa65|x448_mlkem768 block=1]: sig=mldsa65 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=5512 intermediate=0 server_leaf=5494 user_leaf=5489 server_chain_sent=5494 user_chain_sent=5489 
+offload[pair=mldsa65|x448_mlkem768][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|x448_mlkem768][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=mldsa65|x448_mlkem768][servidor]=qdisc netem 804e: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 1894511279050933493
+offload[pair=mldsa65|x448_mlkem768][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|x448_mlkem768][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=mldsa65|x448_mlkem768]=permanent srv=172.18.0.2/82:dd:ed:ce:fb:22 cli=172.18.0.3/a6:04:e8:3b:94:53
+netem[pair=mldsa65|x448_mlkem768][cliente]=qdisc netem 804f: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 2447551568550624626
+tcp_metrics_entries[pair=mldsa65|x448_mlkem768][cliente]=0
+tcp_metrics_entries[pair=mldsa65|x448_mlkem768][servidor]=0
+cert_sizes[mldsa65|x448_mlkem768 block=1]: sig=mldsa65 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=5512 intermediate=0 server_leaf=5494 user_leaf=5489 server_chain_sent=5494 user_chain_sent=5489 
+offload[pair=mldsa65|x448_mlkem768][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|x448_mlkem768][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=mldsa65|x448_mlkem768][servidor]=qdisc netem 8052: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 11510144941852322782
+offload[pair=mldsa65|x448_mlkem768][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|x448_mlkem768][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=mldsa65|x448_mlkem768]=permanent srv=172.18.0.2/12:0d:f7:10:a1:b2 cli=172.18.0.3/d2:75:cd:50:4a:d8
+netem[pair=mldsa65|x448_mlkem768][cliente]=qdisc netem 8053: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 30453909608413202
+tcp_metrics_entries[pair=mldsa65|x448_mlkem768][cliente]=0
+tcp_metrics_entries[pair=mldsa65|x448_mlkem768][servidor]=0
+cert_sizes[secp384r1|x448_mlkem768 block=1]: sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=447 intermediate=0 server_leaf=430 user_leaf=425 server_chain_sent=430 user_chain_sent=425 
+offload[pair=secp384r1|x448_mlkem768][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|x448_mlkem768][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=secp384r1|x448_mlkem768][servidor]=qdisc netem 8056: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 13420145576139970639
+offload[pair=secp384r1|x448_mlkem768][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|x448_mlkem768][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=secp384r1|x448_mlkem768]=permanent srv=172.18.0.2/26:fc:ef:9d:57:97 cli=172.18.0.3/02:93:9b:67:ac:74
+netem[pair=secp384r1|x448_mlkem768][cliente]=qdisc netem 8057: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 7744633083611260088
+tcp_metrics_entries[pair=secp384r1|x448_mlkem768][cliente]=0
+tcp_metrics_entries[pair=secp384r1|x448_mlkem768][servidor]=0
+cert_sizes[secp384r1|hqc192 block=1]: sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=448 intermediate=0 server_leaf=429 user_leaf=424 server_chain_sent=429 user_chain_sent=424 
+offload[pair=secp384r1|hqc192][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|hqc192][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=secp384r1|hqc192][servidor]=qdisc netem 805a: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 11497317533578159890
+offload[pair=secp384r1|hqc192][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=secp384r1|hqc192][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=secp384r1|hqc192]=permanent srv=172.18.0.2/aa:76:c2:ac:1d:21 cli=172.18.0.3/6e:95:be:75:4e:f1
+netem[pair=secp384r1|hqc192][cliente]=qdisc netem 805b: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 13594202857802790518
+tcp_metrics_entries[pair=secp384r1|hqc192][cliente]=0
+tcp_metrics_entries[pair=secp384r1|hqc192][servidor]=0
+cert_sizes[mldsa65|hqc192 block=1]: sig=mldsa65 chain_depth=1 pad_bytes=0 pad_target_der=0 der_bytes: root=5512 intermediate=0 server_leaf=5494 user_leaf=5489 server_chain_sent=5494 user_chain_sent=5489 
+offload[pair=mldsa65|hqc192][servidor]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|hqc192][servidor]=no_metrics_save=1 syn_retries=8
+netem[pair=mldsa65|hqc192][servidor]=qdisc netem 805e: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 10790683625241142355
+offload[pair=mldsa65|hqc192][cliente]=tcp-segmentation-offload: off generic-segmentation-offload: off generic-receive-offload: off tx-udp-segmentation: off rx-gro-list: off rx-udp-gro-forwarding: off  gso_max_segs: 1
+tcp_isolation[pair=mldsa65|hqc192][cliente]=no_metrics_save=1 syn_retries=8
+neighbors[pair=mldsa65|hqc192]=permanent srv=172.18.0.2/f2:93:b1:42:49:5a cli=172.18.0.3/12:73:c8:25:73:ed
+netem[pair=mldsa65|hqc192][cliente]=qdisc netem 805f: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 13433171232006370200
+tcp_metrics_entries[pair=mldsa65|hqc192][cliente]=0
+tcp_metrics_entries[pair=mldsa65|hqc192][servidor]=0
+timestamp_end=2026-10-27T11:20:53+01:00

@@ -1,0 +1,11 @@
+# bloc=1 n_blocks=1 master_seed=20261101 block_seed=1114874944 date=2026-10-27T11:06:38+01:00
+pilot_comp_tls_chain1_rtt50_none
+pilot_comp_tls_ctl16000_rtt50_none
+pilot_res_tls_rtt50
+pilot_load_tls_mt_rtt0
+pilot_load_quic_rtt0
+pilot_comp_tls_chain1_rtt50_zlib
+pilot_res_quic_rtt50
+pilot_comp_tls_chain1_rtt50_brotli
+pilot_comp_tls_ctl16000_rtt50_brotli
+pilot_comp_tls_ctl16000_rtt50_zlib

@@ -1,0 +1,39 @@
+{
+  "campaign": "v2",
+  "fid": "F09",
+  "slug": "controle_qualite_blocs",
+  "variant": "sentinelles_env",
+  "note": "pre/mid/post sentinels measure drift inside a block; blocks are the inferential unit",
+  "n_data_rows": 280,
+  "data_columns": [
+    "kind",
+    "proto",
+    "sig_class",
+    "position",
+    "block",
+    "value",
+    "temp_c",
+    "mhz",
+    "load"
+  ],
+  "inputs": {
+    "v2_conn": {
+      "path": "analysis_v2/conn.csv.gz",
+      "sha256": "0463d6f2813a00086e21b9bf71c81bd78410d1aca58c96d21b55a3b0bdbbc3de",
+      "bytes": 5287913
+    }
+  },
+  "fingerprint": "9cb11f9ee6663e9213e5905e113cf86b4f9404f92127da648b4c5ab3bad9657e",
+  "created_utc": "20261029T035035Z",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "matplotlib": "3.6.3"
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 12345,
+    "unit": "blocs entiers, percentile 2.5/97.5"
+  }
+}

@@ -1,0 +1,149 @@
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=brotli
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 80ec: root refcnt 2 limit 1000 seed 5858657304579172277
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 5 connexion(s) jetee(s) avant mesure
+Execution 1 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2040
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 109.38 ms
+App-ready duration: 160.66 ms
+Execution 2 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2040
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 111.53 ms
+App-ready duration: 162.35 ms
+Execution 3 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2041
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 109.46 ms
+App-ready duration: 160.12 ms
+Execution 4 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2041
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 111.81 ms
+App-ready duration: 162.74 ms
+Execution 5 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2040
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 111.43 ms
+App-ready duration: 162.28 ms
+Execution 6 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2039
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 111.74 ms
+App-ready duration: 162.58 ms
+Execution 7 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2040
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 109.66 ms
+App-ready duration: 160.61 ms
+Execution 8 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2041
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 112.64 ms
+App-ready duration: 163.43 ms
+Execution 9 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2040
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 109.92 ms
+App-ready duration: 161.59 ms
+Execution 10 - TLS Single
+s_connection: verify depth is 1
+depth=1 CN=oqstest CA
+verify return:1
+depth=0 CN=localhost
+verify return:1
+App-bytes: 100
+Resumed: 0
+Rx-bytes: 2041
+Tx-bytes: 1749
+CertMsg: type=25 len_comp=538 len_plain=0
+Cert-comp: brotli
+Handshake duration: 110.71 ms
+App-ready duration: 162.55 ms

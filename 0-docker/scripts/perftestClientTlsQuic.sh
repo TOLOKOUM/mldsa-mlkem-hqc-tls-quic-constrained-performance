@@ -55,6 +55,7 @@ fi
 if [ -z "$HANDSHAKE_TIMEOUT_S" ]; then
     HANDSHAKE_TIMEOUT_S=150
 fi
+export HANDSHAKE_TIMEOUT_S
 echo "Handshake timeout budget: ${HANDSHAKE_TIMEOUT_S}s (identique TLS/QUIC)"
 
 INTERFAZ="lo"
@@ -107,52 +108,177 @@ echo "Running $0 with SIG_ALG=$SIG_ALG and KEM_ALG=$KEM_ALG"
 
 NUM_RUNS=$NUM_RUNS
 
-i=1
-      
-
-    while [ $i -le $NUM_RUNS ]
-    do
-    if [ "$USE_TLS" = "true" ]; then
-   
-         if [ "$MUTUAL" = "true" ]; then
-           echo "Execution $i - TLS Mutual"
-
-           timeout "${HANDSHAKE_TIMEOUT_S}"s openssl s_connection -connect $DOCKER_HOST:4433 -new  -verify 1 -CAfile $CERT_PATH/CA.crt -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key \
-             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
-        
-         else
-           echo "Execution $i - TLS Single" 
-           timeout "${HANDSHAKE_TIMEOUT_S}"s openssl s_connection -connect $DOCKER_HOST:4433 -new -verify 1 -CAfile $CERT_PATH/CA.crt \
-             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
-
-         fi   
+# ---------------------------------------------------------------------------
+# Execute UNE connexion avec le budget d'échec commun et garantit que le log
+# contient TOUJOURS exactement une ligne "Handshake duration" et une ligne
+# "App-ready duration" par exécution.
+#
+# Remplace l'ancien `cmd || echo "...NaN..."$'\n'"..."` :
+#  - $'\n' n'existe pas dans dash (/bin/sh Debian/Ubuntu) : le marqueur
+#    sortait sur UNE ligne avec un "\n" littéral ;
+#  - après un échec partiel (ex. "Handshake duration: 211 ms" suivi de
+#    "App-ready duration: NaN ... request failed"), le `|| echo` ajoutait
+#    deux lignes NaN qui écrasaient la vraie mesure au parsing.
+# Ici, seules les lignes MANQUANTES sont complétées par un marqueur NaN.
+# ---------------------------------------------------------------------------
+run_measured() {
+    _rm_rc=0
+    _rm_out=$(timeout "${HANDSHAKE_TIMEOUT_S}"s "$@" 2>&1) || _rm_rc=$?
+    if [ -n "$_rm_out" ]; then
+        printf '%s\n' "$_rm_out"
+    fi
+    if [ "$_rm_rc" -eq 124 ]; then
+        _rm_why="client-side timeout after ${HANDSHAKE_TIMEOUT_S}s"
     else
+        _rm_why="no measurement, exit code ${_rm_rc}"
+    fi
+    if ! printf '%s\n' "$_rm_out" | grep -q 'Handshake duration:'; then
+        printf 'Handshake duration: NaN ms  (%s)\n' "$_rm_why"
+    fi
+    if ! printf '%s\n' "$_rm_out" | grep -q 'App-ready duration:'; then
+        printf 'App-ready duration: NaN ms  (%s)\n' "$_rm_why"
+    fi
+    return 0
+}
 
-        # Solo si SSL_DIR está definido (cuando CAPTURE_MODE=captureKey)
+# ---------------------------------------------------------------------------
+# one_connection <label> : UNE connexion mesuree (TLS ou QUIC, mutual ou single).
+# Factorisee pour etre appelee a l'identique par le WARM-UP et par la boucle
+# mesuree. Le format "Execution <n> - ..." est celui attendu par logs_to_csv.py.
+# ---------------------------------------------------------------------------
+one_connection() {
+    _oc_i="$1"
+    if [ "$USE_TLS" = "true" ]; then
+         # -www /payload.bin : echange applicatif (reponse fixe de 100 octets
+         # servie par s_server -WWW) => "App-ready duration", metrique PRINCIPALE.
+         if [ "$MUTUAL" = "true" ]; then
+           echo "Execution $_oc_i - TLS Mutual"
+           run_measured openssl s_connection -connect $DOCKER_HOST:4433 -new  -verify 1 -CAfile $CERT_PATH/CA.crt -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key -www /payload.bin
+         else
+           echo "Execution $_oc_i - TLS Single"
+           run_measured openssl s_connection -connect $DOCKER_HOST:4433 -new -verify 1 -CAfile $CERT_PATH/CA.crt -www /payload.bin
+         fi
+    else
         if [ -n "${SSL_DIR:-}" ]; then
-            mkdir -p "$SSL_DIR"   # asegúrate de que exista el directorio montado
+            mkdir -p "$SSL_DIR"
             KEYLOG_PATH="${SSL_DIR}/sslkeys_client_${SIG_ALG}_${KEM_ALG}.log"
-            echo "🔐 QUIC keys will be stored in: $KEYLOG_PATH"
-
-            # Exporta la variable para que MsQUIC/OpenSSL la detecte
+            if [ "$_oc_i" = "1" ]; then
+                echo "QUIC keys will be stored in: $KEYLOG_PATH"
+            fi
             export SSLKEYLOGFILE="$KEYLOG_PATH"
         fi
-        
-        #echo "Execution $i - QUIC"
-
-         if [ "$MUTUAL" = "true" ]; then
-           echo "Execution $i - QUIC Mutual"
-           timeout "${HANDSHAKE_TIMEOUT_S}"s quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt" -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key \
-             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
-
+        if [ "$MUTUAL" = "true" ]; then
+           echo "Execution $_oc_i - QUIC Mutual"
+           run_measured quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt" -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key
          else
-           echo "Execution $i - QUIC Single" 
-           timeout "${HANDSHAKE_TIMEOUT_S}"s quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt" \
-             || echo "Handshake duration: NaN ms  (client-side timeout after ${HANDSHAKE_TIMEOUT_S}s)"
+           echo "Execution $_oc_i - QUIC Single"
+           run_measured quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt"
+         fi
+    fi
+}
 
-         fi   
+# ---------------------------------------------------------------------------
+# WARM-UP (critique 1 de l'AE : etat processeur/cache/thermique) : WARMUP_RUNS
+# connexions JETEES avant la mesure (defaut 0 = comportement historique).
+# Les conteneurs sont recrees pour chaque paire : la premiere connexion paie
+# les defauts de cache froid, le chargement des modules, la resolution de
+# symboles, etc. Sortie entierement supprimee (aucune ligne ne peut polluer
+# le log mesure) ; effectue AVANT le demarrage de tcpdump.
+# ---------------------------------------------------------------------------
+WARMUP_RUNS="${WARMUP_RUNS:-0}"
+_w=1
+while [ "$_w" -le "$WARMUP_RUNS" ]; do
+    one_connection "W${_w}" >/dev/null 2>&1
+    _w=$((_w + 1))
+done
+echo "Warm-up: ${WARMUP_RUNS} connexion(s) jetee(s) avant mesure"
+
+# ── Sous-plan mecanistique (point 3 du prescreen TDSC, TDSC-2026-09-3862) :
+# UNE SEULE capture pcap pour tout le bloc (pas une par connexion). Trois
+# versions successives d'une capture par-connexion ont echoue en pratique
+# (constate le 28-29/09) : redemarrer tcpdump 500 fois est structurellement
+# trop lent par rapport a la duree d'une connexion rapide (~210ms). Ici :
+# capture continue sur toute la duree du bloc (un seul demarrage/arret, cout
+# amorti sur 500 connexions), et la fenetre temporelle [debut,fin] de CHAQUE
+# connexion est enregistree a part (conn_windows.csv). analyze_mechanism.py
+# rattache ensuite chaque FLUX (tcp.stream / udp.stream) a l'execution dont
+# la fenetre contient son premier paquet : c'est independant du decalage
+# d'horodatage cree par netem (les paquets client sont horodates apres le
+# delai netem, donc APRES la fin du processus pour les derniers d'entre eux).
+#
+# Variables : CAPTURE_IF (defaut eth0), TCPDUMP_FLUSH_S (defaut 1 s : marge
+# avant l'arret pour laisser sortir les derniers paquets retardes par netem).
+CAPTURE_IF="${CAPTURE_IF:-eth0}"
+TCPDUMP_FLUSH_S="${TCPDUMP_FLUSH_S:-1}"
+TCPDUMP_PID=""
+if [ "${PER_CONN_PCAP:-0}" = "1" ] && [ -n "${SSL_DIR:-}" ]; then
+    mkdir -p "$SSL_DIR"
+    BLOCK_PCAP="${SSL_DIR}/block.pcap"
+    WINDOWS_CSV="${SSL_DIR}/conn_windows.csv"
+    TCPDUMP_ERR="${SSL_DIR}/tcpdump.err"
+
+    if ! command -v tcpdump >/dev/null 2>&1; then
+        echo "ERREUR FATALE: PER_CONN_PCAP=1 mais tcpdump est introuvable dans l'image." >&2
+        exit 1
+    fi
+    # Les fenetres exigent une horloge a la nanoseconde (GNU date).
+    case "$(date +%s.%N)" in
+        *N*) echo "ERREUR FATALE: 'date +%s.%N' non supporte (busybox ?) : conn_windows.csv serait faux." >&2
+             exit 1 ;;
+    esac
+
+    rm -f "$BLOCK_PCAP" "$WINDOWS_CSV" "$TCPDUMP_ERR"
+    echo "execution,t_start_epoch,t_end_epoch" > "$WINDOWS_CSV"
+    # LD_LIBRARY_PATH (=/opt/oqssa/lib64:...) fait charger a tcpdump la libcrypto d'OpenSSL maison
+    # (compilee no-deprecated, sans MD5_Init) -> "undefined symbol: MD5_Init". On l'ecarte pour tcpdump seul.
+    env -u LD_LIBRARY_PATH tcpdump -i "$CAPTURE_IF" -U -n -w "$BLOCK_PCAP" "port 4433" >/dev/null 2>"$TCPDUMP_ERR" &
+    TCPDUMP_PID=$!
+
+    # Pret = tcpdump a ecrit "listening on" (socket de capture actif), ce qui
+    # est plus fiable que "fichier non vide" (en-tete de 24 octets ecrit avant
+    # que la capture ne soit reellement armee). Attente max 5 s.
+    _waited=0
+    while [ "$_waited" -lt 250 ]; do
+        if grep -q "listening on" "$TCPDUMP_ERR" 2>/dev/null; then break; fi
+        if ! kill -0 "$TCPDUMP_PID" 2>/dev/null; then break; fi
+        sleep 0.02
+        _waited=$((_waited + 1))
+    done
+    if ! kill -0 "$TCPDUMP_PID" 2>/dev/null || ! grep -q "listening on" "$TCPDUMP_ERR" 2>/dev/null; then
+        echo "ERREUR FATALE: tcpdump n'a pas demarre sur ${CAPTURE_IF}. Sortie :" >&2
+        cat "$TCPDUMP_ERR" >&2 || true
+        exit 1
+    fi
+    sleep 0.2
+    echo "tcpdump actif sur ${CAPTURE_IF} -> $BLOCK_PCAP"
+fi
+
+i=1
+while [ $i -le $NUM_RUNS ]
+do
+    if [ -n "$TCPDUMP_PID" ]; then
+        T_START=$(date +%s.%N)
     fi
 
+    one_connection "$i"
+
+    if [ -n "$TCPDUMP_PID" ]; then
+        T_END=$(date +%s.%N)
+        echo "${i},${T_START},${T_END}" >> "$WINDOWS_CSV"
+    fi
 
     i=$((i + 1))
-    done
+done
+
+if [ -n "$TCPDUMP_PID" ]; then
+    # Marge avant l'arret : les derniers paquets client (ACK final, RST) sont
+    # horodates APRES le delai netem et peuvent encore etre en file.
+    sleep "$TCPDUMP_FLUSH_S"
+    kill "$TCPDUMP_PID" 2>/dev/null || true
+    wait "$TCPDUMP_PID" 2>/dev/null || true
+    # Bilan de capture : "dropped by kernel" > 0 signifie que tcpdump a perdu
+    # des paquets, ce qui ressemblerait a tort a une perte reseau dans
+    # l'analyse. A verifier dans chaque log de bloc.
+    echo "tcpdump bilan ($(wc -c < "$BLOCK_PCAP") octets dans $BLOCK_PCAP) :"
+    grep -E "packets (captured|received by filter|dropped by kernel)" "$TCPDUMP_ERR" || true
+fi

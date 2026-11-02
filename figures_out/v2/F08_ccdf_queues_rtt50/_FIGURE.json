@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "campaign": "v2",
+  "fid": "F08",
+  "slug": "ccdf_queues_rtt50",
+  "title": "Complementary CDF of handshake duration at RTT 50 ms",
+  "fingerprint": "9cb11f9ee6663e9213e5905e113cf86b4f9404f92127da648b4c5ab3bad9657e",
+  "variants": [
+    "loss0p0",
+    "loss1p0",
+    "loss2p0",
+    "loss5p0"
+  ],
+  "created_utc": "20261029T035032Z",
+  "inputs": {
+    "v2_conn": {
+      "path": "analysis_v2/conn.csv.gz",
+      "sha256": "0463d6f2813a00086e21b9bf71c81bd78410d1aca58c96d21b55a3b0bdbbc3de",
+      "bytes": 5287913
+    }
+  }
+}

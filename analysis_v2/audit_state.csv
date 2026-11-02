@@ -1,0 +1,6 @@
+block,cell_id,visit,codes,n_attempts,last_code,visites_non_ok_apres
+7,fx_quic_rtt150_loss2_gesevere,,130;0,2,0,0
+13,main_tls_mutual_ideal,,130;0,2,0,0
+15,main_tls_mutual_degraded,,141;0,2,0,0
+16,main_quic_single_moderate,,130;0,2,0,0
+18,size_tls_ecdsapad_mtu1500_loss1,,130;0,2,0,0

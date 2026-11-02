@@ -1,0 +1,25 @@
+# Dockerfile.v3b -- image du BRAS CHARGE : image v3 INCHANGEE + generateurs de charge persistants (tls_load_client, quics_load)
+# + perftestLoadClient.sh (mode "persistent" par defaut). Ne reconstruit ni OpenSSL, ni liboqs, ni MsQuic : quelques secondes.
+#
+# Prerequis (deja presents si vous avez suivi le runbook) :
+#   - l'image  uma-tls-quic-pq-34-v3   (build complet de Dockerfile.v3)
+#   - l'image  v3cfg                    (docker build --network=host --target configure -t v3cfg -f Dockerfile.v3 .  -- etapes en cache)
+# Build : docker build --network=host -f Dockerfile.v3b -t uma-tls-quic-pq-34-v3b .   (dans le contexte ctx_v3, apres y avoir copie
+#         docker_ctx_overlay/patches/{tls_load_client.c,quics_load.c} et docker_ctx_overlay/scripts/perftestLoadClient.sh)
+# Les en-tetes de MsQuic proviennent du MEME arbre que libmsquic.so de l'image v3 (le fork peut differer de l'amont).
+
+FROM v3cfg AS build
+COPY patches/tls_load_client.c /tmp/tls_load_client.c
+COPY patches/quics_load.c /tmp/quics_load.c
+RUN LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \
+    gcc -O2 -pthread -Wall /tmp/tls_load_client.c -o /tmp/tls_load_client \
+        -I/opt/oqssa/include -L/opt/oqssa/${LIBDIR} -Wl,-rpath,/opt/oqssa/${LIBDIR} -lssl -lcrypto && \
+    gcc -O2 -pthread /tmp/quics_load.c -o /tmp/quics_load \
+        -I/opt/msquic-pq/src/inc -L/opt/msquic-pq/build/bin/Release -Wl,-rpath,/opt/oqssa/bin -lmsquic && \
+    ls -la /tmp/tls_load_client /tmp/quics_load
+
+FROM uma-tls-quic-pq-34-v3
+COPY --from=build /tmp/tls_load_client /opt/oqssa/bin/tls_load_client
+COPY --from=build /tmp/quics_load /opt/oqssa/bin/quics_load
+COPY scripts/perftestLoadClient.sh /opt/oqssa/bin/perftestLoadClient.sh
+RUN chmod +x /opt/oqssa/bin/tls_load_client /opt/oqssa/bin/quics_load /opt/oqssa/bin/perftestLoadClient.sh

@@ -1,0 +1,38 @@
+{
+  "campaign": "v3_load",
+  "fid": "L03",
+  "slug": "charge_cpu_par_connexion",
+  "variant": "rtt0",
+  "note": "only non client-bound levels; CPU integrated over the steady-state window",
+  "n_data_rows": 16,
+  "data_columns": [
+    "role",
+    "proto",
+    "sig",
+    "kem",
+    "rtt_ms",
+    "cpu_ms_per_conn",
+    "ci_lo",
+    "ci_hi"
+  ],
+  "inputs": {
+    "v3_load": {
+      "path": "analysis_v3/p6_load_niveaux.csv",
+      "sha256": "7dfe408df8cf0af001719423b77aeee79417e32791e5893556322f647632f732",
+      "bytes": 300301
+    }
+  },
+  "fingerprint": "53727366d674c2a4fca0105314c52c9b3c34394c1823eb76a9982c5f45442dbe",
+  "created_utc": "20261102T115945Z",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "matplotlib": "3.6.3"
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 12345,
+    "unit": "blocs entiers, percentile 2.5/97.5"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "campaign": "v2",
+  "fid": "F02",
+  "slug": "penalite_mldsa_vs_rtt",
+  "title": "ML-DSA minus ECDSA handshake time versus RTT",
+  "fingerprint": "9cb11f9ee6663e9213e5905e113cf86b4f9404f92127da648b4c5ab3bad9657e",
+  "variants": [
+    "handshake_ms",
+    "handshake_rtt",
+    "app_ready_ms",
+    "app_ready_rtt"
+  ],
+  "created_utc": "20261029T034740Z",
+  "inputs": {
+    "v2_conn": {
+      "path": "analysis_v2/conn.csv.gz",
+      "sha256": "0463d6f2813a00086e21b9bf71c81bd78410d1aca58c96d21b55a3b0bdbbc3de",
+      "bytes": 5287913
+    }
+  }
+}

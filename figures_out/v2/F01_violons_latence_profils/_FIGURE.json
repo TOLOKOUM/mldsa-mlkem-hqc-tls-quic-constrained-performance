@@ -1,0 +1,27 @@
+{
+  "status": "complete",
+  "campaign": "v2",
+  "fid": "F01",
+  "slug": "violons_latence_profils",
+  "title": "Handshake latency distributions by signature, KEM, protocol and network profile",
+  "fingerprint": "9cb11f9ee6663e9213e5905e113cf86b4f9404f92127da648b4c5ab3bad9657e",
+  "variants": [
+    "L1_ideal",
+    "L1_moderate",
+    "L1_degraded",
+    "L3_ideal",
+    "L3_moderate",
+    "L3_degraded",
+    "L5_ideal",
+    "L5_moderate",
+    "L5_degraded"
+  ],
+  "created_utc": "20261029T034734Z",
+  "inputs": {
+    "v2_conn": {
+      "path": "analysis_v2/conn.csv.gz",
+      "sha256": "0463d6f2813a00086e21b9bf71c81bd78410d1aca58c96d21b55a3b0bdbbc3de",
+      "bytes": 5287913
+    }
+  }
+}

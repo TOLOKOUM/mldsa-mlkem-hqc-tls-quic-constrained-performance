@@ -1,0 +1,15 @@
+# bloc=13 n_blocks=20 master_seed=20261201 block_seed=2342183154 date=2026-10-30T08:36:19+01:00
+res_quic_rtt50_loss5_iid
+res_tls_rtt50_loss1_iid
+res_tls_rtt0
+res_tls_rtt50_loss2_iid
+res_tls_rtt150
+res_quic_rtt50
+res_quic_rtt0
+res_tls_rtt50
+res_tls_rtt50_loss5_iid
+res_tls_rtt100
+res_quic_rtt50_loss2_iid
+res_quic_rtt50_loss1_iid
+res_quic_rtt100
+res_quic_rtt150
