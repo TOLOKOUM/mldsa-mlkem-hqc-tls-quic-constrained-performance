@@ -1,4 +1,4 @@
-# Post-Quantum TLS 1.3 and QUIC Handshakes under Emulated Delay and Loss: Combining ML-DSA with ML-KEM and HQC
+# Joint Post-Quantum Authentication and Key Establishment: A Systems Evaluation of TLS 1.3 and QUIC
 
 > **David Rive Tolokoum**, **Yve Bruno MBEZOA**, **Hervé Talé Kalachi**
 
@@ -19,10 +19,11 @@ in response to peer review (measurement-completeness audit, paired-block
 statistical tests, TLS/QUIC timer-gap quantification, and censoring
 reanalysis).
 
-The campaign covers 42 signature×KEM configurations across 3 NIST security
-levels (L1/L3/L5), 5 network scenarios, and 2 authentication modes (TLS
-single/mutual, QUIC single only — see [Known limitations](#known-limitations)),
-collected as 4 randomized blocks of 125 runs each.
+42 signature×KEM configurations across three experimental KEM groups
+(L1/L3/L5), five network conditions, and three protocol/authentication
+arms: TLS server-only, TLS mutual, and QUIC server-only. Each
+configuration cell contains four blocks of 125 consecutive attempts,
+except for one documented incomplete cell.
 
 ---
 
