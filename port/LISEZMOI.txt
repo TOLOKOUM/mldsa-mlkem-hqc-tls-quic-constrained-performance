@@ -1,0 +1,5 @@
+Analyses de sensibilite. Python 3 avec pandas, numpy, matplotlib.
+  pip install pandas numpy matplotlib
+Variables : DATA_DIR = dossier qui contient (a n'importe quelle profondeur) conn.csv.gz et p6_connexions.csv.gz ;
+            OUT_DIR  = dossier ou ecrire les resultats (sens_slopes.csv, fig02...).
+Lancer : python3 sens2.py ; python3 acc.py ; python3 b1.py ; python3 b1b.py ; python3 b2.py ; python3 fig02.py

@@ -1,0 +1,16 @@
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from base import *
+c=load()
+c['sentinel']=c.sentinel.astype(str)
+key=['proto','auth','label','block','sig','kem','round']
+v=c.groupby(key,dropna=False).agg(n=('hs_ms','size'),fam=('family','first'),pw=('governor',lambda s:(s=='powersave').any()),fails=('fail','sum')).reset_index()
+print('visits',len(v), v.n.describe()[['min','max']].to_dict(), v.n.value_counts().to_dict())
+cells=c.groupby(['proto','auth','label','sig','kem'],dropna=False).ngroups; print('cells (proto,auth,label,sig,kem)',cells)
+g=v.groupby('fam').agg(visits=('n','size'),conns=('n','sum'),pw_visits=('pw','sum'),fails=('fails','sum'))
+g['conns_pw']=c[c.governor=='powersave'].groupby('family').size(); g=g.fillna(0)
+print(g, g.sum())
+# cells per family by (proto,auth,label,kem,sig)
+print(c.groupby('family').apply(lambda d:d.groupby(['proto','auth','label','sig','kem']).ngroups))
+print('per block visits', v.groupby('block').size().describe()[['min','max']].to_dict())
+print('powersave visits', v[v.pw][['proto','auth','label','block','sig','kem','round','n']])
+print('warmup / n_rounds', c.groupby('family')[['n_rounds']].agg(lambda s: sorted(s.unique())))

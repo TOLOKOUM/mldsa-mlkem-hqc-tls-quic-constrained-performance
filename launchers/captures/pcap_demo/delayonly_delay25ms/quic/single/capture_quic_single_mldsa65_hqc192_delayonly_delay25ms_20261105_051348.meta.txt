@@ -1,0 +1,16 @@
+protocol=quic auth=single sig=mldsa65 kem=hqc192
+network_profile=delayonly_delay25ms loss_pct=0 delay_ms_per_interface=25
+mtu=1500 offload_off=1 tcp_isolate=1 handshake_timeout_s=150
+server_ip=172.18.0.2 conn_ok=true handshake_ms=247.78 app_ready_ms=299.76 app_bytes=100
+tcpdump_dropped_by_kernel=0 oversize_frames=0 keylog_ok=true
+--- sortie du client ---
+Writing SSLKEYLOGFILE at /tmp/sslkeys.log
+[strm][0x7eda441056f0] Starting...
+[strm][0x7eda441056f0] Sending data...
+[strm][0x7eda441056f0] Data sent
+[strm][0x7eda441056f0] Data received
+[strm][0x7eda441056f0] Peer shut down
+[strm][0x7eda441056f0] All done
+Handshake duration: 247.78 ms
+App-bytes: 100
+App-ready duration: 299.76 ms
