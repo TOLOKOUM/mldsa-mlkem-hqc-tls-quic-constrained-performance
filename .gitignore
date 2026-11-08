@@ -27,3 +27,8 @@ captures_v3_comp/
 captures_v3_resume/
 campagne_*.log
 governor_watch.log
+
+captures_S/
+captures_S_phase0/
+campaign_state_S/
+campaign_state_S_phase0/
