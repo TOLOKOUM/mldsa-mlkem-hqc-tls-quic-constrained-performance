@@ -1,0 +1,9 @@
+family,step,bracket_low,bracket_high,pred_amp,inside_amp,pred_cwnd,inside_cwnd,pred_octets,inside_octets,pred_bio,inside_bio
+QUIC_A,1,5150.0,5750.0,5478.0,True,10211.0,False,,,,
+QUIC_A,2,13700.0,28550.0,29007.0,False,33740.0,False,,,,
+QUIC_B,1,5500.0,6100.0,5861.0,True,10594.0,False,,,,
+QUIC_B,2,14100.0,28950.0,29390.0,False,34123.0,False,,,,
+TLS_1280,1,8600.0,9100.0,,,,,10766.0,False,8929.0,True
+TLS_1280,2,10950.0,,,,,,35282.0,False,34466.0,False
+TLS_1500,1,11300.0,11650.0,,,,,12966.0,False,11477.0,True
+TLS_1500,2,41400.0,41800.0,,,,,41882.0,False,41634.0,True

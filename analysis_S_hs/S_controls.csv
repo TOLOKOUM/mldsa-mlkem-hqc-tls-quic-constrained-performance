@@ -1,0 +1,14 @@
+control,family,estimate,ci_lo,ci_hi,band,verdict
+C1 placebo (base paire vs impaire),QUIC_A,0.002399999999999995,-0.0008499999999999563,0.00522012500000002,"[-0.05, 0.05]",PASS
+C1 placebo (base paire vs impaire),QUIC_B,3.4999999999993024e-05,-0.002194999999999997,0.0022049999999999843,"[-0.05, 0.05]",PASS
+C1 placebo (base paire vs impaire),TLS_1280,0.0031150000000000023,-0.000515124999999999,0.007315374999999995,"[-0.05, 0.05]",PASS
+C1 placebo (base paire vs impaire),TLS_1500,-0.001914999999999999,-0.0045749999999999975,0.0009500000000000035,"[-0.05, 0.05]",PASS
+"C2 pont mldsa65 (k_a=0, k_b=0)",TLS_1500,0.0013425000000000724,-0.0020526249999999577,0.004620187500000198,"a:[-0.25,0.25] b:[-0.25,0.25]",a:PASS b:PASS
+"C2 pont mldsa65 (k_a=0, k_b=0)",TLS_1280,-0.0006500000000000908,-0.003392499999999963,0.0023401249999999763,"a:[-0.25,0.25] b:[-0.25,0.25]",a:PASS b:PASS
+"C2 pont mldsa65 (k_a=1, k_b=0)",QUIC_A,1.0009725,0.9968472500000001,1.00484,"a:[0.75,1.25] b:[-0.25,0.25]",a:PASS b:FAIL
+"C2 pont mldsa44 (k_a=1, k_b=0)",QUIC_B,1.0005775,0.9968250000000001,1.0039576249999997,"a:[0.75,1.25] b:[-0.25,0.25]",a:PASS b:FAIL
+C3 octets recus = vol predit +-3 % (QUIC),QUIC_A,1.0,,,>=0.95 des cellules,PASS
+C3 octets recus = vol predit +-3 % (QUIC),QUIC_B,1.0,,,>=0.95 des cellules,PASS
+C3 octets recus = vol predit +-10 o (TLS),TLS_1280,1.0,,,>=0.95 des cellules,PASS
+C3 octets recus = vol predit +-10 o (TLS),TLS_1500,1.0,,,>=0.95 des cellules,PASS
+C4 taux d'echec maximal par cellule (<= 2 %),toutes,0.0,,,<=0.02,PASS

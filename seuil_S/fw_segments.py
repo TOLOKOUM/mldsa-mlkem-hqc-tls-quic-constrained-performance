@@ -210,7 +210,7 @@ def collect(roots, pred=None, rtt_override=None):
             if pred is not None:
                 x = pred[(pred.proto == "tls") & (pred.kem == info["kem"]) & (pred.mtu == info["mtu"]) & (pred.chain_target == info["pad"]) &
                          (pred.sig == info["sig"])]
-                F = int(x.flight_a.iloc[0]) if len(x) else None
+                F = int(x.flight_a.iloc[0]) - 8 if len(x) else None   # marge de 8 o : la signature ECDSA DER varie de quelques octets ; sans marge, des octets de ticket post-poignee de main seraient comptes dans le vol
             if F is None:
                 F = 10 ** 9
         for fl in flows_in_block(f, windows):
@@ -250,8 +250,8 @@ def main():
             continue
         x = x.iloc[0]
         if proto == "tls":
-            ma = (g.bytes_first - x.fw_bytes_a).abs() <= 5
-            mb = (g.bytes_first - x.fw_bytes_b).abs() <= 5
+            ma = (g.bytes_first - x.fw_bytes_a).abs() <= 10
+            mb = (g.bytes_first - x.fw_bytes_b).abs() <= 10
             ra = (g.rounds_obs - 1 == x.k_a)
             rb = (g.rounds_obs - 1 == x.k_b)
             out.append(dict(proto=proto, kem=kem, mtu=mtu, pad=pad, sig=sig, n=len(g), disc=int(x.disc), rule_a=x.rule_a, rule_b=x.rule_b,

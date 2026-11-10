@@ -1,0 +1,127 @@
+Empreintes gelees verifiees.
+connexions lues : 24000 ; blocs : [1, 2, 3]
+
+=================== RESULTATS CONFIRMATOIRES (metrique : app_ms, 20 blocs, 10000 replicats) ===================
+
+E1 TLS (cellules discriminantes primaires)  [n = 8]
+   rule_a       octets
+   rule_b       bio
+   frac_a       0.000
+   frac_a_lo    0.000
+   frac_a_hi    0.000
+   frac_b       1.000
+   frac_b_lo    1.000
+   frac_b_hi    1.000
+   pass_a       0
+   pass_b       8
+   decision     bio CONFIRMEE
+
+E2 QUIC (cellules discriminantes primaires)  [n = 8]
+   rule_a       amp
+   rule_b       cwnd
+   frac_a       1.000
+   frac_a_lo    1.000
+   frac_a_hi    1.000
+   frac_b       0.000
+   frac_b_lo    0.000
+   frac_b_hi    0.000
+   pass_a       8
+   pass_b       0
+   decision     amp CONFIRMEE
+
+E3 cellules non discriminantes primaires (toutes les regles s'accordent)  [n = 20]
+   frac_a       0.900
+   pass_a       18
+   decision     CONFORME
+
+E4 (secondaire) cellules a palier k>=2 : fraction proche de la regle a / b  [n = 9]
+   frac_a       0.889
+   frac_b       0.556
+   pass_a       8
+   pass_b       5
+   decision     descriptif
+
+--- E5 monotonie ---
+  family  max_decrease  n_decreases_gt_0_10
+  QUIC_A      0.003490                    0
+  QUIC_B      0.002825                    0
+TLS_1280      0.009445                    0
+TLS_1500      0.007995                    0
+
+--- E6 encadrement des seuils (tailles de chaine, octets) ---
+  family  step  bracket_low  bracket_high  pred_amp inside_amp  pred_cwnd inside_cwnd  pred_octets inside_octets  pred_bio inside_bio
+  QUIC_A     1       5150.0        5750.0    5478.0       True    10211.0       False          NaN           NaN       NaN        NaN
+  QUIC_A     2      13700.0       28550.0   29007.0      False    33740.0       False          NaN           NaN       NaN        NaN
+  QUIC_B     1       5500.0        6100.0    5861.0       True    10594.0       False          NaN           NaN       NaN        NaN
+  QUIC_B     2      14100.0       28950.0   29390.0      False    34123.0       False          NaN           NaN       NaN        NaN
+TLS_1280     1       8600.0        9100.0       NaN        NaN        NaN         NaN      10766.0         False    8929.0       True
+TLS_1280     2      10950.0           NaN       NaN        NaN        NaN         NaN      35282.0         False   34466.0      False
+TLS_1500     1      11300.0       11650.0       NaN        NaN        NaN         NaN      12966.0         False   11477.0       True
+TLS_1500     2      41400.0       41800.0       NaN        NaN        NaN         NaN      41882.0         False   41634.0       True
+
+--- E7 rapport des seuils QUIC_A / QUIC_B (octets de vol) ---
+   {'flight_bracket_A': (6952.6, 7574.8), 'flight_bracket_B': (6918.3, 7540.5), 'ratio_min': 0.9220343478549168, 'ratio_max': 1.0948932541231227, 'predicted_ratio_amp': 1.0, 'predicted_ratio_cwnd': 1.0}
+
+--- Controles ---
+                                     control   family  estimate     ci_lo    ci_hi                          band       verdict
+          C1 placebo (base paire vs impaire)   QUIC_A  0.000980 -0.002840 0.004585                 [-0.05, 0.05]          PASS
+          C1 placebo (base paire vs impaire)   QUIC_B  0.001245 -0.002460 0.004760                 [-0.05, 0.05]          PASS
+          C1 placebo (base paire vs impaire) TLS_1280  0.002910  0.000205 0.006045                 [-0.05, 0.05]          PASS
+          C1 placebo (base paire vs impaire) TLS_1500 -0.001535 -0.005280 0.002070                 [-0.05, 0.05]          PASS
+              C2 pont mldsa65 (k_a=0, k_b=0) TLS_1500  0.002753 -0.001238 0.006670 a:[-0.25,0.25] b:[-0.25,0.25] a:PASS b:PASS
+              C2 pont mldsa65 (k_a=0, k_b=0) TLS_1280 -0.001707 -0.004925 0.001793 a:[-0.25,0.25] b:[-0.25,0.25] a:PASS b:PASS
+              C2 pont mldsa65 (k_a=1, k_b=0)   QUIC_A  0.999142  0.994362 1.003928  a:[0.75,1.25] b:[-0.25,0.25] a:PASS b:FAIL
+              C2 pont mldsa44 (k_a=1, k_b=0)   QUIC_B  0.999842  0.994845 1.004718  a:[0.75,1.25] b:[-0.25,0.25] a:PASS b:FAIL
+   C3 octets recus = vol predit +-3 % (QUIC)   QUIC_A  1.000000       NaN      NaN           >=0.95 des cellules          PASS
+   C3 octets recus = vol predit +-3 % (QUIC)   QUIC_B  1.000000       NaN      NaN           >=0.95 des cellules          PASS
+   C3 octets recus = vol predit +-10 o (TLS) TLS_1280  1.000000       NaN      NaN           >=0.95 des cellules          PASS
+   C3 octets recus = vol predit +-10 o (TLS) TLS_1500  1.000000       NaN      NaN           >=0.95 des cellules          PASS
+C4 taux d'echec maximal par cellule (<= 2 %)   toutes  0.000000       NaN      NaN                        <=0.02          PASS
+
+--- Cellules (k observe contre k predit) ---
+  family  chain_target      tier  disc  k_a  k_b   khat  ci_lo  ci_hi verdict_a verdict_b  fail_rate
+TLS_1500          6000   primary     0    0    0  0.001 -0.003  0.005      PASS      PASS      0.000
+TLS_1500          9100   primary     0    0    0  0.008  0.003  0.013      PASS      PASS      0.000
+TLS_1500         10000   primary     0    0    0  0.000 -0.005  0.006      PASS      PASS      0.000
+TLS_1500         11300   primary     0    0    0  0.003 -0.001  0.007      PASS      PASS      0.000
+TLS_1500         11650   primary     1    0    1  1.005  0.998  1.011      FAIL      PASS      0.000
+TLS_1500         12200   primary     1    0    1  0.999  0.992  1.004      FAIL      PASS      0.000
+TLS_1500         12500   primary     1    0    1  1.001  0.996  1.006      FAIL      PASS      0.000
+TLS_1500         12800   primary     1    0    1  0.997  0.993  1.002      FAIL      PASS      0.000
+TLS_1500         13150   primary     0    1    1  1.003  0.995  1.011      PASS      PASS      0.000
+TLS_1500         16000   primary     0    1    1  1.003  0.998  1.008      PASS      PASS      0.000
+TLS_1500         28000   primary     0    1    1  1.004  0.998  1.010      PASS      PASS      0.000
+TLS_1500         41400   primary     0    1    1  1.000  0.994  1.006      PASS      PASS      0.000
+TLS_1500         41800 secondary     1    1    2  2.001  1.993  2.007      FAIL      PASS      0.000
+TLS_1500         42100 secondary     0    2    2  2.004  1.998  2.010      PASS      PASS      0.000
+TLS_1500         46000 secondary     0    2    2  2.005  1.995  2.014      PASS      PASS      0.000
+TLS_1280          8600   primary     0    0    0 -0.001 -0.009  0.005      PASS      PASS      0.000
+TLS_1280          9100   primary     1    0    1  0.997  0.992  1.003      FAIL      PASS      0.000
+TLS_1280          9500   primary     1    0    1  1.001  0.995  1.006      FAIL      PASS      0.000
+TLS_1280         10000   primary     1    0    1  1.002  0.994  1.010      FAIL      PASS      0.000
+TLS_1280         10600   primary     1    0    1  0.992  0.986  0.999      FAIL      PASS      0.000
+TLS_1280         10950   primary     0    1    1  0.996  0.991  1.000      PASS      PASS      0.000
+  QUIC_A          2750   primary     0    0    0 -0.000 -0.006  0.004      PASS      PASS      0.000
+  QUIC_A          5150   primary     0    0    0 -0.004 -0.009  0.000      PASS      PASS      0.000
+  QUIC_A          5750   primary     1    1    0  0.995  0.988  1.001      PASS      FAIL      0.000
+  QUIC_A          7350   primary     1    1    0  0.997  0.991  1.003      PASS      FAIL      0.000
+  QUIC_A          9200   primary     1    1    0  0.996  0.990  1.001      PASS      FAIL      0.000
+  QUIC_A          9850   primary     1    1    0  1.000  0.995  1.005      PASS      FAIL      0.000
+  QUIC_A         10550   primary     0    1    1  0.998  0.991  1.005      PASS      PASS      0.000
+  QUIC_A         13700   primary     0    1    1  0.997  0.991  1.004      PASS      PASS      0.000
+  QUIC_A         28550   primary     0    1    1  2.035  2.028  2.042      FAIL      FAIL      0.000
+  QUIC_A         29450 secondary     1    2    1  2.047  2.039  2.055      PASS      FAIL      0.000
+  QUIC_A         31350 secondary     1    2    1  2.048  2.041  2.056      PASS      FAIL      0.000
+  QUIC_A         34150 secondary     0    2    2  2.065  2.058  2.070      PASS      PASS      0.000
+  QUIC_B          2950   primary     0    0    0 -0.003 -0.008  0.002      PASS      PASS      0.000
+  QUIC_B          5500   primary     0    0    0 -0.004 -0.008  0.001      PASS      PASS      0.000
+  QUIC_B          6100   primary     1    1    0  0.998  0.991  1.005      PASS      FAIL      0.000
+  QUIC_B          7750   primary     1    1    0  1.000  0.994  1.006      PASS      FAIL      0.000
+  QUIC_B          9600   primary     1    1    0  0.998  0.992  1.004      PASS      FAIL      0.000
+  QUIC_B         10250   primary     1    1    0  1.000  0.993  1.006      PASS      FAIL      0.000
+  QUIC_B         10950   primary     0    1    1  0.997  0.990  1.004      PASS      PASS      0.000
+  QUIC_B         14100   primary     0    1    1  1.000  0.994  1.006      PASS      PASS      0.000
+  QUIC_B         28950   primary     0    1    1  2.031  2.024  2.037      FAIL      FAIL      0.000
+  QUIC_B         29850 secondary     1    2    1  2.043  2.037  2.048      PASS      FAIL      0.000
+  QUIC_B         31750 secondary     1    2    1  2.051  2.044  2.056      PASS      FAIL      0.000
+  QUIC_B         34500 secondary     0    2    2  2.067  2.062  2.073      PASS      PASS      0.000
