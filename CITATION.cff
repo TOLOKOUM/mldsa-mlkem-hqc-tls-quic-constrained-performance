@@ -1,9 +1,6 @@
 cff-version: 1.2.0
-message: "If you use this software or data, please cite it as below."
-type: software
-
-title: "Replication package for 'Where Post-Quantum Authentication Costs Time: A Testbed Study of ML-DSA, ML-KEM, and HQC in TLS 1.3 and QUIC Handshakes'"
-
+message: "If you use this artifact, please cite it as below."
+title: "Replication artifact: Where Post-Quantum Authentication Costs Time (ML-DSA, ML-KEM, HQC in TLS 1.3 and QUIC)"
 authors:
   - family-names: "Tolokoum"
     given-names: "David Rive"
@@ -11,22 +8,7 @@ authors:
     given-names: "Yve Bruno"
   - family-names: "Talé Kalachi"
     given-names: "Hervé"
-
+doi: "10.5281/zenodo.23977850"
 repository-code: "https://github.com/TOLOKOUM/mldsa-mlkem-hqc-tls-quic-constrained-performance"
-url: "https://github.com/TOLOKOUM/mldsa-mlkem-hqc-tls-quic-constrained-performance"
-
-identifiers:
-  - type: doi
-    value: "10.5281/zenodo.23977851"
-    description: "Raw measurement data and packet captures (Zenodo, CC BY 4.0)"
-
 license: MIT
-
-keywords:
-  - post-quantum cryptography
-  - ML-DSA
-  - ML-KEM
-  - HQC
-  - TLS 1.3
-  - QUIC
-  - handshake performance
+date-released: "2026-11-10"
