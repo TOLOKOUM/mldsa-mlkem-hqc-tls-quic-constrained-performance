@@ -133,6 +133,7 @@ def tls_flow(pk, F, rtt_ms):
             continue
         if cum >= F:
             break
+        n = min(n, int(F - cum))      # troncature exacte au vol predit (les donnees suivantes, p. ex. tickets, sont ignorees)
         segs.append((ts, n))
         cum += n
     if not segs:
@@ -150,16 +151,22 @@ def tls_flow(pk, F, rtt_ms):
 
 
 def quic_flow(pk, rtt_ms):
-    """Ronde 1 = datagrammes serveur emis avant le premier datagramme CLIENT qui suit le premier datagramme serveur."""
+    """RTT > 1 ms : vol 1 = datagrammes serveur recus avant t_srv0 + 0,9 RTT (aucune reaction a un datagramme client ne peut arriver
+    plus tot) ; vol 2 = ensuite. RTT 0 (phase 0) : vol 1 = avant le premier datagramme client suivant le premier datagramme serveur."""
     t_srv = next((ts for ts, fc, n in pk if not fc and n > 0), None)
     if t_srv is None:
         return {}
     cl = [n for ts, fc, n in pk if fc and ts < t_srv]
     bc = sum(cl)
-    t_c1 = next((ts for ts, fc, n in pk if fc and ts > t_srv), None)
     srv = [(ts, n) for ts, fc, n in pk if not fc and n > 0]
-    b1 = [p for p in srv if t_c1 is None or p[0] < t_c1]
-    rest = [p for p in srv if t_c1 is not None and t_c1 <= p[0] < t_c1 + 0.95 * rtt_ms / 1000.0]
+    if rtt_ms > 1.0:
+        t_split = t_srv + 0.9 * rtt_ms / 1000.0
+        b1 = [p for p in srv if p[0] < t_split]
+        rest = [p for p in srv if p[0] >= t_split]
+    else:
+        t_c1 = next((ts for ts, fc, n in pk if fc and ts > t_srv), None)
+        b1 = [p for p in srv if t_c1 is None or p[0] < t_c1]
+        rest = [p for p in srv if t_c1 is not None and p[0] >= t_c1]
     return dict(bc=int(bc), n_client_dgrams=len(cl), client_dgram_sizes=",".join(map(str, cl)),
                 burst1_bytes=int(sum(p[1] for p in b1)), burst1_dgrams=len(b1), burst1_sizes=",".join(str(p[1]) for p in b1),
                 burst2_bytes=int(sum(p[1] for p in rest)),
@@ -197,7 +204,7 @@ def collect(roots, pred=None, rtt_override=None):
     rows = []
     for f, info in block_files(roots):
         windows = load_windows(os.path.join(os.path.dirname(f), "conn_windows.csv"))
-        rtt = rtt_override or info["rtt"] or 50.0
+        rtt = rtt_override if rtt_override is not None else info["rtt"]
         F = None
         if info["proto"] == "tls":
             if pred is not None:
@@ -210,7 +217,7 @@ def collect(roots, pred=None, rtt_override=None):
             if fl["proto"] != info["proto"].replace("tls", "tcp").replace("quic", "udp"):
                 continue
             row = dict(info, execution=fl["execution"], file=f)
-            row.update(tls_flow(fl["pk"], F, rtt) if info["proto"] == "tls" else quic_flow(fl["pk"], rtt))
+            row.update(tls_flow(fl["pk"], F, rtt or 50.0) if info["proto"] == "tls" else quic_flow(fl["pk"], rtt))
             rows.append(row)
     return pd.DataFrame(rows)
 
@@ -234,6 +241,9 @@ def main():
         print(flows.drop(columns=["file"]).to_string(index=False))
         return
     out = []
+    qf = flows[flows.proto == "quic"]
+    post = float(qf.groupby(["kem", "sig", "pad"]).burst2_bytes.median().min()) if len(qf) else 0.0   # donnees post-poignee de main (tickets...) : plancher observe
+    print("QUIC : plancher des octets de 2e vol (donnees post-poignee de main) = %.0f o" % post)
     for (proto, kem, mtu, pad, sig), g in flows.groupby(["proto", "kem", "mtu", "pad", "sig"]):
         x = pred[(pred.proto == proto) & (pred.kem == kem) & (pred.mtu == mtu) & (pred.chain_target == pad) & (pred.sig == sig)]
         if x.empty:
@@ -250,7 +260,7 @@ def main():
                             k_obs_median=float(g.rounds_obs.median() - 1), frac_k_match_a=float(ra.mean()), frac_k_match_b=float(rb.mean()),
                             k_a=x.k_a, k_b=x.k_b))
         else:
-            kobs = (g.burst2_bytes >= 500).astype(int)
+            kobs = (g.burst2_bytes > post + 200).astype(int)
             out.append(dict(proto=proto, kem=kem, mtu=mtu, pad=pad, sig=sig, n=len(g), disc=int(x.disc), rule_a=x.rule_a, rule_b=x.rule_b,
                             bc_median=float(g.bc.median()), burst1_median=float(g.burst1_bytes.median()), ratio_median=float(g.ratio.median()),
                             burst2_median=float(g.burst2_bytes.median()), k_obs_step1=float(kobs.mean()),
