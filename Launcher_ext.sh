@@ -122,6 +122,11 @@ OFFLOAD_OFF=${OFFLOAD_OFF:-0}
 #                         1 = MinimumMtu=MaximumMtu=MTU cote QUIC (client ET serveur), comme le MSS TCP suit le MTU.
 #                         A utiliser dans les cellules ou le MTU est un FACTEUR (plans mech et sizectl).
 QUIC_MTU_SYNC=${QUIC_MTU_SYNC:-0}
+#   INIT_CWND           : (vide par defaut = noyau inchange, initcwnd=10) | entier 1..1000 = fenetre initiale TCP
+#                         (en segments) imposee sur la route du reseau connecte du SERVEUR (ip route change ... initcwnd N).
+#                         Intervention du plan S2 : change la capacite C du premier vol serveur en TLS/TCP.
+#                         Sans effet sur QUIC (MsQuic n'utilise pas la route). Le label recoit '__iwN'.
+INIT_CWND=${INIT_CWND:-}
 PRINT_ORDER=${PRINT_ORDER:-0}
 #   MICRO_BATCHES       : 1 (defaut, historique) | M>1 = ENTRELACEMENT en micro-lots (critique 1) : le bloc est
 #                         execute en M tours ; a chaque tour TOUTES les paires sont visitees dans un ordre
@@ -167,6 +172,7 @@ if ! [[ "$WARMUP_RUNS" =~ ^[0-9]+$ ]]; then echo "Invalid WARMUP_RUNS: entier >=
 if [[ -n "$COOLDOWN_TEMP_C" ]] && ! [[ "$COOLDOWN_TEMP_C" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then echo "Invalid COOLDOWN_TEMP_C."; exit 1; fi
 if [[ "$OFFLOAD_OFF" != "0" && "$OFFLOAD_OFF" != "1" ]]; then echo "Invalid OFFLOAD_OFF: 0 ou 1."; exit 1; fi
 if [[ "$QUIC_MTU_SYNC" != "0" && "$QUIC_MTU_SYNC" != "1" ]]; then echo "Invalid QUIC_MTU_SYNC: 0 ou 1."; exit 1; fi
+if [[ -n "$INIT_CWND" ]] && { ! [[ "$INIT_CWND" =~ ^[0-9]+$ ]] || (( INIT_CWND < 1 || INIT_CWND > 1000 )); }; then echo "Invalid INIT_CWND: entier 1..1000 ou vide."; exit 1; fi
 if [[ "$PRINT_ORDER" != "0" && "$PRINT_ORDER" != "1" ]]; then echo "Invalid PRINT_ORDER: 0 ou 1."; exit 1; fi
 if ! [[ "$MICRO_BATCHES" =~ ^[0-9]+$ ]] || (( MICRO_BATCHES < 1 )); then echo "Invalid MICRO_BATCHES: entier >= 1."; exit 1; fi
 if [[ "$CHAIN_DEPTH" != "1" && "$CHAIN_DEPTH" != "2" ]]; then echo "Invalid CHAIN_DEPTH: 1 ou 2."; exit 1; fi
@@ -365,6 +371,7 @@ fi
 # Chaine de certificats et padding = facteurs : ils DOIVENT figurer dans le label (sinon une cellule
 # 'secp384r1 paddee' ou 'chaine a 2 niveaux' ecraserait / serait confondue avec la cellule de base).
 if [[ "$QUIC_MTU_SYNC" == "1" ]]; then NETWORK_PROFILE_LABEL="${NETWORK_PROFILE_LABEL}__qmtu"; fi
+if [[ -n "$INIT_CWND" ]]; then NETWORK_PROFILE_LABEL="${NETWORK_PROFILE_LABEL}__iw${INIT_CWND}"; fi
 if [[ "$CHAIN_DEPTH" == "2" ]]; then NETWORK_PROFILE_LABEL="${NETWORK_PROFILE_LABEL}__chain2"; fi
 if (( CERT_PAD_BYTES > 0 )); then NETWORK_PROFILE_LABEL="${NETWORK_PROFILE_LABEL}__pad${CERT_PAD_BYTES}b"; fi
 if (( CERT_PAD_TARGET_DER > 0 )); then NETWORK_PROFILE_LABEL="${NETWORK_PROFILE_LABEL}__padto${CERT_PAD_TARGET_DER}"; fi
@@ -625,6 +632,39 @@ check_tcp_isolation() {
         exit 1
     fi
     echo "tcp_isolation[pair=${SIG_ALG}|${KEM}][$container]=no_metrics_save=${nm} syn_retries=${sr}" >> "$MANIFEST_FILE"
+    return 0
+}
+
+# Impose initcwnd=N sur la route du reseau connecte du conteneur (INIT_CWND non vide) et VERIFIE
+# qu'elle est reellement portee par le noyau (rien n'est suppose). Journalise route avant/apres dans le
+# manifeste. Echec = arret (donnees non comparables). Sans INIT_CWND : journalise 'default'.
+apply_initcwnd() {
+    local container="$1" line prefix src before after
+    if [[ -z "$INIT_CWND" ]]; then
+        echo "initcwnd[pair=${SIG_ALG}|${KEM}][$container]=default" >> "$MANIFEST_FILE"
+        return 0
+    fi
+    line=$(docker exec "$container" ip -4 route show dev "$NETIF" scope link proto kernel 2>/dev/null | head -1 | tr -d '\r')
+    prefix=$(awk '{print $1}' <<< "$line")
+    src=$(awk '{for(i=1;i<NF;i++) if($i=="src") print $(i+1)}' <<< "$line")
+    if [[ -z "$prefix" || -z "$src" ]]; then
+        echo "❌ ERREUR FATALE: route du reseau connecte introuvable sur $container (obtenu: '$line')."
+        docker kill $OQS_SERVER $OQS_CLIENT &>/dev/null || true
+        exit 1
+    fi
+    before="$line"
+    if ! docker exec "$container" ip route change "$prefix" dev "$NETIF" proto kernel scope link src "$src" initcwnd "$INIT_CWND"; then
+        echo "❌ ERREUR FATALE: impossible de fixer initcwnd=$INIT_CWND sur $container (route '$prefix')."
+        docker kill $OQS_SERVER $OQS_CLIENT &>/dev/null || true
+        exit 1
+    fi
+    after=$(docker exec "$container" ip -4 route show "$prefix" dev "$NETIF" 2>/dev/null | head -1 | tr -d '\r')
+    if ! grep -qE "(^|[[:space:]])initcwnd[[:space:]]+${INIT_CWND}([[:space:]]|$)" <<< "$after"; then
+        echo "❌ ERREUR FATALE: initcwnd=$INIT_CWND non confirme sur $container (route apres: '$after')."
+        docker kill $OQS_SERVER $OQS_CLIENT &>/dev/null || true
+        exit 1
+    fi
+    echo "initcwnd[pair=${SIG_ALG}|${KEM}][$container]=${INIT_CWND} route_avant='${before}' route_apres='${after}'" >> "$MANIFEST_FILE"
     return 0
 }
 
@@ -1362,6 +1402,7 @@ for PAIR in "${ROUND_PAIRS[@]}"; do
             set_mtu "$OQS_SERVER"
             set_offloads "$OQS_SERVER"
             check_tcp_isolation "$OQS_SERVER"
+            apply_initcwnd "$OQS_SERVER"
 
             echo "    Buscando IP.. "
             IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' servidor)

@@ -1,0 +1,5 @@
+family,rule,step,chain_threshold,flight_threshold,nonmonotone_points
+TLS_IW4,bio_iw,1,4030,5545,0
+TLS_IW4,bio_iw,2,15614,17129,0
+TLS_IW4,bio_iw10,1,11477,12992,0
+TLS_IW4,bio_iw10,2,41634,43193,0

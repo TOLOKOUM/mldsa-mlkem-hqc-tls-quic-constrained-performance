@@ -32,3 +32,8 @@ captures_S/
 captures_S_phase0/
 campaign_state_S/
 campaign_state_S_phase0/
+
+captures_S2*/
+campaign_state_S2*/
+analysis_S2*/
+Launcher_ext.sh.avant_S2

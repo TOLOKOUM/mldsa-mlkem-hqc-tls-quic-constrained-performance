@@ -1,0 +1,7 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+P0S2_TLS_IW4_base,tls,single,both,delay-only,0,25,10,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,INIT_CWND=4;PER_CONN_PCAP=1
+P0S2_TLS_IW4_pad2000,tls,single,both,delay-only,0,25,10,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=2000;INIT_CWND=4;PER_CONN_PCAP=1
+P0S2_TLS_IW4_pad3700,tls,single,both,delay-only,0,25,10,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=3700;INIT_CWND=4;PER_CONN_PCAP=1
+P0S2_TLS_IW4_pad4300,tls,single,both,delay-only,0,25,10,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=4300;INIT_CWND=4;PER_CONN_PCAP=1
+P0S2_TLS_IW4_pad11750,tls,single,both,delay-only,0,25,10,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=11750;INIT_CWND=4;PER_CONN_PCAP=1
+P0S2_TLS_IW4_pad20000,tls,single,both,delay-only,0,25,10,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=20000;INIT_CWND=4;PER_CONN_PCAP=1
