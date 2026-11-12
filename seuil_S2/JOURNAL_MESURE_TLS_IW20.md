@@ -1,0 +1,2 @@
+# Journal de mesure — TLS_IW20
+12/11/2026 : blocs 1 à 4 exécutés avec la limite de 4 blocs par jour du lanceur. Décision de l'opérateur : lever cette limite (`--max-blocks-per-day 20`) pour les blocs suivants, donc plusieurs blocs le même jour et moins de jours calendaires que prévu. Les écarts D_b sont calculés à l'intérieur de chaque bloc, par rapport à la base du même bloc ; l'IC bootstrap sur les 20 blocs ne tient pas compte d'une corrélation entre blocs d'un même jour ; l'article donnera le nombre de jours. Aucune durée consultée.
