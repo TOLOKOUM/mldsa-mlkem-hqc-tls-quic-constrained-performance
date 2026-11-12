@@ -1,0 +1,8 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+S2_TLS_IW20_pcap_base,tls,single,both,delay-only,0,25,100,secp384r1|x448_mlkem768;mldsa65|x448_mlkem768,INIT_CWND=20;PER_CONN_PCAP=1
+S2_TLS_IW20_pcap_pad11150,tls,single,both,delay-only,0,25,100,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=11150;INIT_CWND=20;PER_CONN_PCAP=1
+S2_TLS_IW20_pcap_pad11750,tls,single,both,delay-only,0,25,100,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=11750;INIT_CWND=20;PER_CONN_PCAP=1
+S2_TLS_IW20_pcap_pad24450,tls,single,both,delay-only,0,25,100,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=24450;INIT_CWND=20;PER_CONN_PCAP=1
+S2_TLS_IW20_pcap_pad25050,tls,single,both,delay-only,0,25,100,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=25050;INIT_CWND=20;PER_CONN_PCAP=1
+S2_TLS_IW20_pcap_pad41300,tls,single,both,delay-only,0,25,100,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=41300;INIT_CWND=20;PER_CONN_PCAP=1
+S2_TLS_IW20_pcap_pad41900,tls,single,both,delay-only,0,25,100,secp384r1|x448_mlkem768,CERT_PAD_TARGET_DER=41900;INIT_CWND=20;PER_CONN_PCAP=1

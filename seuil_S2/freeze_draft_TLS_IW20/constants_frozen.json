@@ -1,0 +1,150 @@
+{
+ "BASE_CHAIN": {
+  "ed25519": 304,
+  "secp384r1": 430
+ },
+ "BC_USED": {
+  "x25519_mlkem512": 2440,
+  "x448_mlkem768": 2440
+ },
+ "BIO_BUFFER": 4096,
+ "CHAIN_DEFAULT": {
+  "ed25519": 304,
+  "mldsa44": 3965,
+  "mldsa65": 5494,
+  "mldsa87": 7452,
+  "secp384r1": 430,
+  "secp521r1": 504
+ },
+ "CH_BASE": 300,
+ "CH_CAP": 1200,
+ "FAMILIES": {
+  "TLS_IW20": {
+   "bridge": "mldsa65",
+   "intervention": "initcwnd=20 (route du serveur)",
+   "iw": 20,
+   "kem": "x448_mlkem768",
+   "mtu": 1500,
+   "pcap": [
+    11150,
+    11750,
+    24450,
+    25050,
+    41300,
+    41900
+   ],
+   "proto": "tls",
+   "sig": "secp384r1",
+   "sizes": [
+    5750,
+    11150,
+    11750,
+    14800,
+    18150,
+    21450,
+    24450,
+    25050,
+    29000,
+    33200,
+    37400,
+    41300,
+    41900,
+    46000
+   ],
+   "thresholds_model": {
+    "bio_iw": [
+     24790,
+     83863
+    ],
+    "bio_iw10": [
+     11477,
+     41634
+    ]
+   }
+  }
+ },
+ "KEM_SHARE": {
+  "P-256": [
+   65,
+   65
+  ],
+  "P-384": [
+   97,
+   97
+  ],
+  "P-521": [
+   133,
+   133
+  ],
+  "hqc128": [
+   2249,
+   4497
+  ],
+  "hqc192": [
+   4522,
+   9042
+  ],
+  "hqc256": [
+   7245,
+   14469
+  ],
+  "mlkem1024": [
+   1568,
+   1568
+  ],
+  "mlkem512": [
+   800,
+   768
+  ],
+  "mlkem768": [
+   1184,
+   1088
+  ],
+  "x25519": [
+   32,
+   32
+  ],
+  "x448": [
+   56,
+   56
+  ]
+ },
+ "MARGIN_MIN": {
+  "quic": 150,
+  "tls": 60
+ },
+ "MSS_1500": 1448,
+ "QUIC_DGRAM": 1220,
+ "QUIC_W0": 12200,
+ "RHO_QUIC": 1.037,
+ "RTTS": [
+  50,
+  150
+ ],
+ "SH_FIX": 100,
+ "SIG_BYTES": {
+  "ed25519": 64,
+  "mldsa44": 2420,
+  "mldsa65": 3309,
+  "mldsa87": 4627,
+  "secp384r1": 103,
+  "secp521r1": 138
+ },
+ "S_BC_NULL": 2440,
+ "TCP_IW_SEGMENTS_INTERVENTION": 20,
+ "TLS_A": 267,
+ "TOL_K": 0.25,
+ "phase0_overrides": {
+  "amp_sub": 28,
+  "bc": null,
+  "q_offset": 42.0,
+  "quic_dgram": 1220
+ },
+ "predict_freeze_S_sha256": "654b7711e15c7c5c8ab456ffe318e99aab22956b64dbaada539e62ae612005ac",
+ "source_sha256": {
+  "07_threshold_model.py": "69cd2d645bb66aec0d1660a63e29b90c705671cc542084f2ca907bd7b1496997",
+  "11_modele_ecritures_tls.py": "184577309e64b5b0e75e5bca73608433fc0ccf8d99f1d9ba8a1fd15ac23ebf18",
+  "pq_common.py": "da9ea939dec291e75bd81a99c163fe89ce17e8545662f7525915a12dab7deea1"
+ },
+ "this_script_sha256": "e6200c8fedbcfa85e00748f84de4a34cfb15aa27d00cbcd4a8f96d040aa36c49"
+}

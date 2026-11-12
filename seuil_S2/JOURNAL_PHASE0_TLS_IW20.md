@@ -1,0 +1,2 @@
+# Journal de phase 0 — TLS_IW20 (aucune durée consultée)
+12/11/2026, phase 0 à RTT 50 ms : réussite 100 % ; octets reçus = vol prédit à ± 1 o dans les 7 cellules ; manifeste : `initcwnd[...]=20`, route après portant `initcwnd 20` ; première ronde serveur = 11, 20 et 20 segments aux cellules 11 750, 25 050 et 46 000 o (règle a : 11, 20, 20 ; règle b : 10, 10, 10) ; rondes observées 1, 2 et 2 (règle a : 1, 2, 2). P0-T2 satisfait ; aucun calage de constante ; gel sans argument supplémentaire.
