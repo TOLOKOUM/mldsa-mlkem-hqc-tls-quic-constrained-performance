@@ -67,7 +67,7 @@ def main():
             pt.append("S2_%s_pcap_pad%d,%s,single,both,%s,0,%d,%d,%s,%s" % (fam, X, proto, p, d, pruns, pair, env("CERT_PAD_TARGET_DER=%d" % X, mtu, "PER_CONN_PCAP=1")))
         # phase 0 : extremes + deux tailles proches des seuils, avec pcap ; 1 bloc de 10 connexions par paire.
         # TLS : RTT 50 ms (le detecteur de rondes de fw_segments exige un ecart > 0,4 RTT : a RTT 0 toute la rafale est vue comme une seule ronde) ; QUIC : RTT 0 comme en campagne S.
-        p, d = prof(50) if proto == "tls" else prof(0)
+        p, d = prof(50)
         p0.append("P0S2_%s_base,%s,single,both,%s,0,%d,10,%s,%s" % (fam, proto, p, d, pairs_base, env(mtu, "PER_CONN_PCAP=1")))
         for X in sorted(set([sizes[0], sizes[len(sizes) // 2], sizes[-1]] + list(f["pcap"])[:2])):
             p0.append("P0S2_%s_pad%d,%s,single,both,%s,0,%d,10,%s,%s" % (fam, X, proto, p, d, pair, env("CERT_PAD_TARGET_DER=%d" % X, mtu, "PER_CONN_PCAP=1")))

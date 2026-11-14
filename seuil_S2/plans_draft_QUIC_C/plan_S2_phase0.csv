@@ -1,0 +1,7 @@
+cell_id,protocol,auth,kem_family,profile,loss,delay,total_runs,only_pairs,extra_env
+P0S2_QUIC_C_base,quic,single,both,delay-only,0,25,10,ed25519|hqc128;mldsa44|hqc128,PER_CONN_PCAP=1
+P0S2_QUIC_C_pad1100,quic,single,both,delay-only,0,25,10,ed25519|hqc128,CERT_PAD_TARGET_DER=1100;PER_CONN_PCAP=1
+P0S2_QUIC_C_pad1800,quic,single,both,delay-only,0,25,10,ed25519|hqc128,CERT_PAD_TARGET_DER=1800;PER_CONN_PCAP=1
+P0S2_QUIC_C_pad2400,quic,single,both,delay-only,0,25,10,ed25519|hqc128,CERT_PAD_TARGET_DER=2400;PER_CONN_PCAP=1
+P0S2_QUIC_C_pad4800,quic,single,both,delay-only,0,25,10,ed25519|hqc128,CERT_PAD_TARGET_DER=4800;PER_CONN_PCAP=1
+P0S2_QUIC_C_pad12000,quic,single,both,delay-only,0,25,10,ed25519|hqc128,CERT_PAD_TARGET_DER=12000;PER_CONN_PCAP=1

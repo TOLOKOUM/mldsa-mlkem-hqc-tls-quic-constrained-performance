@@ -1,0 +1,10 @@
+# Journal de phase 0 - QUIC_C (aucune duree lue)
+(i) 14/11/2026, phase 0 a RTT 0 (sorties conservees : run_S2_phase0_QUIC_C.log, phase0_check_S2_QUIC_C.log, captures_S2_phase0_QUIC_C/).
+ - Realisabilite 100 %, aucun echec. B_c = 3 660 o (3 datagrammes client de 1 220 o), different de 2 440 : QUIC_C n'est pas abandonnee (P0-Q2).
+ - P0-Q3/Q4 non evaluables a RTT 0 : la salve 1 est coupee par le premier datagramme client suivant le premier datagramme serveur (1 datagramme de 1 260 o dans les 70 flux). Meme erreur de conception que pour TLS, decouverte avant toute duree.
+(ii) Correction : phase 0 repetee a RTT 50 ms (make_plan_S2.py : phase 0 a RTT 50 ms pour TLS et QUIC). Sorties : run_S2_phase0_QUIC_C_rtt50.log, phase0_check_S2_QUIC_C_rtt50.log. Aucune duree lue.
+ - Realisabilite 100 %, aucun echec ; B_c = 3 660 o ; datagrammes serveur 1 220 o.
+ - Octets recus - vol predit (brouillon, q_offset 42) = +1 196 a +1 221 o dans les 6 cellules ed25519 et +1 206 o pour le pont mldsa44 ; les valeurs affichees par phase0_check sont des ECARTS par rapport au brouillon : q_offset absolu = 42 + 1 216 = 1 258.
+ - Salve 1 des cellules plafonnees (pad 12 000 et pont) = 12 212 o = 1 260 + 10 952, soit un premier datagramme serveur de 1 260 o plus 3 x B_c - 28 (3 x 3 660 - 28) ; chaque flux commence par ce datagramme de 1 260 o ; dernier datagramme de 1 192 o. Lu a la lettre, le critere P0-Q3 (plafond de la salve 1 = 3 B_c - 28) n'est donc pas satisfait ; il l'est exactement hors du premier datagramme.
+ - Lecture post hoc (octets de phase 0 uniquement) : ce premier datagramme (role non verifie, rien n'est dechiffre) est compte dans les octets recus mais hors budget d'amplification. Calage adopte : --q-offset 1258 --first-dgram-extra 1260 (nouvelle option, fichier predict_freeze_S2_quicc.py, le script des gels TLS est inchange). Avec ce calage le vol predit est a moins de 11 o des octets recus dans les 4 cellules lues.
+ - Ecart a la pre-inscription : ajout d'un parametre de calage (first-dgram-extra) au-dela de P0-Q4 ; a declarer dans l'article. L'hypothese est calee sur ces octets : la partie hors echantillon est la position des paliers en latence.

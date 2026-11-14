@@ -1,0 +1,7 @@
+family,rule,step,chain_threshold,flight_threshold,nonmonotone_points
+QUIC_C,amp,1,5736,12212.9,0
+QUIC_C,amp,2,29265,36612.4,0
+QUIC_C,amp_bc,1,2206,8552.3,0
+QUIC_C,amp_bc,2,25736,32952.9,0
+QUIC_C,cwnd,1,6939,13460.4,0
+QUIC_C,cwnd,2,30469,37861.0,0
