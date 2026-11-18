@@ -1,0 +1,8 @@
+pcap,n_conn,Bc_values,S_all_min,S_all_median,S_all_max,S_chg_max,cas_A,cas_B,cas_C,cas_instables,rtt_est_med_ms,undecrypted_total,non_validated
+captures_S3_phase0_PAD0/quic/single/delayonly_delay25ms__padto12500__pcap/pcap_perconn/block1of1/secp384r1_x448_mlkem768/block.pcap,10,2440,14565,14566,14567,14567,0,0,10,0,29.02,0,0
+captures_S3_phase0_PAD0/quic/single/delayonly_delay25ms__padto2750__pcap/pcap_perconn/block1of1/secp384r1_x448_mlkem768/block.pcap,10,2440,4467,7064,7065,7065,10,0,0,0,28.9,0,0
+captures_S3_phase0_PAD0/quic/single/delayonly_delay25ms__padto5150__pcap/pcap_perconn/block1of1/secp384r1_x448_mlkem768/block.pcap,10,2440,6952,9550,9551,9551,2,0,8,0,29.0,0,0
+captures_S3_phase0_PAD0/quic/single/delayonly_delay25ms__padto5750__pcap/pcap_perconn/block1of1/secp384r1_x448_mlkem768/block.pcap,10,2440,7599,7601,7602,7602,0,0,10,0,28.89,0,0
+captures_S3_phase0_PAD0/quic/single/delayonly_delay25ms__padto8100__pcap/pcap_perconn/block1of1/secp384r1_x448_mlkem768/block.pcap,10,2440,10035,10036,10037,10037,0,0,10,0,28.87,0,0
+captures_S3_phase0_PAD0/quic/single/delayonly_delay25ms__pcap/pcap_perconn/block1of1/mldsa65_x448_mlkem768/block.pcap,10,2440,10637,10637,10637,10637,0,0,10,0,28.52,0,0
+captures_S3_phase0_PAD0/quic/single/delayonly_delay25ms__pcap/pcap_perconn/block1of1/secp384r1_x448_mlkem768/block.pcap,10,2440,5037,5037,5037,5037,10,0,0,0,28.85,0,0

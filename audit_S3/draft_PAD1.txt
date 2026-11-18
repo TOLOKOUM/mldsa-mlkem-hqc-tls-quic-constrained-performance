@@ -1,0 +1,18 @@
+=== QUIC_PAD1 : remplissage du ClientHello (CH_PAD_BYTES) : B_c attendu 3 datagrammes, meme vol serveur ===
+regles : a = amp ; b = amp_bc ; seuils du modele (chaine, octets DER) : {'amp': [9007, 32537], 'amp_bc': [5478, 29007], 'cwnd': [10211, 33740]}
+  kind       sig  chain_target  flight_a  k_a  k_b  disc    tier margin_a margin_b  pcap_cell
+  base secp384r1             0    2057.9    0    0     0 primary                            0
+   pad secp384r1          2750    4463.8    0    0     0 primary     1501     1501          0
+   pad secp384r1          5150    6952.6    0    0     0 primary     1501      328          1
+   pad secp384r1          5750    7574.8    0    1     1 primary     1501      273          1
+   pad secp384r1          6350    8197.0    0    1     1 primary     1501      873          0
+   pad secp384r1          7250    9130.3    0    1     1 primary     1501     1501          0
+   pad secp384r1          8100   10011.7    0    1     1 primary      907     1501          0
+   pad secp384r1          8650   10582.1    0    1     1 primary      357     1501          1
+   pad secp384r1          9250   11204.3    1    1     0 primary      244     1501          1
+   pad secp384r1          9850   11826.5    1    1     0 primary      844     1501          0
+   pad secp384r1         10450   12448.7    1    1     0 primary     1444     1501          0
+   pad secp384r1         12500   14574.5    1    1     0 primary     1501     1501          0
+bridge   mldsa65             0   10633.9    0    1     1  bridge                            0
+
+cellules remplies : 11 ; discriminantes primaires : 5 ; pcap : 4

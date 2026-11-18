@@ -1,0 +1,1938 @@
+Anti-veille : systemd-inhibit actif pendant toute la campagne (veille/hibernation/capot bloques).
+Plan: 6 cellule(s) | N_BLOCKS=1 | blocs 1..1 | warm-up=2 | graine maitre=20261118
+Preflight: governor=performance no_turbo=1
+Sorties : /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1 | debit RATE_MBIT=100 Mbit/s
+
+=================== BLOC 1 / 1 (graine de bloc 4005021333) ===================
+Ordre des cellules : P0S2_QUIC_PAD1_pad8100 P0S2_QUIC_PAD1_pad5150 P0S2_QUIC_PAD1_pad2750 P0S2_QUIC_PAD1_base P0S2_QUIC_PAD1_pad5750 P0S2_QUIC_PAD1_pad12500
+>>> [bloc 1/1] cell P0S2_QUIC_PAD1_pad8100  seed=3628477435
+    env TOTAL_RUNS=10 ONLY_PAIRS=secp384r1|x448_mlkem768 CERT_PAD_TARGET_DER=8100 PER_CONN_PCAP=1 Launcher_ext.sh both quic single nocapture delay-only 0 25 1 1 3628477435
+Découpage en blocs : 1 blocs de 10 runs -- ce lancement exécute le bloc 1/1.
+ONLY_PAIRS actif : 1 paire(s) au lieu de la matrice complete.
+*************************************
+Parameters valid. Starting with:
+  KEM Family:      both
+  Protocol:        quic
+  Auth Mode:       single
+  Capture Mode:    nocapture
+  Network Profile: delay-only
+  Loss %:          0
+  Delay (ms):      25
+  Executions:      10 (micro_batches=1, 10 par tour)
+  Signature:       ed25519 secp384r1 secp521r1 mldsa44 mldsa65 mldsa87
+  KEMS Level 1:    P-256 x25519 p256_mlkem512 x25519_mlkem512 mlkem512 hqc128 p256_hqc128 x25519_hqc128
+  KEMS Level 3:    P-384 x448 p384_mlkem768 x448_mlkem768 mlkem768 hqc192 p384_hqc192 x448_hqc192
+  KEMS Level 5:    P-521 p521_mlkem1024 mlkem1024 hqc256 p521_hqc256
+*************************************
+Runnig on Linux
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*************************************
+***NETWORK AND VOLUMEN **************
+*************************************
+0d9b0b1c40990a9aec740673885051bb6b337eaf7c91b15ae1dacee7954f4cd4
+✅ Red localNet created.
+cert
+✅ Volumen cert created.
+*************************************
+Manifeste d'audit du bloc écrit dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto8100__pcap/block_manifest_block1of1_seed3628477435.log
+
+################ TOUR 1 / 1 (10 connexions par paire) ################
+
+****************
+ ==> SIG_ALG: secp384r1  |  KEM: x448_mlkem768  |  bloc 1/1
+ ==> Creating Certs and Keys for secp384r1
+Creating certificates
+Using ECDSA procedure for secp384r1 (chain_depth=1 pad_bytes=0 pad_target_der=8100)
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+  server: cible DER=8100 -> obtenu 8100 (pad=7643 octets)
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+  user: cible DER=8100 -> obtenu 8100 (pad=7647 octets)
+sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=8100
+der_bytes: root=447 intermediate=0 server_leaf=8100 user_leaf=8100 server_chain_sent=8100 user_chain_sent=8100
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=secp384r1 and certificates created
+
+
+    Executing docker Server...
+fa341f074e37f235df49900013060bf227a67f2b04be58861cd3ab11065a648b
+    Buscando IP.. 
+    IP..  172.18.0.2
+   ↳ tc netem sur servidor : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 805a: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 12542480791710330071
+    Executing docker Client... 172.18.0.2
+04c71d94cb6c0624a70b559d60c2f895270638e834db092d56ea1db45607ee01
+cliente
+     Docker cliente executed ... 
+   ↳ tc netem sur cliente : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 805b: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 17824753730923356690
+
+**************************
+     Executing test  ... 
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 805c: root refcnt 2 limit 1000 seed 14462741444314763216
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 2 connexion(s) jetee(s) avant mesure
+tcpdump actif sur eth0 -> /sslkeys/block.pcap
+QUIC keys will be stored in: /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+Execution 1 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7c17c00b1440] Starting...
+[strm][0x7c17c00b1440] Sending data...
+[strm][0x7c17c00b1440] Data sent
+[strm][0x7c17c00b1440] Data received
+[strm][0x7c17c00b1440] Peer shut down
+[strm][0x7c17c00b1440] All done
+Handshake duration: 63.29 ms
+App-bytes: 100
+App-ready duration: 115.09 ms
+Resumed: 0
+Rx-bytes: 11286
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x70e2700c3270] Starting...
+[strm][0x70e2700c3270] Sending data...
+[strm][0x70e2700c3270] Data sent
+[strm][0x70e2700c3270] Data received
+[strm][0x70e2700c3270] Peer shut down
+[strm][0x70e2700c3270] All done
+Handshake duration: 62.98 ms
+App-bytes: 100
+App-ready duration: 114.33 ms
+Resumed: 0
+Rx-bytes: 11293
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7cd2580c3270] Starting...
+[strm][0x7cd2580c3270] Sending data...
+[strm][0x7cd2580c3270] Data sent
+[strm][0x7cd2580c3270] Data received
+[strm][0x7cd2580c3270] Peer shut down
+[strm][0x7cd2580c3270] All done
+Handshake duration: 63.24 ms
+App-bytes: 100
+App-ready duration: 114.53 ms
+Resumed: 0
+Rx-bytes: 11288
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7b03c40c3270] Starting...
+[strm][0x7b03c40c3270] Sending data...
+[strm][0x7b03c40c3270] Data sent
+[strm][0x7b03c40c3270] Data received
+[strm][0x7b03c40c3270] Peer shut down
+[strm][0x7b03c40c3270] All done
+Handshake duration: 63.21 ms
+App-bytes: 100
+App-ready duration: 115.04 ms
+Resumed: 0
+Rx-bytes: 11286
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7954500b1440] Starting...
+[strm][0x7954500b1440] Sending data...
+[strm][0x7954500b1440] Data sent
+[strm][0x7954500b1440] Data received
+[strm][0x7954500b1440] Peer shut down
+[strm][0x7954500b1440] All done
+Handshake duration: 63.30 ms
+App-bytes: 100
+App-ready duration: 115.04 ms
+Resumed: 0
+Rx-bytes: 11288
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7e198c0c3270] Starting...
+[strm][0x7e198c0c3270] Sending data...
+[strm][0x7e198c0c3270] Data sent
+[strm][0x7e198c0c3270] Data received
+[strm][0x7e198c0c3270] Peer shut down
+[strm][0x7e198c0c3270] All done
+Handshake duration: 63.08 ms
+App-bytes: 100
+App-ready duration: 114.60 ms
+Resumed: 0
+Rx-bytes: 11287
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x735bb80d50a0] Starting...
+[strm][0x735bb80d50a0] Sending data...
+[strm][0x735bb80d50a0] Data sent
+[strm][0x735bb80d50a0] Data received
+[strm][0x735bb80d50a0] Peer shut down
+[strm][0x735bb80d50a0] All done
+Handshake duration: 62.99 ms
+App-bytes: 100
+App-ready duration: 114.55 ms
+Resumed: 0
+Rx-bytes: 11287
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x77cbc40d50a0] Starting...
+[strm][0x77cbc40d50a0] Sending data...
+[strm][0x77cbc40d50a0] Data sent
+[strm][0x77cbc40d50a0] Data received
+[strm][0x77cbc40d50a0] Peer shut down
+[strm][0x77cbc40d50a0] All done
+Handshake duration: 64.22 ms
+App-bytes: 100
+App-ready duration: 115.93 ms
+Resumed: 0
+Rx-bytes: 11287
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7659140d50a0] Starting...
+[strm][0x7659140d50a0] Sending data...
+[strm][0x7659140d50a0] Data sent
+[strm][0x7659140d50a0] Data received
+[strm][0x7659140d50a0] Peer shut down
+[strm][0x7659140d50a0] All done
+Handshake duration: 63.16 ms
+App-bytes: 100
+App-ready duration: 114.77 ms
+Resumed: 0
+Rx-bytes: 11287
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7df43c0b1440] Starting...
+[strm][0x7df43c0b1440] Sending data...
+[strm][0x7df43c0b1440] Data sent
+[strm][0x7df43c0b1440] Data received
+[strm][0x7df43c0b1440] Peer shut down
+[strm][0x7df43c0b1440] All done
+Handshake duration: 63.26 ms
+App-bytes: 100
+App-ready duration: 114.94 ms
+Resumed: 0
+Rx-bytes: 11292
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+tcpdump bilan (230740 octets dans /sslkeys/block.pcap) :
+240 packets captured
+240 packets received by filter
+0 packets dropped by kernel
+     Log de handshake enregistré dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto8100__pcap/handshake_logs/handshake_quic_single_secp384r1_x448_mlkem768_delayonly_delay25ms__padto8100__pcap_block1of1.log
+     CPU/mémoire enregistrés dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto8100__pcap/resource_usage/resource_usage_quic_single_delayonly_delay25ms__padto8100__pcap.csv
+     Waiting  ... 
+   Shutting down server and impairments...
+Deleted Containers:
+04c71d94cb6c0624a70b559d60c2f895270638e834db092d56ea1db45607ee01
+fa341f074e37f235df49900013060bf227a67f2b04be58861cd3ab11065a648b
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Tests finished. Bloc 1/1 terminé (graine 3628477435).
+>>> [bloc 1/1] cell P0S2_QUIC_PAD1_pad5150  seed=3591810577
+    env TOTAL_RUNS=10 ONLY_PAIRS=secp384r1|x448_mlkem768 CERT_PAD_TARGET_DER=5150 PER_CONN_PCAP=1 Launcher_ext.sh both quic single nocapture delay-only 0 25 1 1 3591810577
+Découpage en blocs : 1 blocs de 10 runs -- ce lancement exécute le bloc 1/1.
+ONLY_PAIRS actif : 1 paire(s) au lieu de la matrice complete.
+*************************************
+Parameters valid. Starting with:
+  KEM Family:      both
+  Protocol:        quic
+  Auth Mode:       single
+  Capture Mode:    nocapture
+  Network Profile: delay-only
+  Loss %:          0
+  Delay (ms):      25
+  Executions:      10 (micro_batches=1, 10 par tour)
+  Signature:       ed25519 secp384r1 secp521r1 mldsa44 mldsa65 mldsa87
+  KEMS Level 1:    P-256 x25519 p256_mlkem512 x25519_mlkem512 mlkem512 hqc128 p256_hqc128 x25519_hqc128
+  KEMS Level 3:    P-384 x448 p384_mlkem768 x448_mlkem768 mlkem768 hqc192 p384_hqc192 x448_hqc192
+  KEMS Level 5:    P-521 p521_mlkem1024 mlkem1024 hqc256 p521_hqc256
+*************************************
+Runnig on Linux
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*************************************
+***NETWORK AND VOLUMEN **************
+*************************************
+b0e4d3817966683dbd59d2826df35285901582f36528023e3bde6aa95a19754b
+✅ Red localNet created.
+cert
+✅ Volumen cert created.
+*************************************
+Manifeste d'audit du bloc écrit dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto5150__pcap/block_manifest_block1of1_seed3591810577.log
+
+################ TOUR 1 / 1 (10 connexions par paire) ################
+
+****************
+ ==> SIG_ALG: secp384r1  |  KEM: x448_mlkem768  |  bloc 1/1
+ ==> Creating Certs and Keys for secp384r1
+Creating certificates
+Using ECDSA procedure for secp384r1 (chain_depth=1 pad_bytes=0 pad_target_der=5150)
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+  server: cible DER=5150 -> obtenu 5150 (pad=4692 octets)
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+  user: cible DER=5150 -> obtenu 5150 (pad=4697 octets)
+sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=5150
+der_bytes: root=448 intermediate=0 server_leaf=5150 user_leaf=5150 server_chain_sent=5150 user_chain_sent=5150
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=secp384r1 and certificates created
+
+
+    Executing docker Server...
+39ee4d9e9686414d9d1ebe852a3fa520fd3a186701749a292787a9369017063b
+    Buscando IP.. 
+    IP..  172.18.0.2
+   ↳ tc netem sur servidor : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 805e: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 7595611074933531412
+    Executing docker Client... 172.18.0.2
+129870a92eee4411d510cc4c0f81c65b93fa96e19dd24b16dd2ae4f5af3fcffa
+cliente
+     Docker cliente executed ... 
+   ↳ tc netem sur cliente : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 805f: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 249519157914172680
+
+**************************
+     Executing test  ... 
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8060: root refcnt 2 limit 1000 seed 10939589799395616259
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 2 connexion(s) jetee(s) avant mesure
+tcpdump actif sur eth0 -> /sslkeys/block.pcap
+QUIC keys will be stored in: /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+Execution 1 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x716a6808d0a0] Starting...
+[strm][0x716a6808d0a0] Sending data...
+[strm][0x716a6808d0a0] Data sent
+[strm][0x716a6808d0a0] Data received
+[strm][0x716a6808d0a0] Peer shut down
+[strm][0x716a6808d0a0] All done
+Handshake duration: 63.26 ms
+App-bytes: 100
+App-ready duration: 114.89 ms
+Resumed: 0
+Rx-bytes: 8208
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x79ef300b0d00] Starting...
+[strm][0x79ef300b0d00] Sending data...
+[strm][0x79ef300b0d00] Data sent
+[strm][0x79ef300b0d00] Data received
+[strm][0x79ef300b0d00] Peer shut down
+[strm][0x79ef300b0d00] All done
+Handshake duration: 63.11 ms
+App-bytes: 100
+App-ready duration: 114.65 ms
+Resumed: 0
+Rx-bytes: 8209
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7304a00d4960] Starting...
+[strm][0x7304a00d4960] Sending data...
+[strm][0x7304a00d4960] Data sent
+[strm][0x7304a00d4960] Data received
+[strm][0x7304a00d4960] Peer shut down
+[strm][0x7304a00d4960] All done
+Handshake duration: 63.21 ms
+App-bytes: 100
+App-ready duration: 115.26 ms
+Resumed: 0
+Rx-bytes: 8208
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x75c4e407b270] Starting...
+[strm][0x75c4e407b270] Sending data...
+[strm][0x75c4e407b270] Data sent
+[strm][0x75c4e407b270] Data received
+[strm][0x75c4e407b270] Peer shut down
+[strm][0x75c4e407b270] All done
+Handshake duration: 62.58 ms
+App-bytes: 100
+App-ready duration: 114.17 ms
+Resumed: 0
+Rx-bytes: 8213
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7f4a680d4960] Starting...
+[strm][0x7f4a680d4960] Sending data...
+[strm][0x7f4a680d4960] Data sent
+[strm][0x7f4a680d4960] Data received
+[strm][0x7f4a680d4960] Peer shut down
+[strm][0x7f4a680d4960] All done
+Handshake duration: 63.02 ms
+App-bytes: 100
+App-ready duration: 114.45 ms
+Resumed: 0
+Rx-bytes: 8208
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7020c00d4960] Starting...
+[strm][0x7020c00d4960] Sending data...
+[strm][0x7020c00d4960] Data sent
+[strm][0x7020c00d4960] Data received
+[strm][0x7020c00d4960] Peer shut down
+[strm][0x7020c00d4960] All done
+Handshake duration: 63.06 ms
+App-bytes: 100
+App-ready duration: 115.08 ms
+Resumed: 0
+Rx-bytes: 8208
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7023b40c2b30] Starting...
+[strm][0x7023b40c2b30] Sending data...
+[strm][0x7023b40c2b30] Data sent
+[strm][0x7023b40c2b30] Data received
+[strm][0x7023b40c2b30] Peer shut down
+[strm][0x7023b40c2b30] All done
+Handshake duration: 62.95 ms
+App-bytes: 100
+App-ready duration: 114.31 ms
+Resumed: 0
+Rx-bytes: 8208
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x77aac40c2b30] Starting...
+[strm][0x77aac40c2b30] Sending data...
+[strm][0x77aac40c2b30] Data sent
+[strm][0x77aac40c2b30] Data received
+[strm][0x77aac40c2b30] Peer shut down
+[strm][0x77aac40c2b30] All done
+Handshake duration: 62.93 ms
+App-bytes: 100
+App-ready duration: 114.64 ms
+Resumed: 0
+Rx-bytes: 8213
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x78bb6008d0a0] Starting...
+[strm][0x78bb6008d0a0] Sending data...
+[strm][0x78bb6008d0a0] Data sent
+[strm][0x78bb6008d0a0] Data received
+[strm][0x78bb6008d0a0] Peer shut down
+[strm][0x78bb6008d0a0] All done
+Handshake duration: 62.79 ms
+App-bytes: 100
+App-ready duration: 114.01 ms
+Resumed: 0
+Rx-bytes: 8207
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x76981009eed0] Starting...
+[strm][0x76981009eed0] Sending data...
+[strm][0x76981009eed0] Data sent
+[strm][0x76981009eed0] Data received
+[strm][0x76981009eed0] Peer shut down
+[strm][0x76981009eed0] All done
+Handshake duration: 62.62 ms
+App-bytes: 100
+App-ready duration: 114.35 ms
+Resumed: 0
+Rx-bytes: 8208
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+tcpdump bilan (197914 octets dans /sslkeys/block.pcap) :
+209 packets captured
+209 packets received by filter
+0 packets dropped by kernel
+     Log de handshake enregistré dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto5150__pcap/handshake_logs/handshake_quic_single_secp384r1_x448_mlkem768_delayonly_delay25ms__padto5150__pcap_block1of1.log
+     CPU/mémoire enregistrés dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto5150__pcap/resource_usage/resource_usage_quic_single_delayonly_delay25ms__padto5150__pcap.csv
+     Waiting  ... 
+   Shutting down server and impairments...
+Deleted Containers:
+129870a92eee4411d510cc4c0f81c65b93fa96e19dd24b16dd2ae4f5af3fcffa
+39ee4d9e9686414d9d1ebe852a3fa520fd3a186701749a292787a9369017063b
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Tests finished. Bloc 1/1 terminé (graine 3591810577).
+>>> [bloc 1/1] cell P0S2_QUIC_PAD1_pad2750  seed=622903520
+    env TOTAL_RUNS=10 ONLY_PAIRS=secp384r1|x448_mlkem768 CERT_PAD_TARGET_DER=2750 PER_CONN_PCAP=1 Launcher_ext.sh both quic single nocapture delay-only 0 25 1 1 622903520
+Découpage en blocs : 1 blocs de 10 runs -- ce lancement exécute le bloc 1/1.
+ONLY_PAIRS actif : 1 paire(s) au lieu de la matrice complete.
+*************************************
+Parameters valid. Starting with:
+  KEM Family:      both
+  Protocol:        quic
+  Auth Mode:       single
+  Capture Mode:    nocapture
+  Network Profile: delay-only
+  Loss %:          0
+  Delay (ms):      25
+  Executions:      10 (micro_batches=1, 10 par tour)
+  Signature:       ed25519 secp384r1 secp521r1 mldsa44 mldsa65 mldsa87
+  KEMS Level 1:    P-256 x25519 p256_mlkem512 x25519_mlkem512 mlkem512 hqc128 p256_hqc128 x25519_hqc128
+  KEMS Level 3:    P-384 x448 p384_mlkem768 x448_mlkem768 mlkem768 hqc192 p384_hqc192 x448_hqc192
+  KEMS Level 5:    P-521 p521_mlkem1024 mlkem1024 hqc256 p521_hqc256
+*************************************
+Runnig on Linux
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*************************************
+***NETWORK AND VOLUMEN **************
+*************************************
+c35f43e2edee26b3076968b7e13afd8e6a29437173c0ef7d244db992fb4a4131
+✅ Red localNet created.
+cert
+✅ Volumen cert created.
+*************************************
+Manifeste d'audit du bloc écrit dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto2750__pcap/block_manifest_block1of1_seed622903520.log
+
+################ TOUR 1 / 1 (10 connexions par paire) ################
+
+****************
+ ==> SIG_ALG: secp384r1  |  KEM: x448_mlkem768  |  bloc 1/1
+ ==> Creating Certs and Keys for secp384r1
+Creating certificates
+Using ECDSA procedure for secp384r1 (chain_depth=1 pad_bytes=0 pad_target_der=2750)
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+  server: cible DER=2750 -> obtenu 2750 (pad=2291 octets)
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+  user: cible DER=2750 -> obtenu 2750 (pad=2297 octets)
+sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=2750
+der_bytes: root=447 intermediate=0 server_leaf=2750 user_leaf=2750 server_chain_sent=2750 user_chain_sent=2750
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=secp384r1 and certificates created
+
+
+    Executing docker Server...
+6169b396e0b92af1889aee843b5ef1aa89e83ee1d13022f50df6a338da8d1af4
+    Buscando IP.. 
+    IP..  172.18.0.2
+   ↳ tc netem sur servidor : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 8062: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 11106061058681225093
+    Executing docker Client... 172.18.0.2
+b28199329a421878c8366c675ac873ea45a09357297e99ac07733ec598919293
+cliente
+     Docker cliente executed ... 
+   ↳ tc netem sur cliente : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 8063: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 9354691082940279159
+
+**************************
+     Executing test  ... 
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8064: root refcnt 2 limit 1000 seed 571815491879561943
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 2 connexion(s) jetee(s) avant mesure
+tcpdump actif sur eth0 -> /sslkeys/block.pcap
+QUIC keys will be stored in: /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+Execution 1 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x77bcf80b1d10] Starting...
+[strm][0x77bcf80b1d10] Sending data...
+[strm][0x77bcf80b1d10] Data sent
+[strm][0x77bcf80b1d10] Data received
+[strm][0x77bcf80b1d10] Peer shut down
+[strm][0x77bcf80b1d10] All done
+Handshake duration: 63.01 ms
+App-bytes: 100
+App-ready duration: 114.95 ms
+Resumed: 0
+Rx-bytes: 5728
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x730e9c0b1d10] Starting...
+[strm][0x730e9c0b1d10] Sending data...
+[strm][0x730e9c0b1d10] Data sent
+[strm][0x730e9c0b1d10] Data received
+[strm][0x730e9c0b1d10] Peer shut down
+[strm][0x730e9c0b1d10] All done
+Handshake duration: 63.36 ms
+App-bytes: 100
+App-ready duration: 114.96 ms
+Resumed: 0
+Rx-bytes: 5722
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7ba1080b1d10] Starting...
+[strm][0x7ba1080b1d10] Sending data...
+[strm][0x7ba1080b1d10] Data sent
+[strm][0x7ba1080b1d10] Data received
+[strm][0x7ba1080b1d10] Peer shut down
+[strm][0x7ba1080b1d10] All done
+Handshake duration: 62.97 ms
+App-bytes: 100
+App-ready duration: 114.50 ms
+Resumed: 0
+Rx-bytes: 5721
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7d3f8408e0b0] Starting...
+[strm][0x7d3f8408e0b0] Sending data...
+[strm][0x7d3f8408e0b0] Data sent
+[strm][0x7d3f8408e0b0] Data received
+[strm][0x7d3f8408e0b0] Peer shut down
+[strm][0x7d3f8408e0b0] All done
+Handshake duration: 63.27 ms
+App-bytes: 100
+App-ready duration: 114.97 ms
+Resumed: 0
+Rx-bytes: 5727
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7a55f80b1d10] Starting...
+[strm][0x7a55f80b1d10] Sending data...
+[strm][0x7a55f80b1d10] Data sent
+[strm][0x7a55f80b1d10] Data received
+[strm][0x7a55f80b1d10] Peer shut down
+[strm][0x7a55f80b1d10] All done
+Handshake duration: 63.35 ms
+App-bytes: 100
+App-ready duration: 115.51 ms
+Resumed: 0
+Rx-bytes: 5722
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x773f340b1d10] Starting...
+[strm][0x773f340b1d10] Sending data...
+[strm][0x773f340b1d10] Data sent
+[strm][0x773f340b1d10] Data received
+[strm][0x773f340b1d10] Peer shut down
+[strm][0x773f340b1d10] All done
+Handshake duration: 62.99 ms
+App-bytes: 100
+App-ready duration: 114.29 ms
+Resumed: 0
+Rx-bytes: 5722
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7024ac0b1d10] Starting...
+[strm][0x7024ac0b1d10] Sending data...
+[strm][0x7024ac0b1d10] Data sent
+[strm][0x7024ac0b1d10] Data received
+[strm][0x7024ac0b1d10] Peer shut down
+[strm][0x7024ac0b1d10] All done
+Handshake duration: 63.00 ms
+App-bytes: 100
+App-ready duration: 114.51 ms
+Resumed: 0
+Rx-bytes: 5721
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7214a40b1d10] Starting...
+[strm][0x7214a40b1d10] Sending data...
+[strm][0x7214a40b1d10] Data sent
+[strm][0x7214a40b1d10] Data received
+[strm][0x7214a40b1d10] Peer shut down
+[strm][0x7214a40b1d10] All done
+Handshake duration: 62.73 ms
+App-bytes: 100
+App-ready duration: 114.80 ms
+Resumed: 0
+Rx-bytes: 5722
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7b5ba40b1d10] Starting...
+[strm][0x7b5ba40b1d10] Sending data...
+[strm][0x7b5ba40b1d10] Data sent
+[strm][0x7b5ba40b1d10] Data received
+[strm][0x7b5ba40b1d10] Peer shut down
+[strm][0x7b5ba40b1d10] All done
+Handshake duration: 62.75 ms
+App-bytes: 100
+App-ready duration: 114.31 ms
+Resumed: 0
+Rx-bytes: 5723
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x76f5880b1d10] Starting...
+[strm][0x76f5880b1d10] Sending data...
+[strm][0x76f5880b1d10] Data sent
+[strm][0x76f5880b1d10] Data received
+[strm][0x76f5880b1d10] Peer shut down
+[strm][0x76f5880b1d10] All done
+Handshake duration: 62.71 ms
+App-bytes: 100
+App-ready duration: 114.55 ms
+Resumed: 0
+Rx-bytes: 5727
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+tcpdump bilan (170785 octets dans /sslkeys/block.pcap) :
+181 packets captured
+181 packets received by filter
+0 packets dropped by kernel
+     Log de handshake enregistré dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto2750__pcap/handshake_logs/handshake_quic_single_secp384r1_x448_mlkem768_delayonly_delay25ms__padto2750__pcap_block1of1.log
+     CPU/mémoire enregistrés dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto2750__pcap/resource_usage/resource_usage_quic_single_delayonly_delay25ms__padto2750__pcap.csv
+     Waiting  ... 
+   Shutting down server and impairments...
+Deleted Containers:
+b28199329a421878c8366c675ac873ea45a09357297e99ac07733ec598919293
+6169b396e0b92af1889aee843b5ef1aa89e83ee1d13022f50df6a338da8d1af4
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Tests finished. Bloc 1/1 terminé (graine 622903520).
+>>> [bloc 1/1] cell P0S2_QUIC_PAD1_base  seed=3500890600
+    env TOTAL_RUNS=10 ONLY_PAIRS=secp384r1|x448_mlkem768,mldsa65|x448_mlkem768 PER_CONN_PCAP=1 Launcher_ext.sh both quic single nocapture delay-only 0 25 1 1 3500890600
+Découpage en blocs : 1 blocs de 10 runs -- ce lancement exécute le bloc 1/1.
+ONLY_PAIRS actif : 2 paire(s) au lieu de la matrice complete.
+*************************************
+Parameters valid. Starting with:
+  KEM Family:      both
+  Protocol:        quic
+  Auth Mode:       single
+  Capture Mode:    nocapture
+  Network Profile: delay-only
+  Loss %:          0
+  Delay (ms):      25
+  Executions:      10 (micro_batches=1, 10 par tour)
+  Signature:       ed25519 secp384r1 secp521r1 mldsa44 mldsa65 mldsa87
+  KEMS Level 1:    P-256 x25519 p256_mlkem512 x25519_mlkem512 mlkem512 hqc128 p256_hqc128 x25519_hqc128
+  KEMS Level 3:    P-384 x448 p384_mlkem768 x448_mlkem768 mlkem768 hqc192 p384_hqc192 x448_hqc192
+  KEMS Level 5:    P-521 p521_mlkem1024 mlkem1024 hqc256 p521_hqc256
+*************************************
+Runnig on Linux
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*************************************
+***NETWORK AND VOLUMEN **************
+*************************************
+1fbb7bc9380e9f2ceae9df44bef6d4c6ced94397223c2f8db4bfc0dbda9106ae
+✅ Red localNet created.
+cert
+✅ Volumen cert created.
+*************************************
+Manifeste d'audit du bloc écrit dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__pcap/block_manifest_block1of1_seed3500890600.log
+
+################ TOUR 1 / 1 (10 connexions par paire) ################
+
+****************
+ ==> SIG_ALG: secp384r1  |  KEM: x448_mlkem768  |  bloc 1/1
+ ==> Creating Certs and Keys for secp384r1
+Creating certificates
+Using ECDSA procedure for secp384r1 (chain_depth=1 pad_bytes=0 pad_target_der=0)
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=user
+sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=0
+der_bytes: root=448 intermediate=0 server_leaf=430 user_leaf=424 server_chain_sent=430 user_chain_sent=424
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=secp384r1 and certificates created
+
+
+    Executing docker Server...
+2bf1cae19ca4e01b4947d55b6906771ea5a918456370c0835f11af15f0a391cc
+    Buscando IP.. 
+    IP..  172.18.0.2
+   ↳ tc netem sur servidor : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 8066: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 3557961034730961063
+    Executing docker Client... 172.18.0.2
+20d0cf2b81257d263513aca996fb726413020d97b9730d1f957633d4f72bc4b2
+cliente
+     Docker cliente executed ... 
+   ↳ tc netem sur cliente : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 8067: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 6045792200833116311
+
+**************************
+     Executing test  ... 
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8068: root refcnt 2 limit 1000 seed 4184280732429508330
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 2 connexion(s) jetee(s) avant mesure
+tcpdump actif sur eth0 -> /sslkeys/block.pcap
+QUIC keys will be stored in: /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+Execution 1 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x71eef800e220] Starting...
+[strm][0x71eef800e220] Sending data...
+[strm][0x71eef800e220] Data sent
+[strm][0x71eef800e220] Data received
+[strm][0x71eef800e220] Peer shut down
+[strm][0x71eef800e220] All done
+Handshake duration: 63.55 ms
+App-bytes: 100
+App-ready duration: 115.06 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x70618400e220] Starting...
+[strm][0x70618400e220] Sending data...
+[strm][0x70618400e220] Data sent
+[strm][0x70618400e220] Data received
+[strm][0x70618400e220] Peer shut down
+[strm][0x70618400e220] All done
+Handshake duration: 62.80 ms
+App-bytes: 100
+App-ready duration: 114.52 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x788de400e220] Starting...
+[strm][0x788de400e220] Sending data...
+[strm][0x788de400e220] Data sent
+[strm][0x788de400e220] Data received
+[strm][0x788de400e220] Peer shut down
+[strm][0x788de400e220] All done
+Handshake duration: 62.73 ms
+App-bytes: 100
+App-ready duration: 114.35 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x76401800e220] Starting...
+[strm][0x76401800e220] Sending data...
+[strm][0x76401800e220] Data sent
+[strm][0x76401800e220] Data received
+[strm][0x76401800e220] Peer shut down
+[strm][0x76401800e220] All done
+Handshake duration: 62.87 ms
+App-bytes: 100
+App-ready duration: 114.62 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7584d000e220] Starting...
+[strm][0x7584d000e220] Sending data...
+[strm][0x7584d000e220] Data sent
+[strm][0x7584d000e220] Data received
+[strm][0x7584d000e220] Peer shut down
+[strm][0x7584d000e220] All done
+Handshake duration: 62.67 ms
+App-bytes: 100
+App-ready duration: 114.30 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7a1dd800e220] Starting...
+[strm][0x7a1dd800e220] Sending data...
+[strm][0x7a1dd800e220] Data sent
+[strm][0x7a1dd800e220] Data received
+[strm][0x7a1dd800e220] Peer shut down
+[strm][0x7a1dd800e220] All done
+Handshake duration: 62.57 ms
+App-bytes: 100
+App-ready duration: 114.11 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x751bec00e220] Starting...
+[strm][0x751bec00e220] Sending data...
+[strm][0x751bec00e220] Data sent
+[strm][0x751bec00e220] Data received
+[strm][0x751bec00e220] Peer shut down
+[strm][0x751bec00e220] All done
+Handshake duration: 62.75 ms
+App-bytes: 100
+App-ready duration: 114.44 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x70df4000e220] Starting...
+[strm][0x70df4000e220] Sending data...
+[strm][0x70df4000e220] Data sent
+[strm][0x70df4000e220] Data received
+[strm][0x70df4000e220] Peer shut down
+[strm][0x70df4000e220] All done
+Handshake duration: 62.59 ms
+App-bytes: 100
+App-ready duration: 114.13 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7f399800e220] Starting...
+[strm][0x7f399800e220] Sending data...
+[strm][0x7f399800e220] Data sent
+[strm][0x7f399800e220] Data received
+[strm][0x7f399800e220] Peer shut down
+[strm][0x7f399800e220] All done
+Handshake duration: 62.46 ms
+App-bytes: 100
+App-ready duration: 114.23 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7bfd1400e220] Starting...
+[strm][0x7bfd1400e220] Sending data...
+[strm][0x7bfd1400e220] Data sent
+[strm][0x7bfd1400e220] Data received
+[strm][0x7bfd1400e220] Peer shut down
+[strm][0x7bfd1400e220] All done
+Handshake duration: 62.45 ms
+App-bytes: 100
+App-ready duration: 113.96 ms
+Resumed: 0
+Rx-bytes: 3700
+Tx-bytes: 3660
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+tcpdump bilan (149234 octets dans /sslkeys/block.pcap) :
+160 packets captured
+160 packets received by filter
+0 packets dropped by kernel
+     Log de handshake enregistré dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__pcap/handshake_logs/handshake_quic_single_secp384r1_x448_mlkem768_delayonly_delay25ms__pcap_block1of1.log
+     CPU/mémoire enregistrés dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__pcap/resource_usage/resource_usage_quic_single_delayonly_delay25ms__pcap.csv
+     Waiting  ... 
+   Shutting down server and impairments...
+
+****************
+ ==> SIG_ALG: mldsa65  |  KEM: x448_mlkem768  |  bloc 1/1
+ ==> Creating Certs and Keys for mldsa65
+Creating certificates
+Using default procedure for mldsa65 (chain_depth=1 pad_bytes=0 pad_target_der=0)
+-----
+-----
+Certificate request self-signature ok
+subject=CN=localhost
+-----
+Certificate request self-signature ok
+subject=CN=user
+sig=mldsa65 chain_depth=1 pad_bytes=0 pad_target_der=0
+der_bytes: root=5512 intermediate=0 server_leaf=5494 user_leaf=5489 server_chain_sent=5494 user_chain_sent=5489
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=mldsa65 and certificates created
+
+
+    Executing docker Server...
+servidor
+cliente
+8c7cad20f0b06c72807fd7e3093c30df4d97861f3c367d735e62026147ab822c
+    Buscando IP.. 
+    IP..  172.18.0.2
+   ↳ tc netem sur servidor : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 806a: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 16775524584062056115
+    Executing docker Client... 172.18.0.2
+b0f3117878e2af53100766c55395097b86a4fd9ef321182804b47ba7deaa8312
+cliente
+     Docker cliente executed ... 
+   ↳ tc netem sur cliente : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 806b: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 9786513874742422797
+
+**************************
+     Executing test  ... 
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 806c: root refcnt 2 limit 1000 seed 13286584187246727993
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=mldsa65 and KEM_ALG=x448_mlkem768
+Warm-up: 2 connexion(s) jetee(s) avant mesure
+tcpdump actif sur eth0 -> /sslkeys/block.pcap
+QUIC keys will be stored in: /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+Execution 1 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x72040c09fe00] Starting...
+[strm][0x72040c09fe00] Sending data...
+[strm][0x72040c09fe00] Data sent
+[strm][0x72040c09fe00] Data received
+[strm][0x72040c09fe00] Peer shut down
+[strm][0x72040c09fe00] All done
+Handshake duration: 60.42 ms
+App-bytes: 100
+App-ready duration: 111.74 ms
+Resumed: 0
+Rx-bytes: 11887
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x7391780b1c30] Starting...
+[strm][0x7391780b1c30] Sending data...
+[strm][0x7391780b1c30] Data sent
+[strm][0x7391780b1c30] Data received
+[strm][0x7391780b1c30] Peer shut down
+[strm][0x7391780b1c30] All done
+Handshake duration: 60.38 ms
+App-bytes: 100
+App-ready duration: 111.94 ms
+Resumed: 0
+Rx-bytes: 11887
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x74de000c3a60] Starting...
+[strm][0x74de000c3a60] Sending data...
+[strm][0x74de000c3a60] Data sent
+[strm][0x74de000c3a60] Data received
+[strm][0x74de000c3a60] Peer shut down
+[strm][0x74de000c3a60] All done
+Handshake duration: 60.20 ms
+App-bytes: 100
+App-ready duration: 111.75 ms
+Resumed: 0
+Rx-bytes: 11887
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x7f8cf00c3a60] Starting...
+[strm][0x7f8cf00c3a60] Sending data...
+[strm][0x7f8cf00c3a60] Data sent
+[strm][0x7f8cf00c3a60] Data received
+[strm][0x7f8cf00c3a60] Peer shut down
+[strm][0x7f8cf00c3a60] All done
+Handshake duration: 60.14 ms
+App-bytes: 100
+App-ready duration: 111.76 ms
+Resumed: 0
+Rx-bytes: 11892
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x73f5040d5890] Starting...
+[strm][0x73f5040d5890] Sending data...
+[strm][0x73f5040d5890] Data sent
+[strm][0x73f5040d5890] Data received
+[strm][0x73f5040d5890] Peer shut down
+[strm][0x73f5040d5890] All done
+Handshake duration: 60.20 ms
+App-bytes: 100
+App-ready duration: 111.75 ms
+Resumed: 0
+Rx-bytes: 11887
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x7f9ef00c3a60] Starting...
+[strm][0x7f9ef00c3a60] Sending data...
+[strm][0x7f9ef00c3a60] Data sent
+[strm][0x7f9ef00c3a60] Data received
+[strm][0x7f9ef00c3a60] Peer shut down
+[strm][0x7f9ef00c3a60] All done
+Handshake duration: 60.20 ms
+App-bytes: 100
+App-ready duration: 111.39 ms
+Resumed: 0
+Rx-bytes: 11892
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x71200409fe00] Starting...
+[strm][0x71200409fe00] Sending data...
+[strm][0x71200409fe00] Data sent
+[strm][0x71200409fe00] Data received
+[strm][0x71200409fe00] Peer shut down
+[strm][0x71200409fe00] All done
+Handshake duration: 59.85 ms
+App-bytes: 100
+App-ready duration: 111.08 ms
+Resumed: 0
+Rx-bytes: 11887
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x7d8c5809fe00] Starting...
+[strm][0x7d8c5809fe00] Sending data...
+[strm][0x7d8c5809fe00] Data sent
+[strm][0x7d8c5809fe00] Data received
+[strm][0x7d8c5809fe00] Peer shut down
+[strm][0x7d8c5809fe00] All done
+Handshake duration: 60.34 ms
+App-bytes: 100
+App-ready duration: 111.59 ms
+Resumed: 0
+Rx-bytes: 11887
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x7604f80d5890] Starting...
+[strm][0x7604f80d5890] Sending data...
+[strm][0x7604f80d5890] Data sent
+[strm][0x7604f80d5890] Data received
+[strm][0x7604f80d5890] Peer shut down
+[strm][0x7604f80d5890] All done
+Handshake duration: 60.54 ms
+App-bytes: 100
+App-ready duration: 111.82 ms
+Resumed: 0
+Rx-bytes: 11887
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_mldsa65_x448_mlkem768.log
+[strm][0x73d3e808dfd0] Starting...
+[strm][0x73d3e808dfd0] Sending data...
+[strm][0x73d3e808dfd0] Data sent
+[strm][0x73d3e808dfd0] Data received
+[strm][0x73d3e808dfd0] Peer shut down
+[strm][0x73d3e808dfd0] All done
+Handshake duration: 60.08 ms
+App-bytes: 100
+App-ready duration: 111.49 ms
+Resumed: 0
+Rx-bytes: 11892
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+tcpdump bilan (237011 octets dans /sslkeys/block.pcap) :
+243 packets captured
+243 packets received by filter
+0 packets dropped by kernel
+     Log de handshake enregistré dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__pcap/handshake_logs/handshake_quic_single_mldsa65_x448_mlkem768_delayonly_delay25ms__pcap_block1of1.log
+     CPU/mémoire enregistrés dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__pcap/resource_usage/resource_usage_quic_single_delayonly_delay25ms__pcap.csv
+     Waiting  ... 
+   Shutting down server and impairments...
+Deleted Containers:
+b0f3117878e2af53100766c55395097b86a4fd9ef321182804b47ba7deaa8312
+8c7cad20f0b06c72807fd7e3093c30df4d97861f3c367d735e62026147ab822c
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Tests finished. Bloc 1/1 terminé (graine 3500890600).
+>>> [bloc 1/1] cell P0S2_QUIC_PAD1_pad5750  seed=1694032520
+    env TOTAL_RUNS=10 ONLY_PAIRS=secp384r1|x448_mlkem768 CERT_PAD_TARGET_DER=5750 PER_CONN_PCAP=1 Launcher_ext.sh both quic single nocapture delay-only 0 25 1 1 1694032520
+Découpage en blocs : 1 blocs de 10 runs -- ce lancement exécute le bloc 1/1.
+ONLY_PAIRS actif : 1 paire(s) au lieu de la matrice complete.
+*************************************
+Parameters valid. Starting with:
+  KEM Family:      both
+  Protocol:        quic
+  Auth Mode:       single
+  Capture Mode:    nocapture
+  Network Profile: delay-only
+  Loss %:          0
+  Delay (ms):      25
+  Executions:      10 (micro_batches=1, 10 par tour)
+  Signature:       ed25519 secp384r1 secp521r1 mldsa44 mldsa65 mldsa87
+  KEMS Level 1:    P-256 x25519 p256_mlkem512 x25519_mlkem512 mlkem512 hqc128 p256_hqc128 x25519_hqc128
+  KEMS Level 3:    P-384 x448 p384_mlkem768 x448_mlkem768 mlkem768 hqc192 p384_hqc192 x448_hqc192
+  KEMS Level 5:    P-521 p521_mlkem1024 mlkem1024 hqc256 p521_hqc256
+*************************************
+Runnig on Linux
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*************************************
+***NETWORK AND VOLUMEN **************
+*************************************
+22798233ceb2a759e1dfb188c21ff1b9bd838f0c116c8774c9778e4d7127ad40
+✅ Red localNet created.
+cert
+✅ Volumen cert created.
+*************************************
+Manifeste d'audit du bloc écrit dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto5750__pcap/block_manifest_block1of1_seed1694032520.log
+
+################ TOUR 1 / 1 (10 connexions par paire) ################
+
+****************
+ ==> SIG_ALG: secp384r1  |  KEM: x448_mlkem768  |  bloc 1/1
+ ==> Creating Certs and Keys for secp384r1
+Creating certificates
+Using ECDSA procedure for secp384r1 (chain_depth=1 pad_bytes=0 pad_target_der=5750)
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+  server: cible DER=5750 -> obtenu 5750 (pad=5293 octets)
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+  user: cible DER=5750 -> obtenu 5750 (pad=5297 octets)
+sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=5750
+der_bytes: root=448 intermediate=0 server_leaf=5750 user_leaf=5750 server_chain_sent=5750 user_chain_sent=5750
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=secp384r1 and certificates created
+
+
+    Executing docker Server...
+6b9908f74f5be1b6695998ea41eb8efa31753270aac227533c0e40c3cfa14c0c
+    Buscando IP.. 
+    IP..  172.18.0.2
+   ↳ tc netem sur servidor : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 806e: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 16493970506736755193
+    Executing docker Client... 172.18.0.2
+47db06b3d9f9bc08c2559fcb25ef6c7793d4c048de1c6eb3eef6a1e2971e0d22
+cliente
+     Docker cliente executed ... 
+   ↳ tc netem sur cliente : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 806f: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 16319703885145215307
+
+**************************
+     Executing test  ... 
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8070: root refcnt 2 limit 1000 seed 9259684748341385967
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 2 connexion(s) jetee(s) avant mesure
+tcpdump actif sur eth0 -> /sslkeys/block.pcap
+QUIC keys will be stored in: /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+Execution 1 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x72a1500d70b0] Starting...
+[strm][0x72a1500d70b0] Sending data...
+[strm][0x72a1500d70b0] Data sent
+[strm][0x72a1500d70b0] Data received
+[strm][0x72a1500d70b0] Peer shut down
+[strm][0x72a1500d70b0] All done
+Handshake duration: 62.92 ms
+App-bytes: 100
+App-ready duration: 114.39 ms
+Resumed: 0
+Rx-bytes: 8857
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7829ec0c5280] Starting...
+[strm][0x7829ec0c5280] Sending data...
+[strm][0x7829ec0c5280] Data sent
+[strm][0x7829ec0c5280] Data received
+[strm][0x7829ec0c5280] Peer shut down
+[strm][0x7829ec0c5280] All done
+Handshake duration: 63.37 ms
+App-bytes: 100
+App-ready duration: 114.92 ms
+Resumed: 0
+Rx-bytes: 8851
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x71e8980c5280] Starting...
+[strm][0x71e8980c5280] Sending data...
+[strm][0x71e8980c5280] Data sent
+[strm][0x71e8980c5280] Data received
+[strm][0x71e8980c5280] Peer shut down
+[strm][0x71e8980c5280] All done
+Handshake duration: 62.94 ms
+App-bytes: 100
+App-ready duration: 114.31 ms
+Resumed: 0
+Rx-bytes: 8851
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7af3780d70b0] Starting...
+[strm][0x7af3780d70b0] Sending data...
+[strm][0x7af3780d70b0] Data sent
+[strm][0x7af3780d70b0] Data received
+[strm][0x7af3780d70b0] Peer shut down
+[strm][0x7af3780d70b0] All done
+Handshake duration: 62.83 ms
+App-bytes: 100
+App-ready duration: 114.07 ms
+Resumed: 0
+Rx-bytes: 8857
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7667a40d70b0] Starting...
+[strm][0x7667a40d70b0] Sending data...
+[strm][0x7667a40d70b0] Data sent
+[strm][0x7667a40d70b0] Data received
+[strm][0x7667a40d70b0] Peer shut down
+[strm][0x7667a40d70b0] All done
+Handshake duration: 62.73 ms
+App-bytes: 100
+App-ready duration: 114.31 ms
+Resumed: 0
+Rx-bytes: 8852
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x71f2680c5280] Starting...
+[strm][0x71f2680c5280] Sending data...
+[strm][0x71f2680c5280] Data sent
+[strm][0x71f2680c5280] Data received
+[strm][0x71f2680c5280] Peer shut down
+[strm][0x71f2680c5280] All done
+Handshake duration: 63.12 ms
+App-bytes: 100
+App-ready duration: 115.01 ms
+Resumed: 0
+Rx-bytes: 8856
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x723af40c5280] Starting...
+[strm][0x723af40c5280] Sending data...
+[strm][0x723af40c5280] Data sent
+[strm][0x723af40c5280] Data received
+[strm][0x723af40c5280] Peer shut down
+[strm][0x723af40c5280] All done
+Handshake duration: 63.05 ms
+App-bytes: 100
+App-ready duration: 114.87 ms
+Resumed: 0
+Rx-bytes: 8851
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7f51280c5280] Starting...
+[strm][0x7f51280c5280] Sending data...
+[strm][0x7f51280c5280] Data sent
+[strm][0x7f51280c5280] Data received
+[strm][0x7f51280c5280] Peer shut down
+[strm][0x7f51280c5280] All done
+Handshake duration: 63.18 ms
+App-bytes: 100
+App-ready duration: 114.70 ms
+Resumed: 0
+Rx-bytes: 8851
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7ccea80d70b0] Starting...
+[strm][0x7ccea80d70b0] Sending data...
+[strm][0x7ccea80d70b0] Data sent
+[strm][0x7ccea80d70b0] Data received
+[strm][0x7ccea80d70b0] Peer shut down
+[strm][0x7ccea80d70b0] All done
+Handshake duration: 63.21 ms
+App-bytes: 100
+App-ready duration: 114.82 ms
+Resumed: 0
+Rx-bytes: 8851
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7b81ac0c5280] Starting...
+[strm][0x7b81ac0c5280] Sending data...
+[strm][0x7b81ac0c5280] Data sent
+[strm][0x7b81ac0c5280] Data received
+[strm][0x7b81ac0c5280] Peer shut down
+[strm][0x7b81ac0c5280] All done
+Handshake duration: 62.99 ms
+App-bytes: 100
+App-ready duration: 114.27 ms
+Resumed: 0
+Rx-bytes: 8851
+Tx-bytes: 4880
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+tcpdump bilan (206698 octets dans /sslkeys/block.pcap) :
+222 packets captured
+222 packets received by filter
+0 packets dropped by kernel
+     Log de handshake enregistré dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto5750__pcap/handshake_logs/handshake_quic_single_secp384r1_x448_mlkem768_delayonly_delay25ms__padto5750__pcap_block1of1.log
+     CPU/mémoire enregistrés dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto5750__pcap/resource_usage/resource_usage_quic_single_delayonly_delay25ms__padto5750__pcap.csv
+     Waiting  ... 
+   Shutting down server and impairments...
+Deleted Containers:
+47db06b3d9f9bc08c2559fcb25ef6c7793d4c048de1c6eb3eef6a1e2971e0d22
+6b9908f74f5be1b6695998ea41eb8efa31753270aac227533c0e40c3cfa14c0c
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Tests finished. Bloc 1/1 terminé (graine 1694032520).
+>>> [bloc 1/1] cell P0S2_QUIC_PAD1_pad12500  seed=751702073
+    env TOTAL_RUNS=10 ONLY_PAIRS=secp384r1|x448_mlkem768 CERT_PAD_TARGET_DER=12500 PER_CONN_PCAP=1 Launcher_ext.sh both quic single nocapture delay-only 0 25 1 1 751702073
+Découpage en blocs : 1 blocs de 10 runs -- ce lancement exécute le bloc 1/1.
+ONLY_PAIRS actif : 1 paire(s) au lieu de la matrice complete.
+*************************************
+Parameters valid. Starting with:
+  KEM Family:      both
+  Protocol:        quic
+  Auth Mode:       single
+  Capture Mode:    nocapture
+  Network Profile: delay-only
+  Loss %:          0
+  Delay (ms):      25
+  Executions:      10 (micro_batches=1, 10 par tour)
+  Signature:       ed25519 secp384r1 secp521r1 mldsa44 mldsa65 mldsa87
+  KEMS Level 1:    P-256 x25519 p256_mlkem512 x25519_mlkem512 mlkem512 hqc128 p256_hqc128 x25519_hqc128
+  KEMS Level 3:    P-384 x448 p384_mlkem768 x448_mlkem768 mlkem768 hqc192 p384_hqc192 x448_hqc192
+  KEMS Level 5:    P-521 p521_mlkem1024 mlkem1024 hqc256 p521_hqc256
+*************************************
+Runnig on Linux
+Total reclaimed space: 0B
+Error response from daemon: get cert: no such volume
+Error response from daemon: network localNet not found
+exit status 1
+
+*************************************
+***NETWORK AND VOLUMEN **************
+*************************************
+685ba6decadb976857eaedeae18251bd545caba65076d00687aca1aa37f1fb1b
+✅ Red localNet created.
+cert
+✅ Volumen cert created.
+*************************************
+Manifeste d'audit du bloc écrit dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto12500__pcap/block_manifest_block1of1_seed751702073.log
+
+################ TOUR 1 / 1 (10 connexions par paire) ################
+
+****************
+ ==> SIG_ALG: secp384r1  |  KEM: x448_mlkem768  |  bloc 1/1
+ ==> Creating Certs and Keys for secp384r1
+Creating certificates
+Using ECDSA procedure for secp384r1 (chain_depth=1 pad_bytes=0 pad_target_der=12500)
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+Certificate request self-signature ok
+subject=CN=localhost
+  server: cible DER=12500 -> obtenu 12500 (pad=12042 octets)
+Certificate request self-signature ok
+subject=CN=user
+Certificate request self-signature ok
+subject=CN=user
+  user: cible DER=12500 -> obtenu 12500 (pad=12046 octets)
+sig=secp384r1 chain_depth=1 pad_bytes=0 pad_target_der=12500
+der_bytes: root=449 intermediate=0 server_leaf=12500 user_leaf=12500 server_chain_sent=12500 user_chain_sent=12500
+Running /opt/oqssa/bin/doCert.sh with SIG_ALG=secp384r1 and certificates created
+
+
+    Executing docker Server...
+42892b3092cf206792c079731369d8c395ca71b81b7e591f53ab4f9e6bd4e6e2
+    Buscando IP.. 
+    IP..  172.18.0.2
+   ↳ tc netem sur servidor : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 8072: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 16124608466849288861
+    Executing docker Client... 172.18.0.2
+af9aae51dbcd3ccc0acb4e2a9c2cb19ede7269689efcfcc5bca4a6ad12158da4
+cliente
+     Docker cliente executed ... 
+   ↳ tc netem sur cliente : limit 1000 delay 25ms rate 100mbit
+     regle active : qdisc netem 8073: root refcnt 9 limit 1000 delay 25ms rate 100Mbit seed 12108715530850004349
+
+**************************
+     Executing test  ... 
+Handshake timeout budget: 150s (identique TLS/QUIC)
+v3: RESUME=0 ZERORTT_ARM=0 CERT_COMP=default
+Applying netem rules to lo...
+Showing qdisc status for the interface: lo
+qdisc netem 8074: root refcnt 2 limit 1000 seed 15241458292925633185
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+Running ./perftestClientTlsQuic.sh with SIG_ALG=secp384r1 and KEM_ALG=x448_mlkem768
+Warm-up: 2 connexion(s) jetee(s) avant mesure
+tcpdump actif sur eth0 -> /sslkeys/block.pcap
+QUIC keys will be stored in: /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+Execution 1 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7a8c6409f610] Starting...
+[strm][0x7a8c6409f610] Sending data...
+[strm][0x7a8c6409f610] Data sent
+[strm][0x7a8c6409f610] Data received
+[strm][0x7a8c6409f610] Peer shut down
+[strm][0x7a8c6409f610] All done
+Handshake duration: 114.04 ms
+App-bytes: 100
+App-ready duration: 165.51 ms
+Resumed: 0
+Rx-bytes: 15821
+Tx-bytes: 4966
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 2 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7f79d00c3270] Starting...
+[strm][0x7f79d00c3270] Sending data...
+[strm][0x7f79d00c3270] Data sent
+[strm][0x7f79d00c3270] Data received
+[strm][0x7f79d00c3270] Peer shut down
+[strm][0x7f79d00c3270] All done
+Handshake duration: 114.26 ms
+App-bytes: 100
+App-ready duration: 165.82 ms
+Resumed: 0
+Rx-bytes: 15821
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 3 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x718f880b1440] Starting...
+[strm][0x718f880b1440] Sending data...
+[strm][0x718f880b1440] Data sent
+[strm][0x718f880b1440] Data received
+[strm][0x718f880b1440] Peer shut down
+[strm][0x718f880b1440] All done
+Handshake duration: 114.13 ms
+App-bytes: 100
+App-ready duration: 165.50 ms
+Resumed: 0
+Rx-bytes: 15820
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 4 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7b12600b1440] Starting...
+[strm][0x7b12600b1440] Sending data...
+[strm][0x7b12600b1440] Data sent
+[strm][0x7b12600b1440] Data received
+[strm][0x7b12600b1440] Peer shut down
+[strm][0x7b12600b1440] All done
+Handshake duration: 114.20 ms
+App-bytes: 100
+App-ready duration: 165.66 ms
+Resumed: 0
+Rx-bytes: 15822
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 5 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x74fb180b1440] Starting...
+[strm][0x74fb180b1440] Sending data...
+[strm][0x74fb180b1440] Data sent
+[strm][0x74fb180b1440] Data received
+[strm][0x74fb180b1440] Peer shut down
+[strm][0x74fb180b1440] All done
+Handshake duration: 114.22 ms
+App-bytes: 100
+App-ready duration: 165.62 ms
+Resumed: 0
+Rx-bytes: 15821
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 6 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x76805c0c3270] Starting...
+[strm][0x76805c0c3270] Sending data...
+[strm][0x76805c0c3270] Data sent
+[strm][0x76805c0c3270] Data received
+[strm][0x76805c0c3270] Peer shut down
+[strm][0x76805c0c3270] All done
+Handshake duration: 114.14 ms
+App-bytes: 100
+App-ready duration: 165.80 ms
+Resumed: 0
+Rx-bytes: 15821
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 7 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7564d00d50a0] Starting...
+[strm][0x7564d00d50a0] Sending data...
+[strm][0x7564d00d50a0] Data sent
+[strm][0x7564d00d50a0] Data received
+[strm][0x7564d00d50a0] Peer shut down
+[strm][0x7564d00d50a0] All done
+Handshake duration: 114.06 ms
+App-bytes: 100
+App-ready duration: 165.52 ms
+Resumed: 0
+Rx-bytes: 15826
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 8 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x7fc6940c3270] Starting...
+[strm][0x7fc6940c3270] Sending data...
+[strm][0x7fc6940c3270] Data sent
+[strm][0x7fc6940c3270] Data received
+[strm][0x7fc6940c3270] Peer shut down
+[strm][0x7fc6940c3270] All done
+Handshake duration: 114.33 ms
+App-bytes: 100
+App-ready duration: 165.81 ms
+Resumed: 0
+Rx-bytes: 15821
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 9 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x74569c08d7e0] Starting...
+[strm][0x74569c08d7e0] Sending data...
+[strm][0x74569c08d7e0] Data sent
+[strm][0x74569c08d7e0] Data received
+[strm][0x74569c08d7e0] Peer shut down
+[strm][0x74569c08d7e0] All done
+Handshake duration: 114.31 ms
+App-bytes: 100
+App-ready duration: 165.86 ms
+Resumed: 0
+Rx-bytes: 15820
+Tx-bytes: 4923
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+Execution 10 - QUIC Single
+[S3] CH_PAD_BYTES=1450 : extension 0xffb3 ajoutee au ClientHello
+Writing SSLKEYLOGFILE at /sslkeys/sslkeys_client_secp384r1_x448_mlkem768.log
+[strm][0x715f0408d7e0] Starting...
+[strm][0x715f0408d7e0] Sending data...
+[strm][0x715f0408d7e0] Data sent
+[strm][0x715f0408d7e0] Data received
+[strm][0x715f0408d7e0] Peer shut down
+[strm][0x715f0408d7e0] All done
+Handshake duration: 113.89 ms
+App-bytes: 100
+App-ready duration: 165.31 ms
+Resumed: 0
+Rx-bytes: 15820
+Tx-bytes: 4966
+Ticket: 0
+Ticket-bytes: 0
+ZeroRTT-sent: 0
+tcpdump bilan (280495 octets dans /sslkeys/block.pcap) :
+284 packets captured
+284 packets received by filter
+0 packets dropped by kernel
+     Log de handshake enregistré dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto12500__pcap/handshake_logs/handshake_quic_single_secp384r1_x448_mlkem768_delayonly_delay25ms__padto12500__pcap_block1of1.log
+     CPU/mémoire enregistrés dans /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/captures_S3_phase0_PAD1/quic/single/delayonly_delay25ms__padto12500__pcap/resource_usage/resource_usage_quic_single_delayonly_delay25ms__padto12500__pcap.csv
+     Waiting  ... 
+   Shutting down server and impairments...
+Deleted Containers:
+af9aae51dbcd3ccc0acb4e2a9c2cb19ede7269689efcfcc5bca4a6ad12158da4
+42892b3092cf206792c079731369d8c395ca71b81b7e591f53ab4f9e6bd4e6e2
+
+Total reclaimed space: 24.58kB
+cert
+localNet
+✅  Cleanup complete. Tests finished. Bloc 1/1 terminé (graine 751702073).
+Bloc 1 termine. Echecs journalises: 0 (voir /home/tolokoum/Documents/mldsa-mlkem-hqc-tls-quic-constrained-performance/campaign_state_S3_phase0_PAD1/state.csv).
+
+✅ run_campaign termine (blocs 1..1).

@@ -1,0 +1,9 @@
+# Dockerfile.v3c -- image S3 : image v3 INCHANGEE + libmsquic recompilee avec CH_PAD_BYTES (patch cote client, inactif sans la variable).
+# Incremental depuis l'etage v3cfg (sources et build MsQuic deja la) : quelques minutes. Contexte : ctx_v3.
+FROM v3cfg AS patch
+COPY patches/apply_quic_chpad.sh /tmp/apply_quic_chpad.sh
+RUN sh /tmp/apply_quic_chpad.sh /opt/msquic-pq/src/platform/tls_openssl.c && \
+    cd /opt/msquic-pq/build && cmake --build . -- -j"$(nproc)" 2>&1 | tail -5
+
+FROM uma-tls-quic-pq-34-v3
+COPY --from=patch /opt/msquic-pq/build/bin/Release/ /opt/oqssa/bin/

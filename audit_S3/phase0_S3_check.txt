@@ -1,0 +1,18 @@
+temoin : 70 connexions ; Bc = {2440: 70} ; decodees et validees : 70 (100.0 %)
+[OK ] P0-S3-1 decodage (temoin) : 70/70
+traitement : 70 connexions ; Bc = {3660: 70} ; decodees et validees : 70 (100.0 %)
+[OK ] P0-S3-1 decodage (traitement) : 70/70
+[OK ] P0-S3-2 temoin Bc = 2 440 : 100.0 %
+[OK ] P0-S3-3 traitement Bc = 3 660 : 100.0 % (4 880 o : 0.0 %)
+
+cellule (sig, kem, pad) | temoin: n, Bc, S_chg med, marge MsQuic | traitement: n, Bc, S_chg med, marge MsQuic
+('?', '?', 0)                    | 20 2440   7837   -517 | 20 3660   6534   4446
+('?', '?', 2750)                 | 10 2440   7064    256 | 10 3660   4462   6518
+('?', '?', 5150)                 | 10 2440   9550  -2230 | 10 3660   6948   4032
+('?', '?', 5750)                 | 10 2440   7601   -281 | 10 3660   7591   3389
+('?', '?', 8100)                 | 10 2440  10036  -2716 | 10 3660  10027    953
+('?', '?', 12500)                | 10 2440  14566  -7246 | 10 3660  10952     28
+[ECHEC] P0-S3-4 vol serveur inchange (cellules non plafonnees du temoin) : ecarts de mediane : 2750=-2602
+[ECHEC] P0-S3-5 calage : aucune cellule non plafonnee dans le traitement
+
+VERDICT PHASE 0 : AU MOINS UN CRITERE NON SATISFAIT : ne pas geler, envoyer cette sortie

@@ -1,0 +1,21 @@
+temoin : 70 connexions ; Bc = {2440: 70} ; decodees et validees : 70 (100.0 %)
+[OK ] P0-S3-1 decodage (temoin) : 70/70
+traitement : 70 connexions ; Bc = {3660: 70} ; decodees et validees : 70 (100.0 %)
+[OK ] P0-S3-1 decodage (traitement) : 70/70
+[OK ] P0-S3-2 temoin Bc = 2 440 : 100.0 %
+[OK ] P0-S3-3 traitement Bc = 3 660 : 100.0 % (4 880 o : 0.0 %)
+
+cellule (sig, kem, pad) | temoin: n, Bc, S_chg med, marge MsQuic | traitement: n, Bc, S_chg med, marge MsQuic
+('mldsa65', 'x448_mlkem768', 0)  | 10 2440   7292     28 | 10 3660  10627    353
+('secp384r1', 'x448_mlkem768', 0) | 10 2440   2440   4880 | 10 3660   2440   8540
+('secp384r1', 'x448_mlkem768', 2750) | 10 2440   4467   2853 | 10 3660   4462   6518
+('secp384r1', 'x448_mlkem768', 5150) | 10 2440   6953    367 | 10 3660   6948   4032
+('secp384r1', 'x448_mlkem768', 5750) | 10 2440   7292     28 | 10 3660   7591   3389
+('secp384r1', 'x448_mlkem768', 8100) | 10 2440   7292     28 | 10 3660  10027    953
+('secp384r1', 'x448_mlkem768', 12500) | 10 2440   7292     28 | 10 3660  10952     28
+[OK ] P0-S3-4 vol serveur inchange (cellules non plafonnees du temoin) : ecarts de mediane : 0=+0, 2750=-5, 5150=-5
+[OK ] P0-S3-5 calage : S_chg - flight_a(brouillon) par taille : 2750:-2, 5150:-5, 5750:+16, 8100:+15 ; dispersion 21 o ; q-offset propose = 49
+
+=> ARGUMENTS A DONNER AU GEL : --quic-dgram 1220 --bc x448_mlkem768=3660 --amp-sub 28 --q-offset 49   (temoin : --bc x448_mlkem768=2440)
+
+VERDICT PHASE 0 : TOUS LES CRITERES SATISFAITS
