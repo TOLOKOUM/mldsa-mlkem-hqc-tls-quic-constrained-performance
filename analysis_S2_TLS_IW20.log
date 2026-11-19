@@ -1,0 +1,65 @@
+Empreintes gelees verifiees.
+connexions lues : 7200 ; blocs : [1, 2, 3]
+
+=================== RESULTATS CONFIRMATOIRES (metrique : app_ms, 20 blocs, 10000 replicats) ===================
+
+E1 TLS (cellules discriminantes primaires)  [n = 5]
+   rule_a       bio_iw
+   rule_b       bio_iw10
+   frac_a       1.000
+   frac_a_lo    1.000
+   frac_a_hi    1.000
+   frac_b       0.000
+   frac_b_lo    0.000
+   frac_b_hi    0.000
+   pass_a       5
+   pass_b       0
+   decision     bio_iw CONFIRMEE
+
+E3 cellules non discriminantes primaires (toutes les regles s'accordent)  [n = 7]
+   frac_a       1.000
+   pass_a       7
+   decision     CONFORME
+
+E4 (secondaire) cellules a palier k>=2 : fraction proche de la regle a / b  [n = 2]
+   frac_a       1.000
+   frac_b       0.000
+   pass_a       2
+   pass_b       0
+   decision     descriptif
+
+--- E5 monotonie ---
+  family  max_decrease  n_decreases_gt_0_10
+TLS_IW20       0.00579                    0
+
+--- E6 encadrement des seuils (tailles de chaine, octets) ---
+  family  step  bracket_low  bracket_high  pred_bio_iw  inside_bio_iw  pred_bio_iw10  inside_bio_iw10
+TLS_IW20     1      24450.0       25050.0        24790           True          11477            False
+TLS_IW20     2      46000.0           NaN        83863          False          41634            False
+
+--- E7 rapport des seuils QUIC_A / QUIC_B (octets de vol) ---
+   None
+
+--- Controles ---
+                                     control   family  estimate     ci_lo    ci_hi                          band       verdict
+          C1 placebo (base paire vs impaire) TLS_IW20  0.000335 -0.004515 0.005020                 [-0.05, 0.05]          PASS
+              C2 pont mldsa65 (k_a=0, k_b=0) TLS_IW20 -0.001232 -0.004797 0.002537 a:[-0.25,0.25] b:[-0.25,0.25] a:PASS b:PASS
+   C3 octets recus = vol predit +-10 o (TLS) TLS_IW20  1.000000       NaN      NaN           >=0.95 des cellules          PASS
+C4 taux d'echec maximal par cellule (<= 2 %)   toutes  0.000000       NaN      NaN                        <=0.02          PASS
+
+--- Cellules (k observe contre k predit) ---
+  family  chain_target      tier  disc  k_a  k_b   khat  ci_lo  ci_hi verdict_a verdict_b  fail_rate
+TLS_IW20          5750   primary     0    0    0 -0.000 -0.004  0.003      PASS      PASS      0.000
+TLS_IW20         11150   primary     0    0    0  0.002 -0.003  0.007      PASS      PASS      0.000
+TLS_IW20         11750   primary     1    0    1  0.000 -0.004  0.004      PASS      FAIL      0.000
+TLS_IW20         14800   primary     1    0    1 -0.001 -0.005  0.003      PASS      FAIL      0.000
+TLS_IW20         18150   primary     1    0    1 -0.001 -0.005  0.003      PASS      FAIL      0.000
+TLS_IW20         21450   primary     1    0    1 -0.001 -0.005  0.002      PASS      FAIL      0.000
+TLS_IW20         24450   primary     1    0    1 -0.004 -0.009  0.001      PASS      FAIL      0.000
+TLS_IW20         25050   primary     0    1    1  1.000  0.995  1.005      PASS      PASS      0.000
+TLS_IW20         29000   primary     0    1    1  1.001  0.996  1.006      PASS      PASS      0.000
+TLS_IW20         33200   primary     0    1    1  0.995  0.991  0.999      PASS      PASS      0.000
+TLS_IW20         37400   primary     0    1    1  0.998  0.992  1.003      PASS      PASS      0.000
+TLS_IW20         41300   primary     0    1    1  0.996  0.992  1.000      PASS      PASS      0.000
+TLS_IW20         41900 secondary     1    1    2  1.001  0.996  1.006      PASS      FAIL      0.000
+TLS_IW20         46000 secondary     1    1    2  0.997  0.992  1.002      PASS      FAIL      0.000
