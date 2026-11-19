@@ -1,0 +1,43 @@
+Empreintes gelees verifiees.
+connexions lues : 5800 ; blocs : [1, 2, 3]
+E2 QUIC (cellules discriminantes primaires) : aucune cellule
+
+=================== RESULTATS CONFIRMATOIRES (metrique : app_ms, 20 blocs, 10000 replicats) ===================
+
+E3 cellules non discriminantes primaires (toutes les regles s'accordent)  [n = 11]
+   frac_a       1.000
+   pass_a       11
+   decision     CONFORME
+
+--- E5 monotonie ---
+   family  max_decrease  n_decreases_gt_0_10
+QUIC_PAD0      0.006265                    0
+
+--- E6 encadrement des seuils (tailles de chaine, octets) ---
+   family  step  bracket_low  bracket_high  pred_amp  inside_amp  pred_amp_bc  inside_amp_bc  pred_cwnd  inside_cwnd
+QUIC_PAD0     1       5100.0        5700.0      5471        True         5471           True      10204        False
+QUIC_PAD0     2      12500.0           NaN     29000       False        29000          False      33733        False
+
+--- E7 rapport des seuils QUIC_A / QUIC_B (octets de vol) ---
+   None
+
+--- Controles ---
+                                     control    family  estimate     ci_lo    ci_hi                        band       verdict
+          C1 placebo (base paire vs impaire) QUIC_PAD0  0.001900 -0.002220 0.006160               [-0.05, 0.05]          PASS
+              C2 pont mldsa65 (k_a=1, k_b=1) QUIC_PAD0  1.001785  0.996472 1.007515 a:[0.75,1.25] b:[0.75,1.25] a:PASS b:PASS
+   C3 octets recus = vol predit +-3 % (QUIC) QUIC_PAD0  1.000000       NaN      NaN         >=0.95 des cellules          PASS
+C4 taux d'echec maximal par cellule (<= 2 %)    toutes  0.000000       NaN      NaN                      <=0.02          PASS
+
+--- Cellules (k observe contre k predit) ---
+   family  chain_target    tier  disc  k_a  k_b   khat  ci_lo  ci_hi verdict_a verdict_b  fail_rate
+QUIC_PAD0          2750 primary     0    0    0 -0.002 -0.008  0.005      PASS      PASS      0.000
+QUIC_PAD0          5100 primary     0    0    0 -0.001 -0.006  0.005      PASS      PASS      0.000
+QUIC_PAD0          5700 primary     0    1    1  0.999  0.991  1.007      PASS      PASS      0.000
+QUIC_PAD0          6350 primary     0    1    1  0.997  0.990  1.003      PASS      PASS      0.000
+QUIC_PAD0          7250 primary     0    1    1  1.005  0.998  1.011      PASS      PASS      0.000
+QUIC_PAD0          8100 primary     0    1    1  0.999  0.993  1.004      PASS      PASS      0.000
+QUIC_PAD0          8650 primary     0    1    1  0.998  0.993  1.004      PASS      PASS      0.000
+QUIC_PAD0          9250 primary     0    1    1  1.000  0.997  1.004      PASS      PASS      0.000
+QUIC_PAD0          9850 primary     0    1    1  0.999  0.992  1.005      PASS      PASS      0.000
+QUIC_PAD0         10450 primary     0    1    1  1.000  0.994  1.006      PASS      PASS      0.000
+QUIC_PAD0         12500 primary     0    1    1  1.000  0.995  1.006      PASS      PASS      0.000

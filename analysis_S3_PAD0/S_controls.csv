@@ -1,0 +1,5 @@
+control,family,estimate,ci_lo,ci_hi,band,verdict
+C1 placebo (base paire vs impaire),QUIC_PAD0,0.0019000000000000412,-0.0022202499999998356,0.006159999999999993,"[-0.05, 0.05]",PASS
+"C2 pont mldsa65 (k_a=1, k_b=1)",QUIC_PAD0,1.001785,0.9964720625,1.0075151875000001,"a:[0.75,1.25] b:[0.75,1.25]",a:PASS b:PASS
+C3 octets recus = vol predit +-3 % (QUIC),QUIC_PAD0,1.0,,,>=0.95 des cellules,PASS
+C4 taux d'echec maximal par cellule (<= 2 %),toutes,0.0,,,<=0.02,PASS

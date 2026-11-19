@@ -1,0 +1,55 @@
+Empreintes gelees verifiees.
+connexions lues : 5800 ; blocs : [1, 2, 3]
+
+=================== RESULTATS CONFIRMATOIRES (metrique : hs_ms, 20 blocs, 10000 replicats) ===================
+
+E2 QUIC (cellules discriminantes primaires)  [n = 5]
+   rule_a       amp
+   rule_b       amp_bc
+   frac_a       1.000
+   frac_a_lo    1.000
+   frac_a_hi    1.000
+   frac_b       0.000
+   frac_b_lo    0.000
+   frac_b_hi    0.000
+   pass_a       5
+   pass_b       0
+   decision     amp CONFIRMEE
+
+E3 cellules non discriminantes primaires (toutes les regles s'accordent)  [n = 6]
+   frac_a       1.000
+   pass_a       6
+   decision     CONFORME
+
+--- E5 monotonie ---
+   family  max_decrease  n_decreases_gt_0_10
+QUIC_PAD1      0.001915                    0
+
+--- E6 encadrement des seuils (tailles de chaine, octets) ---
+   family  step  bracket_low  bracket_high  pred_amp  inside_amp  pred_amp_bc  inside_amp_bc  pred_cwnd  inside_cwnd
+QUIC_PAD1     1       8650.0        9250.0      9000        True         5471          False      10204        False
+QUIC_PAD1     2      12500.0           NaN     32530       False        29000          False      33733        False
+
+--- E7 rapport des seuils QUIC_A / QUIC_B (octets de vol) ---
+   None
+
+--- Controles ---
+                                     control    family  estimate     ci_lo    ci_hi                         band       verdict
+          C1 placebo (base paire vs impaire) QUIC_PAD1 -0.001335 -0.003730 0.000955                [-0.05, 0.05]          PASS
+              C2 pont mldsa65 (k_a=0, k_b=1) QUIC_PAD1 -0.000243 -0.001743 0.001195 a:[-0.25,0.25] b:[0.75,1.25] a:PASS b:FAIL
+   C3 octets recus = vol predit +-3 % (QUIC) QUIC_PAD1  0.000000       NaN      NaN          >=0.95 des cellules          FAIL
+C4 taux d'echec maximal par cellule (<= 2 %)    toutes  0.000000       NaN      NaN                       <=0.02          PASS
+
+--- Cellules (k observe contre k predit) ---
+   family  chain_target    tier  disc  k_a  k_b   khat  ci_lo  ci_hi verdict_a verdict_b  fail_rate
+QUIC_PAD1          2750 primary     0    0    0 -0.001 -0.004  0.003      PASS      PASS      0.000
+QUIC_PAD1          5100 primary     0    0    0 -0.002 -0.005  0.001      PASS      PASS      0.000
+QUIC_PAD1          5700 primary     1    0    1 -0.001 -0.004  0.002      PASS      FAIL      0.000
+QUIC_PAD1          6350 primary     1    0    1 -0.001 -0.004  0.002      PASS      FAIL      0.000
+QUIC_PAD1          7250 primary     1    0    1 -0.001 -0.004  0.002      PASS      FAIL      0.000
+QUIC_PAD1          8100 primary     1    0    1 -0.002 -0.007  0.001      PASS      FAIL      0.000
+QUIC_PAD1          8650 primary     1    0    1 -0.001 -0.003  0.002      PASS      FAIL      0.000
+QUIC_PAD1          9250 primary     0    1    1  0.998  0.993  1.002      PASS      PASS      0.000
+QUIC_PAD1          9850 primary     0    1    1  0.997  0.993  1.002      PASS      PASS      0.000
+QUIC_PAD1         10450 primary     0    1    1  0.997  0.991  1.002      PASS      PASS      0.000
+QUIC_PAD1         12500 primary     0    1    1  0.999  0.993  1.003      PASS      PASS      0.000

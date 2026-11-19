@@ -1,0 +1,18 @@
+sig        chaine kind     k_trait  k_temoin    delta               IC95  attendu conforme
+secp384r1    2750 pad        0.000    -0.002   +0.002 [ -0.006; +0.010]       +0 OUI
+secp384r1    5100 pad       -0.002    -0.001   -0.001 [ -0.008; +0.006]       +0 OUI
+secp384r1    5700 pad        0.001     0.999   -0.998 [ -1.007; -0.989]       -1 OUI
+secp384r1    6350 pad        0.000     0.997   -0.997 [ -1.004; -0.989]       -1 OUI
+secp384r1    7250 pad        0.000     1.005   -1.005 [ -1.012; -0.997]       -1 OUI
+secp384r1    8100 pad       -0.002     0.999   -1.000 [ -1.008; -0.993]       -1 OUI
+secp384r1    8650 pad       -0.001     0.998   -0.999 [ -1.005; -0.992]       -1 OUI
+secp384r1    9250 pad        0.996     1.000   -0.004 [ -0.012; +0.003]       +0 OUI  (S1)
+secp384r1    9850 pad        0.999     0.999   -0.000 [ -0.009; +0.009]       +0 OUI  (S1)
+secp384r1   10450 pad        0.996     1.000   -0.004 [ -0.014; +0.007]       +0 OUI
+secp384r1   12500 pad        0.998     1.000   -0.002 [ -0.011; +0.006]       +0 OUI
+mldsa65         0 bridge     0.000     1.002   -1.001 [ -1.008; -0.995]       -1 OUI
+
+P3  (primaire) cellules a delta attendu non nul : 5/5 conformes = 1.00 ; decision : CONFIRMEE
+P3c (controle) cellules a delta attendu nul     : 6/6 conformes
+S1  (secondaire, contre « fenetre seule » ; cellules entre 9000 et 10204 o) : 2/2 conformes a k = 1
+pont mldsa65 : delta -1.001 [-1.008 ; -0.995] attendu -1 -> conforme
