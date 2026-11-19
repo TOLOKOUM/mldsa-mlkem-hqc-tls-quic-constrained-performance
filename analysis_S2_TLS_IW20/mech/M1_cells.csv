@@ -1,0 +1,9 @@
+proto,kem,mtu,pad,sig,n,disc,rule_a,rule_b,fw_bytes_a,fw_bytes_b,bytes_first_median,frac_bytes_match_a,frac_bytes_match_b,k_obs_median,frac_k_match_a,frac_k_match_b,k_a,k_b
+tls,x448_mlkem768,1500,0,mldsa65,100,0,bio_iw,bio_iw10,,,10207.0,0.0,0.0,0.0,1.0,1.0,0,0
+tls,x448_mlkem768,1500,0,secp384r1,100,0,bio_iw,bio_iw10,1945.0,1945.0,1937.0,1.0,1.0,0.0,1.0,1.0,0,0
+tls,x448_mlkem768,1500,11150,secp384r1,100,0,bio_iw,bio_iw10,12665.0,12665.0,12657.0,1.0,1.0,0.0,1.0,1.0,0,0
+tls,x448_mlkem768,1500,11750,secp384r1,100,1,bio_iw,bio_iw10,13265.0,13058.0,13257.0,1.0,0.0,0.0,1.0,0.0,0,1
+tls,x448_mlkem768,1500,24450,secp384r1,100,1,bio_iw,bio_iw10,25987.0,14232.0,25979.0,1.0,0.0,0.0,1.0,0.0,0,1
+tls,x448_mlkem768,1500,25050,secp384r1,100,0,bio_iw,bio_iw10,26380.0,14232.0,26380.0,1.0,0.0,1.0,1.0,1.0,1,1
+tls,x448_mlkem768,1500,41300,secp384r1,100,0,bio_iw,bio_iw10,27567.0,14232.0,27815.0,0.0,0.0,1.0,1.0,1.0,1,1
+tls,x448_mlkem768,1500,41900,secp384r1,100,1,bio_iw,bio_iw10,27567.0,14232.0,27815.0,0.0,0.0,1.0,1.0,0.0,1,2

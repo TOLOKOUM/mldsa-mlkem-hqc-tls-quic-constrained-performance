@@ -1,0 +1,4 @@
+endpoint,n_cells,rule_a,rule_b,frac_a,frac_a_lo,frac_a_hi,frac_b,frac_b_lo,frac_b_hi,pass_a,pass_b,decision
+E1 TLS (cellules discriminantes primaires),5,bio_iw,bio_iw10,1.0,1.0,1.0,0.0,0.0,0.0,5,0.0,bio_iw CONFIRMEE
+E3 cellules non discriminantes primaires (toutes les regles s'accordent),7,,,1.0,,,,,,7,,CONFORME
+E4 (secondaire) cellules a palier k>=2 : fraction proche de la regle a / b,2,,,1.0,,,0.0,,,2,0.0,descriptif

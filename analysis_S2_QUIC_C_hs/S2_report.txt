@@ -1,0 +1,55 @@
+Empreintes gelees verifiees.
+connexions lues : 5800 ; blocs : [1, 2, 3]
+
+=================== RESULTATS CONFIRMATOIRES (metrique : hs_ms, 20 blocs, 10000 replicats) ===================
+
+E2 QUIC (cellules discriminantes primaires)  [n = 5]
+   rule_a       amp
+   rule_b       amp_bc
+   frac_a       1.000
+   frac_a_lo    1.000
+   frac_a_hi    1.000
+   frac_b       0.000
+   frac_b_lo    0.000
+   frac_b_hi    0.000
+   pass_a       5
+   pass_b       0
+   decision     amp CONFIRMEE
+
+E3 cellules non discriminantes primaires (toutes les regles s'accordent)  [n = 6]
+   frac_a       1.000
+   pass_a       6
+   decision     CONFORME
+
+--- E5 monotonie ---
+family  max_decrease  n_decreases_gt_0_10
+QUIC_C       0.00236                    0
+
+--- E6 encadrement des seuils (tailles de chaine, octets) ---
+family  step  bracket_low  bracket_high  pred_amp  inside_amp  pred_amp_bc  inside_amp_bc  pred_cwnd  inside_cwnd
+QUIC_C     1       5400.0        6000.0      5736        True         2206          False       6939        False
+QUIC_C     2      12000.0           NaN     29265       False        25736          False      30469        False
+
+--- E7 rapport des seuils QUIC_A / QUIC_B (octets de vol) ---
+   None
+
+--- Controles ---
+                                     control family  estimate     ci_lo    ci_hi                        band       verdict
+          C1 placebo (base paire vs impaire) QUIC_C -0.002355 -0.005830 0.001300               [-0.05, 0.05]          PASS
+              C2 pont mldsa44 (k_a=1, k_b=1) QUIC_C  1.003833  0.992259 1.021423 a:[0.75,1.25] b:[0.75,1.25] a:PASS b:PASS
+   C3 octets recus = vol predit +-3 % (QUIC) QUIC_C  1.000000       NaN      NaN         >=0.95 des cellules          PASS
+C4 taux d'echec maximal par cellule (<= 2 %) toutes  0.000000       NaN      NaN                      <=0.02          PASS
+
+--- Cellules (k observe contre k predit) ---
+family  chain_target    tier  disc  k_a  k_b   khat  ci_lo  ci_hi verdict_a verdict_b  fail_rate
+QUIC_C          1100 primary     0    0    0 -0.004 -0.007 -0.000      PASS      PASS      0.000
+QUIC_C          1850 primary     0    0    0 -0.005 -0.010 -0.000      PASS      PASS      0.000
+QUIC_C          2450 primary     1    0    1 -0.004 -0.008  0.001      PASS      FAIL      0.000
+QUIC_C          3100 primary     1    0    1 -0.005 -0.009 -0.001      PASS      FAIL      0.000
+QUIC_C          3950 primary     1    0    1 -0.007 -0.013 -0.003      PASS      FAIL      0.000
+QUIC_C          4850 primary     1    0    1 -0.004 -0.009 -0.000      PASS      FAIL      0.000
+QUIC_C          5400 primary     1    0    1 -0.004 -0.008  0.000      PASS      FAIL      0.000
+QUIC_C          6000 primary     0    1    1  0.984  0.956  1.006      PASS      PASS      0.000
+QUIC_C          6600 primary     0    1    1  0.996  0.987  1.009      PASS      PASS      0.000
+QUIC_C          7200 primary     0    1    1  0.996  0.987  1.007      PASS      PASS      0.000
+QUIC_C         12000 primary     0    1    1  0.999  0.992  1.004      PASS      PASS      0.000

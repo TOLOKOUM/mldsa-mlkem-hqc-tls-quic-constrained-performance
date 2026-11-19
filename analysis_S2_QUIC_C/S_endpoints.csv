@@ -1,0 +1,3 @@
+endpoint,n_cells,rule_a,rule_b,frac_a,frac_a_lo,frac_a_hi,frac_b,frac_b_lo,frac_b_hi,pass_a,pass_b,decision
+E2 QUIC (cellules discriminantes primaires),5,amp,amp_bc,1.0,1.0,1.0,0.0,0.0,0.0,5,0.0,amp CONFIRMEE
+E3 cellules non discriminantes primaires (toutes les regles s'accordent),6,,,1.0,,,,,,6,,CONFORME

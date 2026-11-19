@@ -1,0 +1,3 @@
+family,step,bracket_low,bracket_high,pred_amp,inside_amp,pred_amp_bc,inside_amp_bc,pred_cwnd,inside_cwnd
+QUIC_C,1,5400.0,6000.0,5736,True,2206,False,6939,False
+QUIC_C,2,12000.0,,29265,False,25736,False,30469,False

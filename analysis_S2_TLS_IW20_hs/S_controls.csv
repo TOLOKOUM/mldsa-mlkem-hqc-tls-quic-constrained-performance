@@ -1,0 +1,5 @@
+control,family,estimate,ci_lo,ci_hi,band,verdict
+C1 placebo (base paire vs impaire),TLS_IW20,-0.002064999999999948,-0.005159999999999891,0.0010499999999999986,"[-0.05, 0.05]",PASS
+"C2 pont mldsa65 (k_a=0, k_b=0)",TLS_IW20,-0.0018125000000001278,-0.004682562500000088,0.001269999999999833,"a:[-0.25,0.25] b:[-0.25,0.25]",a:PASS b:PASS
+C3 octets recus = vol predit +-10 o (TLS),TLS_IW20,1.0,,,>=0.95 des cellules,PASS
+C4 taux d'echec maximal par cellule (<= 2 %),toutes,0.0,,,<=0.02,PASS
